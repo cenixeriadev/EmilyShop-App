@@ -1,107 +1,66 @@
 package Principal;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
-public class Problema7 extends JFrame implements ActionListener
-{   private final JLabel  lblnum1, lblcombo;
-    private  final JTextField txtn1 ;
-    private  final JButton btncalcular;
-    private  final JComboBox   comboTemp;
-    JScrollPane scrollPane1;
-    JTextArea txtArea;
+public class Problema7 {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Calculo de Longitud");
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    public Problema7() {
-        setLocation(430,80);
-        setSize(600,600);
-        setTitle("Ventana Principal ");
-        setLayout(null);// deja sin efecto la  distribucion normal
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        lblnum1=new JLabel("Capacidad en Gigabytes: ");
-        lblnum1.setBounds(55,70,200,30);
-        add(lblnum1);
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
 
+        JTextArea textArea = new JTextArea();
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(20, 20, 360, 200);
+        textArea.setEditable(false);
 
-        lblcombo=new JLabel("Elegir Operacion :");
-        lblcombo.setBounds(90,30,200,30);//Bounds = Limites
-        add(lblcombo);
-        txtArea = new JTextArea();
-        txtArea.setBounds(100,190,400,350);
-        txtArea.setEditable(false);
-        add(txtArea);
-        scrollPane1 = new JScrollPane();
-        scrollPane1.setBounds(100,190,400,350);
-        txtArea.setColumns(100);
-        txtArea.setRows(100);
-        scrollPane1.setViewportView(txtArea);
-        add(scrollPane1);
-        comboTemp=new JComboBox<>(new String[]{"","Megabytes","Kilobytes","Bytes"});
-        comboTemp.setBounds(200,30,200,30);
-        add(comboTemp);
-        txtn1=new JTextField();
-        txtn1.setBounds(200,70,200,30);
-        add(txtn1);
+        JLabel kmLabel = new JLabel("Longitud en kilómetros:");
+        JTextField kmField = new JTextField();
+        kmLabel.setBounds(20, 230, 150, 20);
+        kmField.setBounds(180, 230, 100, 20);
 
-        btncalcular=new JButton("Calcular ");
-        btncalcular.setBounds(155,150,200,30);
-        btncalcular.addActionListener(this);
-        add(btncalcular);
+        JLabel piesLabel = new JLabel("Longitud en pies:");
+        JTextField piesField = new JTextField();
+        piesLabel.setBounds(20, 260, 150, 20);
+        piesField.setBounds(180, 260, 100, 20);
 
+        JLabel millasLabel = new JLabel("Longitud en millas:");
+        JTextField millasField = new JTextField();
+        millasLabel.setBounds(20, 290, 150, 20);
+        millasField.setBounds(180, 290, 100, 20);
 
+        JButton calcularButton = new JButton("Calcular");
+        calcularButton.setBounds(300, 260, 100, 30);
+        calcularButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double km = Double.parseDouble(kmField.getText());
+                double pies = Double.parseDouble(piesField.getText());
+                double millas = Double.parseDouble(millasField.getText());
 
+                double totalMetros = km * 1000 + pies * 0.3048 + millas * 1609.34;
+                double totalYardas = totalMetros * 1.09361;
 
-    }
-    public static void main(String[] args)
-    {
-        Problema7  ventana=new Problema7();
-        ventana.setVisible(true);
-
-    }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==btncalcular)
-        {
-            calcular();
-        }
-    }
-    public  void  calcular() {
-
-        int op ;
-        int VALX = 1024;
-        double num2, result2;
-        op = comboTemp.getSelectedIndex(); //  capturar el indica de seleccion del combox
-        num2  = Double.parseDouble(txtn1.getText());
-        String format = "%.10f";
-        if(num2>=0) {
-            switch (op) {
-                case 1: {
-                    result2 = num2 / VALX;
-                    txtArea.append("A MEGABYTES ES:  " + String.format(format, result2) + " MB" + "\n");
-
-                    txtArea.requestFocus();
-                    break;
-                }
-                case 2: {
-
-                    result2 = num2 / Math.pow(VALX, 2);
-                    txtArea.append("A KILOBYTES ES: " + String.format(format, result2) +" KB"+ "\n");
-
-                    txtArea.requestFocus();
-                    break;
-                }
-                case 3: {
-                    result2 = num2 / Math.pow(VALX, 3);
-                    txtArea.append("A BYTES ES: " + String.format(format, result2) +" B"+ "\n");
-
-                    txtArea.requestFocus();
-                    break;
-                }
+                textArea.append("Total longitud en metros: " + totalMetros + " m\n");
+                textArea.append("Total longitud en yardas: " + totalYardas + " yd");
             }
-        }else {
-            JOptionPane.showMessageDialog(this, "No se permiten valores negativos!!");
-        }
+        });
 
+        panel.add(scrollPane);
+        panel.add(kmLabel);
+        panel.add(kmField);
+        panel.add(piesLabel);
+        panel.add(piesField);
+        panel.add(millasLabel);
+        panel.add(millasField);
+        panel.add(calcularButton);
+
+        frame.add(panel);
+        frame.setVisible(true);
     }
-
 }

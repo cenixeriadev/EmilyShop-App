@@ -15,6 +15,8 @@ public class Problema4 extends JFrame implements ActionListener
 
     public Problema4() {
         setLocation(430,80);
+
+
         setSize(600,600);
         setTitle("Ventana Principal ");
         setLayout(null);// deja sin efecto la  distribucion normal
