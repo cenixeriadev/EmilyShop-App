@@ -73,12 +73,12 @@ public class Problema4 extends JFrame implements ActionListener
         double num2, result2;
         op = comboTemp.getSelectedIndex(); //  capturar el indica de seleccion del combox
         num2  = Double.parseDouble(txtn1.getText());
-        String format = "%.10f";
+        String format =  "%.10f";
         if(num2>=0) {
             switch (op) {
                 case 1: {
                     result2 = num2 / VALX;
-                    txtArea.append("A MEGABYTES ES:  " + String.format(format, result2) + " MB" + "\n");
+                    txtArea.append("A MEGABYTES ES:  " + String.format(format , result2) + " MB" + "\n");
 
                     txtArea.requestFocus();
                     break;
@@ -86,14 +86,14 @@ public class Problema4 extends JFrame implements ActionListener
                 case 2: {
 
                     result2 = num2 / Math.pow(VALX, 2);
-                    txtArea.append("A KILOBYTES ES: " + String.format(format, result2) +" KB"+ "\n");
+                    txtArea.append("A KILOBYTES ES: " + String.format(format , result2) +" KB"+ "\n");
 
                     txtArea.requestFocus();
                     break;
                 }
                 case 3: {
                     result2 = num2 / Math.pow(VALX, 3);
-                    txtArea.append("A BYTES ES: " + String.format(format, result2) +" B"+ "\n");
+                    txtArea.append("A BYTES ES: " + String.format(format , result2) +" B"+ "\n");
 
                     txtArea.requestFocus();
                     break;

@@ -80,13 +80,13 @@ public class Problema2 extends JFrame implements ActionListener
                 case 2: {
 
                     result2 =  num2 + 273;
-                    txtArea.append("A GRADOS KELVIN ES: " + result2 + "\n");
+                    txtArea.append("A GRADOS KELVIN ES: " + String.format(aprox,result2) + "\n");
                     txtArea.requestFocus();
                     break;
                 }
                 case 3:{
                     result2 = num2 + 460;
-                    txtArea.append("A GRADOS RANKINE ES: " + result2 + "\n");
+                    txtArea.append("A GRADOS RANKINE ES: " + String.format(aprox,result2) + "\n");
                     txtArea.requestFocus();
                     break;
                 }
