@@ -14,7 +14,7 @@ public class Problema19 extends JFrame implements ActionListener {
     public Problema19() {
         // Configuración del JFrame
         setTitle("Formar Número");
-        setSize(400, 300);
+        setSize(400, 400);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centramos la ventana
@@ -37,8 +37,12 @@ public class Problema19 extends JFrame implements ActionListener {
 
         // Caja de texto con scroll para mostrar los resultados
         resultadosArea = new JTextArea();
+        resultadosArea.setEditable(false);
+        resultadosArea.setColumns(100);
+        resultadosArea.setRows(100);
         JScrollPane scrollPane = new JScrollPane(resultadosArea);
-        scrollPane.setBounds(20, 100, 350, 100);
+        scrollPane.setBounds(20, 100, 350, 200);
+        scrollPane.setViewportView(resultadosArea);
         add(scrollPane);
 
         setVisible(true);

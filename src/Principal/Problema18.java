@@ -48,7 +48,7 @@ public class Problema18 extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // Implementación del método actionPerformed
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try {

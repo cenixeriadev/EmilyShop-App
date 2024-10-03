@@ -50,7 +50,7 @@ public class Problema7 {
                 double totalYardas = totalMetros * 1.09361;
 
                 textArea.append("Total longitud en metros: " + totalMetros + " m\n");
-                textArea.append("Total longitud en yardas: " + totalYardas + " yd");
+                textArea.append("Total longitud en yardas: " + totalYardas + " yd\n");
                 textArea.requestFocus();
             }
         });

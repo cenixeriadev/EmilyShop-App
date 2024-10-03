@@ -14,7 +14,7 @@ public class Problema11 extends JFrame implements ActionListener {
     public Problema11() {
         // Configuración del JFrame
         setTitle("Reparto de Ganancias");
-        setSize(400, 400);
+        setSize(400, 600);
         setLayout(null);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +63,7 @@ public class Problema11 extends JFrame implements ActionListener {
         resultadosArea = new JTextArea();
         resultadosArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(resultadosArea);
-        scrollPane.setBounds(20, 230, 350, 100);
+        scrollPane.setBounds(20, 230, 350, 300);
         resultadosArea.setColumns(100);
         resultadosArea.setRows(100);
         scrollPane.setViewportView(resultadosArea);
