@@ -44,7 +44,7 @@ public class Problema19 extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // Implementación del método actionPerformed
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
@@ -64,6 +64,7 @@ public class Problema19 extends JFrame implements ActionListener {
 
             // Mostrar el resultado
             resultadosArea.append("Nuevo número formado: " + nuevoNumero + "\n");
+            resultadosArea.requestFocus();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Por favor ingrese un valor válido.");
@@ -71,6 +72,7 @@ public class Problema19 extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
+
         new Problema19(); // Ejecutar la ventana
     }
 }

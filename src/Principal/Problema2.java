@@ -47,9 +47,6 @@ public class Problema2 extends JFrame implements ActionListener
         btncalcular.addActionListener(this);
         add(btncalcular);
 
-
-
-
     }
     public static void main(String[] args)
     {

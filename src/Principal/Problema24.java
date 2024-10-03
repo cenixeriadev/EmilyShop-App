@@ -1,5 +1,6 @@
 package Principal;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -77,6 +78,17 @@ public class Problema24 extends JFrame {
             String timeInput = inputTimeField.getText();
             int secondsToAdd = Integer.parseInt(inputSecondsField.getText());
 
+            // Verificamos si los segundos ingresados son negativos
+            if (secondsToAdd < 0) {
+                throw new IllegalArgumentException("No se permiten segundos negativos.");
+            }
+
+            // Validamos el formato de la hora (HH:mm:ss) utilizando una expresión regular
+            String timePattern = "^([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d)$";//regex
+            if (!timeInput.matches(timePattern)) {
+                throw new IllegalArgumentException("El formato de la hora es inválido. Debe ser HH:mm:ss.");
+            }
+
             // Parseamos la hora ingresada
             SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
             Date time = format.parse(timeInput);
@@ -87,14 +99,15 @@ public class Problema24 extends JFrame {
 
             // Mostramos el resultado
             resultField.setText(format.format(newTime));
+            resultField.requestFocus();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese valores válidos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     public static void main(String[] args) {
-        // Ejecutar la interfaz gráfica
 
         Problema24 ventanacal = new Problema24();
         ventanacal.setVisible(true);

@@ -61,8 +61,12 @@ public class Problema11 extends JFrame implements ActionListener {
 
         // Caja de texto con scroll para mostrar los resultados
         resultadosArea = new JTextArea();
+        resultadosArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(resultadosArea);
         scrollPane.setBounds(20, 230, 350, 100);
+        resultadosArea.setColumns(100);
+        resultadosArea.setRows(100);
+        scrollPane.setViewportView(resultadosArea);
         add(scrollPane);
 
         // Mostrar la ventana
@@ -77,22 +81,25 @@ public class Problema11 extends JFrame implements ActionListener {
             int acciones1 = Integer.parseInt(txtAcciones1.getText());
             int acciones2 = Integer.parseInt(txtAcciones2.getText());
             int acciones3 = Integer.parseInt(txtAcciones3.getText());
-            double gananciasTotales = Double.parseDouble(txtGanancias.getText());
+            if(acciones1<0 || acciones2<0 || acciones3<0  || (acciones1 + acciones2 + acciones3!=100)){
+                throw  new NumberFormatException("Invalid");
+            }else {
+                double gananciasTotales = Double.parseDouble(txtGanancias.getText());
 
-            // Calcular total de acciones
-            int totalAcciones = acciones1 + acciones2 + acciones3;
+                int totalAcciones = acciones1 + acciones2 + acciones3;
 
-            // Calcular ganancias para cada socio
-            double ganancia1 = (acciones1 / (double) totalAcciones) * gananciasTotales;
-            double ganancia2 = (acciones2 / (double) totalAcciones) * gananciasTotales;
-            double ganancia3 = (acciones3 / (double) totalAcciones) * gananciasTotales;
+                // Calcular ganancias para cada socio
+                double ganancia1 = (acciones1 / (double) totalAcciones) * gananciasTotales;
+                double ganancia2 = (acciones2 / (double) totalAcciones) * gananciasTotales;
+                double ganancia3 = (acciones3 / (double) totalAcciones) * gananciasTotales;
 
-            // Mostrar resultados en el área de texto
-            resultadosArea.append("Socio 1: " + ganancia1 + "\n");
-            resultadosArea.append("Socio 2: " + ganancia2 + "\n");
-            resultadosArea.append("Socio 3: " + ganancia3 + "\n");
-            resultadosArea.append("\n"); // Para separación entre cálculos
-
+                // Mostrar resultados en el área de texto
+                resultadosArea.append("Socio 1: " + ganancia1 + "\n");
+                resultadosArea.append("Socio 2: " + ganancia2 + "\n");
+                resultadosArea.append("Socio 3: " + ganancia3 + "\n");
+                resultadosArea.append("\n"); // Para separación entre cálculos
+                resultadosArea.requestFocus();
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Por favor ingrese valores válidos.");
         }

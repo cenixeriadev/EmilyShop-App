@@ -18,6 +18,9 @@ public class Problema7 {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setBounds(20, 20, 360, 200);
         textArea.setEditable(false);
+        textArea.setRows(100);
+        textArea.setColumns(100);
+        scrollPane.setViewportView(textArea);
 
         JLabel kmLabel = new JLabel("Longitud en kilómetros:");
         JTextField kmField = new JTextField();
@@ -48,6 +51,7 @@ public class Problema7 {
 
                 textArea.append("Total longitud en metros: " + totalMetros + " m\n");
                 textArea.append("Total longitud en yardas: " + totalYardas + " yd");
+                textArea.requestFocus();
             }
         });
 
