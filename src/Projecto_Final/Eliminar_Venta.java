@@ -14,11 +14,12 @@ public class Eliminar_Venta extends JFrame implements ActionListener {
 
     public Eliminar_Venta() {
 
-        setSize(500, 400);
-        setLocation(600, 250);
+        setSize(600, 600);
+        //setLocation(600, 250);
         setTitle("ELiminar Venta");
         setFont(new Font("Arial", Font.CENTER_BASELINE | Font.BOLD, 15));
         setLayout(null);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 

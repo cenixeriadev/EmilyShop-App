@@ -12,10 +12,11 @@ public class Consulta extends JFrame implements ActionListener{
     JButton btnconsulta, btnvolver;
     public Consulta(){
         setTitle("CONSULTAS");
-        setSize(500,400);
+        setSize(600, 600);
         setLocation(500,150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        setLocationRelativeTo(null);
 
 
         lblConsulta = new JLabel("CONSULTA");

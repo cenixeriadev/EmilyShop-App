@@ -18,9 +18,10 @@ public class Inventario extends JFrame implements ActionListener{
 
     public Inventario(){
         setTitle("INVENTARIO...");
-        setSize(600,500);
+        setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        setLocationRelativeTo(null);
 
         lblinventario= new JLabel("INVENTARIO");
         lblinventario.setFont(new Font("Times New Roman",Font.BOLD,30));
@@ -31,25 +32,38 @@ public class Inventario extends JFrame implements ActionListener{
         lblmodelo.setBounds(30,60,100,30);
         add(lblmodelo);
 
+        lblcodigo=new JLabel("CODIGO");
+        lblcodigo.setBounds(30,100,100,30);
+        add(lblcodigo);
+
+        lbltalla=new JLabel("Talla");
+        lbltalla.setBounds(30,140,100,30);
+        add(lbltalla);
+
+        lblmensaje = new JLabel("");
+        lblmensaje.setBounds(120, 290, 300, 20);
+        lblmensaje.setForeground(Color.RED);
+        add(lblmensaje);
+
+        lbldatos = new JLabel("DATOS");
+        lbldatos.setBounds(445,60,100,30);
+        add(lbldatos);
+
+
         cbmodelo= new JComboBox();
         cbmodelo.setBounds(120,60,100,30);
+        cbmodelo.addItem("");
         cbmodelo.addItem("Nike");
         cbmodelo.addItem("Adidas");
         cbmodelo.addItem("Quellin");
         cbmodelo.addItem("I-Run");
         add(cbmodelo);
 
-        lblcodigo=new JLabel("CODIGO");
-        lblcodigo.setBounds(30,100,100,30);
-        add(lblcodigo);
 
         txtcodigo=new JTextField();
         txtcodigo.setBounds(120,100,100,30);
         add(txtcodigo);
 
-        lbltalla=new JLabel("Talla");
-        lbltalla.setBounds(30,140,100,30);
-        add(lbltalla);
 
         panelTallas = new JPanel(new GridLayout(3, 3, 10, 10));
         panelTallas.setBounds(120, 140, 200, 100);
@@ -79,14 +93,12 @@ public class Inventario extends JFrame implements ActionListener{
         btneliminar.addActionListener(this);
         add(btneliminar);
 
-        lblmensaje = new JLabel("");
-        lblmensaje.setBounds(120, 290, 300, 20);
-        lblmensaje.setForeground(Color.RED);
-        add(lblmensaje);
+        btnvolver= new JButton("VOLVER");
+        btnvolver.setBounds(460,370,100,30);
+        btnvolver.addActionListener(this);
+        add(btnvolver);
 
-        lbldatos = new JLabel("DATOS");
-        lbldatos.setBounds(445,60,100,30);
-        add(lbldatos);
+
 
         area= new JTextArea();
         area.setBounds(380,90,180,250);
@@ -96,10 +108,7 @@ public class Inventario extends JFrame implements ActionListener{
         jspbarra.setViewportView(area);
         add(area);
 
-        btnvolver= new JButton("VOLVER");
-        btnvolver.setBounds(460,370,100,30);
-        btnvolver.addActionListener(this);
-        add(btnvolver);
+
 
     }
 

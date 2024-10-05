@@ -13,36 +13,42 @@ public class Menu_Principal extends JFrame implements ActionListener {
 
     public Menu_Principal() {
         // Inicializar el marco principal
-        setLocation(400, 100);
+        //setLocation(400, 100);
         setTitle("Menu Principal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 600);
         setLayout(null); // Usar layout nulo para setBounds
-
+        setLocationRelativeTo(null);
         // Inicializar los botones y etiquetas
 
         TitleFrame = new JLabel("CALZADOS EMILY'S");
         TitleFrame.setFont(new Font("Arial", Font.BOLD, 24));
         TitleFrame.setBounds(180, 120, 500, 30); // Mover el título un poco más abajo
         add(TitleFrame);
+        ventasLabel = new JLabel("Ingrese ventas");
+        ventasLabel.setBounds(230, 180, 200, 30);
+
+        eliminarLabel = new JLabel("Elimine una venta específica");
+        eliminarLabel.setBounds(230, 280, 200, 30);
+
+        inventarioLabel = new JLabel("Ingrese cantidad de mercadería");
+        inventarioLabel.setBounds(230, 230, 200, 30);
+
 
         ventasButton = new JButton("VENTAS");
         ventasButton.setBounds(100, 180, 120, 30); // Ajustar tamaño y posición
         ventasButton.addActionListener(this);
-        ventasLabel = new JLabel("Ingrese ventas");
-        ventasLabel.setBounds(230, 180, 200, 30);
+
 
         inventarioButton = new JButton("INVENTARIO");
         inventarioButton.setBounds(100, 230, 120, 30);
         inventarioButton.addActionListener(this);
-        inventarioLabel = new JLabel("Ingrese cantidad de mercadería");
-        inventarioLabel.setBounds(230, 230, 200, 30);
+
 
         eliminarButton = new JButton("ELIMINAR");
         eliminarButton.setBounds(100, 280, 120, 30);
         eliminarButton.addActionListener(this);
-        eliminarLabel = new JLabel("Elimine una venta específica");
-        eliminarLabel.setBounds(230, 280, 200, 30);
+
 
         cierreCajaButton = new JButton("CIERRE CAJA");
         cierreCajaButton.setBounds(100, 330, 120, 30);

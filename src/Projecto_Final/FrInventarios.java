@@ -13,10 +13,11 @@ public class FrInventarios extends JFrame implements ActionListener{
     JButton btnvolver;
     public FrInventarios(){
         setTitle("REPORTE DE INVENTARIO");
-        setSize(500,400);
-        setLocation(500,150);
+        setSize(600, 600);
+        //setLocation(500,150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        setLocationRelativeTo(null);
 
         lblInventarioReporte = new JLabel("INVENTARIO REPORTES");
         lblInventarioReporte.setFont(new java.awt.Font("Arial",Font.BOLD,18));
