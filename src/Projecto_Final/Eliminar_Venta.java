@@ -90,6 +90,7 @@ public class Eliminar_Venta extends JFrame implements ActionListener {
         btnvolver.setOpaque(true);
         btnvolver.setBackground(Color.GRAY);
         btnvolver.setForeground(Color.WHITE);
+        btnvolver.addActionListener(this);
         btnvolver.setHorizontalAlignment(JButton.CENTER);
         add(btnvolver);
 
@@ -121,6 +122,12 @@ public class Eliminar_Venta extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btneliminar) {
             mensajeelimi();
+        }
+        else if(e.getSource()==btnvolver){
+            new Menu_Principal();
+            this.dispose();
+
+
         }
     }
 

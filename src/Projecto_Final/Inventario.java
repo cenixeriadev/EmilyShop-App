@@ -98,6 +98,7 @@ public class Inventario extends JFrame implements ActionListener{
 
         btnvolver= new JButton("VOLVER");
         btnvolver.setBounds(460,370,100,30);
+        btnvolver.addActionListener(this);
         add(btnvolver);
 
     }
@@ -115,8 +116,14 @@ public class Inventario extends JFrame implements ActionListener{
             lblmensaje.setText("REGISTRADO CORRECTAMENTE");
         }else if(e.getSource() == btnreporte){
             lblmensaje.setText("REPORTE MOSTRADO");
+            FrInventarios Reporte_inventario = new FrInventarios();
+            Reporte_inventario.setVisible(true);
+            this.dispose();
         }else if(e.getSource() == btneliminar){
             lblmensaje.setText("ELIMINADO CORRECTAMENTE");
+        }else if(e.getSource() ==btnvolver){
+            new Menu_Principal();
+            this.dispose();
         }
 
     }

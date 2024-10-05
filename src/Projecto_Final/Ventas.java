@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Ventas extends JFrame {
+public class Ventas extends JFrame implements ActionListener {
 
     // Componentes de la interfaz
     private final JTextField txtCliente;
@@ -123,6 +123,7 @@ public class Ventas extends JFrame {
 
         btnConsulta = new JButton("CONSULTA");
         btnConsulta.setBounds(160, 300, 100, 30);
+        btnConsulta.addActionListener(this);
         add(btnConsulta);
 
         btnEliminar = new JButton("ELIMINAR");
@@ -138,6 +139,7 @@ public class Ventas extends JFrame {
 
         btnVolver = new JButton("VOLVER");
         btnVolver.setBounds(470, 300, 100, 30);
+        btnVolver.addActionListener(this);
         add(btnVolver);
 
         // Acción para el botón de registrar
@@ -166,7 +168,18 @@ public class Ventas extends JFrame {
             }
         });
     }
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btnVolver) {
+            new Menu_Principal();
+            this.dispose();
+        }
+        else if(e.getSource()==btnConsulta){
+            Consulta Consultation = new Consulta();
+            Consultation.setVisible(true);
+            this.dispose();
+        }
+    }
     public static void main(String[] args) {
         Ventas ventana = new Ventas();
         ventana.setVisible(true);

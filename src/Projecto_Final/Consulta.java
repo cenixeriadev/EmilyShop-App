@@ -80,6 +80,11 @@ public class Consulta extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnconsulta){
             Consulta();
+
+        } else if(e.getSource()==btnvolver) {
+            Ventas comeBack = new Ventas();
+            comeBack.setVisible(true);
+            this.dispose();
         }
     }
     public void Consulta(){

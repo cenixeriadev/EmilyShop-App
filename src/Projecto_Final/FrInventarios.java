@@ -33,6 +33,7 @@ public class FrInventarios extends JFrame implements ActionListener{
         btnvolver.addActionListener(this);
         btnvolver.setForeground(Color.white);
         btnvolver.setBackground(Color.LIGHT_GRAY);
+        btnvolver.addActionListener(this);
         add(btnvolver);
 
         //Area de Texto y Barra de Desplazamiento
@@ -50,7 +51,10 @@ public class FrInventarios extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource()==btnvolver){
+            new Menu_Principal();
+            this.dispose();
+        }
     }
 
 }

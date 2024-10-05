@@ -129,7 +129,7 @@ public class FrmLoginUsuario extends JFrame implements ActionListener {
                 }
             }
             if (estado) {
-                FrmLoginAcceso.FrmPrincipal obj = new FrmLoginAcceso.FrmPrincipal();
+                Menu_Principal obj = new Menu_Principal();
                 obj.setVisible(true);
                 this.dispose();
             } else {
