@@ -1,4 +1,4 @@
-package Projecto_Final;
+package Vista;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,49 +13,47 @@ public class FrInventarios extends JFrame implements ActionListener{
     JButton btnvolver;
     public FrInventarios(){
         setTitle("REPORTE DE INVENTARIO");
-        setSize(600, 600);
-        //setLocation(500,150);
+        setSize(600,600);
+        setLocation(500,150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
-
+        //-------------------------------------
         lblInventarioReporte = new JLabel("INVENTARIO REPORTES");
         lblInventarioReporte.setFont(new java.awt.Font("Arial",Font.BOLD,18));
-        lblInventarioReporte.setBounds(120,0,300,100);
+        lblInventarioReporte.setBounds(127,-20,300,100);
         lblInventarioReporte.setForeground(Color.BLACK);
         add(lblInventarioReporte);
-
         lblDatos = new JLabel("DATOS");
-        lblDatos.setBounds(200,48,100,100);
+        lblDatos.setForeground(Color.BLACK);
+        lblDatos.setBounds(210,11,100,100);
         add(lblDatos);
-
+        //--------------------------------------
         btnvolver = new JButton("VOLVER");
         btnvolver.setBounds(384,331,100,30);
         btnvolver.addActionListener(this);
         btnvolver.setForeground(Color.white);
         btnvolver.setBackground(Color.LIGHT_GRAY);
-        btnvolver.addActionListener(this);
         add(btnvolver);
-
-        //Area de Texto y Barra de Desplazamiento
+        //------------------------------------
         txtarea = new JTextArea(200,200);
-        txtarea.setBounds(84, 84, 300, 250);
-        //Barra de desplzamiento
+        txtarea.setEditable(false);
         jspbarra = new JScrollPane();
+        jspbarra.setBounds(74,70,325,250);
         jspbarra.setViewportView(txtarea);
-        add(txtarea);
+        add(jspbarra);
     }
     public static void main(String args[]) {
         FrInventarios ventana = new FrInventarios();
         ventana.setVisible(true);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==btnvolver){
-            new Menu_Principal();
+            new interfaz_Menu_Principal();
             this.dispose();
         }
     }
 
 }
+

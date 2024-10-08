@@ -1,5 +1,5 @@
 package Principal;
-import Projecto_Final.FrmLoginUsuario;
+import Vista.interfaz_FrmLoginUsuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -102,7 +102,7 @@ public class FrmLoginAcceso extends JFrame  implements ActionListener
 
         public void Salir(){
             this.dispose();
-            FrmLoginUsuario ventanaLogin = new FrmLoginUsuario();
+            interfaz_FrmLoginUsuario ventanaLogin = new interfaz_FrmLoginUsuario();
             setVisible(true);
         }
 
