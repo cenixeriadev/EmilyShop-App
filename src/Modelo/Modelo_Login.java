@@ -1,11 +1,11 @@
 package Modelo;
 
-import Controlador.Controlador_Menu_Principal;
-import Vista.interfaz_Menu_Principal;
+import Controlador.Menu_Principal_Controlador;
+import Vista.Menu_Principal_Vista;
 import javax.swing.*;
 
 public class Modelo_Login {
-    public interfaz_Menu_Principal Entrar(JFrame ventana ,JTextField txtUsuario  , JPasswordField txtPassword) {
+    public Menu_Principal_Vista Entrar(JFrame ventana , JTextField txtUsuario  , JPasswordField txtPassword) {
 
         String[] usu = {"Ivan", "Armando", "Julio", "Karin", "Anthony"};
         String[] cla = {"131313", "139319", "49983894", "8589895", "00012319"};
@@ -35,8 +35,8 @@ public class Modelo_Login {
                 }
             }
             if (estado) {
-                interfaz_Menu_Principal obj = new interfaz_Menu_Principal();
-                Controlador_Menu_Principal mod  = new Controlador_Menu_Principal(obj);
+                Menu_Principal_Vista obj = new Menu_Principal_Vista();
+                Menu_Principal_Controlador mod  = new Menu_Principal_Controlador(obj);
                 obj.setVisible(true);
                 ventana.dispose();
                 return obj;

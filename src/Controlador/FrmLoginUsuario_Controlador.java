@@ -1,12 +1,12 @@
 package Controlador;
-import Vista.interfaz_FrmLoginUsuario;
+import Vista.FrmLoginUsuario_Vista;
 import Modelo.Modelo_Login;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class Controlador_FrmLoginUsuario {
-    private interfaz_FrmLoginUsuario login ;
+public class FrmLoginUsuario_Controlador {
+    private FrmLoginUsuario_Vista login ;
     private Modelo_Login modelo;
-    public Controlador_FrmLoginUsuario(interfaz_FrmLoginUsuario login , Modelo_Login modelo){
+    public FrmLoginUsuario_Controlador(FrmLoginUsuario_Vista login , Modelo_Login modelo){
         this.login = login;
         this.modelo = modelo;
         login.getbtnSalir().addActionListener(new ActionListener() {

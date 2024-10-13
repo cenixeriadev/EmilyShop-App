@@ -1,15 +1,15 @@
 package Controlador;
-import Vista.FrInventarios;
-import Vista.interfaz_Inventario;
-import Vista.interfaz_Menu_Principal;
+import Vista.FrInventarios_Vista;
+import Vista.Inventario_Vista;
+import Vista.Menu_Principal_Vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Controlador_Inventario {
-    private interfaz_Inventario inventario;
+public class Inventario_Controlador {
+    private Inventario_Vista inventario;
 
-    public Controlador_Inventario(interfaz_Inventario inventario){
+    public Inventario_Controlador(Inventario_Vista inventario){
         this.inventario = inventario;
 
 // Asignar los eventos de los botones y otros controles
@@ -25,7 +25,7 @@ public class Controlador_Inventario {
 
             @Override
                 public void actionPerformed(ActionEvent e) {
-                    FrInventarios Reporte_inventario = new FrInventarios();
+                    FrInventarios_Vista Reporte_inventario = new FrInventarios_Vista();
                     Reporte_inventario.setVisible(true);
                     inventario.dispose();
                     // Acción al presionar el botón reporte
@@ -42,8 +42,8 @@ public class Controlador_Inventario {
 
             @Override
                 public void actionPerformed(ActionEvent e) {
-                    interfaz_Menu_Principal vent =  new interfaz_Menu_Principal();
-                    Controlador_Menu_Principal contvent = new Controlador_Menu_Principal(vent);
+                    Menu_Principal_Vista vent =  new Menu_Principal_Vista();
+                    Menu_Principal_Controlador contvent = new Menu_Principal_Controlador(vent);
                     vent.setVisible(true);
                     inventario.dispose();
                     // Acción al presionar el botón volver

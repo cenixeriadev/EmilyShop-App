@@ -1,12 +1,12 @@
-import Controlador.Controlador_FrmLoginUsuario;
+import Controlador.FrmLoginUsuario_Controlador;
 import Modelo.Modelo_Login;
-import Vista.interfaz_FrmLoginUsuario;
+import Vista.FrmLoginUsuario_Vista;
 public class Main{
 
     public static void main(String[] args) {
         Modelo_Login  modelo = new Modelo_Login();
-        interfaz_FrmLoginUsuario ventana = new interfaz_FrmLoginUsuario();
-        Controlador_FrmLoginUsuario controlador = new Controlador_FrmLoginUsuario(ventana, modelo);
+        FrmLoginUsuario_Vista ventana = new FrmLoginUsuario_Vista();
+        FrmLoginUsuario_Controlador controlador = new FrmLoginUsuario_Controlador(ventana, modelo);
         ventana.setVisible(true);
     }
 
