@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConexionBD {
     public Connection getConexionBD() {
-        Connection cn = null;
+        Connection Database = null;
         try {
             // Cargar el driver JDBC correcto
             Class.forName("com.mysql.jdbc.Driver");
@@ -17,8 +17,12 @@ public class ConexionBD {
             String password = "";  // Cambia la contraseña si tienes una
 
             // Establecer la conexión
-            cn = DriverManager.getConnection(url, user, password);
+            Database = DriverManager.getConnection(url, user, password);
+
+
             System.out.println("¡Conexión exitosa!");
+
+
 
         } catch (ClassNotFoundException e) {
             System.out.println("Error: No se encontró el driver de MySQL");
@@ -27,7 +31,7 @@ public class ConexionBD {
             System.out.println("Error: No se pudo conectar a la base de datos");
             e.printStackTrace();
         }
-        return cn;
+        return Database;
     }
 
     public static void main(String[] args) {
