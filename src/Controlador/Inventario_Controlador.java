@@ -26,7 +26,6 @@ public class Inventario_Controlador {
             @Override
                 public void actionPerformed(ActionEvent e) {
                     FrInventarios_Vista Reporte_inventario = new FrInventarios_Vista();
-                    FrmInventarios_Controlador ReportController = new FrmInventarios_Controlador(Reporte_inventario);
                     Reporte_inventario.setVisible(true);
                     inventario.dispose();
                     // Acción al presionar el botón reporte
