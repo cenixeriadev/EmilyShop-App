@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FrmLoginUsuario_Vista extends JFrame {
-    private  final Color color3 = Color.CYAN;
-    private  final Color color4 = Color.WHITE;
+    private  final Color color3 = new Color(32, 201, 151);
+    private  final Color color4 = new Color(81, 0, 131);
 
 
     // Panel para el fondo
@@ -37,7 +37,7 @@ public class FrmLoginUsuario_Vista extends JFrame {
         setLocation(400, 50);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 600);
-
+        setUndecorated(true);
 
         // Usa un JPanel con el fondo de gradiente
         GradientPanel gradientPanel = new GradientPanel();
@@ -45,7 +45,7 @@ public class FrmLoginUsuario_Vista extends JFrame {
 
         // Cargar la imagen del logo
         //----------------------------------------------------------------------------------------
-        ImageIcon logoIcon = new ImageIcon("src/Vista/icono.png"); // Ruta del logo
+        ImageIcon logoIcon = new ImageIcon("src/Recursos/Login.png"); // Ruta del logo
         Image logoImage = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH); // Redimensionar imagen
         logoIcon = new ImageIcon(logoImage); // Crear un nuevo ImageIcon redimensionado
         this.setType(Type.NORMAL); // Hacer el frame modal
@@ -84,12 +84,25 @@ public class FrmLoginUsuario_Vista extends JFrame {
         gradientPanel.add(txtPassword);
         //--------------------------------------------------------------------------------------
         btnEntrar = new JButton("Entrar");
-        btnEntrar.setBounds(200, 300, 100, 30);
+        btnEntrar.setBounds(150, 300, 110, 40);
+        btnEntrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnEntrar.setBackground(new Color(47, 158, 68));
+        btnEntrar.setFocusPainted(false);
+        btnEntrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+         // Cambiar el cursor a mano para el botón entrar
         //btnEntrar.addActionListener(this);
         gradientPanel.add(btnEntrar);
-
+        ImageIcon salirIcon =  new ImageIcon("src/Recursos/salir.png");
+        Image salirimage = salirIcon.getImage().getScaledInstance( 30, 30, Image.SCALE_SMOOTH);
+        salirIcon = new ImageIcon(salirimage); // Crear un nuevo ImageIcon redimensionado
         btnSalir = new JButton("Salir");
-        btnSalir.setBounds(310, 300, 100, 30);
+        btnSalir.setBounds(310, 300, 110, 40);
+        btnSalir.setBorder(BorderFactory.createEmptyBorder());
+        btnSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnSalir.setBackground(new Color(255, 107, 107));
+        btnSalir.setFocusPainted(false);
+         // Cambiar el cursor a mano para el botón salir
+        btnSalir.setIcon(salirIcon);
         //btnSalir.addActionListener(this);
         gradientPanel.add(btnSalir);
         //--------------------------------------------------------------------------------------

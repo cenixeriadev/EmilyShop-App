@@ -5,6 +5,7 @@ import Modelo.Modelo_Login;
 import Vista.Menu_Principal_Vista;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class FrmLoginUsuario_Controlador implements LoginObserver{
@@ -17,8 +18,10 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
         login.getbtnSalir().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 login.dispose();
             }
+
         });
         login.getbtnEntrar().addActionListener(new ActionListener() {
             @Override
@@ -36,7 +39,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
     @Override
     public void loginExitoso() {
         Menu_Principal_Vista vista = new Menu_Principal_Vista();
-        Menu_Principal_Controlador controlador = new Menu_Principal_Controlador(vista);
+        new Menu_Principal_Controlador(vista);
         login.dispose();
         vista.setVisible(true);
     }
