@@ -83,27 +83,30 @@ public class FrmLoginUsuario_Vista extends JFrame {
         txtPassword.setBounds(280, 200, 100, 30);
         gradientPanel.add(txtPassword);
         //--------------------------------------------------------------------------------------
+        ImageIcon entrarIcon =  new ImageIcon("src/Recursos/Key.png");
+        Image  entrarimage =  entrarIcon.getImage().getScaledInstance(30 , 30 ,Image.SCALE_SMOOTH);
+        entrarIcon = new ImageIcon(entrarimage); // Crear un nuevo ImageIcon redimensionado
         btnEntrar = new JButton("Entrar");
         btnEntrar.setBounds(150, 300, 110, 40);
         btnEntrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnEntrar.setBackground(new Color(47, 158, 68));
+        //btnEntrar.setBackground(new Color(47, 158, 68));
+        btnEntrar.setForeground(Color.BLACK);
         btnEntrar.setFocusPainted(false);
-        btnEntrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-         // Cambiar el cursor a mano para el botón entrar
-        //btnEntrar.addActionListener(this);
+        btnEntrar.setIcon(entrarIcon);
+        btnEntrar.setCursor(new Cursor(Cursor.HAND_CURSOR));// Cambiar el cursor a mano para el botón entrar
         gradientPanel.add(btnEntrar);
         ImageIcon salirIcon =  new ImageIcon("src/Recursos/salir.png");
-        Image salirimage = salirIcon.getImage().getScaledInstance( 30, 30, Image.SCALE_SMOOTH);
+        Image salirimage = salirIcon.getImage().getScaledInstance( 40, 40, Image.SCALE_SMOOTH);
         salirIcon = new ImageIcon(salirimage); // Crear un nuevo ImageIcon redimensionado
         btnSalir = new JButton("Salir");
         btnSalir.setBounds(310, 300, 110, 40);
         btnSalir.setBorder(BorderFactory.createEmptyBorder());
         btnSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnSalir.setBackground(new Color(255, 107, 107));
+        //btnSalir.setBackground(new Color(255, 107, 107));
+        btnSalir.setForeground(Color.BLACK);
         btnSalir.setFocusPainted(false);
          // Cambiar el cursor a mano para el botón salir
         btnSalir.setIcon(salirIcon);
-        //btnSalir.addActionListener(this);
         gradientPanel.add(btnSalir);
         //--------------------------------------------------------------------------------------
 
