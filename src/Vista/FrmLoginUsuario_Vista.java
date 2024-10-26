@@ -4,8 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FrmLoginUsuario_Vista extends JFrame {
-    private  final Color color3 = new Color(32, 201, 151);
-    private  final Color color4 = new Color(81, 0, 131);
+    //private  final Color color3 = new Color(32, 201, 151);
+    private  final Color color3 = new Color(160, 239, 89);
+    private  final Color color4 = new Color(133, 229, 190);
 
 
     // Panel para el fondo
@@ -21,9 +22,6 @@ public class FrmLoginUsuario_Vista extends JFrame {
             //g2d.setPaint(gp);
             g2d.setPaint(gp);
             g2d.fillRect(0, 0, w, h);
-            //g2d.fillArc(0, 0,w,h,0,120);//arcos (trozos de circunferencias)
-            //g2d.fillOval(0, 0,w,h);
-            //g2d.fillRoundRect(0,0,w,h,30,120);
         }
     }
 
