@@ -72,6 +72,7 @@ public class Menu_Principal_Vista extends JFrame  {
         // Hacer visible el marco
         setVisible(true);
     }
+    public JButton getCierreCajaButton(){return cierreCajaButton;}
     public JButton getVentasButton(){
         return ventasButton;
     }

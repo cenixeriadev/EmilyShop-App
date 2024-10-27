@@ -12,7 +12,7 @@ public class ConexionBD {
             Class.forName("com.mysql.jdbc.Driver");
 
             // Conectar a la base de datos (sin espacio en el nombre de usuario)
-            String url = "jdbc:mysql://localhost:3306/inventario";
+            String url = "jdbc:mysql://localhost:3306/inventariotienda1";
             String user = "root";  // Usuario root sin espacio
             String password = "";  // Cambia la contraseña si tienes una
 
@@ -21,8 +21,6 @@ public class ConexionBD {
 
 
             System.out.println("¡Conexión exitosa!");
-
-
 
         } catch (ClassNotFoundException e) {
             System.out.println("Error: No se encontró el driver de MySQL");
@@ -35,7 +33,7 @@ public class ConexionBD {
     }
 
     public static void main(String[] args) {
-        ConexionBD objeto = new ConexionBD();
-        objeto.getConexionBD();
+        ConexionBD obj = new ConexionBD();
+        obj.getConexionBD();
     }
 }
