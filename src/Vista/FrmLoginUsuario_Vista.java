@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class FrmLoginUsuario_Vista extends JFrame {
     //private  final Color color3 = new Color(32, 201, 151);
-    private  final Color color3 = new Color(160, 239, 89);
-    private  final Color color4 = new Color(133, 229, 190);
+    private  final Color color3 = new Color(0, 248, 4);
+    private  final Color color4 = new Color(250, 237, 95);
 
 
     // Panel para el fondo

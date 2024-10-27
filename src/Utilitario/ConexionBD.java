@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionBD {
-    public Connection getConexionBD() {
+    public static Connection getConexionBD() {
         Connection Database = null;
         try {
             // Cargar el driver JDBC correcto

@@ -133,39 +133,7 @@ public class Venta_Vista extends JFrame  {
         scrollDatos.setBounds(80, 350, 470, 300);
         scrollDatos.setViewportView(textAreaDatos);
         add(scrollDatos);
-        //----------------------------------------------------------------
 
-        // Acción para el botón de registrar
-//        btnRegistrar.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if (txtCliente.getText().isEmpty() || txtCodigo.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtDescripcion.getText().isEmpty() || (comboTalla.getSelectedIndex()==0)) {
-//
-//                    JOptionPane.showMessageDialog(interfaz_Ventas.this, "Debe llenar todos los campos");
-//
-//                } else {
-//                    String cliente = txtCliente.getText();
-//                    String codigo = txtCodigo.getText();
-//                    String precio = txtPrecio.getText();
-//                    String descripcion = txtDescripcion.getText();
-////                    String cantidad = txtCantidad.getText();
-//                    String talla = (String) comboTalla.getSelectedItem();
-//
-//                    textAreaDatos.append(cliente + "  " + codigo + "  " + precio + "  " + descripcion + "  "  + talla + "\n");
-//                    lblUltimaAccion.setText("Venta registrada correctamente");
-//                }
-//            }
-//        });
-
-        // Acción para el botón de eliminar
-//        btnEliminar.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                String lastEntry = textAreaDatos.getText().split("\n")[textAreaDatos.getLineCount() - 1];
-//                textAreaDatos.append(textAreaDatos.getText().replace(lastEntry, ""));
-//                lblUltimaAccion.setText("Última venta eliminada correctamente");
-//            }
-//        });
     }
 
     public JButton getBtnConsulta() {
