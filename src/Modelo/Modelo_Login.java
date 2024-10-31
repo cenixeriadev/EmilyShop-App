@@ -5,7 +5,7 @@ import Controlador.FrmLoginUsuario_Controlador;
 import java.util.ArrayList;
 import java.util.List;
 public class Modelo_Login {
-    private List<FrmLoginUsuario_Controlador> observers =  new ArrayList<>();
+    private  List<FrmLoginUsuario_Controlador> observers =  new ArrayList<>();
     usuarioDAO user = new usuarioDAO();
     private ArrayList<usuario> usuarios = new ArrayList<>();
 
@@ -20,16 +20,12 @@ public class Modelo_Login {
     public void validarCredenciales(String inputUsername , String inputPassword){
         usuarios = user.ListarUsuario();
         boolean estado = false;
-        for(int i = 0; i < usuarios.size(); i++){
-            if (inputUsername.equals(usuarios.get(i).getNames()) && inputPassword.equals(usuarios.get(i).getContraseña())){
-                estado = true;
-            }
-            else{
-                estado = false;
-            }
+        for (Modelo.usuario usuario : usuarios) {
+            estado = inputUsername.equals(usuario.getNames()) && inputPassword.equals(usuario.getContraseña());
         }
         if (estado){
             notificarObserverExito();
+
 
         }
         else {

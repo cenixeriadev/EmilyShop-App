@@ -23,6 +23,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
             }
 
         });
+
         login.getbtnEntrar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,11 +31,13 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
 
             }
         });
+        //modelo.removeObserver(this);
     }
     private void  handleLogin() {
         String inputUsername =  login.getTxtUsuario().getText();
         String password = new String(login.getTxtPassword().getPassword());
         modelo.validarCredenciales(inputUsername, password);
+        modelo.removeObserver(this);
     }
     @Override
     public void loginExitoso() {
@@ -42,11 +45,13 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
         new Menu_Principal_Controlador(vista);
         login.dispose();
         vista.setVisible(true);
+
     }
 
     @Override
     public void loginFallido(String message) {
         JOptionPane.showMessageDialog(null , message,"" ,  JOptionPane.ERROR_MESSAGE);
+
     }
 
 }

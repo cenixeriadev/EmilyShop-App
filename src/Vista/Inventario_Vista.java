@@ -14,7 +14,10 @@ public class Inventario_Vista extends JFrame {
     JScrollPane jspbarra;
 
 
-    public Inventario_Vista(){
+    public Inventario_Vista() {
+        initComponents();
+    }
+    public void initComponents(){
         setTitle("INVENTARIO...");
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,9 +72,9 @@ public class Inventario_Vista extends JFrame {
 
         String[] tallas = {"35", "36", "37", "38", "39", "40", "41", "42", "43"};
         ButtonGroup groupTallas = new ButtonGroup();
-
         for (String talla : tallas) {
             JToggleButton btnTalla = new JToggleButton(talla);
+
             groupTallas.add(btnTalla);
             panelTallas.add(btnTalla);
         }
@@ -108,6 +111,9 @@ public class Inventario_Vista extends JFrame {
     public static void main(String[] args) {
         new Inventario_Vista().setVisible(true);
     }
+    public JTextField getTxtcodigo(){return  txtcodigo;}
+    public ButtonGroup getGrupotallas(){return grupotallas;}
+    public JComboBox getOpcion(){ return cbmodelo;};
     public JButton getBtnregistrar(){
         return  btnregistrar;
     }
