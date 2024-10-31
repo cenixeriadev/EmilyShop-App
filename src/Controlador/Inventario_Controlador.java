@@ -16,9 +16,9 @@ public class Inventario_Controlador {
         inventario.getBtnregistrar().addActionListener(new ActionListener(){
 
             @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Acción al presionar el botón volver
-                }
+            public void actionPerformed(ActionEvent e) {
+
+            }
         });
 
         inventario.getBtnreporte().addActionListener(new ActionListener(){

@@ -105,6 +105,9 @@ public class Inventario_Vista extends JFrame {
 
 
     }
+    public static void main(String[] args) {
+        new Inventario_Vista().setVisible(true);
+    }
     public JButton getBtnregistrar(){
         return  btnregistrar;
     }

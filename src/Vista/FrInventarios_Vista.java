@@ -1,13 +1,25 @@
 package Vista;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import Modelo.inventario;
+import Modelo.inventarioDAO;
+
 
 public class FrInventarios_Vista extends JFrame {
     public JLabel lblInventarioReporte, lblDatos;
-    public JTextArea txtarea;
-    public JScrollPane jspbarra;
+    public DefaultTableModel modelo;
+    public JTable tablaInventario;
+    public JScrollPane barraTablaInventario;
     public JButton btnvolver;
+    String titulos [] = {"Talla" , "Modelo" , "Color" , "Precio"};
+    ArrayList <inventario> listaInventario =  new ArrayList<>();
+    inventario objInventario ;
+    inventarioDAO objInventarioDAO  = new inventarioDAO();
+
+
     public FrInventarios_Vista(){
         setTitle("REPORTE DE INVENTARIO");
         setSize(600,600);
@@ -32,12 +44,12 @@ public class FrInventarios_Vista extends JFrame {
         btnvolver.setBackground(Color.LIGHT_GRAY);
         add(btnvolver);
         //------------------------------------
-        txtarea = new JTextArea(200,200);
-        txtarea.setEditable(false);
-        jspbarra = new JScrollPane();
-        jspbarra.setBounds(74,70,325,250);
-        jspbarra.setViewportView(txtarea);
-        add(jspbarra);
+        //    talla modelo color  precio
+
+    }
+    public static void main(String[] args) {
+        FrInventarios_Vista fi = new FrInventarios_Vista();
+        fi.setVisible(true);
     }
     public JButton getBtnVolver(){
         return btnvolver;
