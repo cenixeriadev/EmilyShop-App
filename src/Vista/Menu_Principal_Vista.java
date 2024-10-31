@@ -17,6 +17,7 @@ public class Menu_Principal_Vista extends JFrame  {
         setSize(600, 600);
         setLayout(null); // Usar layout nulo para setBounds
         setLocationRelativeTo(null);
+        setUndecorated(true);
         // Inicializar los botones y etiquetas
 
         TitleFrame = new JLabel("CALZADOS EMILY'S");

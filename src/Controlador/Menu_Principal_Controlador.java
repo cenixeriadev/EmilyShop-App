@@ -33,10 +33,8 @@ public class Menu_Principal_Controlador {
         menu.getInventarioButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrInventarios_Vista inventario  = new FrInventarios_Vista();
-                Modelo_Inventario modelo = new Modelo_Inventario(inventario);
                 Inventario_Vista inventariopr  = new Inventario_Vista();
-                Inventario_Controlador control = new Inventario_Controlador(inventariopr , modelo);
+                Inventario_Controlador control = new Inventario_Controlador(inventariopr );
                 inventariopr.setVisible(true);
                 menu.dispose();
             }

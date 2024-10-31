@@ -16,13 +16,14 @@ public class inventarioDAO {
             cn  = ConexionBD.getConexionBD();
             pt = cn.prepareStatement("SELECT * FROM inventario");
             rs = pt.executeQuery();
-            listaInvent = new ArrayList<>();
+            listaInvent = new ArrayList<inventario>();
             while(rs.next()){
                 objInventario = new inventario();
                 objInventario.setTalla(rs.getInt("talla"));
                 objInventario.setModel(rs.getString("modelo"));
                 objInventario.setColor(rs.getString("color"));
-                objInventario.setPrecioCosto(rs.getInt("precio"));//Precio entero , esta raro eh.....
+                objInventario.setCodigo(rs.getString("codigo"));
+                objInventario.setPrecioCosto(rs.getInt("preciocosto"));//Precio entero , esta raro eh.....
                 listaInvent.add(objInventario);
             }
             return listaInvent;

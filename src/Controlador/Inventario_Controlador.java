@@ -9,11 +9,10 @@ import java.awt.event.ActionListener;
 
 public class Inventario_Controlador {
     private Inventario_Vista inventario;
-    private Modelo_Inventario modelo_inventario;
-    private Inventario_Vista mpVista;
-    public Inventario_Controlador(Inventario_Vista inventario ,Modelo_Inventario modelo_inventario){
+    private  FrInventarios_Vista Reporte_inventario = new FrInventarios_Vista();
+    public Inventario_Controlador(Inventario_Vista inventario ){
         this.inventario = inventario;
-        this.modelo_inventario = modelo_inventario;
+        //this.modelo_inventario = modelo_inventario;
 
 
 // Asignar los eventos de los botones y otros controles
@@ -21,8 +20,9 @@ public class Inventario_Controlador {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                Modelo_Inventario modelo_inventario =  new Modelo_Inventario(Reporte_inventario);
                 modelo_inventario.AgregarProducto(inventario.getGrupotallas(), inventario.getOpcion() , inventario.getTxtcodigo() , inventario.getTxtcolor(), inventario.getTxtprecio());
-
+                //modelo_inventario.CargarDatos();
             }
         });
 
@@ -30,10 +30,11 @@ public class Inventario_Controlador {
 
             @Override
                 public void actionPerformed(ActionEvent e) {
-                    FrInventarios_Vista Reporte_inventario = new FrInventarios_Vista();
-                    Modelo_Inventario modeloReporte = new Modelo_Inventario(Reporte_inventario);
-                    FrmInventarios_Controlador contReporte = new FrmInventarios_Controlador(Reporte_inventario , modeloReporte);
-
+                    new FrmInventarios_Controlador(Reporte_inventario);
+                    Modelo_Inventario mod = new Modelo_Inventario(Reporte_inventario);
+                    mod.CargarDatos();
+                    Reporte_inventario.setVisible(true);
+                    inventario.dispose();
                     // Acción al presionar el botón reporte
                 }
         });
@@ -59,7 +60,5 @@ public class Inventario_Controlador {
 
     }
 
-    public Inventario_Controlador(Inventario_Vista mpVista) {
-        this.mpVista = mpVista;
-    }
+
 }

@@ -14,13 +14,14 @@ public class FrmInventarios_Controlador  {
         //Agregando listeners a los botones para que funcionen
         //
 
+
         vistainventario.getBtnVolver().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                FrInventarios_Vista vis  = new FrInventarios_Vista();
-                Modelo_Inventario mod = new Modelo_Inventario(vis);
+
                 Inventario_Vista MpVista = new Inventario_Vista();
-                Inventario_Controlador  cont = new Inventario_Controlador(MpVista , mod);
+                Inventario_Controlador  cont = new Inventario_Controlador(MpVista);
+                Modelo_Inventario mod = new Modelo_Inventario(vistainventario);
                 MpVista.setVisible(true);
                 vistainventario.dispose();
 

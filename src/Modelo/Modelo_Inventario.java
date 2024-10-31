@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Modelo_Inventario implements MetodosInventario {
     private FrInventarios_Vista vista ;
-    ArrayList<inventario> listaInventario =  new ArrayList<>();
+    ArrayList<inventario> listaInventario =  new ArrayList<inventario>();
     inventario objInventario ;
     inventarioDAO objInventarioDAO  = new inventarioDAO();
 
@@ -23,10 +23,10 @@ public class Modelo_Inventario implements MetodosInventario {
         listaInventario = objInventarioDAO.listarInventario();
         modelo.setNumRows(listaInventario.size());
         for(inventario objinventario : listaInventario){
-            modelo.setValueAt(String.valueOf(objinventario.getCodigo()), i, 0);
-            modelo.setValueAt(String.valueOf(objinventario.getTalla()), i, 1);
-            modelo.setValueAt(objinventario.getModel(), i, 2);
-            modelo.setValueAt(objinventario.getColor(), i, 3);
+            modelo.setValueAt(String.valueOf(objinventario.getTalla()), i, 0);
+            modelo.setValueAt(objinventario.getModel(), i, 1);
+            modelo.setValueAt(objinventario.getColor(), i, 2);
+            modelo.setValueAt(String.valueOf(objinventario.getCodigo()), i, 3);
             modelo.setValueAt(String.valueOf(objinventario.getPrecioCosto()), i, 4);
             i++;
         }
@@ -63,7 +63,6 @@ public class Modelo_Inventario implements MetodosInventario {
         }else {
             JOptionPane.showMessageDialog(null, "Error al agregar el producto");
         }
-        vista.getTablaInventario().setModel(modelo);
         CargarDatos();
         LimpiarCampos(txtcodigo,txtColor,txtPrecioCosto);
 
