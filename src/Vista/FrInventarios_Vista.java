@@ -4,9 +4,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-import Modelo.inventario;
-import Modelo.inventarioDAO;
-
+import Modelo.Modelo_Inventario;
 
 public class FrInventarios_Vista extends JFrame {
     public JLabel lblInventarioReporte, lblDatos;
@@ -14,11 +12,7 @@ public class FrInventarios_Vista extends JFrame {
     public JTable tablaInventario;
     public JScrollPane barraTablaInventario;
     public JButton btnvolver;
-    String titulos [] = {"Talla" , "Modelo" , "Color" , "Precio"};
-    ArrayList <inventario> listaInventario =  new ArrayList<>();
-    inventario objInventario ;
-    inventarioDAO objInventarioDAO  = new inventarioDAO();
-
+    String titulos [] = {"Codio","Talla" , "Modelo" , "Color" , "Precio"};
 
     public FrInventarios_Vista() {
         initComponents();
@@ -61,9 +55,10 @@ public class FrInventarios_Vista extends JFrame {
         //    talla modelo color  precio
 
     }
-    public static void main(String[] args) {
-        FrInventarios_Vista fi = new FrInventarios_Vista();
-        fi.setVisible(true);
+
+    public DefaultTableModel getModelo(){return modelo;}
+    public JTable getTablaInventario(){
+        return tablaInventario;
     }
     public JButton getBtnVolver(){
         return btnvolver;

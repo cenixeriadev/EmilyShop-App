@@ -4,18 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Inventario_Vista extends JFrame {
-    JLabel lblinventario,lblcodigo,lbldatos,lblmodelo,lbltalla,lblmensaje;
-    JTextField txtcodigo;
+    JLabel lblinventario,lblcodigo,lbldatos,lblmodelo,lbltalla,lblmensaje, lblcolor,lblprecio;
+    JTextField txtcodigo,txtcolor,txtprecio;
     JButton btnregistrar, btnreporte, btneliminar, btnvolver;
-    ButtonGroup grupotallas;
+    public ButtonGroup groupTallas = new ButtonGroup();
     JComboBox cbmodelo;
     JPanel panelTallas;
     JTextArea area;
     JScrollPane jspbarra;
 
 
+
     public Inventario_Vista() {
         initComponents();
+
     }
     public void initComponents(){
         setTitle("INVENTARIO...");
@@ -33,11 +35,19 @@ public class Inventario_Vista extends JFrame {
         lblmodelo.setBounds(30,60,100,30);
         add(lblmodelo);
 
+        lblprecio = new JLabel("PRECIO ");
+        lblprecio.setBounds(230,60,100,30);
+        add(lblprecio);
+
         lblcodigo=new JLabel("CODIGO");
         lblcodigo.setBounds(30,100,100,30);
         add(lblcodigo);
 
-        lbltalla=new JLabel("Talla");
+        lblcolor = new JLabel("COLOR");
+        lblcolor.setBounds(230,100,100,30);
+        add(lblcolor);
+
+        lbltalla=new JLabel("TALLA");
         lbltalla.setBounds(30,140,100,30);
         add(lbltalla);
 
@@ -65,16 +75,24 @@ public class Inventario_Vista extends JFrame {
         txtcodigo.setBounds(120,100,100,30);
         add(txtcodigo);
 
+        txtcolor = new JTextField();
+        txtcolor.setBounds(280,100,100,30);
+        add(txtcolor);
+
+        txtprecio = new JTextField();
+        txtprecio.setBounds(280,60,100,30);
+        add(txtprecio);
 
         panelTallas = new JPanel(new GridLayout(3, 3, 10, 10));
         panelTallas.setBounds(120, 140, 200, 100);
         add(panelTallas);
 
         String[] tallas = {"35", "36", "37", "38", "39", "40", "41", "42", "43"};
-        ButtonGroup groupTallas = new ButtonGroup();
+        //ButtonGroup groupTallas = new ButtonGroup();
+
         for (String talla : tallas) {
             JToggleButton btnTalla = new JToggleButton(talla);
-
+            btnTalla.setActionCommand(talla);
             groupTallas.add(btnTalla);
             panelTallas.add(btnTalla);
         }
@@ -108,11 +126,11 @@ public class Inventario_Vista extends JFrame {
 
 
     }
-    public static void main(String[] args) {
-        new Inventario_Vista().setVisible(true);
-    }
+
+    public JTextField getTxtprecio(){return  txtprecio;}
+    public  JTextField getTxtcolor(){return  txtcolor;}
     public JTextField getTxtcodigo(){return  txtcodigo;}
-    public ButtonGroup getGrupotallas(){return grupotallas;}
+    public ButtonGroup getGrupotallas(){return groupTallas;}
     public JComboBox getOpcion(){ return cbmodelo;};
     public JButton getBtnregistrar(){
         return  btnregistrar;
@@ -127,9 +145,6 @@ public class Inventario_Vista extends JFrame {
         return  btnvolver;
     }
 
-    public ButtonGroup getButtonSelect(){
-        return grupotallas;
-    }
 
 
 

@@ -38,11 +38,12 @@ public class inventarioDAO {
         int estado  = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("INSERT INTO inventario (talla,modelo,color,preciocosto) VALUES (?,?,?,?)");
-            pt.setInt(1, objInventario.getTalla());
-            pt.setString(2, objInventario.getModel());
-            pt.setString(3, objInventario.getColor());
-            pt.setInt(4, objInventario.getPrecioCosto());
+            pt = cn.prepareStatement("INSERT INTO inventario (codigo,talla,modelo,color,preciocosto) VALUES (?,?,?,?,?)");
+            pt.setString(1, objInventario.getCodigo());
+            pt.setInt(2, objInventario.getTalla());
+            pt.setString(3, objInventario.getModel());
+            pt.setString(4, objInventario.getColor());
+            pt.setInt(5, objInventario.getPrecioCosto());
             return pt.executeUpdate();
         }catch(Exception e) {
 

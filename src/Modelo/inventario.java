@@ -27,8 +27,8 @@ public class inventario {
         this.color = color;
     }
 
-    public void setCodigo(int idproducto2){
-        this.idproducto2 = idproducto2;
+    public void setCodigo(String codigo){
+        this.codigo = codigo;
     }
     public void setTalla(int talla){
         this.talla = talla;
@@ -46,10 +46,8 @@ public class inventario {
     public String getColor(){
         return color;
     }
-    public int getCodigo(){
-        return idproducto2;
-    }
-    public int getIdproducto(){
+    public String getCodigo(){return codigo; }
+    public int getIdproducto2(){
         return idproducto2;
     }
     public int getTalla(){

@@ -1,4 +1,5 @@
 package Controlador;
+import Modelo.Modelo_Inventario;
 import Vista.FrInventarios_Vista;
 import Vista.Inventario_Vista;
 import Vista.Menu_Principal_Vista;
@@ -8,15 +9,19 @@ import java.awt.event.ActionListener;
 
 public class Inventario_Controlador {
     private Inventario_Vista inventario;
-
-    public Inventario_Controlador(Inventario_Vista inventario){
+    private Modelo_Inventario modelo_inventario;
+    private Inventario_Vista mpVista;
+    public Inventario_Controlador(Inventario_Vista inventario ,Modelo_Inventario modelo_inventario){
         this.inventario = inventario;
+        this.modelo_inventario = modelo_inventario;
+
 
 // Asignar los eventos de los botones y otros controles
         inventario.getBtnregistrar().addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                modelo_inventario.AgregarProducto(inventario.getGrupotallas(), inventario.getOpcion() , inventario.getTxtcodigo() , inventario.getTxtcolor(), inventario.getTxtprecio());
 
             }
         });
@@ -26,9 +31,9 @@ public class Inventario_Controlador {
             @Override
                 public void actionPerformed(ActionEvent e) {
                     FrInventarios_Vista Reporte_inventario = new FrInventarios_Vista();
-                    FrmInventarios_Controlador ReportController = new FrmInventarios_Controlador(Reporte_inventario);
-                    Reporte_inventario.setVisible(true);
-                    inventario.dispose();
+                    Modelo_Inventario modeloReporte = new Modelo_Inventario(Reporte_inventario);
+                    FrmInventarios_Controlador contReporte = new FrmInventarios_Controlador(Reporte_inventario , modeloReporte);
+
                     // Acción al presionar el botón reporte
                 }
         });
@@ -52,5 +57,9 @@ public class Inventario_Controlador {
         });
 
 
+    }
+
+    public Inventario_Controlador(Inventario_Vista mpVista) {
+        this.mpVista = mpVista;
     }
 }

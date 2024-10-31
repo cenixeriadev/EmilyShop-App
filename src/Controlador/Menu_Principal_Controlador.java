@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Modelo_Inventario;
 import Vista.*;
 
 import java.awt.event.ActionEvent;
@@ -32,9 +33,11 @@ public class Menu_Principal_Controlador {
         menu.getInventarioButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Inventario_Vista inventario  = new Inventario_Vista();
-                Inventario_Controlador control = new Inventario_Controlador(inventario);
-                inventario.setVisible(true);
+                FrInventarios_Vista inventario  = new FrInventarios_Vista();
+                Modelo_Inventario modelo = new Modelo_Inventario(inventario);
+                Inventario_Vista inventariopr  = new Inventario_Vista();
+                Inventario_Controlador control = new Inventario_Controlador(inventariopr , modelo);
+                inventariopr.setVisible(true);
                 menu.dispose();
             }
         });
