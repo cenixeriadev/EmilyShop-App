@@ -7,8 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class Modelo_Inventario implements MetodosInventario {
-    private FrInventarios_Vista vista ;
-    ArrayList<inventario> listaInventario =  new ArrayList<inventario>();
+    private final FrInventarios_Vista vista ;
+    ArrayList<inventario> listaInventario =  new ArrayList<>();
     inventario objInventario ;
     inventarioDAO objInventarioDAO  = new inventarioDAO();
 
@@ -36,16 +36,25 @@ public class Modelo_Inventario implements MetodosInventario {
     @Override
     public void ModificarProducto() {
 
-    }
-
-    @Override
-    public void EliminarProducto() {
 
     }
 
     @Override
-    public void AgregarProducto(ButtonGroup Tallas,JComboBox modeloProducto ,  JTextField txtcodigo, JTextField txtColor, JTextField txtPrecioCosto ) {
-        DefaultTableModel modelo = vista.getModelo();
+    public void EliminarProducto(String codigoProduct) {
+        objInventario = new inventario();
+        objInventario.setCodigo(codigoProduct);
+        int resultado = objInventarioDAO.EliminarProducto(objInventario);
+        if( resultado > 0){
+            JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el producto");
+        }
+        CargarDatos();
+
+    }
+
+    @Override
+    public void AgregarProducto(ButtonGroup Tallas,JComboBox<String> modeloProducto ,  JTextField txtcodigo, JTextField txtColor, JTextField txtPrecioCosto ) {
         int talla = Integer.parseInt(Tallas.getSelection().getActionCommand());
         String modeloProd = String.valueOf(modeloProducto.getSelectedItem());
         String codigo = txtcodigo.getText();

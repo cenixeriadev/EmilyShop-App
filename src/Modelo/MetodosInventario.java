@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 public interface MetodosInventario {
     void CargarDatos();
     void ModificarProducto();
-    void EliminarProducto();
-    void AgregarProducto(ButtonGroup Tallas,JComboBox modeloProducto ,  JTextField txtcodigo, JTextField txtColor, JTextField txtPrecioCosto );
+    void EliminarProducto(String codigoProducto);
+    void AgregarProducto(ButtonGroup Tallas,JComboBox<String> modeloProducto ,  JTextField txtcodigo, JTextField txtColor, JTextField txtPrecioCosto );
 
 }

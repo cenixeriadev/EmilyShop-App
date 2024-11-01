@@ -5,7 +5,6 @@ import Modelo.Modelo_Login;
 import Vista.Menu_Principal_Vista;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class FrmLoginUsuario_Controlador implements LoginObserver{
@@ -29,15 +28,15 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
             public void actionPerformed(ActionEvent e) {
                 handleLogin();
 
+
             }
         });
-        //modelo.removeObserver(this);
     }
     private void  handleLogin() {
         String inputUsername =  login.getTxtUsuario().getText();
         String password = new String(login.getTxtPassword().getPassword());
         modelo.validarCredenciales(inputUsername, password);
-        modelo.removeObserver(this);
+
     }
     @Override
     public void loginExitoso() {

@@ -8,7 +8,7 @@ public class Inventario_Vista extends JFrame {
     JTextField txtcodigo,txtcolor,txtprecio;
     JButton btnregistrar, btnreporte, btneliminar, btnvolver;
     public ButtonGroup groupTallas = new ButtonGroup();
-    JComboBox cbmodelo;
+    JComboBox<String> cbmodelo;
     JPanel panelTallas;
     JTextArea area;
     JScrollPane jspbarra;
@@ -61,7 +61,7 @@ public class Inventario_Vista extends JFrame {
         add(lbldatos);
 
 
-        cbmodelo= new JComboBox();
+        cbmodelo= new JComboBox<>();
         cbmodelo.setBounds(120,60,100,30);
         cbmodelo.addItem("");
         cbmodelo.addItem("Nike");
@@ -131,7 +131,7 @@ public class Inventario_Vista extends JFrame {
     public  JTextField getTxtcolor(){return  txtcolor;}
     public JTextField getTxtcodigo(){return  txtcodigo;}
     public ButtonGroup getGrupotallas(){return groupTallas;}
-    public JComboBox getOpcion(){ return cbmodelo;};
+    public JComboBox<String> getOpcion(){ return cbmodelo;}
     public JButton getBtnregistrar(){
         return  btnregistrar;
     }

@@ -2,9 +2,6 @@ package Vista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
-
-import Modelo.Modelo_Inventario;
 
 public class FrInventarios_Vista extends JFrame {
     public JLabel lblInventarioReporte, lblDatos;
@@ -12,16 +9,12 @@ public class FrInventarios_Vista extends JFrame {
     public JTable tablaInventario;
     public JScrollPane barraTablaInventario;
     public JButton btnvolver;
-    String titulos [] = {"Talla","Modelo" , "Color" , "Codigo" , "Precio"};
+    String[] titulos = {"Talla","Modelo" , "Color" , "Codigo" , "Precio"};
 
     public FrInventarios_Vista() {
         initComponents();
-        //objInventarioDAO = new inventarioDAO();
-        //CargarDatos();
-//        Modelo_Inventario modelo = new Modelo_Inventario(this);
-//        modelo.CargarDatos();
-
     }
+
     public void initComponents(){
         setTitle("REPORTE DE INVENTARIO");
         setSize(600,600);

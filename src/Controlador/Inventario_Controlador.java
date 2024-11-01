@@ -4,6 +4,7 @@ import Vista.FrInventarios_Vista;
 import Vista.Inventario_Vista;
 import Vista.Menu_Principal_Vista;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,6 +43,12 @@ public class Inventario_Controlador {
 
             @Override
                 public void actionPerformed(ActionEvent e) {
+
+                    String codigo = inventario.getTxtcodigo().getText();
+                    Modelo_Inventario modeliminar = new Modelo_Inventario(Reporte_inventario);
+                    modeliminar.EliminarProducto(codigo);
+
+
                     // Acción al presionar el botón eliminar
                 }
         });

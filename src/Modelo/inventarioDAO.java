@@ -56,8 +56,8 @@ public class inventarioDAO {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("DELETE FROM inventario WHERE idinventario=?");
-            pt.setInt(1, objInventario.getIdInventario());
+            pt = cn.prepareStatement("DELETE FROM inventario WHERE codigo=?");
+            pt.setString(1, objInventario.getCodigo());
             estado =  pt.executeUpdate();
             cn.close();
             pt.close();

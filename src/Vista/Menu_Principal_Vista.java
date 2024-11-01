@@ -4,33 +4,30 @@ import javax.swing.*;
 import java.awt.Font;
 
 public class Menu_Principal_Vista extends JFrame  {
-    // Declarar los objetos
-    private JPanel mainPanel;
-    private JButton ventasButton, inventarioButton, eliminarButton, cierreCajaButton;
-    private JLabel ventasLabel,TitleFrame, inventarioLabel, eliminarLabel, cierreCajaLabel;
+    private  JButton ventasButton, inventarioButton, eliminarButton, cierreCajaButton;
 
     public Menu_Principal_Vista() {
-        // Inicializar el marco principal
-        //setLocation(400, 100);
+        initComponents();
+    }
+    public void initComponents(){
         setTitle("Menu Principal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 600);
         setLayout(null); // Usar layout nulo para setBounds
         setLocationRelativeTo(null);
         setUndecorated(true);
-        // Inicializar los botones y etiquetas
 
-        TitleFrame = new JLabel("CALZADOS EMILY'S");
-        TitleFrame.setFont(new Font("Arial", Font.BOLD, 24));
-        TitleFrame.setBounds(180, 120, 500, 30); // Mover el título un poco más abajo
-        add(TitleFrame);
-        ventasLabel = new JLabel("Ingrese ventas");
+        JLabel titleFrame = new JLabel("CALZADOS EMILY'S");
+        titleFrame.setFont(new Font("Arial", Font.BOLD, 24));
+        titleFrame.setBounds(180, 120, 500, 30); // Mover el título un poco más abajo
+        add(titleFrame);
+        JLabel ventasLabel = new JLabel("Ingrese ventas");
         ventasLabel.setBounds(230, 180, 200, 30);
 
-        eliminarLabel = new JLabel("Elimine una venta específica");
+        JLabel eliminarLabel = new JLabel("Elimine una venta específica");
         eliminarLabel.setBounds(230, 280, 200, 30);
 
-        inventarioLabel = new JLabel("Ingrese cantidad de mercadería");
+        JLabel inventarioLabel = new JLabel("Ingrese cantidad de mercadería");
         inventarioLabel.setBounds(230, 230, 200, 30);
 
 
@@ -49,11 +46,11 @@ public class Menu_Principal_Vista extends JFrame  {
 
         cierreCajaButton = new JButton("CIERRE CAJA");
         cierreCajaButton.setBounds(100, 330, 120, 30);
-        cierreCajaLabel = new JLabel("Cerrar ventas del día con reporte");
+        JLabel cierreCajaLabel = new JLabel("Cerrar ventas del día con reporte");
         cierreCajaLabel.setBounds(230, 330, 240, 30);
 
         // Inicializar el panel principal
-        mainPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(null); // Usar layout nulo para setBounds
         mainPanel.setBounds(0, 0, 400, 400);
 
@@ -67,11 +64,9 @@ public class Menu_Principal_Vista extends JFrame  {
         mainPanel.add(cierreCajaButton);
         mainPanel.add(cierreCajaLabel);
 
-        // Agregar el panel principal al marco
         add(mainPanel);
 
-        // Hacer visible el marco
-        setVisible(true);
+        //setVisible(true);
     }
     public JButton getCierreCajaButton(){return cierreCajaButton;}
     public JButton getVentasButton(){
