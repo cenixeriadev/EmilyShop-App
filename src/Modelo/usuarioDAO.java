@@ -59,7 +59,7 @@ public class usuarioDAO {
             ps.close();
             cn.close();
         }catch(SQLException e) {
-            System.out.println("Error al editar el usuario: " + e.getMessage());
+            return  res;
         }
         return res;
     }
@@ -73,7 +73,7 @@ public class usuarioDAO {
             ps.close();
             cn.close();
         }catch(SQLException e) {
-            System.out.println("Error al eliminar el usuario: " + e.getMessage());
+            return res;
         }
         return res;
     }

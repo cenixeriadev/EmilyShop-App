@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Inventario_Controlador {
+public class Inventario_Controlador{
     private Inventario_Vista inventario;
     private  FrInventarios_Vista Reporte_inventario = new FrInventarios_Vista();
     public Inventario_Controlador(Inventario_Vista inventario ){

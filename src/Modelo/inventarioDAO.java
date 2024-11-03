@@ -71,17 +71,17 @@ public class inventarioDAO {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("UPDATE inventario SET talla=?, modelo=?, color=?, preciocosto=? WHERE idinventario=?");
+            pt = cn.prepareStatement("UPDATE inventario SET talla=?, modelo=?, color=?, preciocosto=? WHERE codigo=?");
             pt.setInt(1, objInventario.getTalla());
             pt.setString(2, objInventario.getModel());
             pt.setString(3, objInventario.getColor());
             pt.setInt(4, objInventario.getPrecioCosto());
-            pt.setInt(5, objInventario.getIdInventario());
+            pt.setString(5, objInventario.getCodigo());
             estado = pt.executeUpdate();
             cn.close();
             pt.close();
         } catch (Exception e) {
-            return  estado ;
+            return estado ;
         }
         return  estado;
 

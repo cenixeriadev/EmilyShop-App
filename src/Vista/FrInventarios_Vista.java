@@ -1,4 +1,6 @@
 package Vista;
+import Controlador.FrmInventarios_Controlador;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -8,7 +10,7 @@ public class FrInventarios_Vista extends JFrame {
     public DefaultTableModel modelo;
     public JTable tablaInventario;
     public JScrollPane barraTablaInventario;
-    public JButton btnvolver;
+    public JButton btnvolver , btnActualizar;
     String[] titulos = {"Talla","Modelo" , "Color" , "Codigo" , "Precio"};
 
     public FrInventarios_Vista() {
@@ -17,11 +19,12 @@ public class FrInventarios_Vista extends JFrame {
 
     public void initComponents(){
         setTitle("REPORTE DE INVENTARIO");
-        setSize(600,600);
+        setSize(500,500);
         setLocation(500,150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
+        setUndecorated(true);
         //-------------------------------------
         lblInventarioReporte = new JLabel("INVENTARIO REPORTES");
         lblInventarioReporte.setFont(new java.awt.Font("Arial",Font.BOLD,18));
@@ -34,10 +37,16 @@ public class FrInventarios_Vista extends JFrame {
         add(lblDatos);
         //--------------------------------------
         btnvolver = new JButton("VOLVER");
-        btnvolver.setBounds(384,331,100,30);
-        btnvolver.setForeground(Color.white);
+        btnvolver.setBounds(320,331,100,30);
+        btnvolver.setForeground(Color.BLACK);
         btnvolver.setBackground(Color.LIGHT_GRAY);
         add(btnvolver);
+
+        btnActualizar = new JButton("ACTUALIZAR");
+        btnActualizar.setBounds(60 , 331 , 110 , 30);
+        btnActualizar.setBackground(Color.GREEN);
+        btnActualizar.setForeground(Color.BLACK);
+        add(btnActualizar);
 
         tablaInventario = new JTable();
         modelo = new DefaultTableModel(null, titulos);
@@ -50,7 +59,11 @@ public class FrInventarios_Vista extends JFrame {
         //    talla modelo color  precio
 
     }
-
+    public static void main(String[] args) {
+        FrInventarios_Vista vent = new FrInventarios_Vista();
+        vent.setVisible(true);
+    }
+    public JButton getBtnActualizar() {return btnActualizar;}
     public DefaultTableModel getModelo(){return modelo;}
     public JTable getTablaInventario(){
         return tablaInventario;
