@@ -1,12 +1,14 @@
 package Modelo;
 import java.text.DateFormat;
+import java.sql.Date;
+
 public class ventas {
 
     private int idventas;
     private String  cliente;
     private String metododepago;
     private int precio;
-    private DateFormat horaventa;
+    private Date horaventa;
 
     public void setCliente(String cliente) {
         this.cliente = cliente;
@@ -17,7 +19,7 @@ public class ventas {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    public void setHoraventa(DateFormat horaventa) {
+    public void setHoraventa(Date horaventa) {
         this.horaventa = horaventa;
     }
     public void setIdventas(int idventas) {
@@ -37,7 +39,7 @@ public class ventas {
     public int getPrecio() {
         return precio;
     }
-    public DateFormat getHoraventa() {
+    public Date getHoraventa() {
         return horaventa;
     }
 

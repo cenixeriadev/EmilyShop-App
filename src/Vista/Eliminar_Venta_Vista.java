@@ -95,6 +95,10 @@ public class Eliminar_Venta_Vista extends JFrame {
         ctalla.addItem("43");
         add(ctalla);
     }
+    public static void main(String[] args){
+        Eliminar_Venta_Vista eliminar = new Eliminar_Venta_Vista();
+        eliminar.setVisible(true);
+    }
     public JButton getbtnEliminar(){
         return btneliminar;
     }

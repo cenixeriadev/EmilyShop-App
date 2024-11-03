@@ -135,6 +135,10 @@ public class Venta_Vista extends JFrame  {
         add(scrollDatos);
 
     }
+    public static void main(String[] args){
+        Venta_Vista ven = new Venta_Vista();
+        ven.setVisible(true);
+    }
 
     public JButton getBtnConsulta() {
         return btnConsulta;

@@ -33,6 +33,24 @@ public class Venta_Controlador {
                 // Acción al presionar el botón consulta
             }
         });
+        ventanaVentas.getBtnAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+        ventanaVentas.getBtnEliminar().addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+
+           }
+
+        });
+        ventanaVentas.getBtnRegistrar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Registrar la venta en la base de datos
+            }
+        });
     }
 }

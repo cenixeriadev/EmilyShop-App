@@ -71,6 +71,10 @@ public class Consulta_Vista extends JFrame {
         btnBorrar.setBackground(Color.red);
         add(btnBorrar);
     }
+    public static void main(String[] args){
+        Consulta_Vista vista = new Consulta_Vista();
+        vista.setVisible(true);
+    }
     public JButton getbtnConsulta(){
         return btnconsulta;
     }
