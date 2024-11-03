@@ -66,11 +66,11 @@ public class Venta_Vista extends JFrame  {
         add(lblUltimaAccion);
         //-------------------------------------------------------------------
 
-        ImageIcon logoIcon = new ImageIcon("src/Projecto_Final/icono.png");
-        Image logoImage = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon logoIcon = new ImageIcon("src/Recursos/icono.png");
+        Image logoImage = logoIcon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         logoIcon = new ImageIcon(logoImage);
         logoLabel = new JLabel(logoIcon);
-        logoLabel.setBounds(425, -20, 100, 100); // Posición y tamaño del log
+        logoLabel.setBounds(320, 20, 250, 250); // Posición y tamaño del log
         this.add(logoLabel);
         //--------------------------------------------------------------------------------
 

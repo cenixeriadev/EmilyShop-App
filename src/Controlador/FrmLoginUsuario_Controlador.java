@@ -7,6 +7,9 @@ import Vista.Menu_Principal_Vista;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 public class FrmLoginUsuario_Controlador implements LoginObserver{
     private FrmLoginUsuario_Vista login ;
     private Modelo_Login modelo;
@@ -14,6 +17,23 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
         this.login = login;
         this.modelo = modelo;
         modelo.addObserver(this);
+        login.getTxtUsuario().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    handleLogin();
+                }
+            }
+        });
+
+        login.getTxtPassword().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    handleLogin();
+                }
+            }
+        });
         login.getbtnSalir().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -27,7 +47,6 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
             @Override
             public void actionPerformed(ActionEvent e) {
                 handleLogin();
-
 
             }
         });
