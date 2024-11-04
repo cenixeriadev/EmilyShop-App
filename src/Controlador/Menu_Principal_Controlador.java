@@ -34,7 +34,7 @@ public class Menu_Principal_Controlador {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Inventario_Vista inventariopr  = new Inventario_Vista();
-                Inventario_Controlador control = new Inventario_Controlador(inventariopr );
+                Inventario_Controlador control = new Inventario_Controlador(inventariopr);
                 inventariopr.setVisible(true);
                 menu.dispose();
             }

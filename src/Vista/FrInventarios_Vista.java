@@ -59,10 +59,6 @@ public class FrInventarios_Vista extends JFrame {
         //    talla modelo color  precio
 
     }
-    public static void main(String[] args) {
-        FrInventarios_Vista vent = new FrInventarios_Vista();
-        vent.setVisible(true);
-    }
     public JButton getBtnActualizar() {return btnActualizar;}
     public DefaultTableModel getModelo(){return modelo;}
     public JTable getTablaInventario(){

@@ -4,14 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Inventario_Vista extends JFrame {
-    JLabel lblinventario,lblcodigo,lbldatos,lblmodelo,lbltalla,lblmensaje, lblcolor,lblprecio;
+    JLabel lblinventario,lblcodigo,lblmodelo,lbltalla,lblmensaje, lblcolor,lblprecio;
     JTextField txtcodigo,txtcolor,txtprecio;
     JButton btnregistrar, btnreporte, btneliminar, btnvolver;
     public ButtonGroup groupTallas = new ButtonGroup();
     JComboBox<String> cbmodelo;
     JPanel panelTallas;
-    JTextArea area;
-    JScrollPane jspbarra;
 
 
 
@@ -56,9 +54,6 @@ public class Inventario_Vista extends JFrame {
         lblmensaje.setForeground(Color.RED);
         add(lblmensaje);
 
-        lbldatos = new JLabel("DATOS");
-        lbldatos.setBounds(445,60,100,30);
-        add(lbldatos);
 
 
         cbmodelo= new JComboBox<>();
@@ -115,13 +110,6 @@ public class Inventario_Vista extends JFrame {
 
 
 
-        area= new JTextArea();
-        area.setBounds(380,90,180,250);
-        add(area);
-
-        jspbarra=new JScrollPane();
-        jspbarra.setViewportView(area);
-        add(area);
 
 
 
