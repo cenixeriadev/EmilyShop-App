@@ -9,6 +9,7 @@ public class ventas {
     private String metododepago;
     private int precio;
     private Date horaventa;
+    private int idproducto;
 
     public void setCliente(String cliente) {
         this.cliente = cliente;
@@ -22,13 +23,15 @@ public class ventas {
     public void setHoraventa(Date horaventa) {
         this.horaventa = horaventa;
     }
-    public void setIdventas(int idventas) {
-        this.idventas = idventas;
+    public void setIdProducto(int idproducto) {
+        this.idproducto = idproducto;
     }
+    public void setIdventas(int idventas){this.idventas = idventas;}
 
-
-    public int getIdventas() {
-        return idventas;
+    public int getIdVenta() {
+        return idventas;}
+    public int getIdProducto() {
+        return idproducto;
     }
     public String getCliente() {
         return cliente;

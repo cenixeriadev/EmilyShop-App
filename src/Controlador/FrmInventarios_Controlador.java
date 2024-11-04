@@ -40,6 +40,7 @@ public class FrmInventarios_Controlador  implements  MouseListener{
                     valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 2));
                     valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 3));
                     valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 4));
+                    valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 5));
                     valores.add(String.valueOf(selectedRow));
 
                     // Imprime los valores después de cargarlos
@@ -88,11 +89,19 @@ public class FrmInventarios_Controlador  implements  MouseListener{
             }
 
         });
+        vistainventario.getBtnEliminar().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                Modelo_Inventario mod = new Modelo_Inventario(vistainventario);
+                mod.EliminarProducto(Integer.parseInt(valores.get(5)));
+
+            }
+        });
         vistainventario.getBtnActualizar().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 Modelo_Inventario mod = new Modelo_Inventario(vistainventario);
-                mod.ModificarProducto(valores.get(0), valores.get(1),valores.get(2),valores.get(3),valores.get(4)  , Integer.parseInt(valores.get(5)));
+                mod.ModificarProducto(valores.get(0), valores.get(1),valores.get(2),valores.get(3),valores.get(4)  , Integer.parseInt(valores.get(5)) , Integer.parseInt(valores.get(6)));
 
             }
         });

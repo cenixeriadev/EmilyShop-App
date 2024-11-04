@@ -39,19 +39,7 @@ public class Inventario_Controlador{
                     // Acción al presionar el botón reporte
                 }
         });
-        inventario.getBtneliminar().addActionListener(new ActionListener(){
 
-            @Override
-                public void actionPerformed(ActionEvent e) {
-
-                    String codigo = inventario.getTxtcodigo().getText();
-                    Modelo_Inventario modeliminar = new Modelo_Inventario(Reporte_inventario);
-                    modeliminar.EliminarProducto(codigo);
-
-
-                    // Acción al presionar el botón eliminar
-                }
-        });
         inventario.getBtnvolver().addActionListener(new ActionListener(){
 
             @Override

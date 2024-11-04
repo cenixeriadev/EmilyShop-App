@@ -6,7 +6,7 @@ import java.awt.*;
 public class Inventario_Vista extends JFrame {
     JLabel lblinventario,lblcodigo,lblmodelo,lbltalla,lblmensaje, lblcolor,lblprecio;
     JTextField txtcodigo,txtcolor,txtprecio;
-    JButton btnregistrar, btnreporte, btneliminar, btnvolver;
+    JButton btnregistrar, btnreporte, btnvolver;
     public ButtonGroup groupTallas = new ButtonGroup();
     JComboBox<String> cbmodelo;
     JPanel panelTallas;
@@ -100,9 +100,6 @@ public class Inventario_Vista extends JFrame {
         btnreporte.setBounds(140,260,100,30);
         add(btnreporte);
 
-        btneliminar= new JButton("ELIMINAR");
-        btneliminar.setBounds(250,260,100,30);
-        add(btneliminar);
 
         btnvolver= new JButton("VOLVER");
         btnvolver.setBounds(460,370,100,30);
@@ -125,9 +122,6 @@ public class Inventario_Vista extends JFrame {
     }
     public JButton getBtnreporte(){
         return  btnreporte;
-    }
-    public JButton getBtneliminar(){
-        return  btneliminar;
     }
     public JButton getBtnvolver(){
         return  btnvolver;

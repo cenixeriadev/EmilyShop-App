@@ -29,17 +29,19 @@ public class Modelo_Inventario implements MetodosInventario {
             modelo.setValueAt(objinventario.getColor(), i, 2);
             modelo.setValueAt(String.valueOf(objinventario.getCodigo()), i, 3);
             modelo.setValueAt(String.valueOf(objinventario.getPrecioCosto()), i, 4);
+            modelo.setValueAt(String.valueOf(objinventario.getIdInventario()) , i , 5);
             i++;
         }
         vista.getTablaInventario().setModel(modelo);
     }
 
     @Override
-    public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  , int i ) {
+    public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  ,int idinventario ,  int i ) {
         //int selectedRow = vista.getTablaInventario().getSelectedRow();
         if (i != -1) {
             TableModel model =  vista.getTablaInventario().getModel();
             objInventario  = new inventario();
+            objInventario.setIdinventario(idinventario);
             objInventario.setTalla(Integer.parseInt(talla));
             objInventario.setModel(modelo);
             objInventario.setColor(Color);
@@ -50,6 +52,7 @@ public class Modelo_Inventario implements MetodosInventario {
             model.setValueAt(objInventario.getColor(), i, 2);
             model.setValueAt(objInventario.getCodigo(), i, 3);
             model.setValueAt(String.valueOf(objInventario.getPrecioCosto()), i, 4);
+            model.setValueAt(String.valueOf(objInventario.getIdInventario()), i, 5);
 
             int resultado = objInventarioDAO.ModificarProducto(objInventario);
             vista.getTablaInventario().setModel(model);
@@ -66,10 +69,10 @@ public class Modelo_Inventario implements MetodosInventario {
     }
 
     @Override
-    public void EliminarProducto(String codigoProduct) {
+    public void EliminarProducto(int id) {//debe estar en funcion del idinventario
         objInventario = new inventario();
-        objInventario.setCodigo(codigoProduct);
-        int resultado = objInventarioDAO.EliminarProducto(objInventario);
+        objInventario.setIdinventario(id);
+        int resultado = objInventarioDAO.EliminarProducto(objInventario.getIdInventario());
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
         } else {

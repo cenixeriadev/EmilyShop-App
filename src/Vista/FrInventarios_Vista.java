@@ -10,8 +10,8 @@ public class FrInventarios_Vista extends JFrame {
     public DefaultTableModel modelo;
     public JTable tablaInventario;
     public JScrollPane barraTablaInventario;
-    public JButton btnvolver , btnActualizar;
-    String[] titulos = {"Talla","Modelo" , "Color" , "Codigo" , "Precio"};
+    public JButton btnvolver , btnActualizar ,btnEliminar;
+    String[] titulos = {"Talla","Modelo" , "Color" , "Codigo" , "Precio" , ""};
 
     public FrInventarios_Vista() {
         initComponents();
@@ -41,6 +41,11 @@ public class FrInventarios_Vista extends JFrame {
         btnvolver.setForeground(Color.BLACK);
         btnvolver.setBackground(Color.LIGHT_GRAY);
         add(btnvolver);
+        btnEliminar = new JButton("ELIMINAR");
+        btnEliminar.setBounds(200 , 331 , 110,30);
+        btnEliminar.setForeground(Color.BLACK);
+        btnEliminar.setBackground(Color.RED);
+        add(btnEliminar);
 
         btnActualizar = new JButton("ACTUALIZAR");
         btnActualizar.setBounds(60 , 331 , 110 , 30);
@@ -51,6 +56,7 @@ public class FrInventarios_Vista extends JFrame {
         tablaInventario = new JTable();
         modelo = new DefaultTableModel(null, titulos);
         tablaInventario.setModel(modelo);
+
         barraTablaInventario = new JScrollPane(tablaInventario);
         barraTablaInventario.setBounds(74,70,325,250);
         barraTablaInventario.setViewportView(tablaInventario);
@@ -59,6 +65,7 @@ public class FrInventarios_Vista extends JFrame {
         //    talla modelo color  precio
 
     }
+    public JButton getBtnEliminar() { return btnEliminar;}
     public JButton getBtnActualizar() {return btnActualizar;}
     public DefaultTableModel getModelo(){return modelo;}
     public JTable getTablaInventario(){

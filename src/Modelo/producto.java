@@ -1,7 +1,7 @@
 package Modelo;
 public class producto {
     private int idproducto ;
-    private int idventa2;
+    private int idinventario;
     private String modelo;
     private String codigo;
     private String color ;
@@ -10,8 +10,8 @@ public class producto {
     public void setIdProducto(int idproducto) {
         this.idproducto = idproducto;
     }
-    public void setIdVenta2(int idventa2) {
-        this.idventa2 = idventa2;
+    public void setIdinventario(int idventa2) {
+        this.idinventario = idinventario;
     }
     public void setModel(String modelo) {
         this.modelo = modelo;
@@ -29,8 +29,8 @@ public class producto {
     public int getIdProducto() {
         return idproducto;
     }
-    public int getIdVenta2() {
-        return idventa2;
+    public int getIdinventario() {
+        return idinventario;
     }
     public String getModel() {
         return modelo;

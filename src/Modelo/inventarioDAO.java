@@ -19,6 +19,7 @@ public class inventarioDAO {
             listaInvent = new ArrayList<inventario>();
             while(rs.next()){
                 objInventario = new inventario();
+                objInventario.setIdinventario(rs.getInt("idinventario"));
                 objInventario.setTalla(rs.getInt("talla"));
                 objInventario.setModel(rs.getString("modelo"));
                 objInventario.setColor(rs.getString("color"));
@@ -52,12 +53,12 @@ public class inventarioDAO {
         return  estado;
 
     }
-    public int  EliminarProducto(inventario objInventario){
+    public int  EliminarProducto(int idinventario){
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("DELETE FROM inventario WHERE codigo=?");
-            pt.setString(1, objInventario.getCodigo());
+            pt = cn.prepareStatement("DELETE FROM inventario WHERE idinventario=?");
+            pt.setInt(1, idinventario);
             estado =  pt.executeUpdate();
             cn.close();
             pt.close();
@@ -71,12 +72,13 @@ public class inventarioDAO {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("UPDATE inventario SET talla=?, modelo=?, color=?, preciocosto=? WHERE codigo=?");
+            pt = cn.prepareStatement("UPDATE inventario SET talla=?, modelo=?, color=?, preciocosto=?  ,codigo = ? WHERE idinventario=?");
             pt.setInt(1, objInventario.getTalla());
             pt.setString(2, objInventario.getModel());
             pt.setString(3, objInventario.getColor());
             pt.setInt(4, objInventario.getPrecioCosto());
             pt.setString(5, objInventario.getCodigo());
+            pt.setInt(6,objInventario.getIdInventario());
             estado = pt.executeUpdate();
             cn.close();
             pt.close();
