@@ -4,6 +4,7 @@ import Vista.FrInventarios_Vista;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.util.ArrayList;
 
 public class Modelo_Inventario implements MetodosInventario {
@@ -35,30 +36,32 @@ public class Modelo_Inventario implements MetodosInventario {
 
     @Override
     public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  , int i ) {
-        //int i = 0;
-        DefaultTableModel model = vista.getModelo();
-        objInventario = new inventario();
-        objInventario.setTalla(Integer.parseInt(talla));
-        objInventario.setModel(modelo);
-        objInventario.setColor(Color);
-        objInventario.setPrecioCosto(Integer.parseInt(Precio));
-        objInventario.setCodigo(Codigo);
-        listaInventario = objInventarioDAO.listarInventario();
-        model.setNumRows(listaInventario.size());
-        model.setValueAt(String.valueOf(objInventario.getTalla()), i, 0);
-        model.setValueAt(objInventario.getModel(), i, 1);
-        model.setValueAt(objInventario.getColor(), i, 2);
-        model.setValueAt(objInventario.getCodigo(), i, 3);
-        model.setValueAt(String.valueOf(objInventario.getPrecioCosto()), i, 4);
+        //int selectedRow = vista.getTablaInventario().getSelectedRow();
+        if (i != -1) {
+            TableModel model =  vista.getTablaInventario().getModel();
+            objInventario  = new inventario();
+            objInventario.setTalla(Integer.parseInt(talla));
+            objInventario.setModel(modelo);
+            objInventario.setColor(Color);
+            objInventario.setPrecioCosto(Integer.parseInt(Precio));
+            objInventario.setCodigo(Codigo);
+            model.setValueAt(String.valueOf(objInventario.getTalla()), i, 0);
+            model.setValueAt(objInventario.getModel(), i, 1);
+            model.setValueAt(objInventario.getColor(), i, 2);
+            model.setValueAt(objInventario.getCodigo(), i, 3);
+            model.setValueAt(String.valueOf(objInventario.getPrecioCosto()), i, 4);
 
-        int resultado = objInventarioDAO.ModificarProducto(objInventario);
-        if (resultado>0) {
-            JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
+            int resultado = objInventarioDAO.ModificarProducto(objInventario);
+            vista.getTablaInventario().setModel(model);
+            if (resultado > 0) {
+                JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al modificar el producto");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Error al modificar el producto");
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila para modificar");
         }
-        vista.getTablaInventario().setModel(model);
-        CargarDatos();
+        //CargarDatos();
 
     }
 
