@@ -2,41 +2,54 @@ package Controlador;
 import Modelo.Modelo_Inventario;
 import Vista.FrInventarios_Vista;
 import Vista.Inventario_Vista;
-
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+
 
 public class FrmInventarios_Controlador  implements  MouseListener{
-    private FrInventarios_Vista vistainventario;
-    private Inventario_Vista MpVista  = new Inventario_Vista();
-    private ArrayList<String>  valores = new ArrayList<>();
+    private final FrInventarios_Vista vistainventario;
+    private final Inventario_Vista MpVista  = new Inventario_Vista();
+    private final ArrayList<String>  valores = new ArrayList<>();
+    private boolean keyadd = false;
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource()==vistainventario.getTablaInventario()){
+        if (e.getSource() == vistainventario.getTablaInventario()) {
             System.out.println("CLICK EN ROW CON ESTILO");
-            vistainventario.getTablaInventario().addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if(e.getKeyCode() == KeyEvent.VK_ENTER ){
-                        valores.add((String)vistainventario.getTablaInventario().getValueAt(vistainventario.getTablaInventario().getSelectedRow() , 0));
-                        valores.add((String)vistainventario.getTablaInventario().getValueAt(vistainventario.getTablaInventario().getSelectedRow() ,1));
-                        valores.add((String)vistainventario.getTablaInventario().getValueAt(vistainventario.getTablaInventario().getSelectedRow() ,2));
-                        valores.add((String)vistainventario.getTablaInventario().getValueAt(vistainventario.getTablaInventario().getSelectedRow() ,3));
-                        valores.add((String)vistainventario.getTablaInventario().getValueAt(vistainventario.getTablaInventario().getSelectedRow() ,4));
-                        valores.add(String.valueOf(vistainventario.getTablaInventario().getSelectedRow()) );
+
+            CompletableFuture<Void> future = new CompletableFuture<>();
+
+            if(!keyadd) {
+                vistainventario.getTablaInventario().addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            // Cuando se presiona ENTER, completa el CompletableFuture
+                            future.complete(null);
+                        }
                     }
-                    for(String v : valores){
+                });
+            }
+            keyadd = true;
+            // Una vez que se complete el futuro (al presionar ENTER), carga los datos de la fila
+            future.thenRunAsync(() -> {
+                int selectedRow = vistainventario.getTablaInventario().getSelectedRow();
+                if (selectedRow >= 0) {
+                    valores.clear();
+                    valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 0));
+                    valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 1));
+                    valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 2));
+                    valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 3));
+                    valores.add((String) vistainventario.getTablaInventario().getValueAt(selectedRow, 4));
+                    valores.add(String.valueOf(selectedRow));
+
+                    // Imprime los valores después de cargarlos
+                    for (String v : valores) {
                         System.out.println(v);
                     }
-
                 }
-
-
             });
-
-
-
         }
     }
     @Override
@@ -77,7 +90,7 @@ public class FrmInventarios_Controlador  implements  MouseListener{
                 MpVista.setVisible(true);
                 vistainventario.dispose();
 
-            };
+            }
 
         });
         vistainventario.getBtnActualizar().addActionListener(new ActionListener(){
@@ -86,7 +99,7 @@ public class FrmInventarios_Controlador  implements  MouseListener{
                 Modelo_Inventario mod = new Modelo_Inventario(vistainventario);
                 mod.ModificarProducto(valores.get(0), valores.get(1),valores.get(2),valores.get(3),valores.get(4)  , Integer.parseInt(valores.get(5)));
 
-            };
+            }
         });
     }
 
