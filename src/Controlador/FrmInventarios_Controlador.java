@@ -16,8 +16,6 @@ public class FrmInventarios_Controlador  implements  MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == vistainventario.getTablaInventario()) {
-            System.out.println("CLICK EN ROW CON ESTILO");
-
             CompletableFuture<Void> future = new CompletableFuture<>();
 
             if(!keyadd) {
@@ -45,9 +43,6 @@ public class FrmInventarios_Controlador  implements  MouseListener{
                     valores.add(String.valueOf(selectedRow));
 
                     // Imprime los valores después de cargarlos
-                    for (String v : valores) {
-                        System.out.println(v);
-                    }
                 }
             });
         }
