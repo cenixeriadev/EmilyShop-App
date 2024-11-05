@@ -1,6 +1,6 @@
 package Modelo;
-import java.text.DateFormat;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class ventas {
 

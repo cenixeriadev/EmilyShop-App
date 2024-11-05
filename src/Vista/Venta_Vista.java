@@ -86,7 +86,7 @@ public class Venta_Vista extends JFrame  {
         txtCliente.setBounds(150, 50, 150, 30);
         add(txtCliente);
 
-        txtCodigo = new JTextField("");
+        txtCodigo = new JTextField();
         txtCodigo.setBounds(150, 90, 150, 30);
         add(txtCodigo);
 
@@ -94,7 +94,7 @@ public class Venta_Vista extends JFrame  {
         txtPrecio.setBounds(150, 130, 150, 30);
         add(txtPrecio);
 
-        txtDescripcion = new JTextField("");
+        txtDescripcion = new JTextField();
         txtDescripcion.setBounds(150, 170, 150, 30);
         add(txtDescripcion);
         //-------------------------------------------------------------------------------

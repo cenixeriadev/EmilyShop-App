@@ -11,26 +11,28 @@ import java.util.ArrayList;
 
 public class Venta_Controlador  implements MouseListener {
     private Venta_Vista ventanaVentas ;
-    producto objProducto  = new producto();
+    producto objProducto ;
     productoDAO productoDAO = new productoDAO();
     ventas objVentas ;
     ventasDAO ventaDAO = new ventasDAO();
-    ArrayList<producto> listaProducto = new ArrayList<producto>();
-    private String tallaSeleccionada;
+    //ArrayList<producto> listaProducto = new ArrayList<producto>();
+    String tallaSeleccionada;
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==ventanaVentas.getTablaCandidatos()){
             int filaSelected = ventanaVentas.getTablaCandidatos().getSelectedRow();
             //int idInventario = (Integer)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 4);
+            int IDinventario = (Integer)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 4);
+            objProducto = new producto();
+
             objProducto.setModel((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,0));
             objProducto.setColor((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,1));
             objProducto.setCodigo((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,2));
-            objProducto.setIdinventario((Integer)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 4));
-
+            objProducto.setIdinventario(IDinventario);
+            System.out.println(IDinventario);
             objProducto.setTalla(Integer.parseInt(tallaSeleccionada));//objProducto((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 3));
-
-
+            System.out.println(tallaSeleccionada);
         }
     }
 
@@ -58,7 +60,6 @@ public class Venta_Controlador  implements MouseListener {
 
     public Venta_Controlador(Venta_Vista ventanaVentas){
         this.ventanaVentas = ventanaVentas;
-
         ventanaVentas.getTablaCandidatos().addMouseListener(this);
         //Asignar los eventos de los botones
         ventanaVentas.getBtnVolver().addActionListener(new ActionListener() {
@@ -83,12 +84,18 @@ public class Venta_Controlador  implements MouseListener {
         ventanaVentas.getBtnAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                productoDAO.AgregarProducto(objProducto);
-                String datosProducto = "Modelo: " + objProducto.getModel() + "\n" +
+                int estado = productoDAO.AgregarProducto(objProducto);
+
+                if(estado>0){
+                    JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Producto no agregado");
+                }
+                String datosProducto = "\n" +"Modelo: " + objProducto.getModel() + "\n" +
                         "Color: " + objProducto.getColor() + "\n" +
                         "Código: " + objProducto.getCodigo() + "\n" +
                         "Talla: " + objProducto.getTalla();
-                listaProducto.add(objProducto);
 
                 ventanaVentas.getTextAreaDatos().append(datosProducto);
 
@@ -102,6 +109,7 @@ public class Venta_Controlador  implements MouseListener {
 
         });
         ventanaVentas.getBtnRegistrar().addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -109,22 +117,33 @@ public class Venta_Controlador  implements MouseListener {
                     String Codigo = ventanaVentas.getTxtCodigo().getText();
                     String Precio = ventanaVentas.getTxtPrecio().getText();
                     String MetodoDePago = ventanaVentas.getTxtDescripcion().getText();
-                    for(producto obj : listaProducto){
-                        objVentas = new ventas();
-                        objVentas.setCliente(cliente);
-                        objVentas.setCodigo(Integer.parseInt(Codigo));
-                        objVentas.setPrecio(Integer.parseInt(Precio));
-                        objVentas.setMetododepago(MetodoDePago);
-                        objVentas.setIdProducto(obj.getIdProducto());
+                    java.time.LocalDate currentDate = java.time.LocalDate.now();
+                    // Convert the LocalDate to java.sql.Date
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
+                    //objVentas = new ventas();
 
-                        ventaDAO.AgregarVentas(objVentas);
+                    int estado  = 0;
+                    objVentas = new ventas();
+                        //objVentas.setIdventas(1);
+                    objVentas.setCliente(cliente);
+                    objVentas.setCodigo(Integer.parseInt(Codigo));
+                    objVentas.setPrecio(Integer.parseInt(Precio));
+                    objVentas.setMetododepago(MetodoDePago);
+                    objVentas.setHoraventa(sqlDate);
+
+                    estado  = ventaDAO.AgregarVentas(objVentas);
+
+                    if(estado>0){
+                        JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Error al registrar la venta");
                     }
 
-                    listaProducto.clear();
 
 
                 }catch (Exception ex){
-                    JOptionPane.showMessageDialog(ventanaVentas, "Por favor ingrese todos los datos");
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos");
                 }
 
 
@@ -135,10 +154,14 @@ public class Venta_Controlador  implements MouseListener {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
-                    Object itemSeleccionado = e.getItem();
-                    tallaSeleccionada  = itemSeleccionado.toString();
-                    Modelo_Ventas mod = new Modelo_Ventas(ventanaVentas);
-                    mod.CargarInventarioD(tallaSeleccionada);
+                    try {
+                        Object itemSeleccionado = e.getItem();
+                        tallaSeleccionada = itemSeleccionado.toString();
+                        Modelo_Ventas mod = new Modelo_Ventas(ventanaVentas);
+                        mod.CargarInventarioD(tallaSeleccionada);
+                    }catch (Exception ex){
+                        JOptionPane.showMessageDialog(null, "ERROR");
+                    }
 
                 }
 
