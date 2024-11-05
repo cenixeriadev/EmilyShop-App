@@ -22,7 +22,6 @@ public class Venta_Controlador  implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==ventanaVentas.getTablaCandidatos()){
             int filaSelected = ventanaVentas.getTablaCandidatos().getSelectedRow();
-            //int idInventario = (Integer)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 4);
             int IDinventario = (Integer)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 4);
             objProducto = new producto();
 
@@ -30,9 +29,7 @@ public class Venta_Controlador  implements MouseListener {
             objProducto.setColor((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,1));
             objProducto.setCodigo((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,2));
             objProducto.setIdinventario(IDinventario);
-            System.out.println(IDinventario);
-            objProducto.setTalla(Integer.parseInt(tallaSeleccionada));//objProducto((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 3));
-            System.out.println(tallaSeleccionada);
+            objProducto.setTalla(Integer.parseInt(tallaSeleccionada));
         }
     }
 
@@ -88,16 +85,18 @@ public class Venta_Controlador  implements MouseListener {
 
                 if(estado>0){
                     JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
+                    String datosProducto = "\n" +"Modelo: " + objProducto.getModel() + "\n" +
+                            "Color: " + objProducto.getColor() + "\n" +
+                            "Código: " + objProducto.getCodigo() + "\n" +
+                            "Talla: " + objProducto.getTalla() + "\n";
+                    ventanaVentas.getTextAreaDatos().append(datosProducto);
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Producto no agregado");
                 }
-                String datosProducto = "\n" +"Modelo: " + objProducto.getModel() + "\n" +
-                        "Color: " + objProducto.getColor() + "\n" +
-                        "Código: " + objProducto.getCodigo() + "\n" +
-                        "Talla: " + objProducto.getTalla();
 
-                ventanaVentas.getTextAreaDatos().append(datosProducto);
+
+
 
             }
         });

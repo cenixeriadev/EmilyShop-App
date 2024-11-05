@@ -40,7 +40,7 @@ public class productoDAO {
         int estado = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("INSERT INTO producto (idinventario, modelo, color, codigo, talla ) VALUES (?,?,?,?,?,?)");
+            ps = cn.prepareStatement("INSERT INTO producto (idinventario, modelo, color, codigo, talla ) VALUES (?,?,?,?,?)");
             ps.setInt(1, producto.getIdinventario());
             ps.setString(2, producto.getModel());
             ps.setString(3, producto.getColor());
