@@ -15,7 +15,6 @@ public class Venta_Controlador  implements MouseListener {
     productoDAO productoDAO = new productoDAO();
     ventas objVentas ;
     ventasDAO ventaDAO = new ventasDAO();
-    //ArrayList<producto> listaProducto = new ArrayList<producto>();
     String tallaSeleccionada;
 
     @Override
