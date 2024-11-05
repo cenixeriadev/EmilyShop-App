@@ -8,7 +8,34 @@ public class ventasDAO {
     PreparedStatement ps = null;
     ResultSet   rs = null;
     ArrayList<ventas> listaVentas = null;
+    ArrayList<inventario> listaInventarioD = null;
     ventas objVentas = null;
+    inventario objInventarioD = null;
+    public ArrayList<inventario> listarInventarioDisponible(String talla){
+        try {
+            cn = ConexionBD.getConexionBD();
+            ps = cn.prepareStatement("SELECT modelo , color , codigo , preciocosto FROM inventario WHERE talla =?");
+            ps.setInt(1, Integer.parseInt(talla));
+            rs = ps.executeQuery();
+            listaInventarioD = new ArrayList<>();
+            while (rs.next()) {
+                objInventarioD = new inventario();
+                objInventarioD.setModel(rs.getString("modelo"));
+                objInventarioD.setColor(rs.getString("color"));
+                objInventarioD.setCodigo(rs.getString("codigo"));
+                objInventarioD.setPrecioCosto(rs.getInt("preciocosto"));
+                listaInventarioD.add(objInventarioD);
+
+            }
+
+        }catch(Exception e){
+            System.out.println("Error al listar los modelos de la talla: " + e.getMessage());
+            return null;
+        }
+        return listaInventarioD;
+
+    }
+
     public ArrayList<ventas> listarVentas() {
         try {
             cn = ConexionBD.getConexionBD();

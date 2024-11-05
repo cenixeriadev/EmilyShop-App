@@ -12,7 +12,6 @@ public class Inventario_Vista extends JFrame {
     JPanel panelTallas;
 
 
-
     public Inventario_Vista() {
         initComponents();
 
@@ -60,7 +59,7 @@ public class Inventario_Vista extends JFrame {
         cbmodelo.setBounds(120,60,100,30);
         cbmodelo.addItem("");
         cbmodelo.addItem("Nike");
-        cbmodelo.addItem("Adidas");
+        cbmodelo.addItem("Addidas");
         cbmodelo.addItem("Quellin");
         cbmodelo.addItem("I-Run");
         add(cbmodelo);

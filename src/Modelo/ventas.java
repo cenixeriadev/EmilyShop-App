@@ -10,7 +10,9 @@ public class ventas {
     private int precio;
     private Date horaventa;
     private int idproducto;
+    private int codigo ;
 
+    public void setCodigo(int codigo){this.codigo = codigo;}
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
@@ -28,6 +30,8 @@ public class ventas {
     }
     public void setIdventas(int idventas){this.idventas = idventas;}
 
+
+    public int getCodigo() { return codigo;}
     public int getIdVenta() {
         return idventas;}
     public int getIdProducto() {

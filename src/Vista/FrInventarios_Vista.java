@@ -3,6 +3,7 @@ import Controlador.FrmInventarios_Controlador;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class FrInventarios_Vista extends JFrame {
@@ -56,6 +57,12 @@ public class FrInventarios_Vista extends JFrame {
         tablaInventario = new JTable();
         modelo = new DefaultTableModel(null, titulos);
         tablaInventario.setModel(modelo);
+
+
+        TableColumn columnainvisible = tablaInventario.getColumnModel().getColumn(5);
+        columnainvisible.setMinWidth(0);
+        columnainvisible.setMinWidth(0);
+        columnainvisible.setPreferredWidth(0);
 
         barraTablaInventario = new JScrollPane(tablaInventario);
         barraTablaInventario.setBounds(74,70,325,250);

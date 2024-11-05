@@ -2,6 +2,7 @@ package Vista;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 
@@ -12,18 +13,22 @@ public class Venta_Vista extends JFrame  {
     private final JTextField txtCodigo;
     private final JTextField txtPrecio;
     private final JTextField txtDescripcion;
-    //    private final JTextField txtCantidad;
-    private final JComboBox<String> comboTalla;
+    private final JComboBox<String> comboTalla ;
+    private JComboBox<String> comboModelo;
     private final JTextArea textAreaDatos;
-    private final JLabel lblUltimaAccion, logoLabel;
+    private final JLabel lblUltimaAccion, logoLabel ;
     private final JButton btnRegistrar, btnConsulta, btnEliminar, btnVolver, btnAdd;
-    JScrollPane scrollDatos;
+    JScrollPane scrollDatos , scrollTabla;
+    public JTable tablaCandidatos;
+    public DefaultTableModel modelo;
+    String[] titulos = {"Modelo" , "Color" , "Codigo" , "Costo"};
+
 
     public Venta_Vista() {
         // Configuración de la ventana principal
         //setLocation(500,100);
         setTitle("Ventas");
-        setSize(600, 700);
+        setSize(1200, 700);
         //setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -60,6 +65,8 @@ public class Venta_Vista extends JFrame  {
         lblTalla.setBounds(50, 240, 50, 30);
         add(lblTalla);
 
+
+
         lblUltimaAccion = new JLabel();
         lblUltimaAccion.setBounds(50, 340, 300, 30);
         lblUltimaAccion.setForeground(Color.RED);
@@ -89,9 +96,9 @@ public class Venta_Vista extends JFrame  {
         txtDescripcion = new JTextField("");
         txtDescripcion.setBounds(150, 170, 150, 30);
         add(txtDescripcion);
-        //--------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------
 
-        comboTalla = new JComboBox<>(new String[]{" ", "30", "32", "35", "39"});
+        comboTalla = new JComboBox<>(new String[]{"35","36" , "37" ,"38" ,  "39","40 " , "41" , "42" ,  "43"});
         comboTalla.setBounds(110, 240, 50, 30);
         add(comboTalla);
         //--------------------------------------------------------------------------------
@@ -104,7 +111,7 @@ public class Venta_Vista extends JFrame  {
         //----------------------------------------------------------------
 
         btnAdd = new JButton("AÑADIR");
-        btnAdd.setBounds(240, 240, 100, 30);
+        btnAdd.setBounds(360, 240, 100, 30);
         add(btnAdd);
 
         btnRegistrar = new JButton("REGISTRAR");
@@ -134,10 +141,26 @@ public class Venta_Vista extends JFrame  {
         scrollDatos.setViewportView(textAreaDatos);
         add(scrollDatos);
 
+        tablaCandidatos = new JTable();
+        modelo = new DefaultTableModel(null , titulos);
+
+        tablaCandidatos.setModel(modelo);
+        scrollTabla = new JScrollPane(tablaCandidatos);
+        scrollTabla.setBounds(700, 120, 420, 300);
+        scrollTabla.setViewportView(tablaCandidatos);
+        add(scrollTabla);
+
+
     }
     public static void main(String[] args){
         Venta_Vista ven = new Venta_Vista();
         ven.setVisible(true);
+    }
+    public JTable getTablaCandidatos(){
+        return tablaCandidatos;
+    }
+    public DefaultTableModel getModelo(){
+        return modelo;
     }
 
     public JButton getBtnConsulta() {
@@ -152,13 +175,14 @@ public class Venta_Vista extends JFrame  {
         return btnEliminar;
     }
 
+
     public JButton getBtnRegistrar() {
         return btnRegistrar;
     }
     public JButton getBtnAdd(){
         return btnAdd;
     }
-
+    public JComboBox<String> getComboTalla(){return comboTalla;}
     public JTextArea getTextAreaDatos() {
         return textAreaDatos;
     }
