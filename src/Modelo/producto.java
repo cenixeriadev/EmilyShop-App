@@ -10,7 +10,7 @@ public class producto {
     public void setIdProducto(int idproducto) {
         this.idproducto = idproducto;
     }
-    public void setIdinventario(int idventa2) {
+    public void setIdinventario(int idinventario) {
         this.idinventario = idinventario;
     }
     public void setModel(String modelo) {

@@ -26,6 +26,7 @@ public class Modelo_Ventas implements MetodosVentas{
             model.setValueAt(objInventario.getColor(), i, 1);
             model.setValueAt(objInventario.getCodigo(), i, 2);
             model.setValueAt(objInventario.getPrecioCosto(), i, 3);
+            model.setValueAt(objInventario.getIdInventario() , i, 4);
             i++;
         }
         vista.getTablaCandidatos().setModel(model);

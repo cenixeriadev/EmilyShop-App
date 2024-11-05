@@ -14,7 +14,7 @@ public class ventasDAO {
     public ArrayList<inventario> listarInventarioDisponible(String talla){
         try {
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT modelo , color , codigo , preciocosto FROM inventario WHERE talla =?");
+            ps = cn.prepareStatement("SELECT modelo , color , codigo , preciocosto , idinventario FROM inventario WHERE talla =?");
             ps.setInt(1, Integer.parseInt(talla));
             rs = ps.executeQuery();
             listaInventarioD = new ArrayList<>();
@@ -24,6 +24,7 @@ public class ventasDAO {
                 objInventarioD.setColor(rs.getString("color"));
                 objInventarioD.setCodigo(rs.getString("codigo"));
                 objInventarioD.setPrecioCosto(rs.getInt("preciocosto"));
+                objInventarioD.setIdinventario(rs.getInt("idinventario"));
                 listaInventarioD.add(objInventarioD);
 
             }
@@ -62,12 +63,13 @@ public class ventasDAO {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("INSERT INTO ventas (cliente, metododepago, precio, horaventa ,idproducto) VALUES (?,?,?,?,?)");
+            ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio, horaventa ,idproducto , codigo) VALUES (?,?,?,?,? ,?)");
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
             ps.setInt(3, Venta.getPrecio());
             ps.setDate(4, Venta.getHoraventa());
             ps.setInt(5, Venta.getIdProducto());
+            ps.setInt(6, Venta.getCodigo());
             estado =  ps.executeUpdate();
             cn.close();
             ps.close();

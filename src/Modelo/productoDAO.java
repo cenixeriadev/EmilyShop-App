@@ -10,6 +10,9 @@ public class productoDAO {
     ResultSet rs = null;
     ArrayList<producto> listaProducto = null;
     producto objProducto = null;
+
+
+
     public ArrayList<producto> listarProductos(){
         try{
             cn = ConexionBD.getConexionBD();

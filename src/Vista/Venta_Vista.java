@@ -3,6 +3,7 @@ package Vista;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 
 
@@ -21,7 +22,7 @@ public class Venta_Vista extends JFrame  {
     JScrollPane scrollDatos , scrollTabla;
     public JTable tablaCandidatos;
     public DefaultTableModel modelo;
-    String[] titulos = {"Modelo" , "Color" , "Codigo" , "Costo"};
+    String[] titulos = {"Modelo" , "Color" , "Codigo" , "Costo" , ""};
 
 
     public Venta_Vista() {
@@ -145,6 +146,13 @@ public class Venta_Vista extends JFrame  {
         modelo = new DefaultTableModel(null , titulos);
 
         tablaCandidatos.setModel(modelo);
+
+        TableColumn columnainvisible = tablaCandidatos.getColumnModel().getColumn(4);
+        columnainvisible.setMinWidth(0);
+        columnainvisible.setMaxWidth(0);
+        columnainvisible.setPreferredWidth(0);
+
+
         scrollTabla = new JScrollPane(tablaCandidatos);
         scrollTabla.setBounds(700, 120, 420, 300);
         scrollTabla.setViewportView(tablaCandidatos);
