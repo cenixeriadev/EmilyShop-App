@@ -21,9 +21,15 @@ public class Inventario_Controlador{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Modelo_Inventario modelo_inventario =  new Modelo_Inventario(Reporte_inventario);
-                modelo_inventario.AgregarProducto(inventario.getGrupotallas(), inventario.getOpcion() , inventario.getTxtcodigo() , inventario.getTxtcolor(), inventario.getTxtprecio());
-                //modelo_inventario.CargarDatos();
+                try{
+                    Modelo_Inventario modelo_inventario =  new Modelo_Inventario(Reporte_inventario);
+                    modelo_inventario.AgregarProducto(inventario.getGrupotallas(), inventario.getOpcion() , inventario.getTxtcodigo() , inventario.getTxtcolor(), inventario.getTxtprecio());
+                    //modelo_inventario.CargarDatos();
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null , "Ingrese los valores antes de registrar","" ,  JOptionPane.ERROR_MESSAGE);
+
+
+                }
             }
         });
 

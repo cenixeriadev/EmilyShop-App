@@ -10,16 +10,12 @@ public class ConexionBD {
         try {
             // Cargar el driver JDBC correcto
             Class.forName("com.mysql.jdbc.Driver");
-
             // Conectar a la base de datos (sin espacio en el nombre de usuario)
             String url = "jdbc:mysql://localhost:3306/inventariotienda1";
             String user = "root";  // Usuario root sin espacio
             String password = "";  // Cambia la contraseña si tienes una
-
             // Establecer la conexión
             Database = DriverManager.getConnection(url, user, password);
-
-
             System.out.println("¡Conexión exitosa!");
 
         } catch (ClassNotFoundException e) {

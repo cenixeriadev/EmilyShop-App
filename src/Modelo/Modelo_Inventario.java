@@ -15,7 +15,7 @@ public class Modelo_Inventario implements MetodosInventario {
 
     public Modelo_Inventario(FrInventarios_Vista vista) {
         this.vista = vista;
-
+        //hola como estas dice konichiwua
     }
     @Override
     public void CargarDatos() {
