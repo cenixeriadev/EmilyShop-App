@@ -2,7 +2,6 @@ package Modelo;
 import Utilitario.ConexionBD;
 import java.sql.*;
 import java.util.ArrayList;
-import Modelo.ventas;
 public class ventasDAO {
     Connection cn = null;
     PreparedStatement ps = null;
@@ -83,7 +82,7 @@ public class ventasDAO {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("UPDATE ventas SET cliente=?, metododepago=?, precio=?, horaventa=? WHERE idventa=?");
+            ps = cn.prepareStatement("UPDATE ventas SET cliente=?, metododepago=?, precio=?, horaventa=? WHERE idventas=?");
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
             ps.setInt(3, Venta.getPrecio());
@@ -101,7 +100,7 @@ public class ventasDAO {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("DELETE FROM ventas WHERE idventa=?");
+            ps = cn.prepareStatement("DELETE FROM ventas WHERE idventas=?");
             ps.setInt(1, Venta.getIdVenta());
             estado =  ps.executeUpdate();
             cn.close();

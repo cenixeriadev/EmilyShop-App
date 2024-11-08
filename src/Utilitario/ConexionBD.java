@@ -20,16 +20,12 @@ public class ConexionBD {
 
         } catch (ClassNotFoundException e) {
             System.out.println("Error: No se encontró el driver de MySQL");
-            e.printStackTrace();
+
         } catch (SQLException e) {
             System.out.println("Error: No se pudo conectar a la base de datos");
-            e.printStackTrace();
         }
         return Database;
     }
 
-    public static void main(String[] args) {
-        ConexionBD obj = new ConexionBD();
-        obj.getConexionBD();
-    }
+
 }

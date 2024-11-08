@@ -124,7 +124,7 @@ public class Venta_Controlador  implements MouseListener {
                     objVentas.setCodigo(Integer.parseInt(Codigo));
                     objVentas.setPrecio(Integer.parseInt(Precio));
                     objVentas.setMetododepago(MetodoDePago);
-                    objVentas.setIdProducto(productoDAO.ObtenerIdProducto(5));
+                    objVentas.setIdProducto(productoDAO.ObtenerIdProducto(objProducto.getIdinventario()));
 
 
 
