@@ -1,6 +1,6 @@
 package Modelo;
-import java.sql.Date;
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
 
 public class ventas {
 
@@ -8,7 +8,7 @@ public class ventas {
     private String  cliente;
     private String metododepago;
     private int precio;
-    private Date horaventa;
+    private Timestamp horaventa;
     private int idproducto;
     private int codigo ;
 
@@ -22,7 +22,7 @@ public class ventas {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    public void setHoraventa(Date horaventa) {
+    public void setHoraventa(Timestamp horaventa) {
         this.horaventa = horaventa;
     }
     public void setIdProducto(int idproducto) {
@@ -46,7 +46,7 @@ public class ventas {
     public int getPrecio() {
         return precio;
     }
-    public Date getHoraventa() {
+    public Timestamp getHoraventa() {
         return horaventa;
     }
 

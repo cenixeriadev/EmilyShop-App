@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import Utilitario.ConexionBD;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 public class productoDAO {
     Connection cn = null;
@@ -34,6 +36,28 @@ public class productoDAO {
         }catch(Exception e){
             System.out.println("Error al listar productos: " + e.getMessage());
             return null;
+        }
+    }
+    public int ObtenerIdProducto(int idinventario){
+        int id;
+        try {
+            cn = ConexionBD.getConexionBD();
+            ps = cn.prepareStatement("SELECT idproducto FROM producto where idinventario = ?;");
+            ps.setInt(1, idinventario);
+            rs = ps.executeQuery();
+            
+            // Mueve el cursor a la primera fila de resultados
+            rs.next();
+            
+            // Ahora es seguro leer el valor de "idproducto"
+            id = rs.getInt("idproducto");
+            
+            cn.close();
+            ps.close();
+            return id;
+        } catch(SQLException e) {
+            System.out.println("Error al obtener id producto: " + e.getMessage());
+            return 0;
         }
     }
     public int AgregarProducto(producto producto){

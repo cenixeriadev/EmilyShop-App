@@ -23,6 +23,7 @@ public class Venta_Controlador  implements MouseListener {
             int filaSelected = ventanaVentas.getTablaCandidatos().getSelectedRow();
             int IDinventario = (Integer)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 4);
             objProducto = new producto();
+            System.out.println(IDinventario);
 
             objProducto.setModel((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,0));
             objProducto.setColor((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,1));
@@ -62,7 +63,7 @@ public class Venta_Controlador  implements MouseListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Menu_Principal_Vista mprime = new Menu_Principal_Vista();
-                Menu_Principal_Controlador cont = new Menu_Principal_Controlador(mprime);
+                new Menu_Principal_Controlador(mprime);
                 mprime.setVisible(true);
                 ventanaVentas.dispose();
             }
@@ -71,7 +72,7 @@ public class Venta_Controlador  implements MouseListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Consulta_Vista Consultation = new Consulta_Vista();
-                Consulta_Controlador consulta = new Consulta_Controlador(Consultation);
+                new Consulta_Controlador(Consultation);
                 Consultation.setVisible(true);
                 ventanaVentas.dispose();
                 // Acción al presionar el botón consulta
@@ -115,10 +116,6 @@ public class Venta_Controlador  implements MouseListener {
                     String Codigo = ventanaVentas.getTxtCodigo().getText();
                     String Precio = ventanaVentas.getTxtPrecio().getText();
                     String MetodoDePago = ventanaVentas.getTxtDescripcion().getText();
-                    java.time.LocalDate currentDate = java.time.LocalDate.now();
-                    // Convert the LocalDate to java.sql.Date
-                    java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
-                    //objVentas = new ventas();
 
                     int estado  = 0;
                     objVentas = new ventas();
@@ -127,7 +124,9 @@ public class Venta_Controlador  implements MouseListener {
                     objVentas.setCodigo(Integer.parseInt(Codigo));
                     objVentas.setPrecio(Integer.parseInt(Precio));
                     objVentas.setMetododepago(MetodoDePago);
-                    objVentas.setHoraventa(sqlDate);
+                    objVentas.setIdProducto(productoDAO.ObtenerIdProducto(5));
+
+
 
                     estado  = ventaDAO.AgregarVentas(objVentas);
 

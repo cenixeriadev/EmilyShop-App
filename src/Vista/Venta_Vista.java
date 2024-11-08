@@ -99,7 +99,7 @@ public class Venta_Vista extends JFrame  {
         add(txtDescripcion);
         //-------------------------------------------------------------------------------
 
-        comboTalla = new JComboBox<>(new String[]{"35","36" , "37" ,"38" ,  "39","40 " , "41" , "42" ,  "43"});
+        comboTalla = new JComboBox<>(new String[]{"35","36" , "37" ,"38" ,  "39", "40" , "41" , "42" ,  "43"});
         comboTalla.setBounds(110, 240, 50, 30);
         add(comboTalla);
         //--------------------------------------------------------------------------------
