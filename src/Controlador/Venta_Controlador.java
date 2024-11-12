@@ -114,6 +114,7 @@ public class Venta_Controlador  implements MouseListener {
 
                 if(estado>0){
                     JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
+                    ventanaVentas.getTextAreaDatos().setText("");
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Error al registrar la venta");
