@@ -119,4 +119,24 @@ public class ventasDAO {
         }
         return estado;
     }
+    public int actualizarInventario(int idinventario){
+        int estado = 0;
+        try{
+            cn  = ConexionBD.getConexionBD();
+            PreparedStatement pr = null;
+            pr =cn.prepareStatement("DELETE FROM producto WHERE  idinventario = ?;");
+            ps = cn.prepareStatement("DELETE  FROM inventario WHERE idinventario = ?;");
+            pr.setInt(1, idinventario);
+            ps.setInt(1, idinventario);
+            pr.executeUpdate();
+            estado =  ps.executeUpdate();
+            cn.close();
+            ps.close();
+            pr.close();
+        }catch (SQLException e){
+            System.out.println("Ocurrio un error : " + e.getMessage());
+            return estado;
+        }
+        return estado;
+    }
 }

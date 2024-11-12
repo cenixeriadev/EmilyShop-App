@@ -22,7 +22,6 @@ public class Venta_Controlador  implements MouseListener {
             int filaSelected = ventanaVentas.getTablaCandidatos().getSelectedRow();
             int IDinventario = (Integer)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected, 4);
             objProducto = new producto();
-            System.out.println(IDinventario);
 
             objProducto.setModel((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,0));
             objProducto.setColor((String)ventanaVentas.getTablaCandidatos().getValueAt(filaSelected,1));
@@ -108,11 +107,10 @@ public class Venta_Controlador  implements MouseListener {
                 objVentas.setMetododepago(MetodoDePago);
                 objVentas.setIdProducto(productoDAO.ObtenerIdProducto(objProducto.getIdinventario()));
 
-
+                ventaDAO.actualizarInventario(objProducto.getIdinventario());
 
                 estado  = ventaDAO.AgregarVentas(objVentas);
                 LimpiarCampos(ventanaVentas.getTextFieldDatos() , ventanaVentas.getTxtCodigo() , ventanaVentas.getTxtDescripcion() ,ventanaVentas.getTxtPrecio());
-
                 if(estado>0){
                     JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
                     ventanaVentas.getTextAreaDatos().setText("");
