@@ -126,7 +126,4 @@ public class Inventario_Vista extends JFrame {
         return  btnvolver;
     }
 
-
-
-
 }
