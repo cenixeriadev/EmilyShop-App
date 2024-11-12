@@ -1,7 +1,7 @@
 package Modelo;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+
 
 public interface MetodosInventario {
     void CargarDatos();

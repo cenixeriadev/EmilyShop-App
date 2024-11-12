@@ -29,6 +29,7 @@ public class usuarioDAO {
             cn.close();
         }catch(SQLException e) {
             System.out.println("Error al listar los usuarios: " + e.getMessage());
+            return null;
         }
         return listaUsuario;
     }

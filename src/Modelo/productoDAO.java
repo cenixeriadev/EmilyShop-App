@@ -45,13 +45,10 @@ public class productoDAO {
             ps = cn.prepareStatement("SELECT idproducto FROM producto where idinventario = ?;");
             ps.setInt(1, idinventario);
             rs = ps.executeQuery();
-            
             // Mueve el cursor a la primera fila de resultados
             rs.next();
-            
             // Ahora es seguro leer el valor de "idproducto"
             id = rs.getInt("idproducto");
-            
             cn.close();
             ps.close();
             return id;

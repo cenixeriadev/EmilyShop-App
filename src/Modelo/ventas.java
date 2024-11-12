@@ -1,7 +1,7 @@
 package Modelo;
 
 import java.sql.Timestamp;
-
+@SuppressWarnings("ALL")
 public class ventas {
 
     private int idventas;

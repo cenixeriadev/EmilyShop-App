@@ -1,10 +1,9 @@
 package Modelo;
-
+@SuppressWarnings("ALL")
 public class usuario {
     private int idusuario;
     private String apellidoynombre;
     private String contraseña;
-
 
     public void setIdusuario(int idusuario) {
         this.idusuario = idusuario;

@@ -1,14 +1,12 @@
 package Vista;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import Controlador.Venta_Controlador;
+
 public class Consulta_Vista extends JFrame {
     public JLabel lblConsulta, lblcodigo, lblparencontrado;
-    public  JComboBox cboopTalla;
+    public JComboBox<String> cboopTalla;
     public  JTextField txtCod;
-    public  JButton btnconsulta, btnvolver, btnBorrar;
+    public JButton btnconsulta, btnvolver, btnBorrar;
     public Consulta_Vista(){
         setTitle("Consultar Producto");
         setSize(600,600);
@@ -38,7 +36,7 @@ public class Consulta_Vista extends JFrame {
         txtCod.setBounds(200,90,150,25);
         add(txtCod);
         //------------------------------------
-        cboopTalla = new JComboBox();
+        cboopTalla = new JComboBox<>();
         cboopTalla.setBounds(100,130,80,20);
         cboopTalla.setBackground(Color.LIGHT_GRAY);
         cboopTalla.setForeground(Color.WHITE);
@@ -70,10 +68,6 @@ public class Consulta_Vista extends JFrame {
         btnBorrar.setForeground(Color.white);
         btnBorrar.setBackground(Color.red);
         add(btnBorrar);
-    }
-    public static void main(String[] args){
-        Consulta_Vista vista = new Consulta_Vista();
-        vista.setVisible(true);
     }
     public JButton getbtnConsulta(){
         return btnconsulta;

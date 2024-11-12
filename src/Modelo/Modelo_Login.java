@@ -16,6 +16,7 @@ public class Modelo_Login {
         observers.remove(observer);
     }
 
+    @SuppressWarnings("NonAsciiCharacters")
     public void validarCredenciales(String inputUsername , String inputPassword){
         ArrayList<usuario> usuarios = user.ListarUsuario();
         boolean estado = false;
@@ -26,7 +27,7 @@ public class Modelo_Login {
             notificarObserverExito();
         }
         else {
-            notificarObserverFallo("Usuario o contraseña incorrecta");
+            notificarObserverFallo();
 
         }
     }
@@ -35,9 +36,9 @@ public class Modelo_Login {
             observer.loginExitoso();
         }
     }
-    private void notificarObserverFallo(String MensajeError) {
+    private void notificarObserverFallo() {
         for (FrmLoginUsuario_Controlador observer : observers) {
-            observer.loginFallido(MensajeError);
+            observer.loginFallido("Usuario o contraseña incorrecta");
         }
     }
 

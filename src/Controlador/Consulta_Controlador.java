@@ -1,48 +1,32 @@
 package Controlador;
-//import modelo.Consulta_Modelo;
 import Vista.Consulta_Vista;
 import Vista.Venta_Vista;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import java.util.Objects;
 
 public class Consulta_Controlador {
     private final Consulta_Vista vistaConsulta;
 
     public Consulta_Controlador(Consulta_Vista vistaConsulta){
         this.vistaConsulta = vistaConsulta;
-        //Agregando listeners a los botones para que funcionen
-        //Consultar
-        vistaConsulta.getbtnConsulta().addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                Consulta();
-            }
-        });
+
+        vistaConsulta.getbtnConsulta().addActionListener(_ -> Consulta());
         //Borrar
-        vistaConsulta.getbtnBorrar().addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                Borrar();
-            }
-        });
+        vistaConsulta.getbtnBorrar().addActionListener(_ -> Borrar());
         //Volver
-        vistaConsulta.getbtnVolver().addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                Venta_Vista comeBack = new Venta_Vista();
-                Venta_Controlador ventacont = new Venta_Controlador(comeBack);
-                comeBack.setVisible(true);
-                vistaConsulta.dispose();
-            }
+        vistaConsulta.getbtnVolver().addActionListener(_ -> {
+            Venta_Vista comeBack = new Venta_Vista();
+            new Venta_Controlador(comeBack);
+            comeBack.setVisible(true);
+            vistaConsulta.dispose();
         });
     }
     public void Consulta(){
-        if(vistaConsulta.getTextCod().getText().length()==0){
+        if(vistaConsulta.getTextCod().getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Coloque un codigo valido");
             vistaConsulta.getTextCod().setText("");
             vistaConsulta.getTextCod().requestFocus();
-        } else if(vistaConsulta.cboopTalla.getSelectedItem().equals("TALLA")){
+        } else if(Objects.equals(vistaConsulta.cboopTalla.getSelectedItem(), "TALLA")){
             JOptionPane.showMessageDialog(null, "Elija una talla valida");
             vistaConsulta.cboopTalla.requestFocus();
         } else {

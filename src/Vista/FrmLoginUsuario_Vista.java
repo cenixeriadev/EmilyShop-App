@@ -4,12 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FrmLoginUsuario_Vista extends JFrame {
-    //private  final Color color3 = new Color(32, 201, 151);
-    private  final Color color3 = new Color(0, 248, 4);
-    private  final Color color4 = new Color(250, 237, 95);
+    private  final Color color3 = new Color(70, 182, 62);
+    private  final Color color4 = new Color(0, 222, 149);
 
-
-    // Panel para el fondo
     private class GradientPanel extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
@@ -19,7 +16,6 @@ public class FrmLoginUsuario_Vista extends JFrame {
             int h = getHeight();
 
             GradientPaint gp = new GradientPaint(0, 0, color3, 0,h , color4 , true);
-            //g2d.setPaint(gp);
             g2d.setPaint(gp);
             g2d.fillRect(0, 0, w, h);
         }
@@ -35,22 +31,21 @@ public class FrmLoginUsuario_Vista extends JFrame {
         setLocation(400, 50);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 600);
-        setUndecorated(true);
+        //setUndecorated(true);
 
-        // Usa un JPanel con el fondo de gradiente
         GradientPanel gradientPanel = new GradientPanel();
         gradientPanel.setLayout(null);
 
         // Cargar la imagen del logo
         //----------------------------------------------------------------------------------------
         ImageIcon logoIcon = new ImageIcon("src/Recursos/Login.png"); // Ruta del logo
-        Image logoImage = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH); // Redimensionar imagen
+        Image logoImage = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);// Redimensionar imagen
         logoIcon = new ImageIcon(logoImage); // Crear un nuevo ImageIcon redimensionado
         this.setType(Type.NORMAL); // Hacer el frame modal
         //--------------------------------------------------------------------------------------
         // Agregar el logo al JLabel
         logoLabel = new JLabel(logoIcon);
-        logoLabel.setBounds(250, 10, 100, 100); // Posición y tamaño del logo
+        logoLabel.setBounds(250, 10, 100, 100);// Posición y tamaño del logo
         gradientPanel.add(logoLabel); // Añadir logo al panel
 
         TitleFrame = new JLabel("LOGIN");
@@ -87,7 +82,6 @@ public class FrmLoginUsuario_Vista extends JFrame {
         btnEntrar = new JButton("Entrar");
         btnEntrar.setBounds(150, 300, 110, 40);
         btnEntrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        //btnEntrar.setBackground(new Color(47, 158, 68));
         btnEntrar.setForeground(Color.BLACK);
         btnEntrar.setFocusPainted(false);
         btnEntrar.setIcon(entrarIcon);

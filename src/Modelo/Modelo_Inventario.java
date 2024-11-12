@@ -15,7 +15,6 @@ public class Modelo_Inventario implements MetodosInventario {
 
     public Modelo_Inventario(FrInventarios_Vista vista) {
         this.vista = vista;
-        //hola como estas dice konichiwua
     }
     @Override
     public void CargarDatos() {
@@ -37,7 +36,6 @@ public class Modelo_Inventario implements MetodosInventario {
 
     @Override
     public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  ,int idinventario ,  int i ) {
-        //int selectedRow = vista.getTablaInventario().getSelectedRow();
         if (i != -1) {
             TableModel model =  vista.getTablaInventario().getModel();
             objInventario  = new inventario();
@@ -64,8 +62,6 @@ public class Modelo_Inventario implements MetodosInventario {
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila para modificar");
         }
-        //CargarDatos();
-
     }
 
     @Override

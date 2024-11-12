@@ -7,10 +7,9 @@ import Vista.Venta_Vista;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class Venta_Controlador  implements MouseListener {
-    private Venta_Vista ventanaVentas ;
+    private final Venta_Vista ventanaVentas ;
     producto objProducto ;
     productoDAO productoDAO = new productoDAO();
     ventas objVentas ;
@@ -59,111 +58,88 @@ public class Venta_Controlador  implements MouseListener {
         this.ventanaVentas = ventanaVentas;
         ventanaVentas.getTablaCandidatos().addMouseListener(this);
         //Asignar los eventos de los botones
-        ventanaVentas.getBtnVolver().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Menu_Principal_Vista mprime = new Menu_Principal_Vista();
-                new Menu_Principal_Controlador(mprime);
-                mprime.setVisible(true);
-                ventanaVentas.dispose();
-            }
+        ventanaVentas.getBtnVolver().addActionListener(_ -> {
+            Menu_Principal_Vista mprime = new Menu_Principal_Vista();
+            new Menu_Principal_Controlador(mprime);
+            mprime.setVisible(true);
+            ventanaVentas.dispose();
         });
-        ventanaVentas.getBtnConsulta().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Consulta_Vista Consultation = new Consulta_Vista();
-                new Consulta_Controlador(Consultation);
-                Consultation.setVisible(true);
-                ventanaVentas.dispose();
-                // Acción al presionar el botón consulta
-            }
+        ventanaVentas.getBtnConsulta().addActionListener(_ -> {
+            Consulta_Vista Consultation = new Consulta_Vista();
+            new Consulta_Controlador(Consultation);
+            Consultation.setVisible(true);
+            ventanaVentas.dispose();
+            // Acción al presionar el botón consulta
         });
-        ventanaVentas.getBtnAdd().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int estado = productoDAO.AgregarProducto(objProducto);
+        ventanaVentas.getBtnAdd().addActionListener(_ -> {
+            int estado = productoDAO.AgregarProducto(objProducto);
+
+            if(estado>0){
+                JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
+                String datosProducto = "\n" +"Modelo: " + objProducto.getModel() + "\n" +
+                        "Color: " + objProducto.getColor() + "\n" +
+                        "Código: " + objProducto.getCodigo() + "\n" +
+                        "Talla: " + objProducto.getTalla() + "\n";
+                ventanaVentas.getTextAreaDatos().append(datosProducto);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Producto no agregado");
+            }
+
+
+
+
+        });
+        ventanaVentas.getBtnEliminar().addActionListener(_ -> {
+
+        });
+        ventanaVentas.getBtnRegistrar().addActionListener(_ -> {
+            try {
+                String cliente = ventanaVentas.getTextFieldDatos().getText();
+                String Codigo = ventanaVentas.getTxtCodigo().getText();
+                String Precio = ventanaVentas.getTxtPrecio().getText();
+                String MetodoDePago = ventanaVentas.getTxtDescripcion().getText();
+
+                int estado;
+                objVentas = new ventas();
+                objVentas.setCliente(cliente);
+                objVentas.setCodigo(Integer.parseInt(Codigo));
+                objVentas.setPrecio(Integer.parseInt(Precio));
+                objVentas.setMetododepago(MetodoDePago);
+                objVentas.setIdProducto(productoDAO.ObtenerIdProducto(objProducto.getIdinventario()));
+
+
+
+                estado  = ventaDAO.AgregarVentas(objVentas);
 
                 if(estado>0){
-                    JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
-                    String datosProducto = "\n" +"Modelo: " + objProducto.getModel() + "\n" +
-                            "Color: " + objProducto.getColor() + "\n" +
-                            "Código: " + objProducto.getCodigo() + "\n" +
-                            "Talla: " + objProducto.getTalla() + "\n";
-                    ventanaVentas.getTextAreaDatos().append(datosProducto);
+                    JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Producto no agregado");
+                    JOptionPane.showMessageDialog(null, "Error al registrar la venta");
                 }
 
 
 
-
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos");
             }
+
+
+            // Registrar la venta en la base de datos
         });
-        ventanaVentas.getBtnEliminar().addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-
-           }
-
-        });
-        ventanaVentas.getBtnRegistrar().addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        ventanaVentas.getComboTalla().addItemListener(e -> {
+            if(e.getStateChange() == ItemEvent.SELECTED){
                 try {
-                    String cliente = ventanaVentas.getTextFieldDatos().getText();
-                    String Codigo = ventanaVentas.getTxtCodigo().getText();
-                    String Precio = ventanaVentas.getTxtPrecio().getText();
-                    String MetodoDePago = ventanaVentas.getTxtDescripcion().getText();
-
-                    int estado  = 0;
-                    objVentas = new ventas();
-                        //objVentas.setIdventas(1);
-                    objVentas.setCliente(cliente);
-                    objVentas.setCodigo(Integer.parseInt(Codigo));
-                    objVentas.setPrecio(Integer.parseInt(Precio));
-                    objVentas.setMetododepago(MetodoDePago);
-                    objVentas.setIdProducto(productoDAO.ObtenerIdProducto(objProducto.getIdinventario()));
-
-
-
-                    estado  = ventaDAO.AgregarVentas(objVentas);
-
-                    if(estado>0){
-                        JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "Error al registrar la venta");
-                    }
-
-
-
+                    Object itemSeleccionado = e.getItem();
+                    tallaSeleccionada = itemSeleccionado.toString();
+                    Modelo_Ventas mod = new Modelo_Ventas(ventanaVentas);
+                    mod.CargarInventarioD(tallaSeleccionada);
                 }catch (Exception ex){
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos");
-                }
-
-
-                // Registrar la venta en la base de datos
-            }
-        });
-        ventanaVentas.getComboTalla().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if(e.getStateChange() == ItemEvent.SELECTED){
-                    try {
-                        Object itemSeleccionado = e.getItem();
-                        tallaSeleccionada = itemSeleccionado.toString();
-                        Modelo_Ventas mod = new Modelo_Ventas(ventanaVentas);
-                        mod.CargarInventarioD(tallaSeleccionada);
-                    }catch (Exception ex){
-                        JOptionPane.showMessageDialog(null, "ERROR");
-                    }
-
+                    JOptionPane.showMessageDialog(null, "ERROR");
                 }
 
             }
-
 
         });
 

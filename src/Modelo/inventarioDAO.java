@@ -16,7 +16,7 @@ public class inventarioDAO {
             cn  = ConexionBD.getConexionBD();
             pt = cn.prepareStatement("SELECT * FROM inventario");
             rs = pt.executeQuery();
-            listaInvent = new ArrayList<inventario>();
+            listaInvent = new ArrayList<>();
             while(rs.next()){
                 objInventario = new inventario();
                 objInventario.setIdinventario(rs.getInt("idinventario"));
@@ -27,12 +27,12 @@ public class inventarioDAO {
                 objInventario.setPrecioCosto(rs.getInt("preciocosto"));//Precio entero , esta raro eh.....
                 listaInvent.add(objInventario);
             }
+            rs.close();
+            pt.close();
+            cn.close();
             return listaInvent;
-
-
-
         }catch(Exception e) {
-
+            System.out.println("Error al listar inventario: " + e.getMessage());
         }
         return listaInvent;
     }
@@ -46,9 +46,12 @@ public class inventarioDAO {
             pt.setString(3, objInventario.getModel());
             pt.setString(4, objInventario.getColor());
             pt.setInt(5, objInventario.getPrecioCosto());
-            return pt.executeUpdate();
+            estado =  pt.executeUpdate();
+            cn.close();
+            pt.close();
         }catch(Exception e) {
-
+            System.out.println("Error: " + e.getMessage());
+            return estado ;
         }
         return  estado;
 

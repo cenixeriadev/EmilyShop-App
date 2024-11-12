@@ -15,9 +15,7 @@ public class Venta_Vista extends JFrame  {
     private final JTextField txtPrecio;
     private final JTextField txtDescripcion;
     private final JComboBox<String> comboTalla ;
-    private JComboBox<String> comboModelo;
     private final JTextArea textAreaDatos;
-    private final JLabel lblUltimaAccion, logoLabel ;
     private final JButton btnRegistrar, btnConsulta, btnEliminar, btnVolver, btnAdd;
     JScrollPane scrollDatos , scrollTabla;
     public JTable tablaCandidatos;
@@ -26,8 +24,6 @@ public class Venta_Vista extends JFrame  {
 
 
     public Venta_Vista() {
-        // Configuración de la ventana principal
-        //setLocation(500,100);
         setTitle("Ventas");
         setSize(1200, 700);
         //setLocationRelativeTo(null);
@@ -67,8 +63,7 @@ public class Venta_Vista extends JFrame  {
         add(lblTalla);
 
 
-
-        lblUltimaAccion = new JLabel();
+        JLabel lblUltimaAccion = new JLabel();
         lblUltimaAccion.setBounds(50, 340, 300, 30);
         lblUltimaAccion.setForeground(Color.RED);
         add(lblUltimaAccion);
@@ -77,7 +72,7 @@ public class Venta_Vista extends JFrame  {
         ImageIcon logoIcon = new ImageIcon("src/Recursos/icono.png");
         Image logoImage = logoIcon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         logoIcon = new ImageIcon(logoImage);
-        logoLabel = new JLabel(logoIcon);
+        JLabel logoLabel = new JLabel(logoIcon);
         logoLabel.setBounds(320, 20, 250, 250); // Posición y tamaño del log
         this.add(logoLabel);
         //--------------------------------------------------------------------------------
@@ -99,7 +94,7 @@ public class Venta_Vista extends JFrame  {
         add(txtDescripcion);
         //-------------------------------------------------------------------------------
 
-        comboTalla = new JComboBox<>(new String[]{"35","36" , "37" ,"38" ,  "39", "40" , "41" , "42" ,  "43"});
+        comboTalla = new JComboBox<>(new String[]{"","35","36" , "37" ,"38" ,  "39", "40" , "41" , "42" ,  "43"});
         comboTalla.setBounds(110, 240, 50, 30);
         add(comboTalla);
         //--------------------------------------------------------------------------------
@@ -144,7 +139,8 @@ public class Venta_Vista extends JFrame  {
 
         tablaCandidatos = new JTable();
         modelo = new DefaultTableModel(null , titulos);
-
+        tablaCandidatos.getTableHeader().setReorderingAllowed(false);
+        tablaCandidatos.getTableHeader().setEnabled(false);
         tablaCandidatos.setModel(modelo);
 
         TableColumn columnainvisible = tablaCandidatos.getColumnModel().getColumn(4);
@@ -160,10 +156,7 @@ public class Venta_Vista extends JFrame  {
 
 
     }
-    public static void main(String[] args){
-        Venta_Vista ven = new Venta_Vista();
-        ven.setVisible(true);
-    }
+
     public JTable getTablaCandidatos(){
         return tablaCandidatos;
     }

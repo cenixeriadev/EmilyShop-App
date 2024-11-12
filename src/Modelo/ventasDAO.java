@@ -27,7 +27,9 @@ public class ventasDAO {
                 listaInventarioD.add(objInventarioD);
 
             }
-
+            rs.close();
+            ps.close();
+            cn.close();
         }catch(Exception e){
             System.out.println("Error al listar los modelos de la talla: " + e.getMessage());
             return null;
@@ -53,8 +55,12 @@ public class ventasDAO {
 
                 listaVentas.add(objVentas);
             }
+            rs.close();
+            ps.close();
+            cn.close();
         } catch (SQLException e) {
             System.out.println("Error al listar las ventas: " + e.getMessage());
+            return null;
         }
         return listaVentas;
     }
@@ -73,6 +79,7 @@ public class ventasDAO {
             cn.close();
             ps.close();
         }catch (Exception e){
+            System.out.println("Ocurrio un error : " + e.getMessage());
             return  estado;
         }
         return estado;
@@ -92,6 +99,7 @@ public class ventasDAO {
             cn.close();
             ps.close();
         }catch (SQLException e){
+            System.out.println("Ocurrio un error : " + e.getMessage());
             return estado;
         }
         return estado;
@@ -106,6 +114,7 @@ public class ventasDAO {
             cn.close();
             ps.close();
         }catch (SQLException e){
+            System.out.println("Ocurrio un error : " + e.getMessage());
             return  estado;
         }
         return estado;

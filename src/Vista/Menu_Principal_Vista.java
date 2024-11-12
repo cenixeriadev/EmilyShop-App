@@ -15,7 +15,7 @@ public class Menu_Principal_Vista extends JFrame  {
         setSize(600, 600);
         setLayout(null); // Usar layout nulo para setBounds
         setLocationRelativeTo(null);
-        setUndecorated(true);
+        //setUndecorated(true);
 
         JLabel titleFrame = new JLabel("CALZADOS EMILY'S");
         titleFrame.setFont(new Font("Arial", Font.BOLD, 24));
@@ -78,6 +78,5 @@ public class Menu_Principal_Vista extends JFrame  {
     public JButton getEliminarButton(){
         return eliminarButton;
     }
-    //falta el JButton in action brou...
 }
 

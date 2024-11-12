@@ -2,14 +2,13 @@ package Modelo;
 
 import Vista.Venta_Vista;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class Modelo_Ventas implements MetodosVentas{
     private final Venta_Vista vista;
     ArrayList<inventario> listaDisponible = new ArrayList<>();
-    ventas objVentas;
+    //ventas objVentas;
     ventasDAO objVentDAO = new ventasDAO();
 
     public Modelo_Ventas(Venta_Vista vista){
@@ -30,10 +29,7 @@ public class Modelo_Ventas implements MetodosVentas{
             i++;
         }
         vista.getTablaCandidatos().setModel(model);
-        // Implementar la logica para consultar el inventario
     }
-
-
 
 
 }

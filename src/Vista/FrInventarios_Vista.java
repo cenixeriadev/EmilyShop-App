@@ -1,5 +1,4 @@
 package Vista;
-import Controlador.FrmInventarios_Controlador;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,12 +19,12 @@ public class FrInventarios_Vista extends JFrame {
 
     public void initComponents(){
         setTitle("REPORTE DE INVENTARIO");
-        setSize(500,500);
+        setSize(700,700);
         setLocation(500,150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setLocationRelativeTo(null);
-        setUndecorated(true);
+        //setUndecorated(true);
         //-------------------------------------
         lblInventarioReporte = new JLabel("INVENTARIO REPORTES");
         lblInventarioReporte.setFont(new java.awt.Font("Arial",Font.BOLD,18));
@@ -56,6 +55,8 @@ public class FrInventarios_Vista extends JFrame {
 
         tablaInventario = new JTable();
         modelo = new DefaultTableModel(null, titulos);
+        tablaInventario.getTableHeader().setReorderingAllowed(false);
+        tablaInventario.getTableHeader().setEnabled(false);
         tablaInventario.setModel(modelo);
 
 

@@ -1,4 +1,5 @@
 package Modelo;
+@SuppressWarnings("ALL")
 public class producto {
     private int idproducto ;
     private int idinventario;

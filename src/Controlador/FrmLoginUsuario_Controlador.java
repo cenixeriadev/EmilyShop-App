@@ -5,51 +5,56 @@ import Modelo.Modelo_Login;
 import Vista.Menu_Principal_Vista;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+
 public class FrmLoginUsuario_Controlador implements LoginObserver{
-    private FrmLoginUsuario_Vista login ;
-    private Modelo_Login modelo;
-    public FrmLoginUsuario_Controlador(FrmLoginUsuario_Vista login , Modelo_Login modelo){
+    private final FrmLoginUsuario_Vista login ;
+    private final Modelo_Login modelo;
+    public FrmLoginUsuario_Controlador(FrmLoginUsuario_Vista login , Modelo_Login modelo) {
         this.login = login;
         this.modelo = modelo;
         modelo.addObserver(this);
-        login.getTxtUsuario().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    handleLogin();
-                }
-            }
-        });
+        Iniciar();
 
-        login.getTxtPassword().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    handleLogin();
+    }
+    private void Iniciar(){
+        try {
+            login.getTxtUsuario().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        handleLogin();
+                    }
                 }
-            }
-        });
-        login.getbtnSalir().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            });
 
+            login.getTxtPassword().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        handleLogin();
+                    }
+                }
+            });
+            login.getbtnSalir().addActionListener(_ -> {
+                removerObserver();
                 login.dispose();
-            }
+            });
 
-        });
-
-        login.getbtnEntrar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            login.getbtnEntrar().addActionListener(_ -> {
                 handleLogin();
+                removerObserver();
+            });
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null , "Ocurrio un error inesperado : " + e.getMessage());
+        }
 
-            }
-        });
+    }
+    private void removerObserver(){
+        modelo.removeObserver(this);
     }
     private void  handleLogin() {
         String inputUsername =  login.getTxtUsuario().getText();
@@ -63,7 +68,6 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
         new Menu_Principal_Controlador(vista);
         login.dispose();
         vista.setVisible(true);
-
     }
 
     @Override

@@ -6,10 +6,8 @@ public class Main{
     public static void main(String[] args) {
         Modelo_Login  modelo = new Modelo_Login();
         FrmLoginUsuario_Vista ventana = new FrmLoginUsuario_Vista();
-        FrmLoginUsuario_Controlador controlador = new FrmLoginUsuario_Controlador(ventana, modelo);
+        new FrmLoginUsuario_Controlador(ventana, modelo);
         ventana.setVisible(true);
     }
-
-
 }
 

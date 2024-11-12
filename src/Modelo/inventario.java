@@ -1,8 +1,6 @@
 package Modelo;
-
+@SuppressWarnings("ALL")
 public class inventario {
-    // El modelo solo encargarse de la logica de los datos y no tener relacion directa 
-    // con la vista
     private int idinventario ;
     private int preciocosto;
     private int talla;
