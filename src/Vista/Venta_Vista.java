@@ -137,7 +137,12 @@ public class Venta_Vista extends JFrame  {
         scrollDatos.setViewportView(textAreaDatos);
         add(scrollDatos);
 
-        tablaCandidatos = new JTable();
+        tablaCandidatos = new JTable(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         modelo = new DefaultTableModel(null , titulos);
         tablaCandidatos.getTableHeader().setReorderingAllowed(false);
         tablaCandidatos.getTableHeader().setEnabled(false);
@@ -147,7 +152,10 @@ public class Venta_Vista extends JFrame  {
         columnainvisible.setMinWidth(0);
         columnainvisible.setMaxWidth(0);
         columnainvisible.setPreferredWidth(0);
-
+        JLabel stock = new JLabel("Mostrar disponibilidad de Stock según talla");
+        stock.setBounds(750, 80, 400, 30);
+        stock.setFont(new Font("Arial" , Font.BOLD , 16));
+        add(stock);
 
         scrollTabla = new JScrollPane(tablaCandidatos);
         scrollTabla.setBounds(700, 120, 420, 300);

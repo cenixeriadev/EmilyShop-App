@@ -111,6 +111,7 @@ public class Venta_Controlador  implements MouseListener {
 
 
                 estado  = ventaDAO.AgregarVentas(objVentas);
+                LimpiarCampos(ventanaVentas.getTextFieldDatos() , ventanaVentas.getTxtCodigo() , ventanaVentas.getTxtDescripcion() ,ventanaVentas.getTxtPrecio());
 
                 if(estado>0){
                     JOptionPane.showMessageDialog(null, "Venta registrada correctamente");
@@ -144,5 +145,11 @@ public class Venta_Controlador  implements MouseListener {
 
         });
 
+    }
+    private void LimpiarCampos(JTextField... campos){
+        for(JTextField campo : campos){
+            campo.setText("");
+            campo.requestFocus();
+        }
     }
 }
