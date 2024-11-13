@@ -1,5 +1,6 @@
 package Controlador;
 import Modelo.LoginObserver;
+import Utilitario.PantallaCarga;
 import Vista.FrmLoginUsuario_Vista;
 import Modelo.Modelo_Login;
 import Vista.Menu_Principal_Vista;
@@ -27,6 +28,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         handleLogin();
+                        removerObserver();
                     }
                 }
             });
@@ -36,6 +38,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         handleLogin();
+                        removerObserver();
                     }
                 }
             });
@@ -64,10 +67,29 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
     }
     @Override
     public void loginExitoso() {
-        Menu_Principal_Vista vista = new Menu_Principal_Vista();
-        new Menu_Principal_Controlador(vista);
+        PantallaCarga pantallaCarga = new PantallaCarga();
+        pantallaCarga.setVisible(true);
         login.dispose();
-        vista.setVisible(true);
+        // Usar SwingWorker para realizar operaciones de carga en un hilo separado
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                // Simular operaciones de carga
+                Thread.sleep(500);
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                pantallaCarga.dispose();
+                Menu_Principal_Vista vista = new Menu_Principal_Vista();
+                new Menu_Principal_Controlador(vista);
+                vista.setVisible(true);
+            }
+        };
+
+        worker.execute();
     }
 
     @Override
