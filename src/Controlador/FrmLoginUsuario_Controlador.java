@@ -71,7 +71,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
         pantallaCarga.setVisible(true);
         login.dispose();
         // Usar SwingWorker para realizar operaciones de carga en un hilo separado
-        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+        SwingWorker<Void, Void> worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() throws Exception {
                 // Simular operaciones de carga
