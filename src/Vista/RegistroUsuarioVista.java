@@ -9,7 +9,7 @@ import java.awt.event.FocusListener;
 
 public class RegistroUsuarioVista extends JFrame {
     JPanel panel1, panel2;
-    JLabel lblsistema, lblempresa,lblnombre, lbltelefono, lblimagen1, lblimagen2, lblimagen3, lblimagen4,lblimagen5,lblimagen6
+    JLabel  lblimagen3, lblimagen4,lblimagen5,lblimagen6
             ,lblcrearusuario;
     JTextField txtusuario, txtcontra,txtnombre,txttelefono;
     
@@ -89,6 +89,21 @@ public class RegistroUsuarioVista extends JFrame {
         panel2.add(btncrear);
 
     }
+    public JTextField getTxtusuario(){
+        return txtusuario;
+    }
+    public JTextField getTxtcontra(){
+        return txtcontra;
+    }
+    public JTextField getTxtnombre(){
+        return txtnombre;
+    }
+    public JTextField getTxttelefono(){
+        return txttelefono;
+    }
+    public JButton getBtncrear(){
+        return btncrear;
+    }
 
     private JTextField crearCampoTexto(String placeholder, int x, int y) {
         JTextField textField = new JTextField();
@@ -108,21 +123,6 @@ public class RegistroUsuarioVista extends JFrame {
         button.setBorder(new LineBorder(Color.WHITE, 2, true)); // Borde con esquinas redondeadas
         button.setFocusPainted(false);
         return button;
-    }
-    public JTextField getTxtusuario(){
-        return txtusuario;
-    }
-    public JTextField getTxtcontra(){
-        return txtcontra;
-    }
-    public JTextField getTxtnombre(){
-        return txtnombre;
-    }
-    public JTextField getTxttelefono(){
-        return txttelefono;
-    }
-    public JButton getBtncrear(){
-        return btncrear;
     }
 
     public static void main(String[] args) {

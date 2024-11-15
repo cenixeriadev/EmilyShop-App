@@ -1,9 +1,11 @@
 package Controlador;
 import Modelo.LoginObserver;
 import Utilitario.PantallaCarga;
-import Vista.FrmLoginUsuario_Vista;
 import Modelo.Modelo_Login;
+import Vista.LoginVista;
 import Vista.Menu_Principal_Vista;
+import Vista.PrincipalVista;
+import Vista.RegistroUsuarioVista;
 
 import javax.swing.*;
 
@@ -12,9 +14,9 @@ import java.awt.event.KeyEvent;
 
 
 public class FrmLoginUsuario_Controlador implements LoginObserver{
-    private final FrmLoginUsuario_Vista login ;
+    private final LoginVista login ;
     private final Modelo_Login modelo;
-    public FrmLoginUsuario_Controlador(FrmLoginUsuario_Vista login , Modelo_Login modelo) {
+    public FrmLoginUsuario_Controlador(LoginVista login , Modelo_Login modelo) {
         this.login = login;
         this.modelo = modelo;
         modelo.addObserver(this);
@@ -23,7 +25,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
     }
     private void Iniciar(){
         try {
-            login.getTxtUsuario().addKeyListener(new KeyAdapter() {
+            login.getTxtusuario().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -33,7 +35,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
                 }
             });
 
-            login.getTxtPassword().addKeyListener(new KeyAdapter() {
+            login.getTxtContra().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -42,12 +44,14 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
                     }
                 }
             });
-            login.getbtnSalir().addActionListener(_ -> {
-                removerObserver();
+            login.getbtnNuevo().addActionListener(_->{
+                RegistroUsuarioVista registrar = new RegistroUsuarioVista();
                 login.dispose();
+                removerObserver();
+                registrar.setVisible(true);
             });
 
-            login.getbtnEntrar().addActionListener(_ -> {
+            login.getbtnInicio().addActionListener(_ -> {
                 handleLogin();
                 removerObserver();
             });
@@ -60,8 +64,8 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
         modelo.removeObserver(this);
     }
     private void  handleLogin() {
-        String inputUsername =  login.getTxtUsuario().getText();
-        String password = new String(login.getTxtPassword().getPassword());
+        String inputUsername =  login.getTxtusuario().getText();
+        String password = new String(login.getTxtContra().getText());
         modelo.validarCredenciales(inputUsername, password);
 
     }
@@ -83,7 +87,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
             @Override
             protected void done() {
                 pantallaCarga.dispose();
-                Menu_Principal_Vista vista = new Menu_Principal_Vista();
+                PrincipalVista vista = new PrincipalVista();
                 new Menu_Principal_Controlador(vista);
                 vista.setVisible(true);
             }

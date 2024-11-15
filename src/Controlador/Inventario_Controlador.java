@@ -40,7 +40,7 @@ public class Inventario_Controlador{
         inventario.getBtnvolver().addActionListener(_ -> {// Acción al presionar el botón volver
             try {
                 Menu_Principal_Vista vent = new Menu_Principal_Vista();
-                new Menu_Principal_Controlador(vent);
+                //new Menu_Principal_Controlador(vent);
                 vent.setVisible(true);
                 inventario.dispose();
             } catch (Exception e) {

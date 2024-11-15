@@ -12,7 +12,7 @@ public class Eliminar_Venta_Controlador {
         //Volver
         EliminarVentaVista.getbtnVolver().addActionListener(_ -> {
             Menu_Principal_Vista hola = new Menu_Principal_Vista();
-            new Menu_Principal_Controlador(hola);
+            //new Menu_Principal_Controlador(hola);
             hola.setVisible(true);
             EliminarVentaVista.dispose();
         });

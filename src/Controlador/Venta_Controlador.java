@@ -59,7 +59,7 @@ public class Venta_Controlador  implements MouseListener {
         //Asignar los eventos de los botones
         ventanaVentas.getBtnVolver().addActionListener(_ -> {
             Menu_Principal_Vista mprime = new Menu_Principal_Vista();
-            new Menu_Principal_Controlador(mprime);
+            //new Menu_Principal_Controlador(mprime);
             mprime.setVisible(true);
             ventanaVentas.dispose();
         });

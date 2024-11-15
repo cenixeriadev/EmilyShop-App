@@ -2,40 +2,63 @@ package Controlador;
 
 import Vista.*;
 
+import javax.swing.*;
+import java.awt.*;
+
+
 
 public class Menu_Principal_Controlador {
-    private final Menu_Principal_Vista menu;
-    public Menu_Principal_Controlador(Menu_Principal_Vista menu) {
+    private final PrincipalVista menu;
+    private  JPanel mainPanel;
+    private  CardLayout cardLayout;
+    public Menu_Principal_Controlador(PrincipalVista menu) {
         this.menu = menu;
         Iniciar();
     }
     private void Iniciar(){
-        menu.getCierreCajaButton().addActionListener(_ -> {
-            Cerrar_Caja_Vista cierreCaja = new Cerrar_Caja_Vista();
-            new Cerrar_Caja_Controlador(cierreCaja);
-            cierreCaja.setVisible(true);
-            menu.dispose();
+        gestionUsuarioVista Usuariovist = new gestionUsuarioVista();
+        gestioninventarioVista Inventariovist = new gestioninventarioVista();
+        registroInventarioVista Registrovist = new registroInventarioVista();
+        registroVentaVista RegsitroVentas = new registroVentaVista();
+        GestionarVentasVista gestionarVentas = new GestionarVentasVista();
+
+
+        JPanel gestionarV = gestionarVentas.getPanelusuario();
+        JPanel registropa = Registrovist.getPanelusuario();
+        JPanel inventariopa = Inventariovist.getPanelInventario();
+        JPanel usuariopa = Usuariovist.getPanelusuario();
+        JPanel registrovent = RegsitroVentas.getPanelregistroventas();
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+        JPanel menupr = menu.getPanelprincipal();
+        mainPanel.add(menupr , "MenuPrincipal");
+        mainPanel.add(usuariopa , "GestionUsuario");
+        mainPanel.add(inventariopa , "GestionInventario");
+        mainPanel.add(registropa , "RegistroInventario");
+        mainPanel.add(registrovent, "RegistroVentas");
+        mainPanel.add(gestionarV , "GestionarVentas");
+
+        menu.add(mainPanel ,BorderLayout.CENTER);
+
+        menu.getGestionUsuario().addActionListener(_-> {
+            cardLayout.show(mainPanel, "GestionUsuario");
+
+
         });
         //Asignar los eventos de los botones
-        menu.getVentasButton().addActionListener(_ -> {
-            Venta_Vista ventas  = new Venta_Vista();
-            new Venta_Controlador(ventas);
-            ventas.setVisible(true);
-            menu.dispose();
+        menu.getRegistrarProducto().addActionListener(_ -> {
+            cardLayout.show(mainPanel, "RegistroInventario");
         });
-        menu.getInventarioButton().addActionListener(_ -> {
-            Inventario_Vista inventariopr  = new Inventario_Vista();
-            new Inventario_Controlador(inventariopr);
-            inventariopr.setVisible(true);
-            menu.dispose();
+        menu.getGestionarInventario().addActionListener(_ -> {
+            cardLayout.show(mainPanel, "GestionInventario");
         });
-        menu.getEliminarButton().addActionListener(_ -> {
-            Eliminar_Venta_Vista deleteventa =  new Eliminar_Venta_Vista();
-            new Eliminar_Venta_Controlador(deleteventa);
-            deleteventa.setVisible(true);
-            menu.dispose();
+        menu.getRegistrarVenta().addActionListener(_ -> {
+           cardLayout.show(mainPanel , "RegistroVentas");
         });
+        menu.getGestionarVentas().addActionListener(_ -> {
+            cardLayout.show(mainPanel, "GestionarVentas");
+        });
+
 
     }
-
 }

@@ -9,7 +9,7 @@ import java.awt.event.FocusListener;
 
 public class LoginVista extends JFrame {
     JPanel panel1, panel2;
-    JLabel lblsistema, lblempresa, lblimagen1, lblimagen2, lblimagen3, lblimagen4;
+    JLabel  lblimagen2, lblimagen3, lblimagen4;
     JTextField txtusuario, txtcontra;
     JButton btninicio, btnnuevo;
 
@@ -107,7 +107,7 @@ public class LoginVista extends JFrame {
 
 // Clase para establecer una imagen de fondo en el panel
 class PanelConImagenFondo extends JPanel {
-    private Image imagenFondo;
+    private final Image imagenFondo;
 
     public PanelConImagenFondo(String rutaImagen) {
         this.imagenFondo = new ImageIcon(rutaImagen).getImage();
