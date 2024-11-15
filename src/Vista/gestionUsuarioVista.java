@@ -8,15 +8,6 @@ public class gestionUsuarioVista extends JFrame {
     // Barra de menú y menús
 
     JLabel lblbienvenida;
-    JMenuBar menuBar;
-    JMenu usuarioMenu, inventarioMenu, ventasMenu, reporteMenu, cerrarMenu;
-    
-    JMenuItem gestionUsuario;
-    JMenuItem registrarProducto, gestionarInventario;
-    JMenuItem registrarVenta, gestionarVentas, generarBoleta;
-    JMenuItem reporteDia, reporteSemana, reporteMes;
-    JMenuItem cerrarSesion;
-    
     JPanel panelusuario;
     
     JTable tablaUsuario;
@@ -33,78 +24,6 @@ public class gestionUsuarioVista extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1140, 840);
         setResizable(false);
-
-        // -------Crear la barra de menú-------------
-        menuBar = new JMenuBar();
-        menuBar.setBackground(new Color(15, 33, 47));
-       
-        // ----------------Menú Usuario-------------
-        usuarioMenu = new JMenu("    USUARIO    ");
-        usuarioMenu.setForeground(Color.WHITE);
-        usuarioMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        gestionUsuario = new JMenuItem(" Gestionar Usuario  ");
-        gestionUsuario.setFont(new Font("Arial", Font.BOLD, 17));
-        usuarioMenu.add(gestionUsuario);
-
-        // ---------------Menú Inventario-------------
-        inventarioMenu = new JMenu("    INVENTARIO    ");
-        inventarioMenu.setForeground(Color.WHITE);
-        inventarioMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        registrarProducto = new JMenuItem(" Registrar Producto  ");
-        registrarProducto.setFont(new Font("Arial", Font.BOLD, 17));
-        gestionarInventario = new JMenuItem(" Gestionar Inventario  ");
-        gestionarInventario.setFont(new Font("Arial", Font.BOLD, 17));
-        inventarioMenu.add(registrarProducto);
-        inventarioMenu.add(gestionarInventario);
-
-        // ----------------Menú Ventas------------
-        ventasMenu = new JMenu("    VENTAS    ");
-        ventasMenu.setForeground(Color.WHITE);
-        ventasMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        registrarVenta = new JMenuItem(" Registrar Venta");
-        registrarVenta.setFont(new Font("Arial", Font.BOLD, 17));
-        gestionarVentas = new JMenuItem(" Gestionar Ventas");
-        gestionarVentas.setFont(new Font("Arial", Font.BOLD, 17));
-        generarBoleta = new JMenuItem(" Generar Boleta");
-        generarBoleta.setFont(new Font("Arial", Font.BOLD, 17));
-        ventasMenu.add(registrarVenta);
-        ventasMenu.add(gestionarVentas);
-        ventasMenu.add(generarBoleta);
-
-        //--------------- Menú Reporte General---------------
-        reporteMenu = new JMenu("    REPORTE GENERAL    ");
-        reporteMenu.setForeground(Color.WHITE);
-        reporteMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        reporteDia = new JMenuItem(" Reporte del Día");
-        reporteDia.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteSemana = new JMenuItem(" Reporte de la Semana");
-        reporteSemana.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteMes = new JMenuItem(" Reporte del Mes");
-        reporteMes.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteMenu.add(reporteDia);
-        reporteMenu.add(reporteSemana);
-        reporteMenu.add(reporteMes);
-        
-        cerrarMenu = new JMenu("    CERRAR SESIÓN    ");
-        cerrarMenu.setForeground(Color.WHITE);
-        cerrarMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        cerrarSesion = new JMenuItem(" Cerrar   ");
-        cerrarSesion.setFont(new Font("Arial", Font.BOLD, 17));
-        cerrarMenu.add(cerrarSesion);
-
-        // ----------Agregar los menús a la barra de menú----------
-        menuBar.add(usuarioMenu);
-        menuBar.add(inventarioMenu);
-        menuBar.add(ventasMenu);
-        menuBar.add(reporteMenu);
-        menuBar.add(cerrarMenu);
-
-        // Establecer la barra de menú en el JFrame
-        setJMenuBar(menuBar);
-        
-        // ----------Imagenes parte arriba---------
-
-        
         //-----------panel bienvenido----------
         panelusuario = new PanelDegradadoAzul3();
         panelusuario.setBounds(0,70,1140,540);
@@ -186,24 +105,36 @@ public class gestionUsuarioVista extends JFrame {
         txtcontra= new JTextField("");
         txtcontra.setBounds(220,280,250,30);
         panelusuario.add(txtcontra);
-        /*
-        ImageIcon imageIcon13 = new ImageIcon("logoempresacirculo.png");
-        Image img13 = imageIcon13.getImage(); 
-        Image newImg13 = img13.getScaledInstance(200, 200, Image.SCALE_SMOOTH); 
-        lblilogoempresa2 = new JLabel(new ImageIcon(newImg13));
-        lblilogoempresa2.setBounds(440,260,200,200);  
-        panelusuario.add(lblilogoempresa2);
-*/
         
     }
     public JPanel getPanelusuario(){
         return panelusuario;
     }
-
-    public static void main(String[] args) {
-        gestionUsuarioVista ventana4 = new gestionUsuarioVista();
-        ventana4.setVisible(true);
+    public JButton getBtneliminar(){
+        return btneliminar;
     }
+    public JButton getBtnactualizar(){
+        return btnactualizar;
+    }
+    public JTable getTablaUsuario(){
+        return tablaUsuario;
+    }
+    public JTextField getTxtnombre(){
+        return txtnombre;
+    }
+    public JTextField getTxttelefono(){
+        return txttelefono;
+    }
+    public JTextField getTxtusuario(){
+        return txtusuario;
+    }
+    public JTextField getTxtcontra(){
+        return txtcontra;
+    }
+    public DefaultTableModel getModeloUsuario(){
+        return modeloUsuario;
+    }
+
 }
 
 class PanelDegradadoAzul3 extends JPanel {

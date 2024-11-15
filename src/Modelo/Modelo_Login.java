@@ -1,12 +1,13 @@
 package Modelo;
 
 import Controlador.FrmLoginUsuario_Controlador;
+import Vista.LoginVista;
 
 import java.util.ArrayList;
 import java.util.List;
 public class Modelo_Login {
     List<FrmLoginUsuario_Controlador> observers =  new ArrayList<>();
-    usuarioDAO user = new usuarioDAO();
+    usuario user = new usuario();
 
     public void addObserver(FrmLoginUsuario_Controlador observer) {
 
@@ -17,18 +18,19 @@ public class Modelo_Login {
     }
 
     @SuppressWarnings("NonAsciiCharacters")
-    public void validarCredenciales(String inputUsername , String inputPassword){
+    public void validarCredenciales(String inputUsername, String inputPassword) {
         ArrayList<usuario> usuarios = user.ListarUsuario();
         boolean estado = false;
-        for (Modelo.usuario usuario : usuarios) {
-            estado = inputUsername.equals(usuario.getNames()) && inputPassword.equals(usuario.getContraseña());
+        for (usuario usuario : usuarios) {
+            if (inputUsername.equals(usuario.getNames()) && inputPassword.equals(usuario.getContraseña())) {
+                estado = true;
+                break; // Salir del bucle tan pronto como se encuentre una coincidencia
+            }
         }
-        if (estado){
+        if (estado) {
             notificarObserverExito();
-        }
-        else {
+        } else {
             notificarObserverFallo();
-
         }
     }
     private void notificarObserverExito() {

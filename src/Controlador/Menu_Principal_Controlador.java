@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Modelo_Login;
 import Vista.*;
 
 import javax.swing.*;
@@ -42,6 +43,9 @@ public class Menu_Principal_Controlador {
 
         menu.getGestionUsuario().addActionListener(_-> {
             cardLayout.show(mainPanel, "GestionUsuario");
+            Usuariovist.getBtneliminar().addActionListener(_-> {
+                JOptionPane.showMessageDialog(null , "xD");
+            });
 
 
         });
@@ -57,6 +61,14 @@ public class Menu_Principal_Controlador {
         });
         menu.getGestionarVentas().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionarVentas");
+        });
+        menu.getCerrarSesion().addActionListener(_ -> {
+            menu.dispose();
+            LoginVista vista = new LoginVista();
+            Modelo_Login modelologin = new Modelo_Login();
+            new FrmLoginUsuario_Controlador(vista, modelologin);
+            vista.setVisible(true);
+
         });
 
 

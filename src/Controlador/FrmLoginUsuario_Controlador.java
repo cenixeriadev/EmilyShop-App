@@ -3,7 +3,6 @@ import Modelo.LoginObserver;
 import Utilitario.PantallaCarga;
 import Modelo.Modelo_Login;
 import Vista.LoginVista;
-import Vista.Menu_Principal_Vista;
 import Vista.PrincipalVista;
 import Vista.RegistroUsuarioVista;
 
@@ -30,7 +29,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         handleLogin();
-                        removerObserver();
+
                     }
                 }
             });
@@ -40,20 +39,20 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
                 public void keyPressed(KeyEvent e) {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         handleLogin();
-                        removerObserver();
+
                     }
                 }
             });
             login.getbtnNuevo().addActionListener(_->{
                 RegistroUsuarioVista registrar = new RegistroUsuarioVista();
+                new ControladorCrearUsuario(registrar);
                 login.dispose();
-                removerObserver();
+
                 registrar.setVisible(true);
             });
 
             login.getbtnInicio().addActionListener(_ -> {
                 handleLogin();
-                removerObserver();
             });
         }catch (Exception e){
             JOptionPane.showMessageDialog(null , "Ocurrio un error inesperado : " + e.getMessage());
