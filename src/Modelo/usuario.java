@@ -111,16 +111,17 @@ public class usuario {
             ps.close();
             cn.close();
         }catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
             return  res;
         }
         return res;
     }
-    public int EliminarUsuario(usuario user){
+    public int EliminarUsuario(String nombUsuario){
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("DELETE FROM usuario WHERE idusuario=?");
-            ps.setInt(1, user.getIdusuario());
+            ps = cn.prepareStatement("DELETE FROM usuario WHERE nombusuario=?");
+            ps.setString(1, nombUsuario);
             res = ps.executeUpdate();
             ps.close();
             cn.close();

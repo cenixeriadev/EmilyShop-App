@@ -14,8 +14,8 @@ public class Modelo_CrearUsuario {
         String password = registroVista.getTxtcontra().getText();
         String telefono = registroVista.getTxttelefono().getText();
         Usuario = new usuario();
-        Usuario.setApellidoynombre(usuario);
-        Usuario.setNombUsuario(nombre);
+        Usuario.setApellidoynombre(nombre);
+        Usuario.setNombUsuario(usuario);
         Usuario.setContraseña(password);
         Usuario.setTelefono(telefono);
         Usuario.AgregarUsuario(Usuario);

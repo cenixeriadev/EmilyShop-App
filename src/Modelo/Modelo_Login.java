@@ -22,7 +22,7 @@ public class Modelo_Login {
         ArrayList<usuario> usuarios = user.ListarUsuario();
         boolean estado = false;
         for (usuario usuario : usuarios) {
-            if (inputUsername.equals(usuario.getNames()) && inputPassword.equals(usuario.getContraseña())) {
+            if (inputUsername.equals(usuario.getNombUsuario()) && inputPassword.equals(usuario.getContraseña())) {
                 estado = true;
                 break; // Salir del bucle tan pronto como se encuentre una coincidencia
             }

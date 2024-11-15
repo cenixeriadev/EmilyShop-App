@@ -48,15 +48,12 @@ public class gestionUsuarioVista extends JFrame {
         tablaUsuario.getTableHeader().setBackground(new Color(25, 43, 57)); // Azul marino
         tablaUsuario.getTableHeader().setForeground(Color.WHITE); // Color de texto blanco
         tablaUsuario.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
-        
+        tablaUsuario.getTableHeader().setReorderingAllowed(false);
+        tablaUsuario.getTableHeader().setEnabled(false);
         JScrollPane scrollPane = new JScrollPane(tablaUsuario);
         scrollPane.setBounds(600, 140, 500, 340);
         panelusuario.add(scrollPane);
-        
-        modeloUsuario.addRow(new Object[]{"Richard Aguilar", "987654321", "RAguilar", "123"});
-        modeloUsuario.addRow(new Object[]{"Anthony Ramos", "987123456", "ARamos", "456"});
-        modeloUsuario.addRow(new Object[]{"Sebastias Tieno", "987654987", "STieno", "789"});
-        modeloUsuario.addRow(new Object[]{"Eduar Siquita", "986543210", "ESiquita", "123"});
+
 
         btnactualizar = new JButton("Actualizar");
         btnactualizar.setBounds(80,340,140,40);
@@ -72,7 +69,7 @@ public class gestionUsuarioVista extends JFrame {
         lblnombre.setFont(new Font("Times New Roman", Font.BOLD, 20));
         panelusuario.add(lblnombre);
         
-        txtnombre= new JTextField("");
+        txtnombre= new JTextField();
         txtnombre.setBounds(220,160,250,30);
         panelusuario.add(txtnombre);
         
@@ -82,7 +79,7 @@ public class gestionUsuarioVista extends JFrame {
         lbltelefono.setFont(new Font("Times New Roman", Font.BOLD, 20));
         panelusuario.add(lbltelefono);
         
-        txttelefono= new JTextField("");
+        txttelefono= new JTextField();
         txttelefono.setBounds(220,200,250,30);
         panelusuario.add(txttelefono);
 
@@ -92,7 +89,7 @@ public class gestionUsuarioVista extends JFrame {
         lblusuario.setFont(new Font("Times New Roman", Font.BOLD, 20));
         panelusuario.add(lblusuario);
         
-        txtusuario= new JTextField("");
+        txtusuario= new JTextField();
         txtusuario.setBounds(220,240,250,30);
         panelusuario.add(txtusuario);
         
@@ -102,7 +99,7 @@ public class gestionUsuarioVista extends JFrame {
         lblcontra.setFont(new Font("Times New Roman", Font.BOLD, 20));
         panelusuario.add(lblcontra);
         
-        txtcontra= new JTextField("");
+        txtcontra= new JTextField();
         txtcontra.setBounds(220,280,250,30);
         panelusuario.add(txtcontra);
         
