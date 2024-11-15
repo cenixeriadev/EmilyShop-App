@@ -86,10 +86,15 @@ public class Menu_Principal_Controlador implements MouseListener {
             model.CargarUsuarios();
             Usuariovist.getBtneliminar().addActionListener(_-> {
                 try {
-                    model.EliminarUsuario(String.valueOf(Usuariovist.getTablaUsuario().getValueAt(selectRow , 2)));
+                    if(Usuariovist.getTablaUsuario().isRowSelected(selectRow)){
+                        model.EliminarUsuario(String.valueOf(Usuariovist.getTablaUsuario().getValueAt(selectRow , 2)));
+                    }
+                    else {
+                        throw new NullPointerException();
+                    }
                     Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() , Usuariovist.getTxtcontra());
                 }catch (Exception e){
-                    JOptionPane.showMessageDialog(null , "Debe seleccionar un usuario de la tabla : " + e.getMessage());
+                    JOptionPane.showMessageDialog(null , "Debe seleccionar un usuario de la tabla  ");
                 }
             });
             Usuariovist.getBtnactualizar().addActionListener(_ ->{
@@ -103,12 +108,12 @@ public class Menu_Principal_Controlador implements MouseListener {
 
 
         });
-        //Asignar los eventos de los botones
         menu.getRegistrarProducto().addActionListener(_ -> {
             cardLayout.show(mainPanel, "RegistroInventario");
         });
         menu.getGestionarInventario().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionInventario");
+
         });
         menu.getRegistrarVenta().addActionListener(_ -> {
            cardLayout.show(mainPanel , "RegistroVentas");

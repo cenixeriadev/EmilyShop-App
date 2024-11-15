@@ -57,7 +57,7 @@ public class Modelo_GestionarUsuario {
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Usuario actualizado correctamente");
         } else {
-            JOptionPane.showMessageDialog(null, "Error al actualizar el usuario");
+            throw new NullPointerException();
         }
         CargarUsuarios();
     }
