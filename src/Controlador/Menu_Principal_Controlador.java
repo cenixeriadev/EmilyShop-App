@@ -114,6 +114,7 @@ public class Menu_Principal_Controlador implements MouseListener {
         menu.getGestionarInventario().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionInventario");
 
+
         });
         menu.getRegistrarVenta().addActionListener(_ -> {
            cardLayout.show(mainPanel , "RegistroVentas");

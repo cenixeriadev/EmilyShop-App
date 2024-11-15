@@ -7,16 +7,8 @@ import java.awt.*;
 public class registroInventarioVista extends JFrame{
 
     // Barra de menú y menús
-    JLabel lblimagennike, lblimagenadidas,lblimagenquelind,lblimagenpuma,lblimagenmarcas,  lblimagenreebok,lblilogoempresa2;
-    JLabel lblbienvenida,lblmensaje1,lblmensaje6;
-    JMenuBar menuBar;
-    JMenu usuarioMenu, inventarioMenu, ventasMenu, reporteMenu, cerrarMenu;
-    
-    JMenuItem gestionUsuario;
-    JMenuItem registrarProducto, gestionarInventario;
-    JMenuItem registrarVenta, gestionarVentas, generarBoleta;
-    JMenuItem reporteDia, reporteSemana, reporteMes;
-    JMenuItem cerrarSesion;
+    JLabel lblbienvenida;
+
     
     JPanel panelusuario;
     
@@ -33,132 +25,6 @@ public class registroInventarioVista extends JFrame{
         setSize(1140, 840);
         setResizable(false);
 
-        // -------Crear la barra de menú-------------
-        menuBar = new JMenuBar();
-        menuBar.setBackground(new Color(15, 33, 47));
-       
-        // ----------------Menú Usuario-------------
-        usuarioMenu = new JMenu("    USUARIO    ");
-        usuarioMenu.setForeground(Color.WHITE);
-        usuarioMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        gestionUsuario = new JMenuItem(" Gestionar Usuario  ");
-        gestionUsuario.setFont(new Font("Arial", Font.BOLD, 17));
-        usuarioMenu.add(gestionUsuario);
-
-        // ---------------Menú Inventario-------------
-        inventarioMenu = new JMenu("    INVENTARIO    ");
-        inventarioMenu.setForeground(Color.WHITE);
-        inventarioMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        registrarProducto = new JMenuItem(" Registrar Producto  ");
-        registrarProducto.setFont(new Font("Arial", Font.BOLD, 17));
-        gestionarInventario = new JMenuItem(" Gestionar Inventario  ");
-        gestionarInventario.setFont(new Font("Arial", Font.BOLD, 17));
-        inventarioMenu.add(registrarProducto);
-        inventarioMenu.add(gestionarInventario);
-
-        // ----------------Menú Ventas------------
-        ventasMenu = new JMenu("    VENTAS    ");
-        ventasMenu.setForeground(Color.WHITE);
-        ventasMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        registrarVenta = new JMenuItem(" Registrar Venta");
-        registrarVenta.setFont(new Font("Arial", Font.BOLD, 17));
-        gestionarVentas = new JMenuItem(" Gestionar Ventas");
-        gestionarVentas.setFont(new Font("Arial", Font.BOLD, 17));
-        generarBoleta = new JMenuItem(" Generar Boleta");
-        generarBoleta.setFont(new Font("Arial", Font.BOLD, 17));
-        ventasMenu.add(registrarVenta);
-        ventasMenu.add(gestionarVentas);
-        ventasMenu.add(generarBoleta);
-
-        //--------------- Menú Reporte General---------------
-        reporteMenu = new JMenu("    REPORTE GENERAL    ");
-        reporteMenu.setForeground(Color.WHITE);
-        reporteMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        reporteDia = new JMenuItem(" Reporte del Día");
-        reporteDia.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteSemana = new JMenuItem(" Reporte de la Semana");
-        reporteSemana.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteMes = new JMenuItem(" Reporte del Mes");
-        reporteMes.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteMenu.add(reporteDia);
-        reporteMenu.add(reporteSemana);
-        reporteMenu.add(reporteMes);
-        
-        cerrarMenu = new JMenu("    CERRAR SESIÓN    ");
-        cerrarMenu.setForeground(Color.WHITE);
-        cerrarMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        cerrarSesion = new JMenuItem(" Cerrar   ");
-        cerrarSesion.setFont(new Font("Arial", Font.BOLD, 17));
-        cerrarMenu.add(cerrarSesion);
-
-        // ----------Agregar los menús a la barra de menú----------
-        menuBar.add(usuarioMenu);
-        menuBar.add(inventarioMenu);
-        menuBar.add(ventasMenu);
-        menuBar.add(reporteMenu);
-        menuBar.add(cerrarMenu);
-
-        // Establecer la barra de menú en el JFrame
-        setJMenuBar(menuBar);
-        
-        // ----------Imagenes parte arriba---------
-        ImageIcon imageIcon5 = new ImageIcon("nike.jpeg");
-        Image img5 = imageIcon5.getImage(); 
-        Image newImg5 = img5.getScaledInstance(190, 70, Image.SCALE_SMOOTH); 
-        lblimagennike = new JLabel(new ImageIcon(newImg5));
-        lblimagennike.setBounds(0,0,190,70);  
-        add(lblimagennike);
-        
-        ImageIcon imageIcon6 = new ImageIcon("adidas.jpeg");
-        Image img6 = imageIcon6.getImage(); 
-        Image newImg6 = img6.getScaledInstance(190, 70, Image.SCALE_SMOOTH); 
-        lblimagenadidas = new JLabel(new ImageIcon(newImg6));
-        lblimagenadidas.setBounds(190,0,190,70);  
-        add(lblimagenadidas);
-        
-        ImageIcon imageIcon7 = new ImageIcon("quelind.jpeg");
-        Image img7 = imageIcon7.getImage(); 
-        Image newImg7 = img7.getScaledInstance(190, 70, Image.SCALE_SMOOTH); 
-        lblimagenquelind = new JLabel(new ImageIcon(newImg7));
-        lblimagenquelind.setBounds(380,0,190,70);  
-        add(lblimagenquelind);
-        
-        ImageIcon imageIcon8 = new ImageIcon("puma.jpeg");
-        Image img8 = imageIcon8.getImage(); 
-        Image newImg8 = img8.getScaledInstance(190, 70, Image.SCALE_SMOOTH); 
-        lblimagenpuma = new JLabel(new ImageIcon(newImg8));
-        lblimagenpuma.setBounds(570,0,190,70);  
-        add(lblimagenpuma);
-        
-        ImageIcon imageIcon10 = new ImageIcon("reebok.jpeg");
-        Image img10 = imageIcon10.getImage(); 
-        Image newImg10 = img10.getScaledInstance(190, 70, Image.SCALE_SMOOTH); 
-        lblimagenreebok = new JLabel(new ImageIcon(newImg10));
-        lblimagenreebok.setBounds(760,0,190,70);  
-        add(lblimagenreebok);
-        
-        ImageIcon imageIcon11 = new ImageIcon("irun.jpeg");
-        Image img11 = imageIcon11.getImage(); 
-        Image newImg11 = img11.getScaledInstance(190, 70, Image.SCALE_SMOOTH); 
-        lblimagenreebok = new JLabel(new ImageIcon(newImg11));
-        lblimagenreebok.setBounds(950,0,190,70);  
-        add(lblimagenreebok);
-        
-        //---------------Imagenes parte abajo---------------
-        ImageIcon imageIcon9 = new ImageIcon("marcas.jpeg");
-        Image img9 = imageIcon9.getImage(); 
-        Image newImg9 = img9.getScaledInstance(760, 190, Image.SCALE_SMOOTH); 
-        lblimagenmarcas = new JLabel(new ImageIcon(newImg9));
-        lblimagenmarcas.setBounds(0,580,760,190);  
-        add(lblimagenmarcas);
-        
-        ImageIcon imageIcon12 = new ImageIcon("marcas2.jpeg");
-        Image img12 = imageIcon12.getImage(); 
-        Image newImg12 = img12.getScaledInstance(380, 190, Image.SCALE_SMOOTH); 
-        lblimagenmarcas = new JLabel(new ImageIcon(newImg12));
-        lblimagenmarcas.setBounds(760,580,380,190);  
-        add(lblimagenmarcas);
-        
         //-----------panel bienvenido----------
         panelusuario = new PanelDegradadoAzul5();
         panelusuario.setBounds(0,70,1140,540);
@@ -230,6 +96,24 @@ public class registroInventarioVista extends JFrame{
     }
     public JPanel getPanelusuario(){
         return panelusuario;
+    }
+    public JButton getBtnregistrar(){
+        return btnregistrar;
+    }
+    public JTextField getTxtmodelo(){
+        return txtmodelo;
+    }
+    public JTextField getTxtcodigo(){
+        return txtcodigo;
+    }
+    public JTextField getTxtcosto(){
+        return txtcosto;
+    }
+    public JComboBox<String> getCbbtalla(){
+        return cbbtalla;
+    }
+    public JComboBox<String> getCbbcolor(){
+        return cbbcolor;
     }
 
     public static void main(String[] args) {

@@ -51,12 +51,6 @@ public class gestioninventarioVista extends JFrame {
         JScrollPane scrollPane = new JScrollPane(tablaInventario);
         scrollPane.setBounds(600, 140, 500, 340);
         panelusuario.add(scrollPane);
-        
-        modeloInventario.addRow(new Object[]{"Nike", "101", "40", "Blanco","90"});
-        modeloInventario.addRow(new Object[]{"Adidas", "301", "37", "Negro","75"});
-        modeloInventario.addRow(new Object[]{"Puma", "201", "38", "Plomo","60"});
-        modeloInventario.addRow(new Object[]{"Nike", "101", "41", "Blanco-Negro","160"});
-        modeloInventario.addRow(new Object[]{"Quelind", "401", "36", "Rosado","95"});
 
         lblmodelo=new JLabel("Modelo");
         lblmodelo.setForeground(Color.WHITE);
