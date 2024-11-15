@@ -23,18 +23,18 @@ public class RegistroUsuarioVista extends JFrame {
         setLayout(null);
 
         // Cambiar panel1 para que use una imagen de fondo
-        panel1 = new PanelConImagenFondo("fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen
+        panel1 = new PanelConImagenFondo("src/Recursos/fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen
         panel1.setBounds(0, 0, 250, 500);
         panel1.setLayout(null);
         add(panel1);
 
-        panel2 = new PanelConImagenFondo2("nuevofondo3.jpeg");
+        panel2 = new PanelConImagenFondo2("src/Recursos/nuevofondo3.jpeg");
         panel2.setBounds(250, 0, 350, 500);
         panel2.setBackground(new Color(240, 240, 240));
         panel2.setLayout(null);
         add(panel2);
         
-        ImageIcon imageIcon3 = new ImageIcon("nuevousuario.png");
+        ImageIcon imageIcon3 = new ImageIcon("src/Recursos/nuevousuario.png");
         Image img3 = imageIcon3.getImage(); // Convertir a Image
         Image newImg3 = img3.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen3 = new JLabel(new ImageIcon(newImg3)); // Crear un nuevo ImageIcon con la imagen redimensionada
@@ -43,21 +43,21 @@ public class RegistroUsuarioVista extends JFrame {
 
         
 
-        ImageIcon imageIcon4 = new ImageIcon("nuevocandado.png");
+        ImageIcon imageIcon4 = new ImageIcon("src/Recursos/nuevocandado.png");
         Image img4 = imageIcon4.getImage(); // Convertir a Image
         Image newImg4 = img4.getScaledInstance(50, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen4 = new JLabel(new ImageIcon(newImg4)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen4.setBounds(30, 280, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen4);
         
-        ImageIcon imageIcon5 = new ImageIcon("nombre.png");
+        ImageIcon imageIcon5 = new ImageIcon("src/Recursos/nombre.png");
         Image img5 = imageIcon5.getImage(); // Convertir a Image
         Image newImg5 = img5.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen5 = new JLabel(new ImageIcon(newImg5)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen5.setBounds(30, 130, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen5);
         
-        ImageIcon imageIcon6 = new ImageIcon("telefono.png");
+        ImageIcon imageIcon6 = new ImageIcon("src/Recursos/telefono.png");
         Image img6 = imageIcon6.getImage(); // Convertir a Image
         Image newImg6 = img6.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen6 = new JLabel(new ImageIcon(newImg6)); // Crear un nuevo ImageIcon con la imagen redimensionada
@@ -108,6 +108,21 @@ public class RegistroUsuarioVista extends JFrame {
         button.setBorder(new LineBorder(Color.WHITE, 2, true)); // Borde con esquinas redondeadas
         button.setFocusPainted(false);
         return button;
+    }
+    public JTextField getTxtusuario(){
+        return txtusuario;
+    }
+    public JTextField getTxtcontra(){
+        return txtcontra;
+    }
+    public JTextField getTxtnombre(){
+        return txtnombre;
+    }
+    public JTextField getTxttelefono(){
+        return txttelefono;
+    }
+    public JButton getBtncrear(){
+        return btncrear;
     }
 
     public static void main(String[] args) {
