@@ -120,7 +120,7 @@ public class Menu_Principal_Controlador implements MouseListener {
         });
         menu.getGestionarInventario().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionInventario");
-
+            modelo_inventario.CargarDatos();
 
         });
         menu.getRegistrarVenta().addActionListener(_ -> {
