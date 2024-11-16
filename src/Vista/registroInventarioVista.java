@@ -64,7 +64,7 @@ public class registroInventarioVista extends JFrame{
         lbltalla.setBounds(415,220,140,30);
         panelusuario.add(lbltalla);
         
-        cbbtalla = new JComboBox<>(new String[]{"  Seleccione una Talla",  "  35", "  36", "  37", "  38","  39", "  40", "  41", "  42"});
+        cbbtalla = new JComboBox<>(new String[]{"  Seleccione una Talla",  "35", "36", "37", "38","39", "40", "41", "42"});
         cbbtalla.setBounds(515, 220, 200, 30);
         panelusuario.add(cbbtalla);
         
@@ -74,7 +74,7 @@ public class registroInventarioVista extends JFrame{
         lblcolor.setBounds(415,260,140,30);
         panelusuario.add(lblcolor);
         
-        cbbcolor = new JComboBox<>(new String[]{"  Seleccione un Color",  "  Blanco", "  Azul", "  Negro", "  Rosado","  Plomo", "  Negro-Blanco", "  Blanco-Negro", "  Beige"});
+        cbbcolor = new JComboBox<>(new String[]{"  Seleccione un Color",  "Blanco", "Azul", "Negro", "Rosado","Plomo", "Negro-Blanco", "Blanco-Negro", "Beige"});
         cbbcolor.setBounds(515, 260, 200, 30);
         panelusuario.add(cbbcolor);
         
@@ -84,9 +84,9 @@ public class registroInventarioVista extends JFrame{
         lblcosto.setBounds(415,300,140,30);
         panelusuario.add(lblcosto);
         
-        txtcodigo= new JTextField();
-        txtcodigo.setBounds(515,300,200,30);
-        panelusuario.add(txtcodigo);
+        txtcosto= new JTextField();
+        txtcosto.setBounds(515,300,200,30);
+        panelusuario.add(txtcosto);
 
         btnregistrar = new JButton("Registrar");
         btnregistrar.setBounds(490,360,140,40);

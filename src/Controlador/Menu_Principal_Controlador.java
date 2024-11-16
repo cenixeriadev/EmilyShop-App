@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.Modelo_GestionarUsuario;
+import Modelo.Modelo_Inventario;
 import Modelo.Modelo_Login;
 import Vista.*;
 
@@ -23,6 +24,7 @@ public class Menu_Principal_Controlador implements MouseListener {
     private final GestionarVentasVista gestionarVentas = new GestionarVentasVista();
 
     private final Modelo_GestionarUsuario model = new Modelo_GestionarUsuario(Usuariovist);
+    private final Modelo_Inventario modelo_inventario = new Modelo_Inventario(Inventariovist);
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==Usuariovist.getTablaUsuario()) {
@@ -110,6 +112,11 @@ public class Menu_Principal_Controlador implements MouseListener {
         });
         menu.getRegistrarProducto().addActionListener(_ -> {
             cardLayout.show(mainPanel, "RegistroInventario");
+            Registrovist.getBtnregistrar().addActionListener(_->{
+                modelo_inventario.AgregarProducto(Registrovist.getTxtmodelo() , Registrovist.getTxtcodigo() , Registrovist.getCbbtalla() ,Registrovist.getCbbcolor() ,Registrovist.getTxtcosto());
+                modelo_inventario.CargarDatos();
+            });
+
         });
         menu.getGestionarInventario().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionInventario");

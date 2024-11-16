@@ -47,7 +47,8 @@ public class gestioninventarioVista extends JFrame {
         tablaInventario.getTableHeader().setBackground(new Color(25, 43, 57)); // Azul marino
         tablaInventario.getTableHeader().setForeground(Color.WHITE); // Color de texto blanco
         tablaInventario.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
-        
+        tablaInventario.getTableHeader().setReorderingAllowed(false);
+        tablaInventario.getTableHeader().setEnabled(false);
         JScrollPane scrollPane = new JScrollPane(tablaInventario);
         scrollPane.setBounds(600, 140, 500, 340);
         panelusuario.add(scrollPane);

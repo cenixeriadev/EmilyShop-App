@@ -42,8 +42,6 @@ public class Menu_Principal_Vista extends JFrame  {
         eliminarButton = new JButton("ELIMINAR");
         eliminarButton.setBounds(100, 280, 120, 30);
 
-
-
         cierreCajaButton = new JButton("CIERRE CAJA");
         cierreCajaButton.setBounds(100, 330, 120, 30);
         JLabel cierreCajaLabel = new JLabel("Cerrar ventas del día con reporte");
@@ -68,7 +66,9 @@ public class Menu_Principal_Vista extends JFrame  {
 
         //setVisible(true);
     }
-    public JButton getCierreCajaButton(){return cierreCajaButton;}
+    public JButton getCierreCajaButton(){
+        return cierreCajaButton;
+    }
     public JButton getVentasButton(){
         return ventasButton;
     }

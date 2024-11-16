@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 
-
 public class Venta_Vista extends JFrame  {
 
     // Componentes de la interfaz
@@ -21,7 +20,6 @@ public class Venta_Vista extends JFrame  {
     public JTable tablaCandidatos;
     public DefaultTableModel modelo;
     String[] titulos = {"Modelo" , "Color" , "Codigo" , "Costo" , ""};
-
 
     public Venta_Vista() {
         setTitle("Ventas");
@@ -68,7 +66,6 @@ public class Venta_Vista extends JFrame  {
         lblUltimaAccion.setForeground(Color.RED);
         add(lblUltimaAccion);
         //-------------------------------------------------------------------
-
         ImageIcon logoIcon = new ImageIcon("src/Recursos/icono.png");
         Image logoImage = logoIcon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         logoIcon = new ImageIcon(logoImage);
@@ -76,7 +73,6 @@ public class Venta_Vista extends JFrame  {
         logoLabel.setBounds(320, 20, 250, 250); // Posición y tamaño del log
         this.add(logoLabel);
         //--------------------------------------------------------------------------------
-
         txtCliente = new JTextField();
         txtCliente.setBounds(150, 50, 150, 30);
         add(txtCliente);
@@ -126,10 +122,10 @@ public class Venta_Vista extends JFrame  {
         btnEliminar.setForeground(Color.WHITE);
         add(btnEliminar);
 
-
         btnVolver = new JButton("VOLVER");
         btnVolver.setBounds(470, 300, 100, 30);
         add(btnVolver);
+
         //----------------------------------------------------------------------------
 
         scrollDatos = new JScrollPane();
@@ -148,6 +144,7 @@ public class Venta_Vista extends JFrame  {
         tablaCandidatos.getTableHeader().setEnabled(false);
         tablaCandidatos.setModel(modelo);
 
+
         TableColumn columnainvisible = tablaCandidatos.getColumnModel().getColumn(4);
         columnainvisible.setMinWidth(0);
         columnainvisible.setMaxWidth(0);
@@ -161,10 +158,7 @@ public class Venta_Vista extends JFrame  {
         scrollTabla.setBounds(700, 120, 420, 300);
         scrollTabla.setViewportView(tablaCandidatos);
         add(scrollTabla);
-
-
     }
-
     public JTable getTablaCandidatos(){
         return tablaCandidatos;
     }
@@ -184,14 +178,15 @@ public class Venta_Vista extends JFrame  {
         return btnEliminar;
     }
 
-
     public JButton getBtnRegistrar() {
         return btnRegistrar;
     }
     public JButton getBtnAdd(){
         return btnAdd;
     }
-    public JComboBox<String> getComboTalla(){return comboTalla;}
+    public JComboBox<String> getComboTalla(){
+        return comboTalla;
+    }
     public JTextArea getTextAreaDatos() {
         return textAreaDatos;
     }

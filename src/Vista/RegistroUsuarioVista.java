@@ -41,8 +41,6 @@ public class RegistroUsuarioVista extends JFrame {
         lblimagen3.setBounds(30, 230, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen3);
 
-        
-
         ImageIcon imageIcon4 = new ImageIcon("src/Recursos/nuevocandado.png");
         Image img4 = imageIcon4.getImage(); // Convertir a Image
         Image newImg4 = img4.getScaledInstance(50, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen

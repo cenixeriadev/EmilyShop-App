@@ -1,7 +1,6 @@
 package Controlador;
 
 import Modelo.*;
-import Vista.Consulta_Vista;
 import Vista.Menu_Principal_Vista;
 import Vista.Venta_Vista;
 
@@ -63,13 +62,7 @@ public class Venta_Controlador  implements MouseListener {
             mprime.setVisible(true);
             ventanaVentas.dispose();
         });
-        ventanaVentas.getBtnConsulta().addActionListener(_ -> {
-            Consulta_Vista Consultation = new Consulta_Vista();
-            new Consulta_Controlador(Consultation);
-            Consultation.setVisible(true);
-            ventanaVentas.dispose();
-            // Acción al presionar el botón consulta
-        });
+
         ventanaVentas.getBtnAdd().addActionListener(_ -> {
             int estado = productoDAO.AgregarProducto(objProducto);
 

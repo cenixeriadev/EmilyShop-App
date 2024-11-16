@@ -10,6 +10,6 @@ public interface MetodosInventario {
 
     void EliminarProducto(int id);
 
-    void AgregarProducto(ButtonGroup Tallas,JComboBox<String> modeloProducto ,  JTextField txtcodigo, JTextField txtColor, JTextField txtPrecioCosto );
+    void AgregarProducto( JTextField modelo , JTextField codigo ,JComboBox<String> talla , JComboBox<String> color , JTextField PrecioCosto );
 
 }
