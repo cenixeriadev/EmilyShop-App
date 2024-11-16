@@ -99,10 +99,6 @@ public class LoginVista extends JFrame {
         return button;
     }
 
-    public static void main(String[] args) {
-        LoginVista ventana = new LoginVista();
-        ventana.setVisible(true);
-    }
 }
 
 // Clase para establecer una imagen de fondo en el panel

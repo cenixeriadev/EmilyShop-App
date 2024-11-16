@@ -189,9 +189,5 @@ public class PrincipalVista extends JFrame {
         return label;
     }
 
-    public static void main(String[] args) {
-        PrincipalVista ventana3 = new PrincipalVista();
-        ventana3.setVisible(true);
-    }
 
 }

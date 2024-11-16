@@ -123,10 +123,6 @@ public class RegistroUsuarioVista extends JFrame {
         return button;
     }
 
-    public static void main(String[] args) {
-        RegistroUsuarioVista ventana2 = new RegistroUsuarioVista();
-        ventana2.setVisible(true);
-    }
 }
 
 // Clase para establecer una imagen de fondo en el panel

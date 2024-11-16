@@ -116,10 +116,6 @@ public class registroInventarioVista extends JFrame{
         return cbbcolor;
     }
 
-    public static void main(String[] args) {
-        registroInventarioVista ventana5= new registroInventarioVista();
-        ventana5.setVisible(true);
-    }
 }
 
 class PanelDegradadoAzul5 extends JPanel {

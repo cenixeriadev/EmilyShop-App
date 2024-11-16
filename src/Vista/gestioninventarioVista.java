@@ -146,10 +146,6 @@ public class gestioninventarioVista extends JFrame {
         return txtcodigo;
     }
 
-    public static void main(String[] args) {
-        gestioninventarioVista ventana4 = new gestioninventarioVista();
-        ventana4.setVisible(true);
-    }
 }
 
 class PanelDegradadoAzul6 extends JPanel {
