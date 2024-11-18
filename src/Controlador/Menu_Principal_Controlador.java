@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.Modelo_GestionarUsuario;
 import Modelo.Modelo_Inventario;
 import Modelo.Modelo_Login;
+import Modelo.inventario;
 import Vista.*;
 
 import javax.swing.*;
@@ -17,6 +18,9 @@ public class Menu_Principal_Controlador implements MouseListener {
     private  CardLayout cardLayout;
     private int selectRow;
     public String names ;
+    public int IDinventario;
+    inventario objInventario;
+
     private  final  gestionUsuarioVista Usuariovist = new gestionUsuarioVista();
     private final gestioninventarioVista Inventariovist = new gestioninventarioVista();
     private final registroInventarioVista Registrovist = new registroInventarioVista();
@@ -34,6 +38,22 @@ public class Menu_Principal_Controlador implements MouseListener {
             Usuariovist.getTxttelefono().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 1)));
             Usuariovist.getTxtusuario().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 2)));
             Usuariovist.getTxtcontra().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 3)));
+        }
+        if(e.getSource()==Inventariovist.getTablaInventario()){
+            selectRow = Inventariovist.getTablaInventario().getSelectedRow();// modelo  codigo talla color pcosto
+            objInventario = new inventario();
+            objInventario.setModel((String)Inventariovist.getTablaInventario().getValueAt(selectRow , 0));
+            objInventario.setCodigo((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 1));
+            objInventario.setTalla(Integer.parseInt((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 2)));
+            objInventario.setColor((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 3));
+            objInventario.setPrecioCosto(Integer.parseInt((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 4)));
+            IDinventario = objInventario.ObtenerIdInventario(objInventario);
+            Inventariovist.getTxtCodigo().setText(objInventario.getCodigo());
+            Inventariovist.getTxtColor().setText(objInventario.getColor());
+            Inventariovist.getTxtCosto().setText(String.valueOf(objInventario.getPrecioCosto()));
+            Inventariovist.getTxtTalla().setText(String.valueOf(objInventario.getTalla()));
+            Inventariovist.getTxtModelo().setText(objInventario.getModel());
+
         }
     }
 
@@ -79,6 +99,7 @@ public class Menu_Principal_Controlador implements MouseListener {
         mainPanel.add(registrovent, "RegistroVentas");
         mainPanel.add(gestionarV , "GestionarVentas");
         Usuariovist.getTablaUsuario().addMouseListener(this);
+        Inventariovist.getTablaInventario().addMouseListener(this);
 
         menu.add(mainPanel ,BorderLayout.CENTER);
 
@@ -121,6 +142,29 @@ public class Menu_Principal_Controlador implements MouseListener {
         menu.getGestionarInventario().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionInventario");
             modelo_inventario.CargarDatos();
+            Inventariovist.getBtneliminar().addActionListener(_ ->{
+                try {
+                    if(Inventariovist.getTablaInventario().isRowSelected(selectRow)){
+                        modelo_inventario.EliminarProducto(IDinventario);
+                        modelo_inventario.CargarDatos();
+                    }
+                    else {
+                        throw new NullPointerException();
+                    }
+                    Limpiarcampos(Inventariovist.getTxtCodigo() , Inventariovist.getTxtColor() , Inventariovist.getTxtModelo() , Inventariovist.getTxtCosto() , Inventariovist.getTxtTalla());
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");
+                }
+            });
+            Inventariovist.getBtnactualizar().addActionListener(_->{
+                try {
+                    modelo_inventario.ModificarProducto(Inventariovist.getTxtTalla().getText(), Inventariovist.getTxtModelo().getText(), Inventariovist.getTxtColor().getText(), Inventariovist.getTxtCodigo().getText(), Inventariovist.getTxtCosto().getText(), IDinventario, selectRow);
+                    modelo_inventario.CargarDatos();
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Debe llenar los campos requeridos :  " + e.getMessage());
+                }
+                Limpiarcampos(Inventariovist.getTxtCodigo() , Inventariovist.getTxtColor() , Inventariovist.getTxtModelo() , Inventariovist.getTxtCosto() , Inventariovist.getTxtTalla());
+            });
 
         });
         menu.getRegistrarVenta().addActionListener(_ -> {

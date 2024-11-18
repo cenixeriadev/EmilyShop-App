@@ -36,7 +36,12 @@ public class gestioninventarioVista extends JFrame {
         lblbienvenida.setFont(new Font("Times New Roman", Font.BOLD, 35)); // Estilo de fuente
         panelusuario.add(lblbienvenida);
 
-        modeloInventario = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color","P. Costo"}, 0);
+        modeloInventario = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color","P. Costo"}, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         tablaInventario = new JTable(modeloInventario);
 
         

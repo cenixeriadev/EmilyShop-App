@@ -37,7 +37,12 @@ public class gestionUsuarioVista extends JFrame {
         lblbienvenida.setFont(new Font("Times New Roman", Font.BOLD, 35)); // Estilo de fuente
         panelusuario.add(lblbienvenida);
 
-        modeloUsuario = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Usuario", "Contraseña"}, 0);
+        modeloUsuario = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Usuario", "Contraseña"}, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Solo lectura de los datos
+            }
+        };
         tablaUsuario = new JTable(modeloUsuario);
 
         

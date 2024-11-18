@@ -42,7 +42,12 @@ public class GestionarVentasVista extends JFrame {
         lblbienvenida.setFont(new Font("Times New Roman", Font.BOLD, 35)); // Estilo de fuente
         panelusuario.add(lblbienvenida);
 
-        modeloInventario = new DefaultTableModel(new String[]{"Cliente", "Código", "Modelo", "Color","Talla", "M. Pago"," Precio", "Hora V.", "Teléfono"}, 0);
+        modeloInventario = new DefaultTableModel(new String[]{"Cliente", "Código", "Modelo", "Color","Talla", "M. Pago"," Precio", "Hora V.", "Teléfono"}, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         tablaInventario = new JTable(modeloInventario);
 
 

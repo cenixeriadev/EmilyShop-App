@@ -84,7 +84,12 @@ public class registroVentaVista extends JFrame {
         
         // --------------tabla carrito--------------
         
-        modelocarrito = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color","Precio","M. Pago","Telefono"}, 0);
+        modelocarrito = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color","Precio","M. Pago","Telefono"}, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         tablacarrito = new JTable(modelocarrito);
 
         
@@ -152,7 +157,12 @@ public class registroVentaVista extends JFrame {
 
         
         // --------------tabla buscar producto--------------
-        modeloInventario = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color"}, 0);
+        modeloInventario = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color"}, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         tablaInventario = new JTable(modeloInventario);
 
         

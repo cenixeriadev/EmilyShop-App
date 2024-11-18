@@ -45,12 +45,11 @@ public class Modelo_Inventario implements MetodosInventario {
             objInventario.setColor(Color);
             objInventario.setPrecioCosto(Integer.parseInt(Precio));
             objInventario.setCodigo(Codigo);
-            model.setValueAt(String.valueOf(objInventario.getTalla()), i, 0);
-            model.setValueAt(objInventario.getModel(), i, 1);
+            model.setValueAt(objInventario.getModel(), i, 0);
+            model.setValueAt(objInventario.getCodigo(), i, 1);
+            model.setValueAt(String.valueOf(objInventario.getTalla()), i, 2);
             model.setValueAt(objInventario.getColor(), i, 2);
-            model.setValueAt(objInventario.getCodigo(), i, 3);
             model.setValueAt(String.valueOf(objInventario.getPrecioCosto()), i, 4);
-            model.setValueAt(String.valueOf(objInventario.getIdInventario()), i, 5);
 
             int resultado = objInventario.ModificarProducto(objInventario);
             vistages.getTablaInventario().setModel(model);
