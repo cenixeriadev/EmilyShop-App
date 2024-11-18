@@ -68,13 +68,13 @@ public class ventasDAO {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio , codigo , idproducto) VALUES (?,?,?,? , ?);");
+            ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio , horaventa ,codigo , idproducto) VALUES (?,?,?,? , ?);");
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
-            ps.setInt(3, Venta.getPrecio());
-            //ps.setDate(4, Venta.getHoraventa());
-            ps.setInt(4, Venta.getCodigo());
-            ps.setInt(5,Venta.getIdProducto());
+            ps.setInt(3, Venta.getPrecio());p
+            ps.setTimestamp(4, Venta.getHoraventa());
+            ps.setInt(5, Venta.getCodigo());
+            ps.setInt(6,Venta.getIdProducto());
             estado =  ps.executeUpdate();
             cn.close();
             ps.close();
@@ -93,7 +93,7 @@ public class ventasDAO {
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
             ps.setInt(3, Venta.getPrecio());
-            //ps.setDate(4, Venta.getHoraventa());
+            ps.setTimestamp(4, Venta.getHoraventa());
             ps.setInt(5, Venta.getIdVenta());
             estado =  ps.executeUpdate();
             cn.close();
