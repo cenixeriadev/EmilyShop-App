@@ -1,4 +1,3 @@
-
 package Vista;
 
 import javax.swing.*;
