@@ -115,14 +115,7 @@ public class GestionarVentasVista extends JFrame {
         btnactualizar.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         btnactualizar.setBackground(Color.CYAN);
         panelusuario.add(btnactualizar);
-        /*
-        ImageIcon imageIcon13 = new ImageIcon("logoempresacirculo.png");
-        Image img13 = imageIcon13.getImage();
-        Image newImg13 = img13.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-        lblilogoempresa2 = new JLabel(new ImageIcon(newImg13));
-        lblilogoempresa2.setBounds(440,260,200,200);
-        panelusuario.add(lblilogoempresa2);
-*/
+
 
     }
     public JPanel getPanelusuario() {
