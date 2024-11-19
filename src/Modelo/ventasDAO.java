@@ -68,10 +68,10 @@ public class ventasDAO {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio , horaventa ,codigo , idproducto) VALUES (?,?,?,? , ?);");
+            ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio , horaventa ,codigo , idproducto) VALUES (?,?,?,?,?,?);");
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
-            ps.setInt(3, Venta.getPrecio());p
+            ps.setInt(3, Venta.getPrecio());
             ps.setTimestamp(4, Venta.getHoraventa());
             ps.setInt(5, Venta.getCodigo());
             ps.setInt(6,Venta.getIdProducto());
