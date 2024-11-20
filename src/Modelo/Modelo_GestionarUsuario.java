@@ -61,4 +61,10 @@ public class Modelo_GestionarUsuario {
         }
         CargarUsuarios();
     }
+    public void Limpiarcampos(JTextField... campos){
+        for(JTextField camp: campos){
+            camp.setText("");
+            camp.requestFocus();
+        }
+    }
 }

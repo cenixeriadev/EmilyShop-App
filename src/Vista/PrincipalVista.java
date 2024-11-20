@@ -127,9 +127,9 @@ public class PrincipalVista extends JFrame {
         add(panelprincipal);
 
         // Componentes del panel principal
-        lblbienvenida = createLabel("BIENVENIDO \n USUARIO", 290, 150, 580, 60, Color.LIGHT_GRAY, 45);
-        lblmensaje1 = createLabel("Seleccione la opción que desea realizar", 390, 160, 580, 150, Color.LIGHT_GRAY, 20);
-        lblmensaje6 = createLabel("Calzados Emily´s", 480, 470, 300, 30, Color.LIGHT_GRAY, 16);
+        lblbienvenida = createLabel("BIENVENIDO \n USUARIO", 290, 150, 580, 60, 45);
+        lblmensaje1 = createLabel("Seleccione la opción que desea realizar", 390, 160, 580, 150, 20);
+        lblmensaje6 = createLabel("Calzados Emily´s", 480, 470, 300, 30, 16);
         lblilogoempresa2 = createImageLabel("src/Recursos/nuevologo.png", 230, 230, 430, 260);
 
         panelprincipal.add(lblbienvenida);
@@ -152,15 +152,6 @@ public class PrincipalVista extends JFrame {
     public JMenuItem getGestionarVentas(){
         return gestionarVentas;
     }
-    public JMenuItem getReporteDia(){
-        return reporteDia;
-    }
-    public JMenuItem getReporteSemana(){
-        return reporteSemana;
-    }
-    public JMenuItem getReporteMes(){
-        return reporteMes;
-    }
     public JMenuItem getCerrarSesion(){
         return cerrarSesion;
     }
@@ -180,10 +171,10 @@ public class PrincipalVista extends JFrame {
     }
 
     // Método auxiliar para crear JLabels de texto
-    private JLabel createLabel(String text, int x, int y, int width, int height, Color color, int fontSize) {
+    private JLabel createLabel(String text, int x, int y, int width, int height, int fontSize) {
         JLabel label = new JLabel(text);
         label.setBounds(x, y, width, height);
-        label.setForeground(color);
+        label.setForeground(Color.LIGHT_GRAY);
         label.setFont(new Font("Times New Roman", Font.BOLD, fontSize));
         return label;
     }

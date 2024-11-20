@@ -1,8 +1,6 @@
 package Modelo;
 
 import Vista.gestioninventarioVista;
-import Vista.registroInventarioVista;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -61,6 +59,7 @@ public class Modelo_Inventario implements MetodosInventario {
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila para modificar");
         }
+        CargarDatos();
     }
 
     @Override
@@ -77,17 +76,21 @@ public class Modelo_Inventario implements MetodosInventario {
 
     @Override
     public void AgregarProducto(JTextField modelo , JTextField codigo ,JComboBox<String> talla , JComboBox<String> color , JTextField PrecioCosto ) {
-        int Talla = Integer.parseInt((String)talla.getSelectedItem());
-        String modeloProd = modelo.getText();
-        String Codigo = codigo.getText();
-        String Color = (String) color.getSelectedItem();
-        int precioCosto = Integer.parseInt(PrecioCosto.getText());
-        objInventario = new inventario();
-        objInventario.setTalla(Talla);
-        objInventario.setModel(modeloProd);
-        objInventario.setCodigo(Codigo);
-        objInventario.setColor(Color);
-        objInventario.setPrecioCosto(precioCosto);
+        try {
+            int Talla = Integer.parseInt((String) Objects.requireNonNull(talla.getSelectedItem()));
+            String modeloProd = modelo.getText();
+            String Codigo = codigo.getText();
+            String Color = (String) color.getSelectedItem();
+            int precioCosto = Integer.parseInt(PrecioCosto.getText());
+            objInventario = new inventario();
+            objInventario.setTalla(Talla);
+            objInventario.setModel(modeloProd);
+            objInventario.setCodigo(Codigo);
+            objInventario.setColor(Color);
+            objInventario.setPrecioCosto(precioCosto);
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null , "Fail in assigning values to variables and " + e.getMessage());
+        }
         int resultado = objInventario.AgregarProducto(objInventario);
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
@@ -98,7 +101,7 @@ public class Modelo_Inventario implements MetodosInventario {
         LimpiarCampos(modelo,codigo,PrecioCosto);
 
     }
-    private void LimpiarCampos(JTextField... campos){
+    public void LimpiarCampos(JTextField... campos){
         for(JTextField campo : campos){
             campo.setText("");
             campo.requestFocus();

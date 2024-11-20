@@ -115,7 +115,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                     else {
                         throw new NullPointerException();
                     }
-                    Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() , Usuariovist.getTxtcontra());
+                    model.Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() , Usuariovist.getTxtcontra());
                 }catch (Exception e){
                     JOptionPane.showMessageDialog(null , "Debe seleccionar un usuario de la tabla  ");
                 }
@@ -123,10 +123,10 @@ public class Menu_Principal_Controlador implements MouseListener {
             Usuariovist.getBtnactualizar().addActionListener(_ ->{
                 try{
                     model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText() , Usuariovist.getTxtcontra().getText() ,names);
-                    Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() , Usuariovist.getTxtcontra());
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Debe completar los campos para poder actualizar");
                 }
+                model.Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() , Usuariovist.getTxtcontra());
             });
 
 
@@ -151,7 +151,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                     else {
                         throw new NullPointerException();
                     }
-                    Limpiarcampos(Inventariovist.getTxtCodigo() , Inventariovist.getTxtColor() , Inventariovist.getTxtModelo() , Inventariovist.getTxtCosto() , Inventariovist.getTxtTalla());
+                    modelo_inventario.LimpiarCampos(Inventariovist.getTxtCodigo() , Inventariovist.getTxtColor() , Inventariovist.getTxtModelo() , Inventariovist.getTxtCosto() , Inventariovist.getTxtTalla());
                 }catch (Exception e){
                     JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");
                 }
@@ -159,11 +159,10 @@ public class Menu_Principal_Controlador implements MouseListener {
             Inventariovist.getBtnactualizar().addActionListener(_->{
                 try {
                     modelo_inventario.ModificarProducto(Inventariovist.getTxtTalla().getText(), Inventariovist.getTxtModelo().getText(), Inventariovist.getTxtColor().getText(), Inventariovist.getTxtCodigo().getText(), Inventariovist.getTxtCosto().getText(), IDinventario, selectRow);
-                    modelo_inventario.CargarDatos();
                 }catch (Exception e){
                     JOptionPane.showMessageDialog(null, "Debe llenar los campos requeridos :  " + e.getMessage());
                 }
-                Limpiarcampos(Inventariovist.getTxtCodigo() , Inventariovist.getTxtColor() , Inventariovist.getTxtModelo() , Inventariovist.getTxtCosto() , Inventariovist.getTxtTalla());
+                modelo_inventario.LimpiarCampos(Inventariovist.getTxtCodigo() , Inventariovist.getTxtColor() , Inventariovist.getTxtModelo() , Inventariovist.getTxtCosto() , Inventariovist.getTxtTalla());
             });
 
         });
@@ -182,12 +181,6 @@ public class Menu_Principal_Controlador implements MouseListener {
 
         });
 
-    }
-    private void Limpiarcampos(JTextField... campos) {
-        for(JTextField camp : campos) {
-            camp.setText("");
-            camp.requestFocus();
-        }
     }
 
 
