@@ -123,7 +123,7 @@ public class registroVentaVista extends JFrame {
         lblbuscar.setFont(new Font("Times new roman", Font.BOLD, 20));
         panelregistroventas.add(lblbuscar);
         
-        cbbcolor = new JComboBox<>(new String[]{"  Seleccione un Color",  "Blanco", "Azul", "Negro", "Rosado","Plomo", "Negro-Blanco", "Blanco-Negro", "Beige"});
+        cbbcolor = new JComboBox<>(new String[]{"Seleccione un Color",  "Blanco", "Azul", "Negro", "Rosado","Plomo", "Negro-Blanco", "Blanco-Negro", "Beige"});
         cbbcolor.setBounds(700, 210, 170, 30);
         panelregistroventas.add(cbbcolor);
         

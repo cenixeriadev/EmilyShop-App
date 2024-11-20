@@ -168,6 +168,9 @@ public class Menu_Principal_Controlador implements MouseListener {
         });
         menu.getRegistrarVenta().addActionListener(_ -> {
            cardLayout.show(mainPanel , "RegistroVentas");
+           
+
+
         });
         menu.getGestionarVentas().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionarVentas");
