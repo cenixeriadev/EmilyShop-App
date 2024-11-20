@@ -1,7 +1,12 @@
 package Modelo;
 
-import java.sql.Timestamp;
-@SuppressWarnings("ALL")
+import java.sql.*;
+
+import Utilitario.ConexionBD;
+
+import java.util.ArrayList;
+
+
 public class ventas {
 
     private int idventas;
@@ -51,7 +56,7 @@ public class ventas {
     }
     Connection cn = null;
     PreparedStatement ps = null;
-    ResultSet   rs = null;
+    ResultSet rs = null;
     ArrayList<ventas> listaVentas = null;
     ArrayList<inventario> listaInventarioD = null;
     ventas objVentas = null;

@@ -9,7 +9,7 @@ public class Modelo_Ventas implements MetodosVentas{
     private final Venta_Vista vista;
     ArrayList<inventario> listaDisponible = new ArrayList<>();
     //ventas objVentas;
-    ventasDAO objVentDAO = new ventasDAO();
+    ventas objVentDAO = new ventas();
 
     public Modelo_Ventas(Venta_Vista vista){
         this.vista = vista;
