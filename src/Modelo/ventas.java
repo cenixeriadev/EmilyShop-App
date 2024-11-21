@@ -14,10 +14,10 @@ public class ventas {
     private String metododepago;
     private int precio;
     private Timestamp horaventa;
-    private int idproducto;
-    private int codigo ;
+    private String codigo ;
+    private String telefono;
 
-    public void setCodigo(int codigo){this.codigo = codigo;}
+    public void setCodigo(String codigo){this.codigo = codigo;}
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
@@ -30,18 +30,12 @@ public class ventas {
     public void setHoraventa(Timestamp horaventa) {
         this.horaventa = horaventa;
     }
-    public void setIdProducto(int idproducto) {
-        this.idproducto = idproducto;
-    }
     public void setIdventas(int idventas){this.idventas = idventas;}
+    public void setTelefono(String telefono){this.telefono = telefono;}
 
-
-    public int getCodigo() { return codigo;}
+    public String getCodigo() { return codigo;}
     public int getIdVenta() {
         return idventas;}
-    public int getIdProducto() {
-        return idproducto;
-    }
     public String getCliente() {
         return cliente;
     }
@@ -54,6 +48,7 @@ public class ventas {
     public Timestamp getHoraventa() {
         return horaventa;
     }
+    public String getTelefono(){return telefono;}
     Connection cn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -61,34 +56,57 @@ public class ventas {
     ArrayList<inventario> listaInventarioD = null;
     ventas objVentas = null;
     inventario objInventarioD = null;
-    
-    public ArrayList<inventario> listarInventarioDisponible(String talla){
-        try {
-            cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT modelo , color , codigo , preciocosto , idinventario FROM inventario WHERE talla =?");
-            ps.setInt(1, Integer.parseInt(talla));
-            rs = ps.executeQuery();
-            listaInventarioD = new ArrayList<>();
-            while (rs.next()) {
-                objInventarioD = new inventario();
-                objInventarioD.setModel(rs.getString("modelo"));
-                objInventarioD.setColor(rs.getString("color"));
-                objInventarioD.setCodigo(rs.getString("codigo"));
-                objInventarioD.setPrecioCosto(rs.getInt("preciocosto"));
-                objInventarioD.setIdinventario(rs.getInt("idinventario"));
-                listaInventarioD.add(objInventarioD);
 
+
+    public ArrayList<inventario> listarInventarioDisponible(String talla, String color, String codigo) {
+        ArrayList<inventario> listaInventarioD = new ArrayList<>();
+        try {
+            Connection cn = ConexionBD.getConexionBD();
+            StringBuilder query = new StringBuilder("SELECT * FROM inventario WHERE 1=1");
+            if (talla != null && !talla.equals("Seleccionar una talla")) {
+                query.append(" AND talla = ?");
+            }
+            if(codigo != null && !codigo.isEmpty()){
+                query.append(" AND codigo = ?");
+            }
+            if(color != null && !color.equals("Seleccionar un color")) {
+                query.append(" AND color = ?");
+            }
+            PreparedStatement ps = cn.prepareStatement(query.toString());
+
+            int paramIndex = 1;
+            if (talla != null && !talla.equals("Seleccionar una talla")) {
+                ps.setInt(paramIndex++, Integer.parseInt(talla));
+            }
+            if (codigo != null && !codigo.isEmpty()) {
+                ps.setString(paramIndex++, codigo);
+            }
+            if (color != null && !color.equals("Seleccionar un color")) {
+                ps.setString(paramIndex++, color);
+            }
+
+            ResultSet rs = ps.executeQuery();
+
+            // Procesar resultados
+            while (rs.next()) {
+                inventario objInventario = new inventario();
+                objInventario.setModel(rs.getString("modelo"));
+                objInventario.setCodigo(rs.getString("codigo"));
+                objInventario.setTalla(rs.getInt("talla"));
+                objInventario.setColor(rs.getString("color"));
+                objInventario.setIdinventario(rs.getInt("idinventario"));
+                objInventario.setPrecioCosto(rs.getInt("preciocosto"));
+                listaInventarioD.add(objInventario);
             }
             rs.close();
             ps.close();
             cn.close();
-        }catch(Exception e){
-            System.out.println("Error al listar los modelos de la talla: " + e.getMessage());
-            return null;
+        } catch (Exception e) {
+            e.printStackTrace(); // Manejo de excepciones
         }
         return listaInventarioD;
-
     }
+
 
     public ArrayList<ventas> listarVentas() {
         try {
@@ -99,12 +117,11 @@ public class ventas {
             while (rs.next()) {
                 objVentas = new ventas();
                 objVentas.setIdventas(rs.getInt("idventas"));
-                objVentas.setIdProducto(rs.getInt("idproducto"));
                 objVentas.setCliente(rs.getString("cliente"));
                 objVentas.setMetododepago(rs.getString("metododepago"));
+                objVentas.setTelefono(rs.getString("telefono"));
                 objVentas.setPrecio(rs.getInt("precio"));
                 objVentas.setHoraventa(rs.getTimestamp("horaventa"));
-
                 listaVentas.add(objVentas);
             }
             rs.close();
@@ -120,13 +137,12 @@ public class ventas {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio , horaventa ,codigo , idproducto) VALUES (?,?,?,?,?,?);");
+            ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio  ,codigo , telefono) VALUES (?,?,?,?,?);");
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
             ps.setInt(3, Venta.getPrecio());
-            ps.setTimestamp(4, Venta.getHoraventa());
-            ps.setInt(5, Venta.getCodigo());
-            ps.setInt(6,Venta.getIdProducto());
+            ps.setString(4, Venta.getCodigo());
+            ps.setString(5, Venta.getTelefono());
             estado =  ps.executeUpdate();
             cn.close();
             ps.close();
@@ -141,12 +157,11 @@ public class ventas {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("UPDATE ventas SET cliente=?, metododepago=?, precio=?, horaventa=? WHERE idventas=?");
+            ps = cn.prepareStatement("UPDATE ventas SET cliente=?, metododepago=?, precio=? WHERE idventas=?");
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
             ps.setInt(3, Venta.getPrecio());
-            ps.setTimestamp(4, Venta.getHoraventa());
-            ps.setInt(5, Venta.getIdVenta());
+            ps.setInt(4, Venta.getIdVenta());
             estado =  ps.executeUpdate();
             cn.close();
             ps.close();
@@ -168,26 +183,6 @@ public class ventas {
         }catch (SQLException e){
             System.out.println("Ocurrio un error : " + e.getMessage());
             return  estado;
-        }
-        return estado;
-    }
-    public int actualizarInventario(int idinventario){
-        int estado = 0;
-        try{
-            cn  = ConexionBD.getConexionBD();
-            PreparedStatement pr = null;
-            pr =cn.prepareStatement("DELETE FROM producto WHERE  idinventario = ?;");
-            ps = cn.prepareStatement("DELETE  FROM inventario WHERE idinventario = ?;");
-            pr.setInt(1, idinventario);
-            ps.setInt(1, idinventario);
-            pr.executeUpdate();
-            estado =  ps.executeUpdate();
-            cn.close();
-            ps.close();
-            pr.close();
-        }catch (SQLException e){
-            System.out.println("Ocurrio un error : " + e.getMessage());
-            return estado;
         }
         return estado;
     }

@@ -1,15 +1,13 @@
 package Controlador;
 
-import Modelo.Modelo_GestionarUsuario;
-import Modelo.Modelo_Inventario;
-import Modelo.Modelo_Login;
-import Modelo.inventario;
+import Modelo.*;
 import Vista.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 
 public class Menu_Principal_Controlador implements MouseListener {
@@ -20,15 +18,20 @@ public class Menu_Principal_Controlador implements MouseListener {
     public String names ;
     public int IDinventario;
     inventario objInventario;
+    producto objProducto;
+    ventas objVentas;
+    public ArrayList<ventas> listaVentas = new  ArrayList<>();
+    public ArrayList<Integer> inventarioConsumido = new  ArrayList<Integer>();
 
     private  final  gestionUsuarioVista Usuariovist = new gestionUsuarioVista();
     private final gestioninventarioVista Inventariovist = new gestioninventarioVista();
     private final registroInventarioVista Registrovist = new registroInventarioVista();
-    private final  registroVentaVista RegsitroVentas = new registroVentaVista();
+    private final  registroVentaVista RegistroVentas = new registroVentaVista();
     private final GestionarVentasVista gestionarVentas = new GestionarVentasVista();
 
     private final Modelo_GestionarUsuario model = new Modelo_GestionarUsuario(Usuariovist);
     private final Modelo_Inventario modelo_inventario = new Modelo_Inventario(Inventariovist);
+    private final Modelo_GestionarVentas modelo_registro_ventas = new Modelo_GestionarVentas(RegistroVentas);
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==Usuariovist.getTablaUsuario()) {
@@ -54,6 +57,18 @@ public class Menu_Principal_Controlador implements MouseListener {
             Inventariovist.getTxtTalla().setText(String.valueOf(objInventario.getTalla()));
             Inventariovist.getTxtModelo().setText(objInventario.getModel());
 
+        }
+        if(e.getSource()==RegistroVentas.getTablaInventario()){
+            selectRow = RegistroVentas.getTablaInventario().getSelectedRow();
+            objInventario = new inventario();
+            objInventario.setModel((String)RegistroVentas.getTablaInventario().getValueAt(selectRow , 0));
+            objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
+            objInventario.setTalla(Integer.parseInt(String.valueOf(RegistroVentas.getTablaInventario().getValueAt(selectRow, 2))));
+            objInventario.setColor((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 3));
+            int id = objInventario.ObtenerIdInventario(objInventario);
+            int preciocosto = objInventario.ObtenerPrecio(id);
+            objInventario.setIdinventario(id);
+            objInventario.setPrecioCosto(preciocosto);
         }
     }
 
@@ -88,7 +103,7 @@ public class Menu_Principal_Controlador implements MouseListener {
         JPanel registropa = Registrovist.getPanelusuario();
         JPanel inventariopa = Inventariovist.getPanelInventario();
         JPanel usuariopa = Usuariovist.getPanelusuario();
-        JPanel registrovent = RegsitroVentas.getPanelregistroventas();
+        JPanel registrovent = RegistroVentas.getPanelregistroventas();
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         JPanel menupr = menu.getPanelprincipal();
@@ -98,6 +113,9 @@ public class Menu_Principal_Controlador implements MouseListener {
         mainPanel.add(registropa , "RegistroInventario");
         mainPanel.add(registrovent, "RegistroVentas");
         mainPanel.add(gestionarV , "GestionarVentas");
+
+        RegistroVentas.getTablaInventario().addMouseListener(this);
+        RegistroVentas.getTablacarrito().addMouseListener(this);
         Usuariovist.getTablaUsuario().addMouseListener(this);
         Inventariovist.getTablaInventario().addMouseListener(this);
 
@@ -168,7 +186,38 @@ public class Menu_Principal_Controlador implements MouseListener {
         });
         menu.getRegistrarVenta().addActionListener(_ -> {
            cardLayout.show(mainPanel , "RegistroVentas");
-           
+           RegistroVentas.getBtnbuscar().addActionListener(_ -> {
+               try {
+                   if (!RegistroVentas.getTxtcodigo2().getText().isEmpty() || !String.valueOf(RegistroVentas.getCbbtallas().getSelectedItem()).equals("Seleccionar una talla") || !String.valueOf(RegistroVentas.getCbbcolor().getSelectedItem()).equals("Seleccionar un color")) {
+                       modelo_registro_ventas.CargarInventarioD(String.valueOf(RegistroVentas.getCbbtallas().getSelectedItem()), String.valueOf(RegistroVentas.getCbbcolor().getSelectedItem()), RegistroVentas.getTxtcodigo2().getText());
+                   }else{
+                    JOptionPane.showMessageDialog(null,"Debe llenar alguno de los campos requeridos para realizar la busqueda");
+                   }
+               }catch (Exception e) {
+                   JOptionPane.showMessageDialog(null, "Error en la busqueda: " + e.getMessage());
+               }
+               modelo_registro_ventas.LimpiarCampos(RegistroVentas.getTxtcodigo2());
+           });
+           RegistroVentas.getBtnregistrar().addActionListener(_->{
+               try{
+                   modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
+                   JOptionPane.showMessageDialog(null , "Venta realizada con exito :D");
+               }catch (Exception e){
+                   JOptionPane.showMessageDialog(null, "Debe llenar los campos requeridos :  " + e.getMessage());
+               }
+
+           });
+           RegistroVentas.getBtnCarrito().addActionListener(_->{
+                modelo_registro_ventas.Agregar_aCarrito(objInventario , String.valueOf(RegistroVentas.getTxtprecioventa().getText()) , String.valueOf(RegistroVentas.getCbbmetodo().getSelectedItem()) , RegistroVentas.getTxttelefono().getText());
+                objVentas = new ventas();
+                objVentas.setCliente(RegistroVentas.getTxtcliente().getText());
+                objVentas.setMetododepago(String.valueOf(RegistroVentas.getCbbmetodo().getSelectedItem()));
+                objVentas.setTelefono( RegistroVentas.getTxttelefono().getText());
+                objVentas.setCodigo(objInventario.getCodigo());
+                objVentas.setPrecio(Integer.parseInt(String.valueOf(RegistroVentas.getTxtprecioventa().getText())));
+                listaVentas.add(objVentas);
+                inventarioConsumido.add(objInventario.getIdInventario());
+           });
 
 
         });

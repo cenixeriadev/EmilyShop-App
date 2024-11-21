@@ -8,7 +8,7 @@ import java.awt.*;
 public class registroVentaVista extends JFrame {
 
     // Barra de menú y menús
-    JLabel lblbienvenida, lblbuscar, lblcodigo2;
+    JLabel lblbienvenida, lblbuscar, lblcodigo2 ,lblprecioventa;
 
     
     JPanel panelregistroventas;
@@ -19,9 +19,9 @@ public class registroVentaVista extends JFrame {
     DefaultTableModel modeloInventario,modelocarrito;
     
     JLabel lblmetodo, lblcarrito,lblcliente,lbltelefono;
-    JTextField txtcliente,txtcodigo2,txttelefono;
+    JTextField txtcliente,txtcodigo2,txttelefono , txtprecioventa;
     
-    JButton btnregistrar,btnbuscar,btneliminar ,btnBoleta;
+    JButton btnregistrar,btnbuscar,btneliminar ,btnCarrito;
     
     public registroVentaVista() {
         setTitle("Menu Calzados Emily´s");
@@ -64,15 +64,25 @@ public class registroVentaVista extends JFrame {
         txttelefono=new JTextField("");
         txttelefono.setBounds(185,180,200,30);
         panelregistroventas.add(txttelefono);
+
+        lblprecioventa = new JLabel("P. de venta:  ");
+        lblprecioventa.setForeground(Color.WHITE);
+        lblprecioventa.setFont(new Font("Times New Roman", Font.BOLD,20));
+        lblprecioventa.setBounds(65,220,200,30);
+        panelregistroventas.add(lblprecioventa);
+
+        txtprecioventa = new JTextField("");
+        txtprecioventa.setBounds(185,220,200,30);
+        panelregistroventas.add(txtprecioventa);
         
         lblmetodo=new JLabel("M. de Pago:");
         lblmetodo.setForeground(Color.WHITE);
         lblmetodo.setFont(new Font("Times New Roman", Font.BOLD,20));
-        lblmetodo.setBounds(65,220,140,30);
+        lblmetodo.setBounds(65,260,140,30);
         panelregistroventas.add(lblmetodo);
         
         cbbmetodo = new JComboBox<>(new String[]{"Seleccione metodo",  "Yape", "IZIPAY", "Plin", "Efectivo","Transferencia"});
-        cbbmetodo.setBounds(185, 220, 200, 30);
+        cbbmetodo.setBounds(185, 260, 200, 30);
         panelregistroventas.add(cbbmetodo);
         
        
@@ -123,11 +133,11 @@ public class registroVentaVista extends JFrame {
         lblbuscar.setFont(new Font("Times new roman", Font.BOLD, 20));
         panelregistroventas.add(lblbuscar);
         
-        cbbcolor = new JComboBox<>(new String[]{"Seleccione un Color",  "Blanco", "Azul", "Negro", "Rosado","Plomo", "Negro-Blanco", "Blanco-Negro", "Beige"});
+        cbbcolor = new JComboBox<>(new String[]{"Seleccionar un color",  "Blanco", "Azul", "Negro", "Rosado","Plomo", "Negro-Blanco", "Blanco-Negro", "Beige"});
         cbbcolor.setBounds(700, 210, 170, 30);
         panelregistroventas.add(cbbcolor);
         
-        cbbtallas = new JComboBox<>(new String[]{"Seleccione una Talla",  "35", "36", "37", "38","39", "40", "41", "42"});
+        cbbtallas = new JComboBox<>(new String[]{"Seleccionar una talla",  "35", "36", "37", "38","39", "40", "41", "42"});
         cbbtallas.setBounds(700, 250, 170, 30);
         panelregistroventas.add(cbbtallas);
         
@@ -151,9 +161,9 @@ public class registroVentaVista extends JFrame {
         ImageIcon imageIcon14 = new ImageIcon("src/Recursos/carrito2.png");
         Image img14 = imageIcon14.getImage();
         Image newImg14 = img14.getScaledInstance(140, 120, Image.SCALE_SMOOTH);
-        btnBoleta = new JButton(new ImageIcon(newImg14));
-        btnBoleta.setBounds(450, 130, 140, 120);
-        panelregistroventas.add(btnBoleta);
+        btnCarrito = new JButton(new ImageIcon(newImg14));
+        btnCarrito.setBounds(450, 130, 140, 120);
+        panelregistroventas.add(btnCarrito);
 
         
         // --------------tabla buscar producto--------------
@@ -193,8 +203,8 @@ public class registroVentaVista extends JFrame {
     public JButton getBtneliminar(){
         return btneliminar;
     }
-    public JButton getBtnBoleta(){
-        return btnBoleta;
+    public JButton getBtnCarrito(){
+        return btnCarrito;
     }
     public JComboBox<String> getCbbcolor(){
         return cbbcolor;
@@ -204,6 +214,9 @@ public class registroVentaVista extends JFrame {
     }
     public JButton getBtnbuscar(){
         return btnbuscar;
+    }
+    public JTable getTablacarrito(){
+        return tablacarrito;
     }
     public JTable getTablaInventario(){
         return tablaInventario;
@@ -226,6 +239,9 @@ public class registroVentaVista extends JFrame {
     public JComboBox<String> getCbbmetodo(){
         return cbbmetodo;
     }
+    public JTextField getTxtprecioventa(){return txtprecioventa;}
+    public JComboBox<String> getTalla(){return cbbtallas;}
+    public JComboBox<String> getColor(){return cbbcolor;}
 
 }
 

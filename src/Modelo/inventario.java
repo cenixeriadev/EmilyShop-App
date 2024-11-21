@@ -2,6 +2,7 @@ package Modelo;
 
 import Utilitario.ConexionBD;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -114,6 +115,25 @@ public class inventario {
         }
 
         return estado;
+    }
+    public int ObtenerPrecio(int idinventario){
+        try{
+            cn  = ConexionBD.getConexionBD();
+            pt = cn.prepareStatement("SELECT preciocosto FROM inventario WHERE idinventario=?");
+            pt.setInt(1, idinventario);
+            rs = pt.executeQuery();
+            int preciocosto = 0;
+            if(rs.next()){
+
+                preciocosto = rs.getInt("preciocosto");
+            }
+            rs.close();
+            pt.close();
+            cn.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null ,"Fallo en obtenerPrecio");
+        }
+        return  preciocosto;
     }
     public int ObtenerIdInventario(inventario objInventario){
         int idInventario = 0;
