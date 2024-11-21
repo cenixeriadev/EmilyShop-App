@@ -2,6 +2,7 @@ package Modelo;
 
 import Utilitario.ConexionBD;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +56,27 @@ public class usuario {
     ResultSet rs = null;
     ArrayList<usuario> listaUsuario = null;
     usuario User = null;
+    public int ObtenerIdUsuario (usuario Usuario){
+        int id= 0;
+        try{
+            cn = ConexionBD.getConexionBD();
+            ps = cn.prepareStatement("SELECT idusuario FROM usuario WHERE nombusuario = ?  AND contraseña = ? AND apellidoynombre = ? AND telefono = ?;");
+            ps.setString(1, Usuario.getNombUsuario());
+            ps.setString(2, Usuario.getContraseña());
+            ps.setString(3 , Usuario.getNames());
+            ps.setString(4, Usuario.getTelefono());
+            rs = ps.executeQuery();
+            if(rs.next()){
+                id = rs.getInt("idusuario");
+            }
+            ps.close();
+            cn.close();
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null , "Error en obtener ID usuario");
+        }
+        return id;
+    }
     public ArrayList<usuario> ListarUsuario(){
 
         try{

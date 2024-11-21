@@ -39,13 +39,14 @@ public class Modelo_GestionarUsuario {
         }
         CargarUsuarios();
     }
-    public void ActualizarUsuario(String names, String telefono, String nombusuario, String contraseña , String nomactual){
+    public void ActualizarUsuario(String names, String telefono, String nombusuario, String contraseña , int id){
         Usuario = new usuario();
-        int id = 0;
+        int Id = 0;
         listaUsuarios = Usuario.ListarUsuario();
         for(usuario u : listaUsuarios){
-            if(Objects.equals(u.getNames(), nomactual)){
-                id = u.getIdusuario();
+            Id = Usuario.ObtenerIdUsuario(u);
+            if(Id==id){
+                break;
             }
         }
         Usuario.setNombUsuario(nombusuario);

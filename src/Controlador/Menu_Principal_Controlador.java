@@ -4,6 +4,7 @@ import Modelo.*;
 import Vista.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,6 +18,8 @@ public class Menu_Principal_Controlador implements MouseListener {
     private int selectRow;
     public String names ;
     public int IDinventario;
+    public int IDusuario;
+    usuario objUsuario;
     inventario objInventario;
     producto objProducto;
     ventas objVentas;
@@ -37,10 +40,17 @@ public class Menu_Principal_Controlador implements MouseListener {
         if(e.getSource()==Usuariovist.getTablaUsuario()) {
             names = (String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 0));
             selectRow = Usuariovist.getTablaUsuario().getSelectedRow();
+            objUsuario = new usuario();
             Usuariovist.getTxtnombre().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 0)));
             Usuariovist.getTxttelefono().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 1)));
             Usuariovist.getTxtusuario().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 2)));
             Usuariovist.getTxtcontra().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 3)));
+            objUsuario.setApellidoynombre(Usuariovist.getTxtnombre().getText());
+            objUsuario.setContraseña(Usuariovist.getTxtcontra().getText());
+            objUsuario.setTelefono(Usuariovist.getTxttelefono().getText());
+            objUsuario.setNombUsuario(Usuariovist.getTxtusuario().getText());
+            IDusuario = objUsuario.ObtenerIdUsuario(objUsuario);
+
         }
         if(e.getSource()==Inventariovist.getTablaInventario()){
             selectRow = Inventariovist.getTablaInventario().getSelectedRow();// modelo  codigo talla color pcosto
@@ -140,7 +150,7 @@ public class Menu_Principal_Controlador implements MouseListener {
             });
             Usuariovist.getBtnactualizar().addActionListener(_ ->{
                 try{
-                    model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText() , Usuariovist.getTxtcontra().getText() ,names);
+                    model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText() , Usuariovist.getTxtcontra().getText() ,IDusuario);
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Debe completar los campos para poder actualizar");
                 }
@@ -202,6 +212,10 @@ public class Menu_Principal_Controlador implements MouseListener {
                try{
                    modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
                    JOptionPane.showMessageDialog(null , "Venta realizada con exito :D");
+                   DefaultTableModel model1 = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();
+                   model1.setRowCount(0);
+                   DefaultTableModel model2 = (DefaultTableModel) RegistroVentas.getTablaInventario().getModel();
+                   model2.setRowCount(0);
                }catch (Exception e){
                    JOptionPane.showMessageDialog(null, "Debe llenar los campos requeridos :  " + e.getMessage());
                }

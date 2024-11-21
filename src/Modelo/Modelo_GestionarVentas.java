@@ -36,6 +36,8 @@ public class Modelo_GestionarVentas{
             objVentas.AgregarVentas(Venta);
         }
         for(int id : inventarioConsumido){
+            int idproducto = objProducto.ObtenerIdProducto(id);
+            objProducto.EliminarProducto(idproducto);
             objInventario.EliminarProducto(id);
 
         }
