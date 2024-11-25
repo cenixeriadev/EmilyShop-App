@@ -58,6 +58,8 @@ public class GestionarVentasVista extends JFrame {
         tablaInventario.getTableHeader().setBackground(new Color(25, 43, 57)); // Azul marino
         tablaInventario.getTableHeader().setForeground(Color.WHITE); // Color de texto blanco
         tablaInventario.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15));
+        tablaInventario.getTableHeader().setReorderingAllowed(false);
+        tablaInventario.getTableHeader().setEnabled(false);
 
         JScrollPane scrollPane = new JScrollPane(tablaInventario);
         scrollPane.setBounds(380, 140, 690, 340);
@@ -111,6 +113,25 @@ public class GestionarVentasVista extends JFrame {
     }
     public JPanel getPanelusuario() {
         return panelusuario;
+    }
+    public JTable getTablaInventario() {
+        return tablaInventario;
+    }
+    public DefaultTableModel getModeloInventario() {
+        return modeloInventario;
+    }
+    public JButton getBtneliminar(){
+        return btneliminar;
+    }
+    public JButton getBtnactualizar(){
+        return btnactualizar;
+    }
+    public JButton getBtnbuscar(){
+        return btnbuscar;
+    }
+    public static void main(String[] args){
+        GestionarVentasVista ventana = new GestionarVentasVista();
+        ventana.setVisible(true);
     }
 }
 

@@ -6,14 +6,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class Modelo_GestionarVentas{
+public class Modelo_RegistrarVentas {
     private final registroVentaVista vista;
     ArrayList<inventario> listaDisponible = new ArrayList<>();
     //ventas objVentas;
     ventas objVentas = new ventas();
     producto objProducto = new producto();
     inventario objInventario = new inventario();
-    public Modelo_GestionarVentas(registroVentaVista vista){
+    public Modelo_RegistrarVentas(registroVentaVista vista){
         this.vista = vista;
     }
     public void CargarInventarioD(String talla,String color ,String codigo) {

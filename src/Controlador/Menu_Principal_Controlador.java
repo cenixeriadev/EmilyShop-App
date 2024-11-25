@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 
@@ -24,7 +26,7 @@ public class Menu_Principal_Controlador implements MouseListener {
     producto objProducto;
     ventas objVentas;
     public ArrayList<ventas> listaVentas = new  ArrayList<>();
-    public ArrayList<Integer> inventarioConsumido = new  ArrayList<Integer>();
+    public ArrayList<Integer> inventarioConsumido = new  ArrayList<>();
 
     private  final  gestionUsuarioVista Usuariovist = new gestionUsuarioVista();
     private final gestioninventarioVista Inventariovist = new gestioninventarioVista();
@@ -34,7 +36,10 @@ public class Menu_Principal_Controlador implements MouseListener {
 
     private final Modelo_GestionarUsuario model = new Modelo_GestionarUsuario(Usuariovist);
     private final Modelo_Inventario modelo_inventario = new Modelo_Inventario(Inventariovist);
-    private final Modelo_GestionarVentas modelo_registro_ventas = new Modelo_GestionarVentas(RegistroVentas);
+    private final Modelo_RegistrarVentas modelo_registro_ventas = new Modelo_RegistrarVentas(RegistroVentas);
+    private final ModeloGestionarVentas model_gestionar_ventas = new ModeloGestionarVentas(gestionarVentas);
+    private final VentaPDF pdf = new VentaPDF();
+    @SuppressWarnings("NonAsciiCharacters")
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==Usuariovist.getTablaUsuario()) {
@@ -80,6 +85,18 @@ public class Menu_Principal_Controlador implements MouseListener {
             objInventario.setIdinventario(id);
             objInventario.setPrecioCosto(preciocosto);
         }
+        if(e.getSource()==gestionarVentas.getTablaInventario()){
+            selectRow = gestionarVentas.getTablaInventario().getSelectedRow();
+            objVentas = new ventas();
+            objVentas.setCliente((String)gestionarVentas.getTablaInventario().getValueAt(selectRow , 0));
+            objVentas.setCodigo((String)gestionarVentas.getTablaInventario().getValueAt(selectRow , 1));
+            objVentas.setMetododepago((String)gestionarVentas.getTablaInventario().getValueAt(selectRow , 5));
+            objVentas.setPrecio((Integer) gestionarVentas.getTablaInventario().getValueAt(selectRow , 6));
+            objVentas.setHoraventa((Timestamp) gestionarVentas.getTablaInventario().getValueAt(selectRow , 7));
+            objVentas.setTelefono((String)gestionarVentas.getTablaInventario().getValueAt(selectRow,8));
+
+
+        }
     }
 
     @Override
@@ -105,6 +122,9 @@ public class Menu_Principal_Controlador implements MouseListener {
 
     public Menu_Principal_Controlador(PrincipalVista menu) {
         this.menu = menu;
+        RegistroVentas.getTablaInventario().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        Usuariovist.getTablaUsuario().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        RegistroVentas.getTablacarrito().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         Iniciar();
     }
 
@@ -128,6 +148,7 @@ public class Menu_Principal_Controlador implements MouseListener {
         RegistroVentas.getTablacarrito().addMouseListener(this);
         Usuariovist.getTablaUsuario().addMouseListener(this);
         Inventariovist.getTablaInventario().addMouseListener(this);
+        gestionarVentas.getTablaInventario().addMouseListener(this);
 
         menu.add(mainPanel ,BorderLayout.CENTER);
 
@@ -237,6 +258,16 @@ public class Menu_Principal_Controlador implements MouseListener {
         });
         menu.getGestionarVentas().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionarVentas");
+            model_gestionar_ventas.cargarDatos();
+            gestionarVentas.getBtnactualizar().addActionListener(_->{
+                try {
+                    pdf.DatosCliente(objVentas.getCliente());
+                    pdf.generarFacturaPDF(gestionarVentas);
+
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Debe completar los campos para poder actualizar");
+                }
+            });
         });
         menu.getCerrarSesion().addActionListener(_ -> {
             menu.dispose();

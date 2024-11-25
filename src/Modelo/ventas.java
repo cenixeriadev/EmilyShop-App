@@ -101,7 +101,7 @@ public class ventas {
             rs.close();
             ps.close();
             cn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace(); // Manejo de excepciones
         }
         return listaInventarioD;
@@ -122,6 +122,7 @@ public class ventas {
                 objVentas.setTelefono(rs.getString("telefono"));
                 objVentas.setPrecio(rs.getInt("precio"));
                 objVentas.setHoraventa(rs.getTimestamp("horaventa"));
+                objVentas.setCodigo(rs.getString("codigo"));
                 listaVentas.add(objVentas);
             }
             rs.close();
@@ -146,7 +147,7 @@ public class ventas {
             estado =  ps.executeUpdate();
             cn.close();
             ps.close();
-        }catch (Exception e){
+        }catch (SQLException e){
             System.out.println("Ocurrio un error : " + e.getMessage());
             return  estado;
         }
