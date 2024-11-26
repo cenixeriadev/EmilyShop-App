@@ -25,13 +25,13 @@ public class VentaPDF {
     public ArrayList<ventas> DatosCliente(String nombCliente) {
         try {
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT cliente ,codigo , telefono  , precio , horaventa FROM ventas WHERE cliente = ?;");
+            ps = cn.prepareStatement("SELECT cliente ,metododepago , telefono  , precio , horaventa FROM ventas WHERE cliente = ?;");
             ps.setString(1,nombCliente);
             rs = ps.executeQuery();
             while (rs.next()) {
                 objVentas = new ventas();
                 objVentas.setCliente(rs.getString("cliente"));
-                objVentas.setCodigo(rs.getString("codigo"));
+                objVentas.setMetododepago(rs.getString("metododepago"));
                 objVentas.setHoraventa(rs.getTimestamp("horaventa"));
                 objVentas.setTelefono(rs.getString("telefono"));
                 objVentas.setPrecio(rs.getInt("precio"));
@@ -128,7 +128,7 @@ public class VentaPDF {
             PdfPCell[] encabezados = {
                     new PdfPCell(new Phrase("#", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
                     new PdfPCell(new Phrase("Cant.", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
-                    new PdfPCell(new Phrase("Código", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
+                    new PdfPCell(new Phrase("Método de pago", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
                     new PdfPCell(new Phrase("Descripción", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
                     new PdfPCell(new Phrase("P. Unit.", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
                     new PdfPCell(new Phrase("Total", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE)))
@@ -142,12 +142,12 @@ public class VentaPDF {
             int totalventa = 0;
             // Agregar filas de ejemplo
             for (int i = 0; i <= listaventas.size()-1 ; i++) {
-                tablaProductos.addCell(String.valueOf(i));
+                tablaProductos.addCell(String.valueOf(i+1));
                 tablaProductos.addCell("1");
-                tablaProductos.addCell(listaventas.get(i).getCodigo());//codigo
+                tablaProductos.addCell(listaventas.get(i).getMetododepago());//codigo
                 tablaProductos.addCell(listaproductos.get(i).getModel()+" " + listaproductos.get(i).getColor() + " " + listaproductos.get(i).getTalla());//descripcion
-                tablaProductos.addCell(String.valueOf(listaventas.get(i).getPrecio()));//precio unitario
-                tablaProductos.addCell(String.valueOf(listaventas.get(i).getPrecio()));//precio total del producto
+                tablaProductos.addCell(String.valueOf(listaventas.get(i).getPrecio()) +" Soles");//precio unitario
+                tablaProductos.addCell(String.valueOf(listaventas.get(i).getPrecio())+" Soles");//precio total del producto
                 totalventa += listaventas.get(i).getPrecio();
             }
 
@@ -160,7 +160,7 @@ public class VentaPDF {
             totales.setWidths(new float[]{1,1});
 
             totales.addCell(new PdfPCell(new Phrase("TOTAL:", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
-            totales.addCell(new PdfPCell(new Phrase(String.valueOf(totalventa))));
+            totales.addCell(new PdfPCell(new Phrase(String.valueOf(totalventa)+" Soles")));
 
             doc.add(totales);
 

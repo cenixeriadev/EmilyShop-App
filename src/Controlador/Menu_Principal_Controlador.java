@@ -268,7 +268,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                 objVentas.setCliente(RegistroVentas.getTxtcliente().getText());
                 objVentas.setMetododepago(String.valueOf(RegistroVentas.getCbbmetodo().getSelectedItem()));
                 objVentas.setTelefono( RegistroVentas.getTxttelefono().getText());
-                objVentas.setCodigo(RegistroVentas.getTxtcodigo2().getText());
+                objVentas.setCodigo(objInventario.getCodigo());
                 objVentas.setPrecio(Integer.parseInt(String.valueOf(RegistroVentas.getTxtprecioventa().getText())));
                 listaVentas.add(objVentas);
                 inventarioConsumido.add(objInventario.getIdInventario());
