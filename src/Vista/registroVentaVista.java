@@ -116,15 +116,6 @@ public class registroVentaVista extends JFrame {
         JScrollPane scrollPane = new JScrollPane(tablacarrito);
         scrollPane.setBounds(30, 360, 600, 200);
         panelregistroventas.add(scrollPane);
-
-        
-        btnregistrar = new JButton("Registrar Venta");
-        btnregistrar.setBounds(450,260,140,35);
-        panelregistroventas.add(btnregistrar);
-        
-        btneliminar= new JButton("Eliminar Producto");
-        btneliminar.setBounds(450,305,140,35);
-        panelregistroventas.add(btneliminar);
         
         // ----- busqueda de producto----------
         lblbuscar=new JLabel("BUSCAR DISPONIBILIDAD DE PRODUCTO");
@@ -150,20 +141,25 @@ public class registroVentaVista extends JFrame {
         txtcodigo2= new JTextField();
         txtcodigo2.setBounds(770,170,100,30);
         panelregistroventas.add(txtcodigo2);
-        
-        btnbuscar = new JButton("Buscar");
-        btnbuscar.setBounds(920,180,150,40);
-        panelregistroventas.add(btnbuscar);
             
         
         // -----------Boton Boleta------------
-        
-        ImageIcon imageIcon14 = new ImageIcon("src/Recursos/carrito2.png");
-        Image img14 = imageIcon14.getImage();
-        Image newImg14 = img14.getScaledInstance(140, 120, Image.SCALE_SMOOTH);
-        btnCarrito = new JButton(new ImageIcon(newImg14));
-        btnCarrito.setBounds(450, 130, 140, 120);
+
+        btnbuscar = crearBotonPersonalizado("Buscar", "src/Recursos/buscar.png");
+        btnbuscar.setBounds(920,180,150,40); // Ajustar posición y tamaño
+        panelregistroventas.add(btnbuscar);
+
+        btnCarrito = crearBotonPersonalizado("Añadir al carrito", "src/Recursos/carrito.png");
+        btnCarrito.setBounds(440, 140, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btnCarrito);
+
+        btnregistrar = crearBotonPersonalizado("Registrar", "src/Recursos/registrar.png");
+        btnregistrar.setBounds(440, 200, 200, 50); // Ajustar posición y tamaño
+        panelregistroventas.add(btnregistrar);
+
+        btneliminar = crearBotonPersonalizado("Eliminar", "src/Recursos/tachito.png");
+        btneliminar.setBounds(440, 260, 200, 50); // Ajustar posición y tamaño
+        panelregistroventas.add(btneliminar);
 
         
         // --------------tabla buscar producto--------------
@@ -242,8 +238,47 @@ public class registroVentaVista extends JFrame {
     public JTextField getTxtprecioventa(){return txtprecioventa;}
     public JComboBox<String> getTalla(){return cbbtallas;}
     public JComboBox<String> getColor(){return cbbcolor;}
+    private JButton crearBotonPersonalizado(String texto, String icono) {
+        JButton boton = new JButton(texto) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                // Cambiar color según el estado (presionado o no)
+                g2d.setColor(getModel().isPressed() ? new Color(200, 200, 200) : new Color(35, 53, 67));//255, 182, 193
+                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 50, 50);
+
+                // Dibujar borde redondeado
+                g2d.setColor(Color.LIGHT_GRAY);
+                g2d.setStroke(new BasicStroke(2));
+                g2d.drawRoundRect(1, 1, getWidth() - 2, getHeight() - 2, 50, 50);
+
+                super.paintComponent(g);
+            }
+        };
+
+        // Configuración básica del botón
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.setForeground(Color.WHITE);
+        boton.setContentAreaFilled(false); // Evitar fondo estándar del botón
+        boton.setFocusPainted(false);      // Quitar efecto de foco
+        boton.setBorderPainted(false);    // Quitar borde predeterminado
+
+        // Configurar icono si se proporciona
+        if (icono != null) {
+            ImageIcon iconoOriginal = new ImageIcon(icono);
+            Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            boton.setIcon(new ImageIcon(imagenEscalada));
+            boton.setHorizontalTextPosition(SwingConstants.RIGHT);
+            boton.setVerticalTextPosition(SwingConstants.CENTER);
+        }
+
+        return boton;
+    }
 
 }
+
 
 class PanelDegradadoAzul8 extends JPanel {
     @Override

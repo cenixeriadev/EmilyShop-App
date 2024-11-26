@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -231,8 +230,28 @@ public class Menu_Principal_Controlador implements MouseListener {
            });
            RegistroVentas.getBtnregistrar().addActionListener(_->{
                try{
+                   ImageIcon icon = new ImageIcon("src/Recursos/iconoPregunta.png");
+                   Image image = icon.getImage();
+                   Image newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // Reducir el tamaño a 50x50
+                   ImageIcon newIcon = new ImageIcon(newimg);
+
                    modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
                    JOptionPane.showMessageDialog(null , "Venta realizada con exito :D");
+                   Object[] opciones= {"Aceptar" , "Cancelar"};
+                   int respuesta = JOptionPane.showOptionDialog(
+                           null,
+                           "¿Deseas generar una boleta en pdf?",
+                           "Confirmación",
+                           JOptionPane.DEFAULT_OPTION,
+                           JOptionPane.QUESTION_MESSAGE,
+                           newIcon,
+                           opciones,
+                           opciones[0] // Opción predeterminada
+                   );
+                   if(respuesta==0){
+                       //pdf.DatosCliente(objVentas.getCliente());
+                       pdf.generarFactura();
+                   }
                    DefaultTableModel model1 = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();
                    model1.setRowCount(0);
                    DefaultTableModel model2 = (DefaultTableModel) RegistroVentas.getTablaInventario().getModel();
@@ -259,15 +278,6 @@ public class Menu_Principal_Controlador implements MouseListener {
         menu.getGestionarVentas().addActionListener(_ -> {
             cardLayout.show(mainPanel, "GestionarVentas");
             model_gestionar_ventas.cargarDatos();
-            gestionarVentas.getBtnactualizar().addActionListener(_->{
-                try {
-                    pdf.DatosCliente(objVentas.getCliente());
-                    pdf.generarFacturaPDF(gestionarVentas);
-
-                }catch (Exception e){
-                    JOptionPane.showMessageDialog(null, "Debe completar los campos para poder actualizar");
-                }
-            });
         });
         menu.getCerrarSesion().addActionListener(_ -> {
             menu.dispose();
@@ -279,6 +289,4 @@ public class Menu_Principal_Controlador implements MouseListener {
         });
 
     }
-
-
 }
