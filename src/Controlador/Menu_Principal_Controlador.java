@@ -234,8 +234,8 @@ public class Menu_Principal_Controlador implements MouseListener {
                    Image image = icon.getImage();
                    Image newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // Reducir el tamaño a 50x50
                    ImageIcon newIcon = new ImageIcon(newimg);
-
-                   modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
+                   ArrayList<producto> productos = new ArrayList<producto>();
+                   productos = modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
                    JOptionPane.showMessageDialog(null , "Venta realizada con exito :D");
                    Object[] opciones= {"Aceptar" , "Cancelar"};
                    int respuesta = JOptionPane.showOptionDialog(
@@ -249,8 +249,9 @@ public class Menu_Principal_Controlador implements MouseListener {
                            opciones[0] // Opción predeterminada
                    );
                    if(respuesta==0){
-                       //pdf.DatosCliente(objVentas.getCliente());
-                       pdf.generarFactura();
+                       ArrayList<ventas> resultados = new ArrayList<>();
+                       resultados = pdf.DatosCliente(objVentas.getCliente());
+                       pdf.generarFactura(productos , resultados);
                    }
                    DefaultTableModel model1 = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();
                    model1.setRowCount(0);
@@ -267,7 +268,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                 objVentas.setCliente(RegistroVentas.getTxtcliente().getText());
                 objVentas.setMetododepago(String.valueOf(RegistroVentas.getCbbmetodo().getSelectedItem()));
                 objVentas.setTelefono( RegistroVentas.getTxttelefono().getText());
-                objVentas.setCodigo(objInventario.getCodigo());
+                objVentas.setCodigo(RegistroVentas.getTxtcodigo2().getText());
                 objVentas.setPrecio(Integer.parseInt(String.valueOf(RegistroVentas.getTxtprecioventa().getText())));
                 listaVentas.add(objVentas);
                 inventarioConsumido.add(objInventario.getIdInventario());

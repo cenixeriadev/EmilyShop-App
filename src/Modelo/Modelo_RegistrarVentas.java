@@ -30,17 +30,19 @@ public class Modelo_RegistrarVentas {
         }
         vista.getTablaInventario().setModel(model);
     }
-    public void RegistrarVenta(ArrayList<ventas> Ventas , ArrayList<Integer> inventarioConsumido) {
-
+    public ArrayList<producto> RegistrarVenta(ArrayList<ventas> Ventas , ArrayList<Integer> inventarioConsumido) {
+        ArrayList<producto> listaProductosVendidos = new ArrayList<producto>();
         for(ventas Venta : Ventas){
             objVentas.AgregarVentas(Venta);
         }
+        listaProductosVendidos = objProducto.listarProductos();
         for(int id : inventarioConsumido){
             int idproducto = objProducto.ObtenerIdProducto(id);
             objProducto.EliminarProducto(idproducto);
             objInventario.EliminarProducto(id);
 
         }
+        return listaProductosVendidos;
     }
     public void Agregar_aCarrito(inventario inventario , String precio , String MetodoDePago , String telefono){
         objProducto = new producto();
