@@ -236,6 +236,8 @@ public class Menu_Principal_Controlador implements MouseListener {
                    ImageIcon newIcon = new ImageIcon(newimg);
                    ArrayList<producto> productos = new ArrayList<producto>();
                    productos = modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
+                   listaVentas.clear();
+                   inventarioConsumido.clear();
                    JOptionPane.showMessageDialog(null , "Venta realizada con exito :D");
                    Object[] opciones= {"Aceptar" , "Cancelar"};
                    int respuesta = JOptionPane.showOptionDialog(

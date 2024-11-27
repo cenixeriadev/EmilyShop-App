@@ -19,7 +19,7 @@ public class VentaPDF {
     PreparedStatement ps = null;
     ResultSet rs = null;
     Connection cn = null;
-    ArrayList<ventas> listaCarrito = new ArrayList<>();
+    ArrayList<ventas> listaCarrito = null;
     ventas objVentas;
     //metodo para obtener datos del cliente
     public ArrayList<ventas> DatosCliente(String nombCliente) {
@@ -28,6 +28,7 @@ public class VentaPDF {
             ps = cn.prepareStatement("SELECT cliente ,metododepago , telefono  , precio , horaventa FROM ventas WHERE cliente = ?;");
             ps.setString(1,nombCliente);
             rs = ps.executeQuery();
+            listaCarrito = new ArrayList<>();
             while (rs.next()) {
                 objVentas = new ventas();
                 objVentas.setCliente(rs.getString("cliente"));
