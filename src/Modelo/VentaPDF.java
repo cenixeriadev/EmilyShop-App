@@ -82,11 +82,17 @@ public class VentaPDF {
             encabezado.addCell(celdaLogo);
 
             PdfPCell celdaInfo = new PdfPCell();
+            String direccion = """
+                    Jr san cristobal N° 1660 1er sotano tda 070 Galeria YUYI
+                    """ +
+                    """
+                    Fabricados Directo de Trujillo
+                    """.indent(6);
             celdaInfo.setBorder(Rectangle.NO_BORDER);
-            celdaInfo.addElement(new Paragraph("\t\tCalzatura Emily \n\tVentas al por Mayor y  Menor", new Font(Font.FontFamily.HELVETICA, 14, Font.UNDERLINE)));
+            celdaInfo.addElement(new Paragraph("Calzatura Emily".indent(4) + "Ventas al por Mayor y  Menor".indent(2), new Font(Font.FontFamily.HELVETICA, 14, Font.UNDERLINE)));
             celdaInfo.addElement(new Paragraph("RUC: 10600700214"));
-            celdaInfo.addElement(new Paragraph("Jr san cristobal N° 1660 1er sotano tda 070 Galeria YUYI \n\t Fabricados Directo de Trujillo"));
-            celdaInfo.addElement(new Paragraph("Cel: 955151725"));
+            celdaInfo.addElement(new Paragraph(direccion));
+            celdaInfo.addElement(new Paragraph("Cel: 955151725".indent(5)));
             encabezado.addCell(celdaInfo);
 
             doc.add(encabezado);
