@@ -5,7 +5,6 @@ import Vista.gestionUsuarioVista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Modelo_GestionarUsuario {
     gestionUsuarioVista vistagesusuario;
@@ -29,9 +28,9 @@ public class Modelo_GestionarUsuario {
         }
         vistagesusuario.getTablaUsuario().setModel(modelo);
     }
-    public void EliminarUsuario(String nombusuario){
+    public void EliminarUsuario(int idusuario){
         Usuario = new usuario();
-        int resultado = Usuario.EliminarUsuario(nombusuario);
+        int resultado = Usuario.EliminarUsuario(idusuario);
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
         } else {
@@ -41,14 +40,6 @@ public class Modelo_GestionarUsuario {
     }
     public void ActualizarUsuario(String names, String telefono, String nombusuario, String contraseña , int id){
         Usuario = new usuario();
-        int Id = 0;
-        listaUsuarios = Usuario.ListarUsuario();
-        for(usuario u : listaUsuarios){
-            Id = Usuario.ObtenerIdUsuario(u);
-            if(Id==id){
-                break;
-            }
-        }
         Usuario.setNombUsuario(nombusuario);
         Usuario.setTelefono(telefono);
         Usuario.setApellidoynombre(names);

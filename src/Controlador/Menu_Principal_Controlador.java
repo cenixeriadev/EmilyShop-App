@@ -17,7 +17,6 @@ public class Menu_Principal_Controlador implements MouseListener {
     private  JPanel mainPanel;
     private  CardLayout cardLayout;
     private int selectRow;
-    public String names ;
     public int IDinventario;
     public int IDusuario;
     usuario objUsuario;
@@ -42,7 +41,6 @@ public class Menu_Principal_Controlador implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==Usuariovist.getTablaUsuario()) {
-            names = (String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 0));
             selectRow = Usuariovist.getTablaUsuario().getSelectedRow();
             objUsuario = new usuario();
             Usuariovist.getTxtnombre().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 0)));
@@ -124,6 +122,7 @@ public class Menu_Principal_Controlador implements MouseListener {
         RegistroVentas.getTablaInventario().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         Usuariovist.getTablaUsuario().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         RegistroVentas.getTablacarrito().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        Inventariovist.getTablaInventario().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         Iniciar();
     }
 
@@ -158,19 +157,21 @@ public class Menu_Principal_Controlador implements MouseListener {
             Usuariovist.getBtneliminar().addActionListener(_-> {
                 try {
                     if(Usuariovist.getTablaUsuario().isRowSelected(selectRow)){
-                        model.EliminarUsuario(String.valueOf(Usuariovist.getTablaUsuario().getValueAt(selectRow , 2)));
+                        model.EliminarUsuario(IDusuario);
                     }
                     else {
-                        throw new NullPointerException();
+                        JOptionPane.showMessageDialog(null , "Debe seleccionar un usuario de la tabla  ");
                     }
                     model.Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() , Usuariovist.getTxtcontra());
                 }catch (Exception e){
-                    JOptionPane.showMessageDialog(null , "Debe seleccionar un usuario de la tabla  ");
+                    JOptionPane.showMessageDialog(null , "Error al eliminar el usuario ");
                 }
             });
             Usuariovist.getBtnactualizar().addActionListener(_ ->{
                 try{
-                    model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText() , Usuariovist.getTxtcontra().getText() ,IDusuario);
+                    if(Usuariovist.getTablaUsuario().isRowSelected(selectRow)){
+                        model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText() , Usuariovist.getTxtcontra().getText() ,IDusuario);
+                    }
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Debe completar los campos para poder actualizar");
                 }
@@ -234,7 +235,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                    Image image = icon.getImage();
                    Image newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // Reducir el tamaño a 50x50
                    ImageIcon newIcon = new ImageIcon(newimg);
-                   ArrayList<producto> productos = new ArrayList<producto>();
+                   ArrayList<producto> productos;
                    productos = modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
                    listaVentas.clear();
                    inventarioConsumido.clear();
@@ -251,7 +252,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                            opciones[0] // Opción predeterminada
                    );
                    if(respuesta==0){
-                       ArrayList<ventas> resultados = new ArrayList<>();
+                       ArrayList<ventas> resultados;
                        resultados = pdf.DatosCliente(objVentas.getCliente());
                        pdf.generarFactura(productos , resultados);
                    }

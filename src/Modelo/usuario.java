@@ -138,12 +138,12 @@ public class usuario {
         }
         return res;
     }
-    public int EliminarUsuario(String nombUsuario){
+    public int EliminarUsuario(int id){
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("DELETE FROM usuario WHERE nombusuario=?");
-            ps.setString(1, nombUsuario);
+            ps = cn.prepareStatement("DELETE FROM usuario WHERE idusuario=?");
+            ps.setInt(1,id );
             res = ps.executeUpdate();
             ps.close();
             cn.close();
