@@ -184,7 +184,7 @@ public class Menu_Principal_Controlador implements MouseListener {
             cardLayout.show(mainPanel, "RegistroInventario");
             Registrovist.getBtnregistrar().addActionListener(_->{
                 modelo_inventario.AgregarProducto(Registrovist.getTxtmodelo() , Registrovist.getTxtcodigo() , Registrovist.getCbbtalla() ,Registrovist.getCbbcolor() ,Registrovist.getTxtcosto());
-                modelo_inventario.CargarDatos();
+
             });
 
         });
