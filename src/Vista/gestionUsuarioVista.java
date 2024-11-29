@@ -12,10 +12,9 @@ public class gestionUsuarioVista extends JFrame {
     
     JTable tablaUsuario;
     DefaultTableModel modeloUsuario;
-    
-    
-    JLabel lblusuario, lblnombre, lbltelefono, lblcontra;
-    JTextField txtusuario, txtnombre, txttelefono, txtcontra;
+
+    JLabel lblusuario, lblnombre, lbltelefono;
+    JTextField txtusuario, txtnombre, txttelefono;
     
     JButton btneliminar, btnactualizar;
     
@@ -37,7 +36,7 @@ public class gestionUsuarioVista extends JFrame {
         lblbienvenida.setFont(new Font("Times New Roman", Font.BOLD, 35)); // Estilo de fuente
         panelusuario.add(lblbienvenida);
 
-        modeloUsuario = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Usuario", "Contraseña"}, 0){
+        modeloUsuario = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Usuario"}, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Solo lectura de los datos
@@ -97,16 +96,7 @@ public class gestionUsuarioVista extends JFrame {
         txtusuario= new JTextField();
         txtusuario.setBounds(220,240,250,30);
         panelusuario.add(txtusuario);
-        
-        lblcontra= new JLabel("Contraseña");
-        lblcontra.setBounds(25,280,200,30);
-        lblcontra.setForeground(Color.WHITE);
-        lblcontra.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        panelusuario.add(lblcontra);
-        
-        txtcontra= new JTextField();
-        txtcontra.setBounds(220,280,250,30);
-        panelusuario.add(txtcontra);
+
         
     }
     public JPanel getPanelusuario(){
@@ -129,9 +119,6 @@ public class gestionUsuarioVista extends JFrame {
     }
     public JTextField getTxtusuario(){
         return txtusuario;
-    }
-    public JTextField getTxtcontra(){
-        return txtcontra;
     }
     public DefaultTableModel getModeloUsuario(){
         return modeloUsuario;

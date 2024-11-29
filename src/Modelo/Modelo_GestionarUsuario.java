@@ -23,7 +23,7 @@ public class Modelo_GestionarUsuario {
             modelo.setValueAt(String.valueOf(obj.getNames()), i, 0);
             modelo.setValueAt(obj.getTelefono(), i, 1);
             modelo.setValueAt(obj.getNombUsuario(), i, 2);
-            modelo.setValueAt(String.valueOf(obj.getContraseña()), i, 3);
+            //modelo.setValueAt(String.valueOf(obj.getContraseña()), i, 3);
             i++;
         }
         vistagesusuario.getTablaUsuario().setModel(modelo);
@@ -38,13 +38,12 @@ public class Modelo_GestionarUsuario {
         }
         CargarUsuarios();
     }
-    public void ActualizarUsuario(String names, String telefono, String nombusuario, String contraseña , int id){
+    public void ActualizarUsuario(String names, String telefono, String nombusuario , int id){
         Usuario = new usuario();
         Usuario.setNombUsuario(nombusuario);
         Usuario.setTelefono(telefono);
         Usuario.setApellidoynombre(names);
         Usuario.setIdusuario(id);
-        Usuario.setContraseña(contraseña);
         int resultado = Usuario.EditarUsuario(Usuario);
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Usuario actualizado correctamente");

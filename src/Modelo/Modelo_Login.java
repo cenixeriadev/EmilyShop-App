@@ -1,6 +1,7 @@
 package Modelo;
 
 import Controlador.FrmLoginUsuario_Controlador;
+import Utilitario.ValidationPassword;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class Modelo_Login {
             ArrayList<usuario> usuarios = user.ListarUsuario();
             boolean estado = false;
             for (usuario usuario : usuarios) {
-                if (inputUsername.equals(usuario.getNombUsuario()) && inputPassword.equals(usuario.getContraseña())) {
+                if (inputUsername.equals(usuario.getNombUsuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
                     estado = true;
                     break; // Salir del bucle tan pronto como se encuentre una coincidencia
                 }

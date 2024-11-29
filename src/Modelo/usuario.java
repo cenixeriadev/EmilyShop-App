@@ -1,6 +1,7 @@
 package Modelo;
 
 import Utilitario.ConexionBD;
+import Utilitario.ValidationPassword;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -60,11 +61,11 @@ public class usuario {
         int id= 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT idusuario FROM usuario WHERE nombusuario = ?  AND contraseña = ? AND apellidoynombre = ? AND telefono = ?;");
+            ps = cn.prepareStatement("SELECT idusuario FROM usuario WHERE nombusuario = ?   AND apellidoynombre = ? AND telefono = ?;");
             ps.setString(1, Usuario.getNombUsuario());
-            ps.setString(2, Usuario.getContraseña());
-            ps.setString(3 , Usuario.getNames());
-            ps.setString(4, Usuario.getTelefono());
+           // ps.setString(2, Usuario.getContraseña());
+            ps.setString(2 , Usuario.getNames());
+            ps.setString(3, Usuario.getTelefono());
             rs = ps.executeQuery();
             if(rs.next()){
                 id = rs.getInt("idusuario");
@@ -107,8 +108,9 @@ public class usuario {
         try{
             cn = ConexionBD.getConexionBD();
             ps = cn.prepareStatement("INSERT INTO usuario(apellidoynombre , contraseña , nombusuario , telefono) VALUES(?,?,? ,?);");
+            String hashContraseña = ValidationPassword.encriptar(user.getContraseña());
             ps.setString(1, user.getNames());
-            ps.setString(2, user.getContraseña());
+            ps.setString(2, hashContraseña);
             ps.setString(3 , user.getNombUsuario());
             ps.setString(4 , user.getTelefono());
             res = ps.executeUpdate();
@@ -123,12 +125,12 @@ public class usuario {
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("UPDATE usuario SET apellidoynombre=?, contraseña=? , nombusuario = ? , telefono = ? WHERE idusuario=?");
+            ps = cn.prepareStatement("UPDATE usuario SET apellidoynombre=? , nombusuario = ? , telefono = ? WHERE idusuario=?");
             ps.setString(1, user.getNames());
-            ps.setString(2, user.getContraseña());
-            ps.setString(3 , user.getNombUsuario());
-            ps.setString(4, user.getTelefono());
-            ps.setInt(5, user.getIdusuario());
+            //ps.setString(2, user.getContraseña());
+            ps.setString(2 , user.getNombUsuario());
+            ps.setString(3, user.getTelefono());
+            ps.setInt(4, user.getIdusuario());
             res = ps.executeUpdate();
             ps.close();
             cn.close();

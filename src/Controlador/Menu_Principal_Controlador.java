@@ -46,9 +46,9 @@ public class Menu_Principal_Controlador implements MouseListener {
             Usuariovist.getTxtnombre().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 0)));
             Usuariovist.getTxttelefono().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 1)));
             Usuariovist.getTxtusuario().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 2)));
-            Usuariovist.getTxtcontra().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 3)));
+            //Usuariovist.getTxtcontra().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 3)));
             objUsuario.setApellidoynombre(Usuariovist.getTxtnombre().getText());
-            objUsuario.setContraseña(Usuariovist.getTxtcontra().getText());
+            //objUsuario.setContraseña(Usuariovist.getTxtcontra().getText());
             objUsuario.setTelefono(Usuariovist.getTxttelefono().getText());
             objUsuario.setNombUsuario(Usuariovist.getTxtusuario().getText());
             IDusuario = objUsuario.ObtenerIdUsuario(objUsuario);
@@ -162,7 +162,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                     else {
                         JOptionPane.showMessageDialog(null , "Debe seleccionar un usuario de la tabla  ");
                     }
-                    model.Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() , Usuariovist.getTxtcontra());
+                    model.Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario());
                 }catch (Exception e){
                     JOptionPane.showMessageDialog(null , "Error al eliminar el usuario ");
                 }
@@ -170,12 +170,12 @@ public class Menu_Principal_Controlador implements MouseListener {
             Usuariovist.getBtnactualizar().addActionListener(_ ->{
                 try{
                     if(Usuariovist.getTablaUsuario().isRowSelected(selectRow)){
-                        model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText() , Usuariovist.getTxtcontra().getText() ,IDusuario);
+                        model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText()  ,IDusuario);
                     }
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Debe completar los campos para poder actualizar");
                 }
-                model.Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() , Usuariovist.getTxtcontra());
+                model.Limpiarcampos(Usuariovist.getTxtnombre(), Usuariovist.getTxttelefono(), Usuariovist.getTxtusuario() );
             });
 
 
