@@ -38,7 +38,7 @@ public class Modelo_Login {
 
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null , "Fail in connection with database");
+            JOptionPane.showMessageDialog(null , "Fail in connection with database"+ e.getMessage());
         }
 
     }
