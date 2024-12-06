@@ -26,7 +26,7 @@ public class Modelo_Login {
             ArrayList<usuario> usuarios = user.ListarUsuario();
             boolean estado = false;
             for (usuario usuario : usuarios) {
-                if (inputUsername.equals(usuario.getNombUsuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
+                if (inputUsername.equals(usuario.getNombre_usuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
                     estado = true;
                     break; // Salir del bucle tan pronto como se encuentre una coincidencia
                 }

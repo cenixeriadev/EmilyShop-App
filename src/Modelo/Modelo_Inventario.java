@@ -22,11 +22,11 @@ public class Modelo_Inventario implements MetodosInventario {
         listaInventario = objInventario.listarInventario();
         modelo.setNumRows(listaInventario.size());
         for(inventario objinventario : listaInventario){
-            modelo.setValueAt(objinventario.getModel(), i, 0);
+            modelo.setValueAt(objinventario.getMarca(), i, 0);
             modelo.setValueAt(String.valueOf(objinventario.getCodigo()), i, 1);
             modelo.setValueAt(String.valueOf(objinventario.getTalla()), i, 2);
             modelo.setValueAt(objinventario.getColor(), i, 3);
-            modelo.setValueAt(String.valueOf(objinventario.getPrecioCosto()), i, 4);
+            modelo.setValueAt(String.valueOf(objinventario.getPrecio_compra()), i, 4);
             i++;
         }
         vistages.getTablaInventario().setModel(modelo);
@@ -37,17 +37,17 @@ public class Modelo_Inventario implements MetodosInventario {
         if (i != -1) {
             TableModel model =  vistages.getTablaInventario().getModel();
             objInventario  = new inventario();
-            objInventario.setIdinventario(idinventario);
+            objInventario.setId_inventario(idinventario);
             objInventario.setTalla(Integer.parseInt(talla));
-            objInventario.setModel(modelo);
+            objInventario.setMarca(modelo);
             objInventario.setColor(Color);
-            objInventario.setPrecioCosto(Integer.parseInt(Precio));
+            objInventario.setPrecio_compra(Integer.parseInt(Precio));
             objInventario.setCodigo(Codigo);
-            model.setValueAt(objInventario.getModel(), i, 0);
+            model.setValueAt(objInventario.getMarca(), i, 0);
             model.setValueAt(objInventario.getCodigo(), i, 1);
             model.setValueAt(String.valueOf(objInventario.getTalla()), i, 2);
             model.setValueAt(objInventario.getColor(), i, 2);
-            model.setValueAt(String.valueOf(objInventario.getPrecioCosto()), i, 4);
+            model.setValueAt(String.valueOf(objInventario.getPrecio_compra()), i, 4);
 
             int resultado = objInventario.ModificarProducto(objInventario);
             vistages.getTablaInventario().setModel(model);
@@ -84,10 +84,10 @@ public class Modelo_Inventario implements MetodosInventario {
             int precioCosto = Integer.parseInt(PrecioCosto.getText());
             objInventario = new inventario();
             objInventario.setTalla(Talla);
-            objInventario.setModel(modeloProd);
+            objInventario.setMarca(modeloProd);
             objInventario.setCodigo(Codigo);
             objInventario.setColor(Color);
-            objInventario.setPrecioCosto(precioCosto);
+            objInventario.setPrecio_compra(precioCosto);
         }catch(NullPointerException e){
             JOptionPane.showMessageDialog(null , "Fail in assigning values to variables and " + e.getMessage());
         }

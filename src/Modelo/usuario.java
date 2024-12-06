@@ -12,40 +12,40 @@ import java.util.ArrayList;
 
 @SuppressWarnings("ALL")
 public class usuario {
-    private int idusuario;
-    private String apellidoynombre;
+    private int id_usuario;
+    private String nombre;
     private String contraseña;
-    private String nombUsuario;
+    private String nombre_usuario;
     private String telefono;
 
-    public void setNombUsuario(String nombUsuario) {
-        this.nombUsuario = nombUsuario;
+    public void setNombre_usuario(String nombre_usuario) {
+        this.nombre_usuario = nombre_usuario;
     }
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    public void setIdusuario(int idusuario) {
-        this.idusuario = idusuario;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
-    public void setApellidoynombre(String apellidoynombre) {
-        this.apellidoynombre = apellidoynombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
-    public String getNombUsuario() {
-        return nombUsuario;
+    public String getNombre_usuario() {
+        return nombre_usuario;
     }
     public String getTelefono() {
         return telefono;
     }
-    public int getIdusuario() {
-        return idusuario;
+    public int getId_usuario() {
+        return id_usuario;
     }
     public String getNames(){
-        return apellidoynombre;
+        return nombre;
     }
 
     public String getContraseña() {
@@ -61,19 +61,19 @@ public class usuario {
         int id= 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT idusuario FROM usuario WHERE nombusuario = ?   AND apellidoynombre = ? AND telefono = ?;");
-            ps.setString(1, Usuario.getNombUsuario());
+            ps = cn.prepareStatement("SELECT id_usuario FROM usuarios WHERE nombre_usuario = ?   AND nombre = ? AND telefono = ?;");
+            ps.setString(1, Usuario.getNombre_usuario());
            // ps.setString(2, Usuario.getContraseña());
             ps.setString(2 , Usuario.getNames());
             ps.setString(3, Usuario.getTelefono());
             rs = ps.executeQuery();
             if(rs.next()){
-                id = rs.getInt("idusuario");
+                id = rs.getInt("id_usuario");
             }
             ps.close();
             cn.close();
 
-        }catch(Exception e){
+        }catch(SQLException e){
             JOptionPane.showMessageDialog(null , "Error en obtener ID usuario");
         }
         return id;
@@ -82,15 +82,15 @@ public class usuario {
 
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT * FROM usuario");
+            ps = cn.prepareStatement("SELECT * FROM usuarios");
             rs = ps.executeQuery();
             listaUsuario = new ArrayList<>();
             while(rs.next()){
                 User = new usuario();
-                User.setIdusuario(rs.getInt("idusuario"));
-                User.setApellidoynombre(rs.getString("apellidoynombre"));
+                User.setId_usuario(rs.getInt("id_usuario"));
+                User.setNombre(rs.getString("nombre"));
                 User.setContraseña(rs.getString("contraseña"));
-                User.setNombUsuario(rs.getString("nombusuario"));
+                User.setNombre_usuario(rs.getString("nombre_usuario"));
                 User.setTelefono(rs.getString("telefono"));
                 listaUsuario.add(User);
             }
@@ -107,11 +107,11 @@ public class usuario {
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("INSERT INTO usuario(apellidoynombre , contraseña , nombusuario , telefono) VALUES(?,?,? ,?);");
+            ps = cn.prepareStatement("INSERT INTO usuarios(nombre , contraseña , nombre_usuario , telefono) VALUES(?,?,? ,?);");
             String hashContraseña = ValidationPassword.encriptar(user.getContraseña());
             ps.setString(1, user.getNames());
             ps.setString(2, hashContraseña);
-            ps.setString(3 , user.getNombUsuario());
+            ps.setString(3 , user.getNombre_usuario());
             ps.setString(4 , user.getTelefono());
             res = ps.executeUpdate();
             ps.close();
@@ -125,12 +125,12 @@ public class usuario {
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("UPDATE usuario SET apellidoynombre=? , nombusuario = ? , telefono = ? WHERE idusuario=?");
+            ps = cn.prepareStatement("UPDATE usuarios SET nombre=? , nombre_usuario = ? , telefono = ? WHERE id_usuario=?");
             ps.setString(1, user.getNames());
             //ps.setString(2, user.getContraseña());
-            ps.setString(2 , user.getNombUsuario());
+            ps.setString(2 , user.getNombre_usuario());
             ps.setString(3, user.getTelefono());
-            ps.setInt(4, user.getIdusuario());
+            ps.setInt(4, user.getId_usuario());
             res = ps.executeUpdate();
             ps.close();
             cn.close();
@@ -144,7 +144,7 @@ public class usuario {
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("DELETE FROM usuario WHERE idusuario=?");
+            ps = cn.prepareStatement("DELETE FROM usuarios WHERE id_usuario=?");
             ps.setInt(1,id );
             res = ps.executeUpdate();
             ps.close();

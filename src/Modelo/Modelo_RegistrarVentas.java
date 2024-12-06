@@ -11,7 +11,7 @@ public class Modelo_RegistrarVentas {
     ArrayList<inventario> listaDisponible = new ArrayList<>();
     //ventas objVentas;
     ventas objVentas = new ventas();
-    producto objProducto = new producto();
+    carrito objProducto = new carrito();
     inventario objInventario = new inventario();
     public Modelo_RegistrarVentas(registroVentaVista vista){
         this.vista = vista;
@@ -22,7 +22,7 @@ public class Modelo_RegistrarVentas {
         listaDisponible = objVentas.listarInventarioDisponible(talla , color ,codigo);
         model.setNumRows(listaDisponible.size());
         for(inventario objInventario : listaDisponible){
-            model.setValueAt(objInventario.getModel(), i, 0);
+            model.setValueAt(objInventario.getMarca(), i, 0);
             model.setValueAt(objInventario.getCodigo(), i, 1);
             model.setValueAt(objInventario.getTalla(), i, 2);
             model.setValueAt(objInventario.getColor(), i, 3);
@@ -30,8 +30,8 @@ public class Modelo_RegistrarVentas {
         }
         vista.getTablaInventario().setModel(model);
     }
-    public ArrayList<producto> RegistrarVenta(ArrayList<ventas> Ventas , ArrayList<Integer> inventarioConsumido) {
-        ArrayList<producto> listaProductosVendidos = new ArrayList<producto>();
+    public ArrayList<carrito> RegistrarVenta(ArrayList<ventas> Ventas , ArrayList<Integer> inventarioConsumido) {
+        ArrayList<carrito> listaProductosVendidos = new ArrayList<carrito>();
         for(ventas Venta : Ventas){
             objVentas.AgregarVentas(Venta);
         }
@@ -45,11 +45,11 @@ public class Modelo_RegistrarVentas {
         return listaProductosVendidos;
     }
     public void Agregar_aCarrito(inventario inventario , String precio , String MetodoDePago , String telefono){
-        objProducto = new producto();
+        objProducto = new carrito();
         objProducto.setCodigo(inventario.getCodigo());
-        objProducto.setIdinventario(inventario.getIdInventario());
+        objProducto.setId_cliente(inventario.getIdInventario());
         objProducto.setColor(inventario.getColor());
-        objProducto.setModel(inventario.getModel());
+        objProducto.setModel(inventario.getMarca());
         objProducto.setTalla(inventario.getTalla());
         objProducto.AgregarProducto(objProducto);
 

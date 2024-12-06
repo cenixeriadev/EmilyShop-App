@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 
@@ -21,7 +20,7 @@ public class Menu_Principal_Controlador implements MouseListener {
     public int IDusuario;
     usuario objUsuario;
     inventario objInventario;
-    producto objProducto;
+    carrito objProducto;
     ventas objVentas;
     public ArrayList<ventas> listaVentas = new  ArrayList<>();
     public ArrayList<Integer> inventarioConsumido = new  ArrayList<>();
@@ -47,50 +46,42 @@ public class Menu_Principal_Controlador implements MouseListener {
             Usuariovist.getTxttelefono().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 1)));
             Usuariovist.getTxtusuario().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 2)));
             //Usuariovist.getTxtcontra().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 3)));
-            objUsuario.setApellidoynombre(Usuariovist.getTxtnombre().getText());
+            objUsuario.setNombre(Usuariovist.getTxtnombre().getText());
             //objUsuario.setContraseña(Usuariovist.getTxtcontra().getText());
             objUsuario.setTelefono(Usuariovist.getTxttelefono().getText());
-            objUsuario.setNombUsuario(Usuariovist.getTxtusuario().getText());
+            objUsuario.setNombre_usuario(Usuariovist.getTxtusuario().getText());
             IDusuario = objUsuario.ObtenerIdUsuario(objUsuario);
 
         }
         if(e.getSource()==Inventariovist.getTablaInventario()){
             selectRow = Inventariovist.getTablaInventario().getSelectedRow();// modelo  codigo talla color pcosto
             objInventario = new inventario();
-            objInventario.setModel((String)Inventariovist.getTablaInventario().getValueAt(selectRow , 0));
+            objInventario.setMarca((String)Inventariovist.getTablaInventario().getValueAt(selectRow , 0));
             objInventario.setCodigo((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 1));
             objInventario.setTalla(Integer.parseInt((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 2)));
             objInventario.setColor((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 3));
-            objInventario.setPrecioCosto(Integer.parseInt((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 4)));
+            objInventario.setPrecio_compra(Double.parseDouble((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 4)));
             IDinventario = objInventario.ObtenerIdInventario(objInventario);
             Inventariovist.getTxtCodigo().setText(objInventario.getCodigo());
             Inventariovist.getTxtColor().setText(objInventario.getColor());
-            Inventariovist.getTxtCosto().setText(String.valueOf(objInventario.getPrecioCosto()));
+            Inventariovist.getTxtCosto().setText(String.valueOf(objInventario.getPrecio_compra()));
             Inventariovist.getTxtTalla().setText(String.valueOf(objInventario.getTalla()));
-            Inventariovist.getTxtModelo().setText(objInventario.getModel());
+            Inventariovist.getTxtModelo().setText(objInventario.getMarca());
 
         }
         if(e.getSource()==RegistroVentas.getTablaInventario()){
             selectRow = RegistroVentas.getTablaInventario().getSelectedRow();
             objInventario = new inventario();
-            objInventario.setModel((String)RegistroVentas.getTablaInventario().getValueAt(selectRow , 0));
+            objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow , 0));
             objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
             objInventario.setTalla(Integer.parseInt(String.valueOf(RegistroVentas.getTablaInventario().getValueAt(selectRow, 2))));
             objInventario.setColor((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 3));
             int id = objInventario.ObtenerIdInventario(objInventario);
-            int preciocosto = objInventario.ObtenerPrecio(id);
-            objInventario.setIdinventario(id);
-            objInventario.setPrecioCosto(preciocosto);
+            objInventario.setId_inventario(id);
         }
         if(e.getSource()==gestionarVentas.getTablaInventario()){
             selectRow = gestionarVentas.getTablaInventario().getSelectedRow();
             objVentas = new ventas();
-            objVentas.setCliente((String)gestionarVentas.getTablaInventario().getValueAt(selectRow , 0));
-            objVentas.setCodigo((String)gestionarVentas.getTablaInventario().getValueAt(selectRow , 1));
-            objVentas.setMetododepago((String)gestionarVentas.getTablaInventario().getValueAt(selectRow , 5));
-            objVentas.setPrecio((Integer) gestionarVentas.getTablaInventario().getValueAt(selectRow , 6));
-            objVentas.setHoraventa((Timestamp) gestionarVentas.getTablaInventario().getValueAt(selectRow , 7));
-            objVentas.setTelefono((String)gestionarVentas.getTablaInventario().getValueAt(selectRow,8));
 
 
         }
@@ -235,7 +226,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                    Image image = icon.getImage();
                    Image newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // Reducir el tamaño a 50x50
                    ImageIcon newIcon = new ImageIcon(newimg);
-                   ArrayList<producto> productos;
+                   ArrayList<carrito> productos;
                    productos = modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
                    listaVentas.clear();
                    inventarioConsumido.clear();
@@ -253,7 +244,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                    );
                    if(respuesta==0){
                        ArrayList<ventas> resultados;
-                       resultados = pdf.DatosCliente(objVentas.getCliente());
+                       resultados = pdf.DatosCliente(String.valueOf(objVentas.getId_cliente()));
                        pdf.generarFactura(productos , resultados);
                    }
                    DefaultTableModel model1 = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();
@@ -268,11 +259,6 @@ public class Menu_Principal_Controlador implements MouseListener {
            RegistroVentas.getBtnCarrito().addActionListener(_->{
                 modelo_registro_ventas.Agregar_aCarrito(objInventario , String.valueOf(RegistroVentas.getTxtprecioventa().getText()) , String.valueOf(RegistroVentas.getCbbmetodo().getSelectedItem()) , RegistroVentas.getTxttelefono().getText());
                 objVentas = new ventas();
-                objVentas.setCliente(RegistroVentas.getTxtcliente().getText());
-                objVentas.setMetododepago(String.valueOf(RegistroVentas.getCbbmetodo().getSelectedItem()));
-                objVentas.setTelefono( RegistroVentas.getTxttelefono().getText());
-                objVentas.setCodigo(objInventario.getCodigo());
-                objVentas.setPrecio(Integer.parseInt(String.valueOf(RegistroVentas.getTxtprecioventa().getText())));
                 listaVentas.add(objVentas);
                 inventarioConsumido.add(objInventario.getIdInventario());
            });

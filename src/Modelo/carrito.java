@@ -2,79 +2,54 @@ package Modelo;
 
 import Utilitario.ConexionBD;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 
-public class producto {
-    private int idproducto ;
-    private int idinventario;
-    private String modelo;
-    private String codigo;
-    private String color ;
-    private int talla;
-
+public class carrito {
+    private int id_carrito;
+    private int id_cliente;
+    private int id_inventario;
+    private int cantidad ;
+    private double precio_unitario;
+    private double subtotal;
+    private Timestamp fecha_agregado;
     public void setIdProducto(int idproducto) {
-        this.idproducto = idproducto;
+        this.id_carrito = idproducto;
     }
-    public void setIdinventario(int idinventario) {
-        this.idinventario = idinventario;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
-    public void setModel(String modelo) {
-        this.modelo = modelo;
-    }
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-    public void setColor(String color) {
-        this.color = color;
-    }
-    public void setTalla(int talla) {
-        this.talla = talla;
-    }
+
 
     public int getIdProducto() {
-        return idproducto;
+        return id_carrito;
     }
-    public int getIdinventario() {
-        return idinventario;
+    public int getId_cliente() {
+        return id_cliente;
     }
-    public String getModel() {
-        return modelo;
-    }
-    public String getCodigo() {
-        return codigo;
-    }
-    public String getColor() {
-        return color;
-    }
-    public int getTalla() {
-        return talla;
-    }
+
 
 
 
     Connection cn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    ArrayList<producto> listaProducto = null;
-    producto objProducto = null;
+    ArrayList<carrito> listaProducto = null;
+    carrito objProducto = null;
 
 
 
-    public ArrayList<producto> listarProductos(){
+    public ArrayList<carrito> listarProductos(){
         try{
             cn = ConexionBD.getConexionBD();
             ps = cn.prepareStatement("SELECT * FROM producto");
             rs = ps.executeQuery();
             listaProducto = new ArrayList<>();
             while(rs.next()){
-                objProducto = new producto();
+                objProducto = new carrito();
                 objProducto.setIdProducto(rs.getInt("idproducto"));
-                objProducto.setIdinventario(rs.getInt("idInventario"));
+                objProducto.setId_cliente(rs.getInt("idInventario"));
                 objProducto.setModel(rs.getString("modelo"));
                 objProducto.setColor(rs.getString("color"));
                 objProducto.setCodigo(rs.getString("codigo"));
@@ -107,12 +82,12 @@ public class producto {
             return 0;
         }
     }
-    public int AgregarProducto(producto producto){
+    public int AgregarProducto(carrito producto){
         int estado = 0;
         try{
             cn = ConexionBD.getConexionBD();
             ps = cn.prepareStatement("INSERT INTO producto (idinventario, modelo, color, codigo, talla ) VALUES (?,?,?,?,?)");
-            ps.setInt(1, producto.getIdinventario());
+            ps.setInt(1, producto.getId_cliente());
             ps.setString(2, producto.getModel());
             ps.setString(3, producto.getColor());
             ps.setString(4, producto.getCodigo());
@@ -125,12 +100,12 @@ public class producto {
         }
         return estado;
     }
-    public int ModificarProducto(producto producto){
+    public int ModificarProducto(carrito producto){
         int estado = 0;
         try{
             cn = ConexionBD.getConexionBD();
             ps = cn.prepareStatement("UPDATE producto SET idinventario=?, modelo=?, color=?, codigo=?, talla=? WHERE idproducto=?");
-            ps.setInt(1, producto.getIdinventario());
+            ps.setInt(1, producto.getId_cliente());
             ps.setString(2, producto.getModel());
             ps.setString(3, producto.getColor());
             ps.setString(4, producto.getCodigo());

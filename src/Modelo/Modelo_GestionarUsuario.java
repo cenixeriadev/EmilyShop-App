@@ -22,7 +22,7 @@ public class Modelo_GestionarUsuario {
         for(usuario obj : listaUsuarios){
             modelo.setValueAt(String.valueOf(obj.getNames()), i, 0);
             modelo.setValueAt(obj.getTelefono(), i, 1);
-            modelo.setValueAt(obj.getNombUsuario(), i, 2);
+            modelo.setValueAt(obj.getNombre_usuario(), i, 2);
             //modelo.setValueAt(String.valueOf(obj.getContraseña()), i, 3);
             i++;
         }
@@ -40,10 +40,10 @@ public class Modelo_GestionarUsuario {
     }
     public void ActualizarUsuario(String names, String telefono, String nombusuario , int id){
         Usuario = new usuario();
-        Usuario.setNombUsuario(nombusuario);
+        Usuario.setNombre_usuario(nombusuario);
         Usuario.setTelefono(telefono);
-        Usuario.setApellidoynombre(names);
-        Usuario.setIdusuario(id);
+        Usuario.setNombre(names);
+        Usuario.setId_usuario(id);
         int resultado = Usuario.EditarUsuario(Usuario);
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Usuario actualizado correctamente");

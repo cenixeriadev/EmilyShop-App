@@ -25,16 +25,15 @@ public class VentaPDF {
     public ArrayList<ventas> DatosCliente(String nombCliente) {
         try {
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT cliente ,metododepago , telefono  , precio , horaventa FROM ventas WHERE cliente = ?;");
+            ps = cn.prepareStatement("SELECT id_cliente ,metodo_pago , total_venta , fecha_venta FROM ventas WHERE id_cliente = ?;");
             ps.setString(1,nombCliente);
             rs = ps.executeQuery();
             while (rs.next()) {
                 objVentas = new ventas();
-                objVentas.setCliente(rs.getString("cliente"));
-                objVentas.setMetododepago(rs.getString("metododepago"));
-                objVentas.setHoraventa(rs.getTimestamp("horaventa"));
-                objVentas.setTelefono(rs.getString("telefono"));
-                objVentas.setPrecio(rs.getInt("precio"));
+                objVentas.setId_cliente(rs.getInt("id_cliente"));
+                objVentas.setMetodo_pago(rs.getString("metodo_pago"));
+                objVentas.setFecha_venta(rs.getTimestamp("fecha_venta"));
+                objVentas.setTotal_venta(rs.getDouble("total_venta"));
 
                 listaCarrito.add(objVentas);
             }
@@ -44,7 +43,7 @@ public class VentaPDF {
         }
         return  listaCarrito;
     }
-    public void generarFactura(ArrayList<producto> listaproductos , ArrayList<ventas> listaventas) {
+    public void generarFactura(ArrayList<carrito> listaproductos , ArrayList<ventas> listaventas) {
         try {
             //cargar la fecha actual
             Date date = new Date();
@@ -60,7 +59,7 @@ public class VentaPDF {
 
             // Crear el documento
             Document doc = new Document(PageSize.A4, 36, 36, 20, 20);
-            String nombreArchivo =  listaventas.getFirst().getCliente();
+            int nombreArchivo =  listaventas.getFirst().getId_cliente();
             FileOutputStream archivo;
             File file = new File("src/pdf/" + nombreArchivo + fechaNueva + ".pdf");//agregue fecha actual para el nombre de la ruta y el de el open doc es el mismo
             archivo = new FileOutputStream(file);
@@ -116,10 +115,10 @@ public class VentaPDF {
             clienteCell.setBorder(Rectangle.ALIGN_RIGHT);
             clienteCell.addElement(new Paragraph("Datos del cliente", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE)));
             clienteCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            clienteCell.addElement(new Paragraph("Cliente: " + listaventas.getFirst().getCliente() ));
+            clienteCell.addElement(new Paragraph("Cliente: " + listaventas.getFirst().getId_cliente() ));
             clienteCell.addElement(new Paragraph("DNI: 06907263"));
             clienteCell.addElement(new Paragraph("Dirección: CALLE PEDRO RUIZ NRO. 129, SURQUILLO, LIMA, LIMA, PERÚ"));
-            clienteCell.addElement(new Paragraph("Teléfono: " + listaventas.getFirst().getTelefono()));
+            clienteCell.addElement(new Paragraph("Teléfono: " + listaventas.getFirst().getMetododepago()));
             datosCliente.addCell(clienteCell);
 
             doc.add(datosCliente);
@@ -145,16 +144,16 @@ public class VentaPDF {
                 celda.setHorizontalAlignment(Element.ALIGN_CENTER);
                 tablaProductos.addCell(celda);
             }
-            int totalventa = 0;
+            double totalventa = 0;
             // Agregar filas de ejemplo
             for (int i = 0; i <= listaventas.size()-1 ; i++) {
                 tablaProductos.addCell(String.valueOf(i+1));
                 tablaProductos.addCell("1");
                 tablaProductos.addCell(listaventas.get(i).getMetododepago());//codigo
                 tablaProductos.addCell(listaproductos.get(i).getModel()+" " + listaproductos.get(i).getColor() + " " + listaproductos.get(i).getTalla());//descripcion
-                tablaProductos.addCell(String.valueOf(listaventas.get(i).getPrecio()) +" Soles");//precio unitario
-                tablaProductos.addCell(String.valueOf(listaventas.get(i).getPrecio())+" Soles");//precio total del producto
-                totalventa += listaventas.get(i).getPrecio();
+                tablaProductos.addCell(String.valueOf(listaventas.get(i).getTotal_venta()) +" Soles");//precio unitario
+                tablaProductos.addCell(String.valueOf(listaventas.get(i).getTotal_venta())+" Soles");//precio total del producto
+                totalventa += listaventas.get(i).getTotal_venta();
             }
 
             doc.add(tablaProductos);

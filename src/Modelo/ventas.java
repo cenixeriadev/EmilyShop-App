@@ -9,46 +9,25 @@ import java.util.ArrayList;
 
 public class ventas {
 
-    private int idventas;
-    private String  cliente;
-    private String metododepago;
-    private int precio;
-    private Timestamp horaventa;
-    private String codigo ;
-    private String telefono;
+    private int id_venta;
+    private int id_cliente;
+    private Timestamp fecha_venta;
+    private double total_venta;
+    private String metodo_pago;
 
-    public void setCodigo(String codigo){this.codigo = codigo;}
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-    public void setMetododepago(String metododepago) {
-        this.metododepago = metododepago;
-    }
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
-    public void setHoraventa(Timestamp horaventa) {
-        this.horaventa = horaventa;
-    }
-    public void setIdventas(int idventas){this.idventas = idventas;}
-    public void setTelefono(String telefono){this.telefono = telefono;}
+    public void setId_venta(int id_venta) {this.id_venta = id_venta;}
+    public void setId_cliente(int id_cliente) {this.id_cliente = id_cliente;}
+    public void setFecha_venta(Timestamp fecha_venta) {this.fecha_venta = fecha_venta;}
+    public void setTotal_venta(double total_venta) {this.total_venta = total_venta;}
+    public void setMetodo_pago(String metodo_pago) {this.metodo_pago = metodo_pago;}
 
-    public String getCodigo() { return codigo;}
-    public int getIdVenta() {
-        return idventas;}
-    public String getCliente() {
-        return cliente;
-    }
-    public String getMetododepago() {
-        return metododepago;
-    }
-    public int getPrecio() {
-        return precio;
-    }
-    public Timestamp getHoraventa() {
-        return horaventa;
-    }
-    public String getTelefono(){return telefono;}
+    public int getIdVenta(){return id_venta;}
+    public int getId_cliente(){return id_cliente;}
+    public Timestamp getFecha_venta(){return fecha_venta;}
+    public double getTotal_venta(){return total_venta;}
+    public String getMetododepago(){return metodo_pago;}
+
+
     Connection cn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -90,12 +69,12 @@ public class ventas {
             // Procesar resultados
             while (rs.next()) {
                 inventario objInventario = new inventario();
-                objInventario.setModel(rs.getString("modelo"));
+                objInventario.setMarca(rs.getString("marca"));
                 objInventario.setCodigo(rs.getString("codigo"));
                 objInventario.setTalla(rs.getInt("talla"));
                 objInventario.setColor(rs.getString("color"));
-                objInventario.setIdinventario(rs.getInt("idinventario"));
-                objInventario.setPrecioCosto(rs.getInt("preciocosto"));
+                objInventario.setId_inventario(rs.getInt("id_inventario"));
+                objInventario.setPrecio_compra(rs.getInt("precio_compra"));
                 listaInventarioD.add(objInventario);
             }
             rs.close();
@@ -108,42 +87,14 @@ public class ventas {
     }
 
 
-    public ArrayList<ventas> listarVentas() {
-        try {
-            cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT * FROM ventas");
-            rs = ps.executeQuery();
-            listaVentas = new ArrayList<>();
-            while (rs.next()) {
-                objVentas = new ventas();
-                objVentas.setIdventas(rs.getInt("idventas"));
-                objVentas.setCliente(rs.getString("cliente"));
-                objVentas.setMetododepago(rs.getString("metododepago"));
-                objVentas.setTelefono(rs.getString("telefono"));
-                objVentas.setPrecio(rs.getInt("precio"));
-                objVentas.setHoraventa(rs.getTimestamp("horaventa"));
-                objVentas.setCodigo(rs.getString("codigo"));
-                listaVentas.add(objVentas);
-            }
-            rs.close();
-            ps.close();
-            cn.close();
-        } catch (SQLException e) {
-            System.out.println("Error al listar las ventas: " + e.getMessage());
-            return null;
-        }
-        return listaVentas;
-    }
     public int AgregarVentas(ventas Venta){
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio  ,codigo , telefono) VALUES (?,?,?,?,?);");
-            ps.setString(1, Venta.getCliente());
+            ps = cn.prepareStatement("INSERT INTO ventas (id_cliente,metodo_pago, total_venta) VALUES (?,?,?);");
+            ps.setInt(1, Venta.getId_cliente());
             ps.setString(2, Venta.getMetododepago());
-            ps.setInt(3, Venta.getPrecio());
-            ps.setString(4, Venta.getCodigo());
-            ps.setString(5, Venta.getTelefono());
+            ps.setDouble(3, Venta.getTotal_venta());
             estado =  ps.executeUpdate();
             cn.close();
             ps.close();
@@ -158,11 +109,10 @@ public class ventas {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("UPDATE ventas SET cliente=?, metododepago=?, precio=? WHERE idventas=?");
-            ps.setString(1, Venta.getCliente());
+            ps = cn.prepareStatement("UPDATE ventas SET id_cliente=?, metodo_pago=?, total_venta=? WHERE id_venta=?");
+            ps.setInt(1, Venta.getId_cliente());
             ps.setString(2, Venta.getMetododepago());
-            ps.setInt(3, Venta.getPrecio());
-            ps.setInt(4, Venta.getIdVenta());
+            ps.setDouble(4, Venta.getTotal_venta());
             estado =  ps.executeUpdate();
             cn.close();
             ps.close();
@@ -176,7 +126,7 @@ public class ventas {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("DELETE FROM ventas WHERE idventas=?");
+            ps = cn.prepareStatement("DELETE FROM ventas WHERE id_venta=?");
             ps.setInt(1, Venta.getIdVenta());
             estado =  ps.executeUpdate();
             cn.close();
