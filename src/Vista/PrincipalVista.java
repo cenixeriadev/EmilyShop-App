@@ -12,7 +12,7 @@ public class PrincipalVista extends JFrame {
 
     JMenuItem gestionUsuario;
     JMenuItem registrarProducto, gestionarInventario;
-    JMenuItem registrarVenta, gestionarVentas, generarBoleta;
+    JMenuItem registrarVenta, gestionarVentas;
     JMenuItem reporteDia, reporteSemana, reporteMes;
     JMenuItem cerrarSesion;
 
@@ -55,11 +55,9 @@ public class PrincipalVista extends JFrame {
         registrarVenta.setFont(new Font("Arial", Font.BOLD, 17));
         gestionarVentas = new JMenuItem(" Gestionar Ventas");
         gestionarVentas.setFont(new Font("Arial", Font.BOLD, 17));
-        generarBoleta = new JMenuItem(" Generar Boleta");
-        generarBoleta.setFont(new Font("Arial", Font.BOLD, 17));
+
         ventasMenu.add(registrarVenta);
         ventasMenu.add(gestionarVentas);
-        ventasMenu.add(generarBoleta);
 
         // Menú Reporte General
         reporteMenu = new JMenu("    REPORTE GENERAL    ");
@@ -145,9 +143,6 @@ public class PrincipalVista extends JFrame {
     }
     public JMenuItem getRegistrarVenta(){
         return registrarVenta;
-    }
-    public JMenuItem getGenerarBoleta(){
-        return generarBoleta;
     }
     public JMenuItem getGestionarVentas(){
         return gestionarVentas;

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class inventario {
     private int id_inventario;
-    private int id_categoria;
     private double precio_compra;
     private double precio_venta;
     private int stock;
@@ -18,10 +17,11 @@ public class inventario {
     private String marca;
     private String codigo;
     private String color ;
+    private String descripcion;
 
 
+    public void setDescripcion(String descripcion){this.descripcion = descripcion;}
     public void setFecha_entrada(Timestamp fecha_entrada){this.fecha_entrada = fecha_entrada;}
-    public void setId_categoria(int id_categoria){this.id_categoria = id_categoria;}
     public void setPrecio_venta(double precio_venta){
         this.precio_venta = precio_venta;
     }
@@ -48,9 +48,6 @@ public class inventario {
 
     public Timestamp getFecha_entrada(){return fecha_entrada;}
     public int getStock(){return stock;}
-    public int getId_categoria(){
-        return id_categoria;
-    }
     public double getPrecio_venta(){
         return precio_venta;
     }
@@ -68,6 +65,7 @@ public class inventario {
     public int getTalla(){
         return talla; 
     }
+    public String getDescripcion(){return descripcion;}
 
     Connection cn  = null;
     PreparedStatement pt = null;
@@ -83,9 +81,9 @@ public class inventario {
             while(rs.next()){
                 objInventario = new inventario();
                 objInventario.setId_inventario(rs.getInt("id_inventario"));
-                objInventario.setId_categoria(rs.getInt("id_categoria"));
                 objInventario.setPrecio_venta(rs.getDouble("precio_venta"));
                 objInventario.setStock(rs.getInt("stock"));
+                objInventario.setDescripcion(rs.getString("descripcion"));
                 objInventario.setFecha_entrada(rs.getTimestamp("fecha_entrada"));
                 objInventario.setTalla(rs.getInt("talla"));
                 objInventario.setMarca(rs.getString("marca"));
@@ -107,7 +105,7 @@ public class inventario {
         int estado  = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("INSERT INTO inventario (codigo,talla,marca,color,precio_compra , precio_venta,stock ,id_categoria) VALUES (?,?,?,?,?,?,?,?)");
+            pt = cn.prepareStatement("INSERT INTO inventario (codigo,talla,marca,color,precio_compra , precio_venta,stock ,descripcion) VALUES (?,?,?,?,?,?,?,?)");
             pt.setString(1, objInventario.getCodigo());
             pt.setInt(2, objInventario.getTalla());
             pt.setString(3, objInventario.getMarca());
@@ -115,7 +113,7 @@ public class inventario {
             pt.setDouble(5, objInventario.getPrecio_compra());
             pt.setDouble(6, objInventario.getPrecio_venta());
             pt.setInt(7, objInventario.getStock());
-            pt.setInt(8, objInventario.getId_categoria());
+            pt.setString(8, objInventario.getDescripcion());
             estado =  pt.executeUpdate();
             cn.close();
             pt.close();
@@ -130,8 +128,9 @@ public class inventario {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("DELETE FROM inventario WHERE id_inventario=?");
-            pt.setInt(1, id_inventario);
+            pt = cn.prepareStatement("UPDATE inventario SET estado = ? WHERE id_inventario=?");
+            pt.setString(1, "inactivo");
+            pt.setInt(2, id_inventario);
             estado =  pt.executeUpdate();
             cn.close();
             pt.close();
@@ -146,11 +145,12 @@ public class inventario {
         int idInventario = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("SELECT id_inventario FROM inventario WHERE codigo=? AND talla=? AND marca=? AND color=?");
+            pt = cn.prepareStatement("SELECT id_inventario FROM inventario WHERE codigo=? AND talla=? AND marca=? AND color=? AND precio_compra = ?;");
             pt.setString(1, objInventario.getCodigo());
             pt.setInt(2, objInventario.getTalla());
             pt.setString(3, objInventario.getMarca());
             pt.setString(4, objInventario.getColor());
+            pt.setDouble(5, objInventario.getPrecio_compra());
             rs = pt.executeQuery();
             if(rs.next()){
                 idInventario = rs.getInt("id_inventario");
@@ -167,7 +167,7 @@ public class inventario {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("UPDATE inventario SET talla=?, marca=?, color=?, precio_compra=?  ,codigo = ? WHERE id_inventario=?");
+            pt = cn.prepareStatement("UPDATE inventario SET talla=?, marca=?, color=?, precio_compra=?  ,codigo = ?  WHERE id_inventario=?");
             pt.setInt(1, objInventario.getTalla());
             pt.setString(2, objInventario.getMarca());
             pt.setString(3, objInventario.getColor());
@@ -182,6 +182,24 @@ public class inventario {
         }
         return  estado;
 
+    }
+    public String ObtenerEstado(inventario objInventario){
+        String estado = "inactivo";
+        try {
+            cn = ConexionBD.getConexionBD();
+            pt = cn.prepareStatement("SELECT estado FROM inventario WHERE id_inventario=?");
+            pt.setInt(1, objInventario.getIdInventario());
+            rs = pt.executeQuery();
+            if (rs.next()) {
+                estado = rs.getString("estado");
+            }
+            rs.close();
+            pt.close();
+            cn.close();
+        }catch (SQLException e){
+            System.out.println("Error al obtener estado: " + e.getMessage());
+        }
+        return estado;
     }
     
 }

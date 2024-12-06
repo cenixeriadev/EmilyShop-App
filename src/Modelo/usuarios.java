@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @SuppressWarnings("ALL")
-public class usuario {
+public class usuarios {
     private int id_usuario;
     private String nombre;
     private String contraseña;
@@ -55,9 +55,9 @@ public class usuario {
     Connection cn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    ArrayList<usuario> listaUsuario = null;
-    usuario User = null;
-    public int ObtenerIdUsuario (usuario Usuario){
+    ArrayList<usuarios> listaUsuario = null;
+    usuarios User = null;
+    public int ObtenerIdUsuario (usuarios Usuario){
         int id= 0;
         try{
             cn = ConexionBD.getConexionBD();
@@ -78,7 +78,7 @@ public class usuario {
         }
         return id;
     }
-    public ArrayList<usuario> ListarUsuario(){
+    public ArrayList<usuarios> ListarUsuario(){
 
         try{
             cn = ConexionBD.getConexionBD();
@@ -86,7 +86,7 @@ public class usuario {
             rs = ps.executeQuery();
             listaUsuario = new ArrayList<>();
             while(rs.next()){
-                User = new usuario();
+                User = new usuarios();
                 User.setId_usuario(rs.getInt("id_usuario"));
                 User.setNombre(rs.getString("nombre"));
                 User.setContraseña(rs.getString("contraseña"));
@@ -103,7 +103,7 @@ public class usuario {
         }
         return listaUsuario;
     }
-    public int AgregarUsuario(usuario user){
+    public int AgregarUsuario(usuarios user){
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();
@@ -121,7 +121,7 @@ public class usuario {
         }
         return res;
     }
-    public int EditarUsuario(usuario user){
+    public int EditarUsuario(usuarios user){
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();

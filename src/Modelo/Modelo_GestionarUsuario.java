@@ -8,18 +8,18 @@ import java.util.ArrayList;
 
 public class Modelo_GestionarUsuario {
     gestionUsuarioVista vistagesusuario;
-    ArrayList<usuario> listaUsuarios = new ArrayList<>();
-    usuario Usuario;
+    ArrayList<usuarios> listaUsuarios = new ArrayList<>();
+    usuarios Usuario;
     public Modelo_GestionarUsuario(gestionUsuarioVista vistagesusuario){
         this.vistagesusuario = vistagesusuario;
     }
     public void CargarUsuarios(){
         DefaultTableModel modelo = vistagesusuario.getModeloUsuario();
         int i = 0 ;
-        Usuario = new usuario();  // Reemplazar con la clase que gestiona la base de datos de usuarios.
+        Usuario = new usuarios();  // Reemplazar con la clase que gestiona la base de datos de usuarios.
         listaUsuarios = Usuario.ListarUsuario();
         modelo.setNumRows(listaUsuarios.size());
-        for(usuario obj : listaUsuarios){
+        for(usuarios obj : listaUsuarios){
             modelo.setValueAt(String.valueOf(obj.getNames()), i, 0);
             modelo.setValueAt(obj.getTelefono(), i, 1);
             modelo.setValueAt(obj.getNombre_usuario(), i, 2);
@@ -29,7 +29,7 @@ public class Modelo_GestionarUsuario {
         vistagesusuario.getTablaUsuario().setModel(modelo);
     }
     public void EliminarUsuario(int idusuario){
-        Usuario = new usuario();
+        Usuario = new usuarios();
         int resultado = Usuario.EliminarUsuario(idusuario);
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
@@ -39,7 +39,7 @@ public class Modelo_GestionarUsuario {
         CargarUsuarios();
     }
     public void ActualizarUsuario(String names, String telefono, String nombusuario , int id){
-        Usuario = new usuario();
+        Usuario = new usuarios();
         Usuario.setNombre_usuario(nombusuario);
         Usuario.setTelefono(telefono);
         Usuario.setNombre(names);

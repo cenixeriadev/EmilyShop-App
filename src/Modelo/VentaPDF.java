@@ -150,7 +150,7 @@ public class VentaPDF {
                 tablaProductos.addCell(String.valueOf(i+1));
                 tablaProductos.addCell("1");
                 tablaProductos.addCell(listaventas.get(i).getMetododepago());//codigo
-                tablaProductos.addCell(listaproductos.get(i).getModel()+" " + listaproductos.get(i).getColor() + " " + listaproductos.get(i).getTalla());//descripcion
+                //tablaProductos.addCell(listaproductos.get(i).get()+" " + listaproductos.get(i).getColor() + " " + listaproductos.get(i).getTalla());//descripcion
                 tablaProductos.addCell(String.valueOf(listaventas.get(i).getTotal_venta()) +" Soles");//precio unitario
                 tablaProductos.addCell(String.valueOf(listaventas.get(i).getTotal_venta())+" Soles");//precio total del producto
                 totalventa += listaventas.get(i).getTotal_venta();

@@ -18,7 +18,7 @@ public class Menu_Principal_Controlador implements MouseListener {
     private int selectRow;
     public int IDinventario;
     public int IDusuario;
-    usuario objUsuario;
+    usuarios objUsuario;
     inventario objInventario;
     carrito objProducto;
     ventas objVentas;
@@ -41,7 +41,7 @@ public class Menu_Principal_Controlador implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==Usuariovist.getTablaUsuario()) {
             selectRow = Usuariovist.getTablaUsuario().getSelectedRow();
-            objUsuario = new usuario();
+            objUsuario = new usuarios();
             Usuariovist.getTxtnombre().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 0)));
             Usuariovist.getTxttelefono().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 1)));
             Usuariovist.getTxtusuario().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow , 2)));
@@ -58,13 +58,13 @@ public class Menu_Principal_Controlador implements MouseListener {
             objInventario = new inventario();
             objInventario.setMarca((String)Inventariovist.getTablaInventario().getValueAt(selectRow , 0));
             objInventario.setCodigo((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 1));
-            objInventario.setTalla(Integer.parseInt((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 2)));
+            objInventario.setTalla((Integer) Inventariovist.getTablaInventario().getValueAt(selectRow, 2));
             objInventario.setColor((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 3));
-            objInventario.setPrecio_compra(Double.parseDouble((String)Inventariovist.getTablaInventario().getValueAt(selectRow, 4)));
+            objInventario.setPrecio_compra((Double)Inventariovist.getTablaInventario().getValueAt(selectRow, 4));
             IDinventario = objInventario.ObtenerIdInventario(objInventario);
             Inventariovist.getTxtCodigo().setText(objInventario.getCodigo());
             Inventariovist.getTxtColor().setText(objInventario.getColor());
-            Inventariovist.getTxtCosto().setText(String.valueOf(objInventario.getPrecio_compra()));
+            Inventariovist.getTxtCosto().setText(Double.toString(objInventario.getPrecio_compra()));
             Inventariovist.getTxtTalla().setText(String.valueOf(objInventario.getTalla()));
             Inventariovist.getTxtModelo().setText(objInventario.getMarca());
 
@@ -160,9 +160,7 @@ public class Menu_Principal_Controlador implements MouseListener {
             });
             Usuariovist.getBtnactualizar().addActionListener(_ ->{
                 try{
-                    if(Usuariovist.getTablaUsuario().isRowSelected(selectRow)){
-                        model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText()  ,IDusuario);
-                    }
+                    model.ActualizarUsuario(Usuariovist.getTxtnombre().getText() , Usuariovist.getTxttelefono().getText(), Usuariovist.getTxtusuario().getText()  ,IDusuario);
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Debe completar los campos para poder actualizar");
                 }
@@ -174,7 +172,7 @@ public class Menu_Principal_Controlador implements MouseListener {
         menu.getRegistrarProducto().addActionListener(_ -> {
             cardLayout.show(mainPanel, "RegistroInventario");
             Registrovist.getBtnregistrar().addActionListener(_->{
-                modelo_inventario.AgregarProducto(Registrovist.getTxtmodelo() , Registrovist.getTxtcodigo() , Registrovist.getCbbtalla() ,Registrovist.getCbbcolor() ,Registrovist.getTxtcosto());
+                modelo_inventario.AgregarProducto(Registrovist.getTxtmarca() , Registrovist.getTxtcodigo() , Registrovist.getCbbtalla() ,Registrovist.getCbbcolor() ,Registrovist.getTxtcosto() , Registrovist.getTxtpventa() , Registrovist.getSpcantidad() , Registrovist.getTxtdescripcion());
 
             });
 
@@ -186,6 +184,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                 try {
                     if(Inventariovist.getTablaInventario().isRowSelected(selectRow)){
                         modelo_inventario.EliminarProducto(IDinventario);
+                        Inventariovist.getModeloInventario().removeRow(selectRow);
                         modelo_inventario.CargarDatos();
                     }
                     else {
@@ -197,11 +196,10 @@ public class Menu_Principal_Controlador implements MouseListener {
                 }
             });
             Inventariovist.getBtnactualizar().addActionListener(_->{
-                try {
-                    modelo_inventario.ModificarProducto(Inventariovist.getTxtTalla().getText(), Inventariovist.getTxtModelo().getText(), Inventariovist.getTxtColor().getText(), Inventariovist.getTxtCodigo().getText(), Inventariovist.getTxtCosto().getText(), IDinventario, selectRow);
-                }catch (Exception e){
-                    JOptionPane.showMessageDialog(null, "Debe llenar los campos requeridos :  " + e.getMessage());
-                }
+
+                modelo_inventario.ModificarProducto(Inventariovist.getTxtTalla().getText(), Inventariovist.getTxtModelo().getText(), Inventariovist.getTxtColor().getText(), Inventariovist.getTxtCodigo().getText(), Inventariovist.getTxtCosto().getText(), IDinventario, selectRow);
+
+
                 modelo_inventario.LimpiarCampos(Inventariovist.getTxtCodigo() , Inventariovist.getTxtColor() , Inventariovist.getTxtModelo() , Inventariovist.getTxtCosto() , Inventariovist.getTxtTalla());
             });
 
@@ -227,7 +225,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                    Image newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // Reducir el tamaño a 50x50
                    ImageIcon newIcon = new ImageIcon(newimg);
                    ArrayList<carrito> productos;
-                   productos = modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
+                   //productos = modelo_registro_ventas.RegistrarVenta(listaVentas , inventarioConsumido);
                    listaVentas.clear();
                    inventarioConsumido.clear();
                    JOptionPane.showMessageDialog(null , "Venta realizada con exito :D");
@@ -245,7 +243,7 @@ public class Menu_Principal_Controlador implements MouseListener {
                    if(respuesta==0){
                        ArrayList<ventas> resultados;
                        resultados = pdf.DatosCliente(String.valueOf(objVentas.getId_cliente()));
-                       pdf.generarFactura(productos , resultados);
+                       //pdf.generarFactura(productos , resultados);
                    }
                    DefaultTableModel model1 = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();
                    model1.setRowCount(0);
@@ -257,7 +255,7 @@ public class Menu_Principal_Controlador implements MouseListener {
 
            });
            RegistroVentas.getBtnCarrito().addActionListener(_->{
-                modelo_registro_ventas.Agregar_aCarrito(objInventario , String.valueOf(RegistroVentas.getTxtprecioventa().getText()) , String.valueOf(RegistroVentas.getCbbmetodo().getSelectedItem()) , RegistroVentas.getTxttelefono().getText());
+                //modelo_registro_ventas.Agregar_aCarrito(objInventario , String.valueOf(RegistroVentas.getTxtprecioventa().getText()) , String.valueOf(RegistroVentas.getCbbmetodo().getSelectedItem()) , RegistroVentas.getTxttelefono().getText());
                 objVentas = new ventas();
                 listaVentas.add(objVentas);
                 inventarioConsumido.add(objInventario.getIdInventario());

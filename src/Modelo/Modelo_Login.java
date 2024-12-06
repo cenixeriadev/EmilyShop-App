@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Modelo_Login {
     List<FrmLoginUsuario_Controlador> observers =  new ArrayList<>();
-    usuario user = new usuario();
+    usuarios user = new usuarios();
 
     public void addObserver(FrmLoginUsuario_Controlador observer) {
 
@@ -23,9 +23,9 @@ public class Modelo_Login {
     public void validarCredenciales(String inputUsername, String inputPassword) {
         try {
 
-            ArrayList<usuario> usuarios = user.ListarUsuario();
+            ArrayList<usuarios> usuarios = user.ListarUsuario();
             boolean estado = false;
-            for (usuario usuario : usuarios) {
+            for (Modelo.usuarios usuario : usuarios) {
                 if (inputUsername.equals(usuario.getNombre_usuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
                     estado = true;
                     break; // Salir del bucle tan pronto como se encuentre una coincidencia

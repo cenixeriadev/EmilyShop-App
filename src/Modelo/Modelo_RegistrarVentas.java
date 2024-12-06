@@ -30,34 +30,34 @@ public class Modelo_RegistrarVentas {
         }
         vista.getTablaInventario().setModel(model);
     }
-    public ArrayList<carrito> RegistrarVenta(ArrayList<ventas> Ventas , ArrayList<Integer> inventarioConsumido) {
-        ArrayList<carrito> listaProductosVendidos = new ArrayList<carrito>();
-        for(ventas Venta : Ventas){
-            objVentas.AgregarVentas(Venta);
-        }
-        listaProductosVendidos = objProducto.listarProductos();
-        for(int id : inventarioConsumido){
-            int idproducto = objProducto.ObtenerIdProducto(id);
-            objProducto.EliminarProducto(idproducto);
-            objInventario.EliminarProducto(id);
-
-        }
-        return listaProductosVendidos;
-    }
-    public void Agregar_aCarrito(inventario inventario , String precio , String MetodoDePago , String telefono){
-        objProducto = new carrito();
-        objProducto.setCodigo(inventario.getCodigo());
-        objProducto.setId_cliente(inventario.getIdInventario());
-        objProducto.setColor(inventario.getColor());
-        objProducto.setModel(inventario.getMarca());
-        objProducto.setTalla(inventario.getTalla());
-        objProducto.AgregarProducto(objProducto);
-
-        DefaultTableModel modelo = vista.getModelocarrito();
-        Object[] fila = new Object[]{objProducto.getModel(), objProducto.getCodigo(), String.valueOf(objProducto.getTalla()), objProducto.getColor(), precio, MetodoDePago, telefono};
-        modelo.addRow(fila);
-        vista.getTablacarrito().setModel(modelo);
-    }
+//    public ArrayList<carrito> RegistrarVenta(ArrayList<ventas> Ventas , ArrayList<Integer> inventarioConsumido) {
+//        ArrayList<carrito> listaProductosVendidos = new ArrayList<carrito>();
+//        for(ventas Venta : Ventas){
+//            objVentas.AgregarVentas(Venta);
+//        }
+//        listaProductosVendidos = objProducto.listarProductos();
+//        for(int id : inventarioConsumido){
+//            int idproducto = objProducto.ObtenerIdProducto(id);
+//            objProducto.EliminarProducto(idproducto);
+//            objInventario.EliminarProducto(id);
+//
+//        }
+//        return listaProductosVendidos;
+//    }
+//    public void Agregar_aCarrito(inventario inventario , String precio , String MetodoDePago , String telefono){
+//        objProducto = new carrito();
+//        objProducto.setCodigo(inventario.getCodigo());
+//        objProducto.setId_cliente(inventario.getIdInventario());
+//        objProducto.setColor(inventario.getColor());
+//        objProducto.setModel(inventario.getMarca());
+//        objProducto.setTalla(inventario.getTalla());
+//        objProducto.AgregarProducto(objProducto);
+//
+//        DefaultTableModel modelo = vista.getModelocarrito();
+//        Object[] fila = new Object[]{objProducto.getModel(), objProducto.getCodigo(), String.valueOf(objProducto.getTalla()), objProducto.getColor(), precio, MetodoDePago, telefono};
+//        modelo.addRow(fila);
+//        vista.getTablacarrito().setModel(modelo);
+//    }
 
     public void LimpiarCampos(JTextField... campos) {
         for(JTextField campo : campos){

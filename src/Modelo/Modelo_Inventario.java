@@ -18,16 +18,21 @@ public class Modelo_Inventario implements MetodosInventario {
     @Override
     public void CargarDatos() {
         DefaultTableModel modelo = vistages.getModeloInventario();
-        int i = 0 ;
+        modelo.setRowCount(0);
         listaInventario = objInventario.listarInventario();
-        modelo.setNumRows(listaInventario.size());
         for(inventario objinventario : listaInventario){
-            modelo.setValueAt(objinventario.getMarca(), i, 0);
-            modelo.setValueAt(String.valueOf(objinventario.getCodigo()), i, 1);
-            modelo.setValueAt(String.valueOf(objinventario.getTalla()), i, 2);
-            modelo.setValueAt(objinventario.getColor(), i, 3);
-            modelo.setValueAt(String.valueOf(objinventario.getPrecio_compra()), i, 4);
-            i++;
+            if(objinventario.ObtenerEstado(objinventario).equals("activo")){
+                Object[] fila = {
+                        objinventario.getMarca(),
+                        objinventario.getCodigo(),
+                        objinventario.getTalla(),
+                        objinventario.getColor(),
+                        objinventario.getPrecio_compra()
+                };
+
+                // Agregar la fila al modelo
+                modelo.addRow(fila);
+            }
         }
         vistages.getTablaInventario().setModel(modelo);
     }
@@ -35,22 +40,14 @@ public class Modelo_Inventario implements MetodosInventario {
     @Override
     public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  ,int idinventario ,  int i ) {
         if (i != -1) {
-            TableModel model =  vistages.getTablaInventario().getModel();
             objInventario  = new inventario();
             objInventario.setId_inventario(idinventario);
             objInventario.setTalla(Integer.parseInt(talla));
             objInventario.setMarca(modelo);
             objInventario.setColor(Color);
-            objInventario.setPrecio_compra(Integer.parseInt(Precio));
+            objInventario.setPrecio_compra(Double.parseDouble(Precio));
             objInventario.setCodigo(Codigo);
-            model.setValueAt(objInventario.getMarca(), i, 0);
-            model.setValueAt(objInventario.getCodigo(), i, 1);
-            model.setValueAt(String.valueOf(objInventario.getTalla()), i, 2);
-            model.setValueAt(objInventario.getColor(), i, 2);
-            model.setValueAt(String.valueOf(objInventario.getPrecio_compra()), i, 4);
-
             int resultado = objInventario.ModificarProducto(objInventario);
-            vistages.getTablaInventario().setModel(model);
             if (resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
             } else {
@@ -70,24 +67,29 @@ public class Modelo_Inventario implements MetodosInventario {
         } else {
             JOptionPane.showMessageDialog(null, "Error al eliminar el producto");
         }
-        CargarDatos();
-
     }
 
     @Override
-    public void AgregarProducto(JTextField modelo , JTextField codigo ,JComboBox<String> talla , JComboBox<String> color , JTextField PrecioCosto ) {
+    public void AgregarProducto(JTextField modelo , JTextField codigo ,JComboBox<String> talla , JComboBox<String> color , JTextField PrecioCosto ,JTextField PrecioVenta , JSpinner Cantidad , JTextField descripcion) {
         try {
             int Talla = Integer.parseInt((String) Objects.requireNonNull(talla.getSelectedItem()));
             String modeloProd = modelo.getText();
             String Codigo = codigo.getText();
             String Color = (String) color.getSelectedItem();
-            int precioCosto = Integer.parseInt(PrecioCosto.getText());
+            double precioCosto = Double.parseDouble(PrecioCosto.getText());
+            double precioVenta = Double.parseDouble(PrecioVenta.getText());
+            int cantidad = (Integer)(Cantidad.getValue());
+            String Descripcion = descripcion.getText();
             objInventario = new inventario();
             objInventario.setTalla(Talla);
             objInventario.setMarca(modeloProd);
             objInventario.setCodigo(Codigo);
             objInventario.setColor(Color);
             objInventario.setPrecio_compra(precioCosto);
+            objInventario.setPrecio_venta(precioVenta);
+            objInventario.setStock(cantidad);
+            objInventario.setDescripcion(Descripcion);
+
         }catch(NullPointerException e){
             JOptionPane.showMessageDialog(null , "Fail in assigning values to variables and " + e.getMessage());
         }

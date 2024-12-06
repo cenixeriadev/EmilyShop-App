@@ -122,6 +122,10 @@ public class gestioninventarioVista extends JFrame {
 
         
     }
+    public static void main(String[] args) throws Exception {
+        gestioninventarioVista vista = new gestioninventarioVista();
+        vista.setVisible(true);
+    }
     public JPanel getPanelInventario(){
         return panelusuario;
     }
