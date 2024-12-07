@@ -1,6 +1,7 @@
-package Modelo;
+package Utilitario;
 
-import Utilitario.ConexionBD;
+import Modelo.carrito;
+import Modelo.ventas;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 

@@ -3,7 +3,6 @@ package Modelo;
 import Vista.gestioninventarioVista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -29,8 +28,6 @@ public class Modelo_Inventario implements MetodosInventario {
                         objinventario.getColor(),
                         objinventario.getPrecio_compra()
                 };
-
-                // Agregar la fila al modelo
                 modelo.addRow(fila);
             }
         }
