@@ -45,7 +45,7 @@ public class Menu_Principal_Controlador {
         new ControladorGestionarUsuario(gestionUsuario, modeloUsuario);
 
         Modelo_Inventario modeloInventario = new Modelo_Inventario(gestionInventario);
-        new ControladorInventario(gestionInventario, modeloInventario);
+        new ControladorInventario(gestionInventario, registroInventario , modeloInventario);
 
         Modelo_RegistrarVentas modeloRegistrarVentas = new Modelo_RegistrarVentas(registroVenta);
         new ControladorRegistrarVentas(registroVenta, modeloRegistrarVentas);

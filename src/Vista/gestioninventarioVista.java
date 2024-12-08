@@ -38,7 +38,7 @@ public class gestioninventarioVista extends JFrame {
         lblbienvenida.setFont(new Font("Times New Roman", Font.BOLD, 35)); // Estilo de fuente
         panelusuario.add(lblbienvenida);
 
-        modeloInventario = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color","P. Costo"}, 0){
+        modeloInventario = new DefaultTableModel(new String[]{"Codigo", "Marca", "Talla", "Color","P. Venta"}, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -101,7 +101,7 @@ public class gestioninventarioVista extends JFrame {
         txtcolor.setBounds(215,260,200,30);
         panelusuario.add(txtcolor);
 
-        lblcosto=new JLabel("P. Costo");
+        lblcosto=new JLabel("P. Venta");
         lblcosto.setForeground(Color.WHITE);
         lblcosto.setFont(new Font("Times New Roman", Font.BOLD,20));
         lblcosto.setBounds(115,300,140,30);

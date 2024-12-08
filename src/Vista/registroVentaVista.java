@@ -10,7 +10,7 @@ import java.awt.*;
 public class registroVentaVista extends JFrame {
 
     // Barra de menú y menús
-    JLabel lblbienvenida, lblbuscar, lblcodigo2 ,lblprecioventa;
+    JLabel lblbienvenida, lblbuscar, lblcodigo2 , lblcantidad;
 
     
     JPanel panelregistroventas;
@@ -21,7 +21,7 @@ public class registroVentaVista extends JFrame {
     DefaultTableModel modeloInventario,modelocarrito;
     
     JLabel lblmetodo, lblcarrito,lblcliente,lbltelefono;
-    JTextField txtcliente,txtcodigo2,txttelefono , txtprecioventa;
+    JTextField txtcliente, txtcodigo,txttelefono , txtcantidad;
     
     JButton btnregistrar,btnbuscar,btneliminar ,btnCarrito;
     
@@ -67,15 +67,15 @@ public class registroVentaVista extends JFrame {
         txttelefono.setBounds(185,180,200,30);
         panelregistroventas.add(txttelefono);
 
-        lblprecioventa = new JLabel("P. de venta:  ");
-        lblprecioventa.setForeground(Color.WHITE);
-        lblprecioventa.setFont(new Font("Times New Roman", Font.BOLD,20));
-        lblprecioventa.setBounds(65,220,200,30);
-        panelregistroventas.add(lblprecioventa);
+        lblcantidad = new JLabel("Cantidad: ");
+        lblcantidad.setForeground(Color.WHITE);
+        lblcantidad.setFont(new Font("Times New Roman", Font.BOLD,20));
+        lblcantidad.setBounds(65,220,200,30);
+        panelregistroventas.add(lblcantidad);
 
-        txtprecioventa = new JTextField("");
-        txtprecioventa.setBounds(185,220,200,30);
-        panelregistroventas.add(txtprecioventa);
+        txtcantidad = new JTextField("");
+        txtcantidad.setBounds(185,220,200,30);
+        panelregistroventas.add(txtcantidad);
         
         lblmetodo=new JLabel("M. de Pago:");
         lblmetodo.setForeground(Color.WHITE);
@@ -96,7 +96,7 @@ public class registroVentaVista extends JFrame {
         
         // --------------tabla carrito--------------
         
-        modelocarrito = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color","Precio","M. Pago","Telefono"}, 0){
+        modelocarrito = new DefaultTableModel(new String[]{"Codigo", "Marca", "Talla", "Color","P.Unitario","Cantidad" , "M. Pago"}, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -140,9 +140,9 @@ public class registroVentaVista extends JFrame {
         lblcodigo2.setBounds(700,170,150,30);
         panelregistroventas.add(lblcodigo2);
         
-        txtcodigo2= new JTextField();
-        txtcodigo2.setBounds(770,170,100,30);
-        panelregistroventas.add(txtcodigo2);
+        txtcodigo = new JTextField();
+        txtcodigo.setBounds(770,170,100,30);
+        panelregistroventas.add(txtcodigo);
             
         
         // -----------Boton Boleta------------
@@ -165,7 +165,7 @@ public class registroVentaVista extends JFrame {
 
         
         // --------------tabla buscar producto--------------
-        modeloInventario = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color"}, 0){
+        modeloInventario = new DefaultTableModel(new String[]{"Codigo", "Marca", "Talla", "Color" , "P.Venta"}, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -225,8 +225,8 @@ public class registroVentaVista extends JFrame {
     public DefaultTableModel getModelocarrito(){
         return modelocarrito;
     }
-    public JTextField getTxtcodigo2(){
-        return txtcodigo2;
+    public JTextField getTxtcodigo(){
+        return txtcodigo;
     }
     public JTextField getTxttelefono(){
         return txttelefono;
@@ -237,7 +237,7 @@ public class registroVentaVista extends JFrame {
     public JComboBox<String> getCbbmetodo(){
         return cbbmetodo;
     }
-    public JTextField getTxtprecioventa(){return txtprecioventa;}
+    public JTextField getTxtcantidad(){return txtcantidad;}
     public JComboBox<String> getTalla(){return cbbtallas;}
     public JComboBox<String> getColor(){return cbbcolor;}
     private JButton crearBotonPersonalizado(String texto, String icono) {

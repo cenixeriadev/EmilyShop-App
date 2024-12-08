@@ -145,16 +145,23 @@ public class inventario {
         int idInventario = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("SELECT id_inventario FROM inventario WHERE codigo=? AND talla=? AND marca=? AND color=? AND precio_compra = ?;");
+            pt = cn.prepareStatement("SELECT id_inventario FROM inventario WHERE codigo=? AND talla=? AND marca=? AND color=? AND precio_venta = ?;");
+            System.out.println("Debugging valores:");
+            System.out.println("Codigo: " + objInventario.getCodigo());
+            System.out.println("Talla: " + objInventario.getTalla());
+            System.out.println("Marca: " + objInventario.getMarca());
+            System.out.println("Color: " + objInventario.getColor());
+            System.out.println("Precio compra: " + objInventario.getPrecio_venta());
             pt.setString(1, objInventario.getCodigo());
             pt.setInt(2, objInventario.getTalla());
             pt.setString(3, objInventario.getMarca());
             pt.setString(4, objInventario.getColor());
-            pt.setDouble(5, objInventario.getPrecio_compra());
+            pt.setDouble(5, objInventario.getPrecio_venta());
             rs = pt.executeQuery();
             if(rs.next()){
                 idInventario = rs.getInt("id_inventario");
             }
+            System.out.println(idInventario);//DEBUGGING
             rs.close();
             pt.close();
             cn.close();
@@ -167,11 +174,11 @@ public class inventario {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("UPDATE inventario SET talla=?, marca=?, color=?, precio_compra=?  ,codigo = ?  WHERE id_inventario=?");
+            pt = cn.prepareStatement("UPDATE inventario SET talla=?, marca=?, color=?, precio_venta=?  ,codigo = ?  WHERE id_inventario=?");
             pt.setInt(1, objInventario.getTalla());
             pt.setString(2, objInventario.getMarca());
             pt.setString(3, objInventario.getColor());
-            pt.setDouble(4, objInventario.getPrecio_compra());
+            pt.setDouble(4, objInventario.getPrecio_venta());
             pt.setString(5, objInventario.getCodigo());
             pt.setInt(6,objInventario.getIdInventario());
             estado = pt.executeUpdate();

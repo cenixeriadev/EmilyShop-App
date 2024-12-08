@@ -74,7 +74,7 @@ public class ventas {
                 objInventario.setTalla(rs.getInt("talla"));
                 objInventario.setColor(rs.getString("color"));
                 objInventario.setId_inventario(rs.getInt("id_inventario"));
-                objInventario.setPrecio_compra(rs.getInt("precio_compra"));
+                objInventario.setPrecio_venta(rs.getDouble("precio_venta"));
                 listaInventarioD.add(objInventario);
             }
             rs.close();

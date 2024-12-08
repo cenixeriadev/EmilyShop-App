@@ -22,11 +22,11 @@ public class Modelo_Inventario implements MetodosInventario {
         for(inventario objinventario : listaInventario){
             if(objinventario.ObtenerEstado(objinventario).equals("activo")){
                 Object[] fila = {
-                        objinventario.getMarca(),
                         objinventario.getCodigo(),
+                        objinventario.getMarca(),
                         objinventario.getTalla(),
                         objinventario.getColor(),
-                        objinventario.getPrecio_compra()
+                        objinventario.getPrecio_venta()
                 };
                 modelo.addRow(fila);
             }
@@ -42,7 +42,7 @@ public class Modelo_Inventario implements MetodosInventario {
             objInventario.setTalla(Integer.parseInt(talla));
             objInventario.setMarca(modelo);
             objInventario.setColor(Color);
-            objInventario.setPrecio_compra(Double.parseDouble(Precio));
+            objInventario.setPrecio_venta(Double.parseDouble(Precio));
             objInventario.setCodigo(Codigo);
             int resultado = objInventario.ModificarProducto(objInventario);
             if (resultado > 0) {

@@ -11,12 +11,13 @@ import java.awt.event.MouseListener;
 
 public class ControladorInventario implements MouseListener {
     private final  gestioninventarioVista  gsvista;
-    private final registroInventarioVista rgvista = new registroInventarioVista();
+    private final registroInventarioVista rgvista;
     private  final  Modelo_Inventario modelo ;
     public int IDinventario;
     private int selectRow;
-    public ControladorInventario(gestioninventarioVista gsvista, Modelo_Inventario modelo) {
+    public ControladorInventario(gestioninventarioVista gsvista,registroInventarioVista rgvista ,  Modelo_Inventario modelo) {
         this.gsvista = gsvista;
+        this.rgvista = rgvista;
         this.modelo = modelo;
         modelo.CargarDatos();
         gsvista.getTablaInventario().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -53,17 +54,17 @@ public class ControladorInventario implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==gsvista.getTablaInventario()){
-            selectRow = gsvista.getTablaInventario().getSelectedRow();// modelo  codigo talla color pcosto
+            selectRow = gsvista.getTablaInventario().getSelectedRow();// codigo  marca talla color pcosto
             inventario objInventario = new inventario();
-            objInventario.setMarca((String)gsvista.getTablaInventario().getValueAt(selectRow , 0));
-            objInventario.setCodigo((String)gsvista.getTablaInventario().getValueAt(selectRow, 1));
+            objInventario.setCodigo((String)gsvista.getTablaInventario().getValueAt(selectRow, 0));
+            objInventario.setMarca((String)gsvista.getTablaInventario().getValueAt(selectRow , 1));
             objInventario.setTalla((Integer) gsvista.getTablaInventario().getValueAt(selectRow, 2));
             objInventario.setColor((String)gsvista.getTablaInventario().getValueAt(selectRow, 3));
-            objInventario.setPrecio_compra((Double)gsvista.getTablaInventario().getValueAt(selectRow, 4));
+            objInventario.setPrecio_venta((Double)gsvista.getTablaInventario().getValueAt(selectRow, 4));
             IDinventario = objInventario.ObtenerIdInventario(objInventario);
             gsvista.getTxtCodigo().setText(objInventario.getCodigo());
             gsvista.getTxtColor().setText(objInventario.getColor());
-            gsvista.getTxtCosto().setText(Double.toString(objInventario.getPrecio_compra()));
+            gsvista.getTxtCosto().setText(Double.toString(objInventario.getPrecio_venta()));
             gsvista.getTxtTalla().setText(String.valueOf(objInventario.getTalla()));
             gsvista.getTxtModelo().setText(objInventario.getMarca());
 

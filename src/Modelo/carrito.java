@@ -2,6 +2,7 @@ package Modelo;
 
 import Utilitario.ConexionBD;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -99,7 +100,7 @@ public class carrito {
             cn.close();
             ps.close();
         }catch (Exception e){
-            return estado;
+            JOptionPane.showMessageDialog(null  , "Error al agregar producto a carrito");
         }
         return estado;
     }
