@@ -19,6 +19,7 @@ public class LoginVista extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
+        setLocationRelativeTo(null);
 
         // Cambiar panel1 para que use una imagen de fondo
         panel1 = new PanelConImagenFondo("src/Recursos/fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen

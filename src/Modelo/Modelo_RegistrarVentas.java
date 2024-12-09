@@ -1,9 +1,13 @@
 package Modelo;
 
+import Utilitario.ConexionBD;
 import Vista.registroVentaVista;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Modelo_RegistrarVentas {
@@ -20,26 +24,20 @@ public class Modelo_RegistrarVentas {
         DefaultTableModel model = vista.getModeloInventario();
         model.setRowCount(0);
         listaDisponible = objVentas.listarInventarioDisponible(talla , color ,codigo);
-        for(inventario objInventario : listaDisponible){
-            if(objInventario.ObtenerEstado(objInventario).equals("activo")) {
-                Object[] fila = {
-                        objInventario.getCodigo(),
-                        objInventario.getMarca(),
-                        objInventario.getTalla(),
-                        objInventario.getColor(),
-                        objInventario.getPrecio_venta()
+        Modelo_Inventario.AgregarInventario(model, listaDisponible, vista.getTablaInventario());
+    }
+    public void VentaConfirmada(clientes cliente ,String metodoPago){
+        try{
+            Connection cn = ConexionBD.getConexionBD();
+            CallableStatement stmt = cn.prepareCall("{CALL confirmar_venta(?, ?)}");
+            stmt.setInt(1, cliente.getId_cliente());
+            stmt.setString(2, metodoPago);
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "Venta realzada con exito");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error al realizar la venta" );
+        }
+    }
 
-                };
-                model.addRow(fila);
-            }
-        }
-        vista.getTablaInventario().setModel(model);
-    }
-    public void LimpiarCampos(JTextField... campos) {
-        for(JTextField campo : campos){
-            campo.setText("");
-            campo.requestFocus();
-        }
-    }
 
 }

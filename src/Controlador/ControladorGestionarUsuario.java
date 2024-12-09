@@ -3,7 +3,7 @@ package Controlador;
 import Modelo.Modelo_GestionarUsuario;
 import Modelo.usuarios;
 import Vista.gestionUsuarioVista;
-
+import Utilitario.Limpieza;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -34,7 +34,7 @@ public class ControladorGestionarUsuario implements MouseListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario de la tabla");
                 }
-                modelo.Limpiarcampos(vista.getTxtnombre(), vista.getTxttelefono(), vista.getTxtusuario());
+                Limpieza.LimpiarCampos(vista.getTxtnombre(), vista.getTxttelefono(), vista.getTxtusuario());
                 vista.getTablaUsuario().clearSelection();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error al eliminar el usuario");
@@ -49,7 +49,7 @@ public class ControladorGestionarUsuario implements MouseListener {
                         IDusuario
                 );
                 modelo.CargarUsuarios();
-                modelo.Limpiarcampos(vista.getTxtnombre(), vista.getTxttelefono(), vista.getTxtusuario());
+                Limpieza.LimpiarCampos(vista.getTxtnombre(), vista.getTxttelefono(), vista.getTxtusuario());
                 vista.getTablaUsuario().clearSelection();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Debe completar los campos para actualizar");

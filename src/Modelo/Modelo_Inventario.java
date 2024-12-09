@@ -1,5 +1,7 @@
 package Modelo;
 
+import Utilitario.Limpieza;
+import Utilitario.ValidadorCampos;
 import Vista.gestioninventarioVista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,20 +21,9 @@ public class Modelo_Inventario implements MetodosInventario {
         DefaultTableModel modelo = vistages.getModeloInventario();
         modelo.setRowCount(0);
         listaInventario = objInventario.listarInventario();
-        for(inventario objinventario : listaInventario){
-            if(objinventario.ObtenerEstado(objinventario).equals("activo")){
-                Object[] fila = {
-                        objinventario.getCodigo(),
-                        objinventario.getMarca(),
-                        objinventario.getTalla(),
-                        objinventario.getColor(),
-                        objinventario.getPrecio_venta()
-                };
-                modelo.addRow(fila);
-            }
-        }
-        vistages.getTablaInventario().setModel(modelo);
+        AgregarInventario(modelo, listaInventario, vistages.getTablaInventario());
     }
+
 
     @Override
     public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  ,int idinventario ,  int i ) {
@@ -67,10 +58,15 @@ public class Modelo_Inventario implements MetodosInventario {
     }
 
     @Override
-    public void AgregarProducto(JTextField modelo , JTextField codigo ,JComboBox<String> talla , JComboBox<String> color , JTextField PrecioCosto ,JTextField PrecioVenta , JSpinner Cantidad , JTextField descripcion) {
+    public void AgregarProducto(JTextField marca , JTextField codigo ,JComboBox<String> talla , JComboBox<String> color , JTextField PrecioCosto ,JTextField PrecioVenta , JSpinner Cantidad , JTextField descripcion) {
+        int resultado;
         try {
+            if(!ValidadorCampos.validacion(marca ,"^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\\s-]{2,50}$")){
+                JOptionPane.showMessageDialog(null , "Ingrese un nombre valido de marca!");
+                return;
+            }
             int Talla = Integer.parseInt((String) Objects.requireNonNull(talla.getSelectedItem()));
-            String modeloProd = modelo.getText();
+            String modeloProd = marca.getText();
             String Codigo = codigo.getText();
             String Color = (String) color.getSelectedItem();
             double precioCosto = Double.parseDouble(PrecioCosto.getText());
@@ -86,24 +82,34 @@ public class Modelo_Inventario implements MetodosInventario {
             objInventario.setPrecio_venta(precioVenta);
             objInventario.setStock(cantidad);
             objInventario.setDescripcion(Descripcion);
+            resultado = objInventario.AgregarProducto(objInventario);
+            if( resultado > 0) {
+                JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
+            }
 
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos para los precios");
         }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null , "Fail in assigning values to variables and " + e.getMessage());
+            JOptionPane.showMessageDialog(null , "Debe llenar todos los campos requeridos ");
         }
-        int resultado = objInventario.AgregarProducto(objInventario);
-        if( resultado > 0){
-            JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
-        }else {
-            JOptionPane.showMessageDialog(null, "Error al agregar el producto");
-        }
+
         CargarDatos();
-        LimpiarCampos(modelo,codigo,PrecioCosto);
+        Limpieza.LimpiarCampos(marca,codigo,PrecioCosto , PrecioVenta ,descripcion);
 
     }
-    public void LimpiarCampos(JTextField... campos){
-        for(JTextField campo : campos){
-            campo.setText("");
-            campo.requestFocus();
+    static void AgregarInventario(DefaultTableModel modelo, ArrayList<inventario> listaInventario, JTable tablaInventario) {
+        for(inventario objinventario : listaInventario){
+            if(objinventario.ObtenerEstado(objinventario).equals("activo")){
+                Object[] fila = {
+                        objinventario.getCodigo(),
+                        objinventario.getMarca(),
+                        objinventario.getTalla(),
+                        objinventario.getColor(),
+                        objinventario.getPrecio_venta()
+                };
+                modelo.addRow(fila);
+            }
         }
+        tablaInventario.setModel(modelo);
     }
 }

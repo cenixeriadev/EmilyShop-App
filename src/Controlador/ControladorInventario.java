@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Modelo_Inventario;
 import Modelo.inventario;
+import Utilitario.Limpieza;
 import Vista.gestioninventarioVista;
 import Vista.registroInventarioVista;
 
@@ -32,7 +33,7 @@ public class ControladorInventario implements MouseListener {
                 modelo.ModificarProducto(gsvista.getTxtTalla().getText(), gsvista.getTxtModelo().getText(), gsvista.getTxtColor().getText(), gsvista.getTxtCodigo().getText(), gsvista.getTxtCosto().getText(), IDinventario, selectRow);
 
 
-                modelo.LimpiarCampos(gsvista.getTxtCodigo(), gsvista.getTxtColor(), gsvista.getTxtModelo(), gsvista.getTxtCosto(), gsvista.getTxtTalla());
+                Limpieza.LimpiarCampos(gsvista.getTxtCodigo(), gsvista.getTxtColor(), gsvista.getTxtModelo(), gsvista.getTxtCosto(), gsvista.getTxtTalla());
                 gsvista.getTablaInventario().clearSelection();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");
@@ -48,7 +49,7 @@ public class ControladorInventario implements MouseListener {
                 else {
                     throw new NullPointerException();
                 }
-                modelo.LimpiarCampos(gsvista.getTxtCodigo() , gsvista.getTxtColor() , gsvista.getTxtModelo() , gsvista.getTxtCosto() , gsvista.getTxtTalla());
+                Limpieza.LimpiarCampos(gsvista.getTxtCodigo() , gsvista.getTxtColor() , gsvista.getTxtModelo() , gsvista.getTxtCosto() , gsvista.getTxtTalla());
                 gsvista.getTablaInventario().clearSelection();
             }catch (Exception e){
                 JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");

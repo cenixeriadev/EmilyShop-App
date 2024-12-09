@@ -13,7 +13,7 @@ public class RegistroUsuarioVista extends JFrame {
             ,lblcrearusuario;
     JTextField txtusuario, txtcontra,txtnombre,txttelefono;
     
-    JButton btncrear;
+    JButton btncrear , btnvolver;
 
     public RegistroUsuarioVista() {
         setSize(600, 500);
@@ -21,6 +21,7 @@ public class RegistroUsuarioVista extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
+        setLocationRelativeTo(null);
 
         // Cambiar panel1 para que use una imagen de fondo
         panel1 = new PanelConImagenFondo("src/Recursos/fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen
@@ -83,8 +84,11 @@ public class RegistroUsuarioVista extends JFrame {
         panel2.add(txttelefono);
 
         
-        btncrear = crearBoton("CREAR", 100, 345);
+        btncrear = crearBoton("CREAR", 10, 345);
         panel2.add(btncrear);
+
+        btnvolver = crearBoton("VOLVER" , 200 , 345);
+        panel2.add(btnvolver);
 
     }
     public JTextField getTxtusuario(){
@@ -101,6 +105,9 @@ public class RegistroUsuarioVista extends JFrame {
     }
     public JButton getBtncrear(){
         return btncrear;
+    }
+    public JButton getBtnvolver(){
+        return btnvolver;
     }
 
     private JTextField crearCampoTexto(String placeholder, int x, int y) {

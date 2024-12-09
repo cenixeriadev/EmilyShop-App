@@ -15,16 +15,16 @@ public class Modelo_GestionarUsuario {
     }
     public void CargarUsuarios(){
         DefaultTableModel modelo = vistagesusuario.getModeloUsuario();
-        int i = 0 ;
-        Usuario = new usuarios();  // Reemplazar con la clase que gestiona la base de datos de usuarios.
+        modelo.setRowCount(0);
+        Usuario = new usuarios();
         listaUsuarios = Usuario.ListarUsuario();
-        modelo.setNumRows(listaUsuarios.size());
         for(usuarios obj : listaUsuarios){
-            modelo.setValueAt(String.valueOf(obj.getNames()), i, 0);
-            modelo.setValueAt(obj.getTelefono(), i, 1);
-            modelo.setValueAt(obj.getNombre_usuario(), i, 2);
-            //modelo.setValueAt(String.valueOf(obj.getContraseña()), i, 3);
-            i++;
+            Object[] fila={
+                    String.valueOf(obj.getNames()),
+                    obj.getTelefono(),
+                    obj.getNombre_usuario()
+            };
+            modelo.addRow(fila);
         }
         vistagesusuario.getTablaUsuario().setModel(modelo);
     }
@@ -51,11 +51,5 @@ public class Modelo_GestionarUsuario {
             throw new NullPointerException();
         }
         CargarUsuarios();
-    }
-    public void Limpiarcampos(JTextField... campos){
-        for(JTextField camp: campos){
-            camp.setText("");
-            camp.requestFocus();
-        }
     }
 }

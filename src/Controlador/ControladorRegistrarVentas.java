@@ -1,7 +1,7 @@
 package Controlador;
 
 import Modelo.*;
-import Utilitario.ModeloVentaConfirmada;
+import Utilitario.Limpieza;
 import Utilitario.VentaPDF;
 import Vista.registroVentaVista;
 
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 public class ControladorRegistrarVentas implements MouseListener {
     private final registroVentaVista RegistroVentas;
-    private int selectRow;
     private final Modelo_RegistrarVentas modelo;
     private final VentaPDF pdf = new VentaPDF();
     private  carrito objProducto;
     private  ventas objVentas;
     private clientes objCliente;
     private  inventario objInventario;
+    private int times = 0;
 
     public ControladorRegistrarVentas(registroVentaVista RegistroVentas, Modelo_RegistrarVentas modelo){
         this.RegistroVentas = RegistroVentas;
@@ -41,15 +41,18 @@ public class ControladorRegistrarVentas implements MouseListener {
                 }
 
                 // Obtener datos del cliente
-                objCliente = new clientes();
-                objCliente.setNombre(RegistroVentas.getTxtcliente().getText());
-                objCliente.setTelefono(RegistroVentas.getTxttelefono().getText());
-                int id_cliente = objCliente.AgregarCliente(objCliente);
-                if (id_cliente <= 0) {
-                    JOptionPane.showMessageDialog(null, "Error al registrar el cliente.");
-                    return;
+                if(times==0){
+                    objCliente = new clientes();
+                    objCliente.setNombre(RegistroVentas.getTxtcliente().getText());
+                    objCliente.setTelefono(RegistroVentas.getTxttelefono().getText());
+                    int id_cliente = objCliente.AgregarCliente(objCliente);
+                    if (id_cliente <= 0) {
+                        JOptionPane.showMessageDialog(null, "Error al registrar el cliente.");
+                        return;
+                    }
+                    objCliente.setId_cliente(id_cliente);
                 }
-                objCliente.setId_cliente(id_cliente);
+
                 // Calcular subtotal
                 double subtotal = (Double.parseDouble(RegistroVentas.getTxtcantidad().getText())) * objInventario.getPrecio_venta();
 
@@ -75,6 +78,7 @@ public class ControladorRegistrarVentas implements MouseListener {
                 };
                 model.addRow(fila);
                 RegistroVentas.getTablaInventario().clearSelection();
+                times = 1;
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Error en el formato de los datos: " + e.getMessage());
             } catch (Exception e) {
@@ -97,7 +101,10 @@ public class ControladorRegistrarVentas implements MouseListener {
                 }
 
                 // Registrar la venta en la base de datos
-                ModeloVentaConfirmada.VentaConfirmada(objCliente, (String)RegistroVentas.getCbbmetodo().getSelectedItem());
+
+                modelo.VentaConfirmada(objCliente, (String)RegistroVentas.getCbbmetodo().getSelectedItem());
+                times = 0;
+                Limpieza.LimpiarCampos(RegistroVentas.getTxtcantidad() , RegistroVentas.getTxtcliente() , RegistroVentas.getTxttelefono());
                 // Preguntar si el usuario quiere generar un PDF
                 ImageIcon icon = new ImageIcon("src/Recursos/iconoPregunta.png");
                 if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
@@ -129,10 +136,6 @@ public class ControladorRegistrarVentas implements MouseListener {
                 model1.setRowCount(0);
                 DefaultTableModel model2 = (DefaultTableModel) RegistroVentas.getTablaInventario().getModel();
                 model2.setRowCount(0);
-                objCliente = null;
-                objProducto = null;
-                objInventario = null;
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
             }
@@ -142,28 +145,34 @@ public class ControladorRegistrarVentas implements MouseListener {
             try {
                 if (!RegistroVentas.getTxtcodigo().getText().isEmpty() || !String.valueOf(RegistroVentas.getCbbtallas().getSelectedItem()).equals("Seleccionar una talla") || !String.valueOf(RegistroVentas.getCbbcolor().getSelectedItem()).equals("Seleccionar un color")) {
                     modelo.CargarInventarioD(String.valueOf(RegistroVentas.getCbbtallas().getSelectedItem()), String.valueOf(RegistroVentas.getCbbcolor().getSelectedItem()), RegistroVentas.getTxtcodigo().getText());
+                    Limpieza.LimpiarCampos(RegistroVentas.getTxtcodigo());
                 }else{
                     JOptionPane.showMessageDialog(null,"Debe llenar alguno de los campos requeridos para realizar la busqueda");
                 }
             }catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error en la busqueda: " + e.getMessage());
             }
-            modelo.LimpiarCampos(RegistroVentas.getTxtcodigo());
+            Limpieza.LimpiarCampos(RegistroVentas.getTxtcodigo());
         });
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==RegistroVentas.getTablaInventario()){
-            selectRow = RegistroVentas.getTablaInventario().getSelectedRow();
+            int selectRow = RegistroVentas.getTablaInventario().getSelectedRow();
             objInventario = new inventario();
             objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 0));
-            objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow , 1));
+            objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
             objInventario.setTalla(Integer.parseInt(String.valueOf(RegistroVentas.getTablaInventario().getValueAt(selectRow, 2))));
             objInventario.setColor((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 3));
-            objInventario.setPrecio_venta((Double)RegistroVentas.getTablaInventario().getValueAt(selectRow , 4));
+            objInventario.setPrecio_venta((Double)RegistroVentas.getTablaInventario().getValueAt(selectRow, 4));
             int id = objInventario.ObtenerIdInventario(objInventario);
             objInventario.setId_inventario(id);
+            System.out.println(objInventario.getPrecio_venta());
+            System.out.println(objInventario.getTalla());
+            System.out.println(objInventario.getColor());
+            System.out.println(objInventario.getCodigo());
+
         }
     }
 

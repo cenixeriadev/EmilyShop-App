@@ -28,6 +28,7 @@ public class PrincipalVista extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1140, 840);
         setResizable(false);
+        setLocationRelativeTo(null);
 
         // -------Crear la barra de menú-------------
         menuBar = new JMenuBar();

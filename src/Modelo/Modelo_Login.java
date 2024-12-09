@@ -26,6 +26,10 @@ public class Modelo_Login {
             ArrayList<usuarios> usuarios = user.ListarUsuario();
             boolean estado = false;
             String nombre = "";
+            if(inputPassword.equals("  Ingrese contraseña") || inputUsername.equals("  Ingrese usuario")){
+                JOptionPane.showMessageDialog(null, "Debes llenar todos los campos requeridos");
+                return;
+            }
             for (Modelo.usuarios usuario : usuarios) {
                 if (inputUsername.equals(usuario.getNombre_usuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
                     estado = true;
