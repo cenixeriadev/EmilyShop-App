@@ -128,9 +128,10 @@ public class inventario {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("UPDATE inventario SET estado = ? WHERE id_inventario=?");
+            pt = cn.prepareStatement("UPDATE inventario SET estado = ? , stock=?  WHERE id_inventario=?");
             pt.setString(1, "inactivo");
-            pt.setInt(2, id_inventario);
+            pt.setInt(2,0);
+            pt.setInt(3, id_inventario);
             estado =  pt.executeUpdate();
             cn.close();
             pt.close();

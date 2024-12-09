@@ -28,11 +28,14 @@ public class ControladorInventario implements MouseListener {
 
         rgvista.getBtnregistrar().addActionListener(_ -> modelo.AgregarProducto(rgvista.getTxtmarca() ,rgvista.getTxtcodigo() , rgvista.getCbbtalla() ,rgvista.getCbbcolor() ,rgvista.getTxtcosto() , rgvista.getTxtpventa() , rgvista.getSpcantidad() , rgvista.getTxtdescripcion()));
         gsvista.getBtnactualizar().addActionListener(_ -> {
-            modelo.ModificarProducto(gsvista.getTxtTalla().getText(), gsvista.getTxtModelo().getText(), gsvista.getTxtColor().getText(), gsvista.getTxtCodigo().getText(), gsvista.getTxtCosto().getText(), IDinventario, selectRow);
+            try {
+                modelo.ModificarProducto(gsvista.getTxtTalla().getText(), gsvista.getTxtModelo().getText(), gsvista.getTxtColor().getText(), gsvista.getTxtCodigo().getText(), gsvista.getTxtCosto().getText(), IDinventario, selectRow);
 
 
-            modelo.LimpiarCampos(gsvista.getTxtCodigo() , gsvista.getTxtColor() , gsvista.getTxtModelo() , gsvista.getTxtCosto() , gsvista.getTxtTalla());
-
+                modelo.LimpiarCampos(gsvista.getTxtCodigo(), gsvista.getTxtColor(), gsvista.getTxtModelo(), gsvista.getTxtCosto(), gsvista.getTxtTalla());
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");
+            }
         });
         gsvista.getBtneliminar().addActionListener(_ ->{
             try {

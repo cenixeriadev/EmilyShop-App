@@ -21,15 +21,17 @@ public class Modelo_RegistrarVentas {
         model.setRowCount(0);
         listaDisponible = objVentas.listarInventarioDisponible(talla , color ,codigo);
         for(inventario objInventario : listaDisponible){
-            Object[] fila = {
-                    objInventario.getCodigo(),
-                    objInventario.getMarca(),
-                    objInventario.getTalla(),
-                    objInventario.getColor(),
-                    objInventario.getPrecio_venta()
+            if(objInventario.ObtenerEstado(objInventario).equals("activo")) {
+                Object[] fila = {
+                        objInventario.getCodigo(),
+                        objInventario.getMarca(),
+                        objInventario.getTalla(),
+                        objInventario.getColor(),
+                        objInventario.getPrecio_venta()
 
-            };
-            model.addRow(fila);
+                };
+                model.addRow(fila);
+            }
         }
         vista.getTablaInventario().setModel(model);
     }
