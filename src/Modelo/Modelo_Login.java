@@ -25,14 +25,16 @@ public class Modelo_Login {
 
             ArrayList<usuarios> usuarios = user.ListarUsuario();
             boolean estado = false;
+            String nombre = "";
             for (Modelo.usuarios usuario : usuarios) {
                 if (inputUsername.equals(usuario.getNombre_usuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
                     estado = true;
+                    nombre = usuario.getNames();
                     break; // Salir del bucle tan pronto como se encuentre una coincidencia
                 }
             }
             if (estado) {
-                notificarObserverExito();
+                notificarObserverExito(nombre);
             } else {
                 notificarObserverFallo();
 
@@ -42,9 +44,9 @@ public class Modelo_Login {
         }
 
     }
-    private void notificarObserverExito() {
+    private void notificarObserverExito(String nombre_Usuario) {
         for (FrmLoginUsuario_Controlador observer : observers) {
-            observer.loginExitoso();
+            observer.loginExitoso(nombre_Usuario);
         }
     }
     private void notificarObserverFallo() {

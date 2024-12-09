@@ -33,6 +33,7 @@ public class ControladorInventario implements MouseListener {
 
 
                 modelo.LimpiarCampos(gsvista.getTxtCodigo(), gsvista.getTxtColor(), gsvista.getTxtModelo(), gsvista.getTxtCosto(), gsvista.getTxtTalla());
+                gsvista.getTablaInventario().clearSelection();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");
             }
@@ -48,6 +49,7 @@ public class ControladorInventario implements MouseListener {
                     throw new NullPointerException();
                 }
                 modelo.LimpiarCampos(gsvista.getTxtCodigo() , gsvista.getTxtColor() , gsvista.getTxtModelo() , gsvista.getTxtCosto() , gsvista.getTxtTalla());
+                gsvista.getTablaInventario().clearSelection();
             }catch (Exception e){
                 JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");
             }

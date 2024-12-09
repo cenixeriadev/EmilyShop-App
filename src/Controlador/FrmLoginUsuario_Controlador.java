@@ -69,7 +69,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
 
     }
     @Override
-    public void loginExitoso() {
+    public void loginExitoso(String nombre_Usuario) {
         PantallaCarga pantallaCarga = new PantallaCarga();
         pantallaCarga.setVisible(true);
         login.dispose();
@@ -86,7 +86,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
             @Override
             protected void done() {
                 pantallaCarga.dispose();
-                PrincipalVista vista = new PrincipalVista();
+                PrincipalVista vista = new PrincipalVista(nombre_Usuario);
                 new Menu_Principal_Controlador(vista);
                 vista.setVisible(true);
             }

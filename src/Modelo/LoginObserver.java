@@ -1,5 +1,5 @@
 package Modelo;
 public interface LoginObserver{
-    void  loginExitoso();
+    void  loginExitoso(String nombreUsuario);
     void loginFallido(String ErrorMessage);
 }

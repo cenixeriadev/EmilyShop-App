@@ -13,8 +13,6 @@ public class ConexionBD {
             String user = "root";
             String password = "";
             Database = DriverManager.getConnection(url, user, password);
-            System.out.println("(～￣▽￣)～");
-
         } catch (ClassNotFoundException e) {
             System.out.println("Error: No se encontró el driver de MySQL");
 

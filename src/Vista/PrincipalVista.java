@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class PrincipalVista extends JFrame {
     // Barra de menú y menús
+    private String names;
     JLabel lblimagennike, lblimagenadidas, lblimagenquelind, lblimagenpuma, lblimagenmarcas, lblimagenreebok,lblimagenirun, lblilogoempresa2;
     JLabel lblbienvenida, lblmensaje1, lblmensaje6;
     JMenuBar menuBar;
@@ -18,7 +19,11 @@ public class PrincipalVista extends JFrame {
 
     JPanel panelprincipal;
 
-    public PrincipalVista() {
+    public PrincipalVista(String names) {
+        this.names = names;
+        Iniciar();
+    }
+    public void Iniciar(){
         setTitle("Menu Calzados Emily´s");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1140, 840);
@@ -125,7 +130,7 @@ public class PrincipalVista extends JFrame {
         add(panelprincipal);
 
         // Componentes del panel principal
-        lblbienvenida = createLabel("BIENVENIDO \n USUARIO", 290, 150, 580, 60, 45);
+        lblbienvenida = createLabel("BIENVENIDO \n "+ names, 290, 150, 580, 60, 45);
         lblmensaje1 = createLabel("Seleccione la opción que desea realizar", 390, 160, 580, 150, 20);
         lblmensaje6 = createLabel("Calzados Emily´s", 480, 470, 300, 30, 16);
         lblilogoempresa2 = createImageLabel("src/Recursos/nuevologo.png", 230, 230, 430, 260);

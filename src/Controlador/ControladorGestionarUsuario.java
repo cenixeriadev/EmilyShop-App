@@ -35,6 +35,7 @@ public class ControladorGestionarUsuario implements MouseListener {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario de la tabla");
                 }
                 modelo.Limpiarcampos(vista.getTxtnombre(), vista.getTxttelefono(), vista.getTxtusuario());
+                vista.getTablaUsuario().clearSelection();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error al eliminar el usuario");
             }
@@ -49,6 +50,7 @@ public class ControladorGestionarUsuario implements MouseListener {
                 );
                 modelo.CargarUsuarios();
                 modelo.Limpiarcampos(vista.getTxtnombre(), vista.getTxttelefono(), vista.getTxtusuario());
+                vista.getTablaUsuario().clearSelection();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Debe completar los campos para actualizar");
             }

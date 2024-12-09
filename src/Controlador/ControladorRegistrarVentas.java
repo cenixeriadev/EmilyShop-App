@@ -74,6 +74,7 @@ public class ControladorRegistrarVentas implements MouseListener {
                         RegistroVentas.getCbbmetodo().getSelectedItem()
                 };
                 model.addRow(fila);
+                RegistroVentas.getTablaInventario().clearSelection();
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Error en el formato de los datos: " + e.getMessage());
             } catch (Exception e) {
@@ -97,7 +98,6 @@ public class ControladorRegistrarVentas implements MouseListener {
 
                 // Registrar la venta en la base de datos
                 ModeloVentaConfirmada.VentaConfirmada(objCliente, (String)RegistroVentas.getCbbmetodo().getSelectedItem());
-
                 // Preguntar si el usuario quiere generar un PDF
                 ImageIcon icon = new ImageIcon("src/Recursos/iconoPregunta.png");
                 if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
