@@ -1,13 +1,18 @@
 
 package Utilitario;
 
+import Modelo.Modelo_Reporte_Ventas;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import java.awt.Desktop;
+import javax.swing.*;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 public class PDFventas {
 
-    public static void main(String[] args) {
+    public static void GenerarPdfVentas(String fechaInicio , String fechaFinal , ArrayList<Modelo_Reporte_Ventas> listaTablaVentasMpago , ArrayList<Modelo_Reporte_Ventas> listaTablaProductosVendidos, double totalVentas , double MargenDeGanancia , int cantidadVendida) {
         String rutaArchivo = "src/pdf/reporte_semanal_ventas.pdf";
 
         // Crear documento
@@ -15,7 +20,20 @@ public class PDFventas {
         try {
             PdfWriter.getInstance(documento, new FileOutputStream(rutaArchivo));
             documento.open();
-
+            String fechaInicioMod = "";
+            String fechaFinalMod = "";
+            for (int i = 0; i < fechaInicio.length(); i++) {
+                if (fechaInicio.charAt(i) == '-') {
+                    fechaInicioMod = fechaInicio.replace("-", "/");
+                    break;
+                }
+            }
+            for (int i = 0; i < fechaFinal.length(); i++) {
+                if (fechaFinal.charAt(i) == '-') {
+                    fechaFinalMod = fechaFinal.replace("-", "/");
+                    break;
+                }
+            }
             
             // Tabla para el título y la imagen
             PdfPTable tablaTituloImagen = new PdfPTable(2); // Dos columnas: imagen y título
@@ -51,15 +69,15 @@ public class PDFventas {
             tablaInfo.setSpacingAfter(10);
 
             tablaInfo.addCell(celda("Fecha de Inicio", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell("04/12/2024");
+            tablaInfo.addCell(fechaInicioMod);
             tablaInfo.addCell(celda("Fecha de Fin", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell("10/12/2024");
+            tablaInfo.addCell(fechaFinalMod);
             tablaInfo.addCell(celda("Ventas Totales", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell("$12,500.00");
+            tablaInfo.addCell("S/. "+ String.valueOf(totalVentas));
             tablaInfo.addCell(celda("Margen de Ganancia", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell("2,500");
+            tablaInfo.addCell( "S/. "+ String.valueOf(MargenDeGanancia));
             tablaInfo.addCell(celda("Cantidad Vendida", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell("320");
+            tablaInfo.addCell(String.valueOf(cantidadVendida));
 
             documento.add(tablaInfo);
 
@@ -84,18 +102,16 @@ public class PDFventas {
             tablaVentasDia.addCell(celda("Ventas Tarjeta", BaseColor.LIGHT_GRAY));
             tablaVentasDia.addCell(celda("Ventas Totales", BaseColor.LIGHT_GRAY));
 
-            String[][] ventasPorDia = {
-                    {"Lunes", "1000", "500", "500", "$2,000"},
-                    {"Martes", "1000", "500", "500", "$1,800"},
-                    {"Miércoles", "1000", "500", "500", "$2,300"},
-                    {"Jueves", "1000", "500", "500", "$2,100"},
-                    {"Viernes", "1000", "500", "500", "$3,000"},
-                    {"Sábado", "1000", "500", "500", "$1,300"},
-                    {"Domingo", "1000", "500", "500", "$2,000"}
-            };
-            for (String[] dia : ventasPorDia) {
-                for (String dato : dia) {
-                    tablaVentasDia.addCell(dato);
+            System.out.println(listaTablaVentasMpago.size());
+            System.out.println(listaTablaProductosVendidos.size());
+            for (Modelo_Reporte_Ventas reporteVenta : listaTablaVentasMpago) {
+                if (reporteVenta.getDia()!=null) {
+                    tablaVentasDia.addCell(reporteVenta.getDia());
+                    tablaVentasDia.addCell(String.valueOf(reporteVenta.getVentasYape()));
+                    tablaVentasDia.addCell(String.valueOf(reporteVenta.getVentasEfectivo()));
+                    tablaVentasDia.addCell(String.valueOf(reporteVenta.getVentasTarjeta()));
+                    tablaVentasDia.addCell(String.valueOf(reporteVenta.getVentasTotales()));
+
                 }
             }
             documento.add(tablaVentasDia);
@@ -117,34 +133,34 @@ public class PDFventas {
 
             // Encabezados
             String[] encabezados = {
-                    "Código", "Modelo", "Cantidad", "Método de Pago", "Precio Venta", "Fecha de Venta"
+                    "Código", "Marca", "Cantidad", "Método de Pago", "Precio Venta", "Fecha de Venta"
             };
             for (String encabezado : encabezados) {
                 tablaProductos.addCell(celda(encabezado, BaseColor.LIGHT_GRAY));
             }
 
-            // Datos de ejemplo
-            String[][] datosProductos = {
-                    {"P001", "Air Max", "2", "Yape", "$150.00", "04/12/2024"},
-                    {"P002", "Superstar", "1", "Efectivo", "$120.00", "05/12/2024"},
-                    {"P003", "Old Skool", "3", "Tarjeta", "$180.00", "06/12/2024"},
-                    {"P004", "Gel Kayano", "2", "Yape", "$250.00", "07/12/2024"}
-            };
 
-            for (String[] fila : datosProductos) {
-                for (String dato : fila) {
-                    tablaProductos.addCell(dato);
+            for (Modelo_Reporte_Ventas reporteVentas : listaTablaProductosVendidos) {
+                if (reporteVentas.getCodigo() != null && reporteVentas.getMarca()!=null && reporteVentas.getMetodo_pago()!=null && reporteVentas.getFechaVenta()!=null) {
+                    tablaProductos.addCell(reporteVentas.getCodigo());
+                    tablaProductos.addCell(reporteVentas.getMarca());
+                    tablaProductos.addCell(String.valueOf(reporteVentas.getCantidad()));
+                    tablaProductos.addCell(reporteVentas.getMetodo_pago());
+                    tablaProductos.addCell(String.valueOf(reporteVentas.getPrecio_venta()));
+                    tablaProductos.addCell(reporteVentas.getFechaVenta());
                 }
+                // Añadir fecha de venta al pdf en la última columna
             }
 
             documento.add(tablaProductos);
 
             // Cerrar documento
             documento.close();
-            System.out.println("Reporte generado correctamente: " + rutaArchivo);
+            Desktop.getDesktop().open(new File(rutaArchivo));
+
 
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null , "Error al generar el pdf");
         }
     }
 

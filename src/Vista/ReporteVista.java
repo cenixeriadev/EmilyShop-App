@@ -68,7 +68,7 @@ public class ReporteVista extends JFrame{
 
         dateChooserDesde = new JDateChooser();
         dateChooserDesde.setBounds(550, 310, 150, 30);
-        dateChooserDesde.setDateFormatString("dd/MM/yyyy");
+        dateChooserDesde.setDateFormatString("yyyy-MM-dd");
         panelusuario.add(dateChooserDesde);
 
         lblFechaHasta = new JLabel("Hasta:");
@@ -79,7 +79,7 @@ public class ReporteVista extends JFrame{
 
         dateChooserHasta = new JDateChooser();
         dateChooserHasta.setBounds(550, 360, 150, 30);
-        dateChooserHasta.setDateFormatString("dd/MM/yyyy");
+        dateChooserHasta.setDateFormatString("yyyy-MM-dd");
         panelusuario.add(dateChooserHasta);
 
         //---------------------------------------------------------------------
@@ -100,9 +100,5 @@ public class ReporteVista extends JFrame{
         return btnVentas;
     }
 
-    public static void main(String[] args) {
-        ReporteVista ventana5= new ReporteVista();
-        ventana5.setVisible(true);
-    }
 }
 

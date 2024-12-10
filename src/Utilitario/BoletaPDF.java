@@ -128,8 +128,8 @@ public class BoletaPDF {
             doc.open();
 
             // Agregar el logo
-            Image img = Image.getInstance("src/Recursos/logoempresa.png");
-            img.scaleAbsolute(100, 50);
+            Image img = Image.getInstance("src/Recursos/nuevologo.png");
+            img.scaleToFit(80, 80);
             img.setAlignment(Element.ALIGN_LEFT);
 
             // Encabezado de la empresa
@@ -175,7 +175,7 @@ public class BoletaPDF {
             PdfPCell clienteCell = new PdfPCell();
             clienteCell.setBorder(Rectangle.ALIGN_RIGHT);
             clienteCell.addElement(new Paragraph("Datos del cliente", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE)));
-            clienteCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            clienteCell.setBackgroundColor(BaseColor.GRAY);
             clienteCell.addElement(new Paragraph("Cliente: " + cliente.getNombre_apellido()));
             clienteCell.addElement(new Paragraph("Teléfono: " + cliente.getTelefono()));
             datosCliente.addCell(clienteCell);

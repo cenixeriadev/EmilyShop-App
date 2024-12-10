@@ -173,28 +173,32 @@ public class ControladorRegistrarVentas implements MouseListener {
         if(e.getSource()==RegistroVentas.getTablaInventario()){
 
             int selectRow = RegistroVentas.getTablaInventario().getSelectedRow();
-            objInventario = new inventario();
-            objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 0));
-            objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
-            objInventario.setTalla(Integer.parseInt(String.valueOf(RegistroVentas.getTablaInventario().getValueAt(selectRow, 2))));
-            objInventario.setColor((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 3));
-            objInventario.setPrecio_venta((Double)RegistroVentas.getTablaInventario().getValueAt(selectRow, 4));
-            int id = objInventario.ObtenerIdInventario(objInventario);
-            objInventario.setId_inventario(id);
-
+            if(selectRow!=-1){
+                objInventario = new inventario();
+                objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 0));
+                objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
+                objInventario.setTalla(Integer.parseInt(String.valueOf(RegistroVentas.getTablaInventario().getValueAt(selectRow, 2))));
+                objInventario.setColor((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 3));
+                objInventario.setPrecio_venta((Double)RegistroVentas.getTablaInventario().getValueAt(selectRow, 4));
+                int id = objInventario.ObtenerIdInventario(objInventario);
+                objInventario.setId_inventario(id);
+            }
         }
         if(e.getSource()==RegistroVentas.getTablacarrito()){
             selectRow = RegistroVentas.getTablacarrito().getSelectedRow();
-            objInventario = new inventario();
-            objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 0));
-            objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
-            objInventario.setTalla(Integer.parseInt(String.valueOf(RegistroVentas.getTablaInventario().getValueAt(selectRow, 2))));
-            objInventario.setColor((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 3));
-            objInventario.setPrecio_venta((Double)RegistroVentas.getTablaInventario().getValueAt(selectRow, 4));
+            if(selectRow!=-1){
+                objInventario = new inventario();
+                objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 0));
+                objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
+                objInventario.setTalla(Integer.parseInt(String.valueOf(RegistroVentas.getTablaInventario().getValueAt(selectRow, 2))));
+                objInventario.setColor((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 3));
+                objInventario.setPrecio_venta((Double)RegistroVentas.getTablaInventario().getValueAt(selectRow, 4));
 
-            int id = objInventario.ObtenerIdInventario(objInventario);
-            objProducto = new carrito();
-            idcarrito = objProducto.ObtenerID(id);
+                int id = objInventario.ObtenerIdInventario(objInventario);
+                objProducto = new carrito();
+                idcarrito = objProducto.ObtenerID(id);
+            }
+
         }
     }
 

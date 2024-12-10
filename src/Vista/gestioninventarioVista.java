@@ -61,7 +61,7 @@ public class gestioninventarioVista extends JFrame {
         scrollPane.setBounds(600, 140, 500, 340);
         panelusuario.add(scrollPane);
 
-        lblmodelo=new JLabel("Modelo");
+        lblmodelo=new JLabel("Marca");
         lblmodelo.setForeground(Color.WHITE);
         lblmodelo.setFont(new Font("Times New Roman", Font.BOLD,20));
         lblmodelo.setBounds(115,140,140,30);

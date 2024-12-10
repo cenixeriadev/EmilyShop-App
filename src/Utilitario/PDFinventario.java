@@ -1,9 +1,12 @@
 package Utilitario;
 
-import Modelo.Modelo_Reportes;
+import Modelo.Modelo_Reporte_Ventas;
+import java.awt.Desktop;
 import Modelo.inventario;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+
+import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,7 +14,7 @@ import java.util.Date;
 
 public class PDFinventario {
     private ArrayList<inventario> listaInventario ;
-    private Modelo_Reportes modelo = new  Modelo_Reportes();
+    private Modelo_Reporte_Ventas modelo = new Modelo_Reporte_Ventas();
     public void generarReporteInventario() {
         String rutaArchivo = "src/pdf/reporte_inventario_zapatillas.pdf";//cambiar nombre de archivo
 
@@ -110,7 +113,7 @@ public class PDFinventario {
 
             // Cerrar documento
             documento.close();
-            System.out.println("Reporte de inventario generado correctamente: " + rutaArchivo);
+            Desktop.getDesktop().open(new File(rutaArchivo));
 
         } catch (Exception e) {
             e.printStackTrace();
