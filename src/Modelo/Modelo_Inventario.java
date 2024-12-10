@@ -22,18 +22,17 @@ public class Modelo_Inventario implements MetodosInventario {
         modelo.setRowCount(0);
         listaInventario = objInventario.listarInventario();
         for(inventario objinventario : listaInventario){
-            if(objinventario.ObtenerEstado(objinventario).equals("activo")){
-                Object[] fila = {
-                        objinventario.getCodigo(),
-                        objinventario.getMarca(),
-                        objinventario.getTalla(),
-                        objinventario.getColor(),
-                        objinventario.getStock(),
-                        objinventario.getPrecio_venta()
-                };
-                modelo.addRow(fila);
-            }
+            Object[] fila = {
+                    objinventario.getCodigo(),
+                    objinventario.getMarca(),
+                    objinventario.getTalla(),
+                    objinventario.getColor(),
+                    objinventario.getStock(),
+                    objinventario.getPrecio_venta()
+            };
+            modelo.addRow(fila);
         }
+
         vistages.getTablaInventario().setModel(modelo);
     }
 

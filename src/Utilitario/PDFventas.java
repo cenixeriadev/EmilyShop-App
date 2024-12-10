@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 public class PDFventas {
 
     public static void main(String[] args) {
-        String rutaArchivo = "reporte_semanal_ventas.pdf";
+        String rutaArchivo = "src/pdf/reporte_semanal_ventas.pdf";
 
         // Crear documento
         Document documento = new Document();
@@ -33,7 +33,7 @@ public class PDFventas {
             tablaTituloImagen.addCell(celdaTitulo);
             
             // Imagen
-            Image imagen = Image.getInstance("nuevologo.png");
+            Image imagen = Image.getInstance("src/Recursos/nuevologo.png");
             imagen.scaleToFit(70, 70); // Ajusta el tamaño de la imagen
             PdfPCell celdaImagen = new PdfPCell(imagen);
             celdaImagen.setBorder(Rectangle.NO_BORDER); // Sin bordes

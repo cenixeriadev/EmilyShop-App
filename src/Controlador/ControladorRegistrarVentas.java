@@ -15,12 +15,13 @@ import java.util.ArrayList;
 public class ControladorRegistrarVentas implements MouseListener {
     private final registroVentaVista RegistroVentas;
     private final Modelo_RegistrarVentas modelo;
-    private final BoletaPDF pdf = new BoletaPDF();
     private  carrito objProducto;
     private  ventas objVentas;
     private clientes objCliente;
     private  inventario objInventario;
     private int times = 0;
+    private int idcarrito;
+    private int selectRow;
     private ArrayList<BoletaPDF> listaBoleta;
 
     public ControladorRegistrarVentas(registroVentaVista RegistroVentas, Modelo_RegistrarVentas modelo){
@@ -35,9 +36,11 @@ public class ControladorRegistrarVentas implements MouseListener {
         RegistroVentas.getTablacarrito().addMouseListener(this);
         RegistroVentas.getBtneliminar().addActionListener(_->{
             if (RegistroVentas.getTablacarrito().isRowSelected(RegistroVentas.getTablacarrito().getSelectedRow())) {
-                int id_carrito = Integer.parseInt(RegistroVentas.getTablacarrito().getValueAt(RegistroVentas.getTablacarrito().getSelectedRow(), 0).toString());
                 objProducto = new carrito();
-                objProducto.setId_carrito(id_carrito);
+                objProducto.setId_carrito(idcarrito);
+                objProducto.EliminarProducto(idcarrito);
+                DefaultTableModel model = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();//TODO: en inventario al "eliminar" una fila esta se elimina con CargarDatos
+                model.removeRow(selectRow);
             } else {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un producto de la tabla");
             }
@@ -168,6 +171,7 @@ public class ControladorRegistrarVentas implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==RegistroVentas.getTablaInventario()){
+
             int selectRow = RegistroVentas.getTablaInventario().getSelectedRow();
             objInventario = new inventario();
             objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 0));
@@ -180,7 +184,7 @@ public class ControladorRegistrarVentas implements MouseListener {
 
         }
         if(e.getSource()==RegistroVentas.getTablacarrito()){
-            int selectRow = RegistroVentas.getTablacarrito().getSelectedRow();
+            selectRow = RegistroVentas.getTablacarrito().getSelectedRow();
             objInventario = new inventario();
             objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 0));
             objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
@@ -190,9 +194,7 @@ public class ControladorRegistrarVentas implements MouseListener {
 
             int id = objInventario.ObtenerIdInventario(objInventario);
             objProducto = new carrito();
-            int idcarrito = objProducto.ObtenerID(id);
-            objProducto.EliminarProducto(idcarrito);
-            RegistroVentas.getModelocarrito().removeRow(selectRow);
+            idcarrito = objProducto.ObtenerID(id);
         }
     }
 

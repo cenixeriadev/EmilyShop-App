@@ -1,8 +1,6 @@
 package Utilitario;
 
-import Modelo.carrito;
 import Modelo.clientes;
-import Modelo.ventas;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 

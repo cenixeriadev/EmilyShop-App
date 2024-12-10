@@ -1,17 +1,27 @@
 package Utilitario;
 
+import Modelo.Modelo_Reportes;
+import Modelo.inventario;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class PDFinventario {
-
-    public static void main(String[] args) {
+    private ArrayList<inventario> listaInventario ;
+    private Modelo_Reportes modelo = new  Modelo_Reportes();
+    public void generarReporteInventario() {
         String rutaArchivo = "src/pdf/reporte_inventario_zapatillas.pdf";//cambiar nombre de archivo
 
         // Crear documento
         Document documento = new Document();
         try {
+            Date date = new Date();
+            String fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+            //cambiar el formato de la fecha de / a _
+
             PdfWriter.getInstance(documento, new FileOutputStream(rutaArchivo));
             documento.open();
 
@@ -47,15 +57,14 @@ public class PDFinventario {
             Font fontSubtitulo = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.WHITE);
             documento.add(new Paragraph("Información General del Inventario", fontSubtitulo));
             documento.add(new Paragraph("\n"));
-
             PdfPTable tablaInfo = new PdfPTable(2);
             tablaInfo.setWidthPercentage(100);
             tablaInfo.setSpacingAfter(10);
 
             tablaInfo.addCell(celda("Total de Zapatillas en Inventario", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell("850");
+            tablaInfo.addCell(String.valueOf(modelo.TotalProductos()));
             tablaInfo.addCell(celda("Última Actualización", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell("09/12/2024");
+            tablaInfo.addCell(fechaActual);
 
             documento.add(tablaInfo);
 
@@ -75,26 +84,23 @@ public class PDFinventario {
             }
 
             // Datos de ejemplo
-            String[][] datosInventario = {
-                    {"Z001", "Nike", "Negro", "42", "25","$70","$110"},
-                    {"Z002", "Adidas", "Blanco", "40", "30","$70","$130"},
-                    {"Z003", "Reebok", "Azul", "41", "20","$70","$110"},
-                    {"Z004", "ASICS", "Gris", "44", "15","$70","$150"},
-                    {"Z005", "Vans", "Rojo", "39", "40","$70","$110"},
-                    {"Z006", "Mizuno", "Negro", "43", "20","$70","$110"}
-            };
-
-            for (String[] fila : datosInventario) {
-                for (String dato : fila) {
-                    tablaInventario.addCell(dato);
-                }
+            inventario objinventario = new inventario();
+            listaInventario = objinventario.listarInventario();
+            for (inventario ObjInventario : listaInventario) { // codigo  marca color  talla  cantidad P.compra PVenta
+                tablaInventario.addCell(ObjInventario.getCodigo());
+                tablaInventario.addCell(ObjInventario.getMarca());
+                tablaInventario.addCell(ObjInventario.getColor());
+                tablaInventario.addCell(String.valueOf(ObjInventario.getTalla()));
+                tablaInventario.addCell(String.valueOf(ObjInventario.getStock()));
+                tablaInventario.addCell(String.valueOf(ObjInventario.getPrecio_compra()));
+                tablaInventario.addCell(String.valueOf(ObjInventario.getPrecio_venta()));
             }
             documento.add(tablaInventario);
 
             // Pie de página con diseño
             documento.add(new Paragraph("\n"));
             PdfPTable piePagina = new PdfPTable(1);
-            PdfPCell celdaPie = new PdfPCell(new Phrase("Reporte generado automáticamente el 09/12/2024"));// cambiar fecha
+            PdfPCell celdaPie = new PdfPCell(new Phrase("Reporte generado automáticamente el " + fechaActual ));// cambiar fecha
             celdaPie.setHorizontalAlignment(Element.ALIGN_CENTER);
             celdaPie.setBackgroundColor(new BaseColor(149, 165, 166)); // Gris
             celdaPie.setPadding(10);

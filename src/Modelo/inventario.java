@@ -75,7 +75,8 @@ public class inventario {
     public ArrayList<inventario> listarInventario() {
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("SELECT * FROM inventario");
+            pt = cn.prepareStatement("SELECT * FROM inventario WHERE  estado = ?");
+            pt.setString(1, "activo");  // esto es para que solo se muestren los productos activos. Puedes modificarlo según necesites.
             rs = pt.executeQuery();
             listaInvent = new ArrayList<>();
             while(rs.next()){
