@@ -57,19 +57,21 @@ public class DetalleVenta {
     ArrayList<DetalleVenta> listaVentas = null;
     DetalleVenta objVenta = null;
 
-    public ArrayList<DetalleVenta> listarProductos(){
+    public ArrayList<DetalleVenta> listarProductosVendidos(ventas Venta){
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT * FROM carrito");
+            ps = cn.prepareStatement("SELECT * FROM detalle_ventas WHERE id_venta=?");
+            ps.setInt(1, Venta.getIdVenta()); // Aquí se reemplaza el id_cliente por el que se quiere listar los productos.
             rs = ps.executeQuery();
             listaVentas = new ArrayList<>();
             while(rs.next()){
                 objVenta = new DetalleVenta();
                 objVenta.setId_detalle_venta(rs.getInt("id_detalle_venta"));
                 objVenta.setId_venta(rs.getInt("id_venta"));
+                objVenta.setId_inventario(rs.getInt("id_inventario"));
                 objVenta.setCantidad(rs.getInt("cantidad"));
-                objVenta.setSubtotal(rs.getDouble("subtotal"));
-                objVenta.setPrecio_unitario(rs.getDouble("precio_unitario"));
+                objVenta.setSubtotal(rs.getDouble("precio_unitario"));
+                objVenta.setPrecio_unitario(rs.getDouble("subtotal"));
                 listaVentas.add(objVenta);
             }
             return listaVentas;

@@ -1,6 +1,7 @@
 
 package Vista;
 
+import Utilitario.BotonPersonalizado;
 import Utilitario.PanelDegradadoAzul;
 
 import javax.swing.*;
@@ -147,19 +148,19 @@ public class registroVentaVista extends JFrame {
         
         // -----------Boton Boleta------------
 
-        btnbuscar = crearBotonPersonalizado("Buscar", "src/Recursos/buscar.png");
+        btnbuscar = new BotonPersonalizado("Buscar","src/Recursos/buscar.png",null);
         btnbuscar.setBounds(920,180,150,40); // Ajustar posición y tamaño
         panelregistroventas.add(btnbuscar);
 
-        btnCarrito = crearBotonPersonalizado("Añadir al carrito", "src/Recursos/carrito.png");
+        btnCarrito = new BotonPersonalizado("Carrito","src/Recursos/carrito.png",null);
         btnCarrito.setBounds(440, 140, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btnCarrito);
 
-        btnregistrar = crearBotonPersonalizado("Registrar", "src/Recursos/registrar.png");
+        btnregistrar = new BotonPersonalizado("Registrar","src/Recursos/registrar.png",null);
         btnregistrar.setBounds(440, 200, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btnregistrar);
 
-        btneliminar = crearBotonPersonalizado("Eliminar", "src/Recursos/tachito.png");
+        btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
         btneliminar.setBounds(440, 260, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btneliminar);
 
@@ -240,6 +241,7 @@ public class registroVentaVista extends JFrame {
     public JTextField getTxtcantidad(){return txtcantidad;}
     public JComboBox<String> getTalla(){return cbbtallas;}
     public JComboBox<String> getColor(){return cbbcolor;}
+    /*
     private JButton crearBotonPersonalizado(String texto, String icono) {
         JButton boton = new JButton(texto) {
             @Override
@@ -278,6 +280,8 @@ public class registroVentaVista extends JFrame {
 
         return boton;
     }
+    */
+
 
 }
 

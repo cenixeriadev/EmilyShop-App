@@ -1,5 +1,6 @@
 package Vista;
 
+import Utilitario.BotonPersonalizado;
 import Utilitario.PanelDegradadoAzul;
 
 import java.awt.*;
@@ -92,20 +93,19 @@ public class GestionarVentasVista extends JFrame {
         panelusuario.add(txttelefono);
 
 
-        btnbuscar = new JButton("Buscar");
-        btnbuscar.setBounds(30,400,140,40);
+        btnbuscar = new BotonPersonalizado("Buscar","src/Recursos/buscar.png",null);
+        btnbuscar.setBounds(30,400,160,40);
         btnbuscar.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         btnbuscar.setBackground(Color.green);
         panelusuario.add(btnbuscar);
 
-        btneliminar = new JButton("Eliminar");
-        btneliminar.setBounds(230,400,140,40);
+        btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
+        btneliminar.setBounds(200,400,160,40);
         btneliminar.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         btneliminar.setBackground(Color.red);
         panelusuario.add(btneliminar);
 
-
-        btnactualizar = new JButton("Actualizar");
+        btnactualizar = new BotonPersonalizado("Actualizar","src/Recursos/actualizar.png",null);
         btnactualizar.setBounds(90,470,200,40);
         btnactualizar.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         btnactualizar.setBackground(Color.CYAN);

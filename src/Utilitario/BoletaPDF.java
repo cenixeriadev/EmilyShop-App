@@ -1,10 +1,12 @@
 package Utilitario;
 
 import Modelo.carrito;
+import Modelo.clientes;
 import Modelo.ventas;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
+import javax.swing.*;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,36 +17,97 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class VentaPDF {
-
+public class BoletaPDF {
     PreparedStatement ps = null;
     ResultSet rs = null;
     Connection cn = null;
-    ArrayList<ventas> listaCarrito = new ArrayList<>();
-    ventas objVentas;
-    //metodo para obtener datos del cliente
-    public ArrayList<ventas> DatosCliente(String nombCliente) {
-        try {
-            cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("SELECT id_cliente ,metodo_pago , total_venta , fecha_venta FROM ventas WHERE id_cliente = ?;");
-            ps.setString(1,nombCliente);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                objVentas = new ventas();
-                objVentas.setId_cliente(rs.getInt("id_cliente"));
-                objVentas.setMetodo_pago(rs.getString("metodo_pago"));
-                objVentas.setFecha_venta(rs.getTimestamp("fecha_venta"));
-                objVentas.setTotal_venta(rs.getDouble("total_venta"));
-
-                listaCarrito.add(objVentas);
-            }
-            cn.close();
-        } catch (SQLException e) {
-            System.out.println("Error al obtener datos del cliente: " + e);
-        }
-        return  listaCarrito;
+    private  ArrayList<BoletaPDF> listaBoleta;
+    private BoletaPDF objBoleta;
+    private int cantidad;
+    private String metodoPago;
+    private String descripcion;
+    private int talla;
+    private String marca;
+    private String color;
+    private double precioUnitario;
+    private double subtotal;
+    public void setCantidad(int cantidad){
+        this.cantidad = cantidad;
     }
-    public void generarFactura(ArrayList<carrito> listaproductos , ArrayList<ventas> listaventas) {
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public void setTalla(int talla) {
+        this.talla = talla;
+    }
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+    public int getCantidad() {
+        return cantidad;
+    }
+    public String getMetodoPago() {
+        return metodoPago;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public int getTalla() {
+        return talla;
+    }
+    public String getMarca() {
+        return marca;
+    }
+    public String getColor() {
+        return color;
+    }
+
+    public ArrayList<BoletaPDF> generarDatos(clientes objClientes){
+        try{
+            cn = ConexionBD.getConexionBD();
+            ps = cn.prepareStatement("select d.cantidad , v.metodo_pago , i.descripcion , i.talla , i.marca , i.color , d.precio_unitario , d.subtotal from detalle_ventas d inner join ventas v on d.id_venta = v.id_venta inner join clientes c on v.id_cliente = c.id_cliente inner join inventario i on i.id_inventario = d.id_inventario WHERE c.id_cliente =?;");
+            ps.setInt(1, objClientes.getId_cliente());
+            rs = ps.executeQuery();
+            listaBoleta = new ArrayList<>();
+            while (rs.next()) {
+                objBoleta = new BoletaPDF();
+                objBoleta.setCantidad(rs.getInt("cantidad"));
+                objBoleta.setMetodoPago(rs.getString("metodo_pago"));
+                objBoleta.setDescripcion(rs.getString("descripcion"));
+                objBoleta.setTalla(rs.getInt("talla"));
+                objBoleta.setMarca(rs.getString("marca"));
+                objBoleta.setColor(rs.getString("color"));
+                objBoleta.setPrecioUnitario(rs.getDouble("precio_unitario"));
+                objBoleta.setSubtotal(rs.getDouble("subtotal"));
+                listaBoleta.add(objBoleta);
+            }
+            return listaBoleta;
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+        return listaBoleta;
+    }
+
+    public  void generarFactura(ArrayList<BoletaPDF> boleta ,clientes cliente) {
         try {
             //cargar la fecha actual
             Date date = new Date();
@@ -60,9 +123,8 @@ public class VentaPDF {
 
             // Crear el documento
             Document doc = new Document(PageSize.A4, 36, 36, 20, 20);
-            int nombreArchivo =  listaventas.getFirst().getId_cliente();
             FileOutputStream archivo;
-            File file = new File("src/pdf/" + nombreArchivo + fechaNueva + ".pdf");//agregue fecha actual para el nombre de la ruta y el de el open doc es el mismo
+            File file = new File("src/pdf/" + "Boleta" + cliente.getNombre_apellido() + fechaNueva + ".pdf");//agregue fecha actual para el nombre de la ruta y el de el open doc es el mismo
             archivo = new FileOutputStream(file);
             PdfWriter.getInstance(doc, archivo);
             doc.open();
@@ -101,7 +163,7 @@ public class VentaPDF {
             doc.add(new Paragraph("\n"));
 
             // Título del documento
-            Paragraph titulo = new Paragraph("BOLETA ELECTRÓNICA BB01-2", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+            Paragraph titulo = new Paragraph("BOLETA DE VENTA REALIZADA", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
             titulo.setAlignment(Element.ALIGN_CENTER);
             doc.add(titulo);
 
@@ -116,10 +178,8 @@ public class VentaPDF {
             clienteCell.setBorder(Rectangle.ALIGN_RIGHT);
             clienteCell.addElement(new Paragraph("Datos del cliente", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE)));
             clienteCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            clienteCell.addElement(new Paragraph("Cliente: " + listaventas.getFirst().getId_cliente() ));
-            clienteCell.addElement(new Paragraph("DNI: 06907263"));
-            clienteCell.addElement(new Paragraph("Dirección: CALLE PEDRO RUIZ NRO. 129, SURQUILLO, LIMA, LIMA, PERÚ"));
-            clienteCell.addElement(new Paragraph("Teléfono: " + listaventas.getFirst().getMetododepago()));
+            clienteCell.addElement(new Paragraph("Cliente: " + cliente.getNombre_apellido()));
+            clienteCell.addElement(new Paragraph("Teléfono: " + cliente.getTelefono()));
             datosCliente.addCell(clienteCell);
 
             doc.add(datosCliente);
@@ -137,7 +197,7 @@ public class VentaPDF {
                     new PdfPCell(new Phrase("Método de pago", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
                     new PdfPCell(new Phrase("Descripción", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
                     new PdfPCell(new Phrase("P. Unit.", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE))),
-                    new PdfPCell(new Phrase("Total", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE)))
+                    new PdfPCell(new Phrase("SubTotal", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.WHITE)))
             };
 
             for (PdfPCell celda : encabezados) {
@@ -147,14 +207,14 @@ public class VentaPDF {
             }
             double totalventa = 0;
             // Agregar filas de ejemplo
-            for (int i = 0; i <= listaventas.size()-1 ; i++) {
+            for (int i = 0; i <= listaBoleta.size()-1 ; i++) {
                 tablaProductos.addCell(String.valueOf(i+1));
-                tablaProductos.addCell("1");
-                tablaProductos.addCell(listaventas.get(i).getMetododepago());//codigo
-                //tablaProductos.addCell(listaproductos.get(i).get()+" " + listaproductos.get(i).getColor() + " " + listaproductos.get(i).getTalla());//descripcion
-                tablaProductos.addCell(String.valueOf(listaventas.get(i).getTotal_venta()) +" Soles");//precio unitario
-                tablaProductos.addCell(String.valueOf(listaventas.get(i).getTotal_venta())+" Soles");//precio total del producto
-                totalventa += listaventas.get(i).getTotal_venta();
+                tablaProductos.addCell(String.valueOf(listaBoleta.get(i).getCantidad()));
+                tablaProductos.addCell(listaBoleta.get(i).getMetodoPago());
+                tablaProductos.addCell(listaBoleta.get(i).getMarca() +" " +  listaBoleta.get(i).getColor()+ " " + String.valueOf(listaBoleta.get(i).getTalla()) + " " + listaBoleta.get(i).getDescripcion());
+                tablaProductos.addCell(String.valueOf(listaBoleta.get(i).getPrecioUnitario()) +" Soles");//precio unitario
+                tablaProductos.addCell(String.valueOf(listaBoleta.get(i).getSubtotal())+" Soles");//precio total del producto
+                totalventa += listaBoleta.get(i).getSubtotal();
             }
 
             doc.add(tablaProductos);
@@ -180,10 +240,10 @@ public class VentaPDF {
             doc.close();
             archivo.close();
 
-            Desktop.getDesktop().open(new File("src/pdf/" + nombreArchivo + fechaNueva + ".pdf"));
+            Desktop.getDesktop().open(new File("src/pdf/" + "Boleta" + cliente.getNombre_apellido() + fechaNueva + ".pdf"));
 
         } catch (IOException | DocumentException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al generar pdf!");
         }
     }
 }

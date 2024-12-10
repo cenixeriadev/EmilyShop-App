@@ -62,30 +62,6 @@ public class carrito {
     carrito objProducto = null;
 
 
-
-//    public ArrayList<carrito> listarProductos(){
-//        try{
-//            cn = ConexionBD.getConexionBD();
-//            ps = cn.prepareStatement("SELECT * FROM carrito");
-//            rs = ps.executeQuery();
-//            listaProducto = new ArrayList<>();
-//            while(rs.next()){
-//                objProducto = new carrito();
-//                objProducto.setIdProducto(rs.getInt("idproducto"));
-//                objProducto.setId_cliente(rs.getInt("idInventario"));
-//                objProducto.setModel(rs.getString("modelo"));
-//                objProducto.setColor(rs.getString("color"));
-//                objProducto.setCodigo(rs.getString("codigo"));
-//                objProducto.setTalla(rs.getInt("talla"));
-//
-//                listaProducto.add(objProducto);
-//            }
-//            return listaProducto;
-//        }catch(Exception e){
-//            System.out.println("Error al listar productos: " + e.getMessage());
-//            return null;
-//        }
-//    }
     public int AgregarProducto(carrito producto){
         int estado = 0;
         try{
@@ -119,5 +95,22 @@ public class carrito {
         }
         return estado;
     }
-
+    public int ObtenerID(int id_inventario){
+        int IdProducto = 0;
+        try{
+            cn  = ConexionBD.getConexionBD();
+            ps = cn.prepareStatement("SELECT id_carrito FROM carrito WHERE id_inventario = ?;");
+            ps.setInt(1,id_inventario);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                IdProducto = rs.getInt("id_carrito");
+            }
+            rs.close();
+            ps.close();
+            cn.close();
+        }catch(Exception e) {
+            System.out.println("Error al obtener id inventario: " + e.getMessage());
+        }
+        return IdProducto;
+    }
 }

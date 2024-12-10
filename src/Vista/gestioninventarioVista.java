@@ -1,5 +1,6 @@
 package Vista;
 
+import Utilitario.BotonPersonalizado;
 import Utilitario.PanelDegradadoAzul;
 
 import javax.swing.*;
@@ -15,8 +16,8 @@ public class gestioninventarioVista extends JFrame {
     JTable tablaInventario;
     DefaultTableModel modeloInventario;
     
-    JLabel lblmodelo, lblcodigo, lblcosto, lbltalla, lblcolor;
-    JTextField txtmodelo, txtcodigo, txtcosto, txttalla, txtcolor;
+    JLabel lblmodelo, lblcodigo, lblcosto, lbltalla, lblcolor , lblCantidad;
+    JTextField txtmodelo, txtcodigo, txtcosto, txttalla, txtcolor , txtcantidad;
     
     JButton btneliminar, btnactualizar;
     
@@ -38,7 +39,7 @@ public class gestioninventarioVista extends JFrame {
         lblbienvenida.setFont(new Font("Times New Roman", Font.BOLD, 35)); // Estilo de fuente
         panelusuario.add(lblbienvenida);
 
-        modeloInventario = new DefaultTableModel(new String[]{"Codigo", "Marca", "Talla", "Color","P. Venta"}, 0){
+        modeloInventario = new DefaultTableModel(new String[]{"Codigo", "Marca", "Talla", "Color","Cantidad" , "P. Venta"}, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -110,13 +111,23 @@ public class gestioninventarioVista extends JFrame {
         txtcosto= new JTextField();
         txtcosto.setBounds(215,300,200,30);
         panelusuario.add(txtcosto);
-        
-        btnactualizar = new JButton("Actualizar");
-        btnactualizar.setBounds(80,360,140,40);
+
+        lblCantidad= new JLabel("Cantidad");
+        lblCantidad.setForeground(Color.WHITE);
+        lblCantidad.setFont(new Font("Times New Roman", Font.BOLD,20));
+        lblCantidad.setBounds(115,340,140,30);
+        panelusuario.add(lblCantidad);
+
+        txtcantidad= new JTextField();
+        txtcantidad.setBounds(215,340,200,30);
+        panelusuario.add(txtcantidad);
+
+        btnactualizar = new BotonPersonalizado("Actualizar","src/Recursos/actualizar.png",null);
+        btnactualizar.setBounds(80, 420, 200, 40);
         panelusuario.add(btnactualizar);
        
-        btneliminar = new JButton("Eliminar");
-        btneliminar.setBounds(300,360,140,40);
+        btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
+        btneliminar.setBounds(300,420,140,40);
         panelusuario.add(btneliminar);
         
 
@@ -155,6 +166,9 @@ public class gestioninventarioVista extends JFrame {
     }
     public JTextField getTxtCodigo(){
         return txtcodigo;
+    }
+    public JTextField getTxtCantidad(){
+        return txtcantidad;
     }
 
 }

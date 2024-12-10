@@ -2,7 +2,7 @@ package Controlador;
 
 import Modelo.*;
 import Utilitario.Limpieza;
-import Utilitario.VentaPDF;
+import Utilitario.BoletaPDF;
 import Vista.registroVentaVista;
 
 import javax.swing.*;
@@ -15,12 +15,13 @@ import java.util.ArrayList;
 public class ControladorRegistrarVentas implements MouseListener {
     private final registroVentaVista RegistroVentas;
     private final Modelo_RegistrarVentas modelo;
-    private final VentaPDF pdf = new VentaPDF();
+    private final BoletaPDF pdf = new BoletaPDF();
     private  carrito objProducto;
     private  ventas objVentas;
     private clientes objCliente;
     private  inventario objInventario;
     private int times = 0;
+    private ArrayList<BoletaPDF> listaBoleta;
 
     public ControladorRegistrarVentas(registroVentaVista RegistroVentas, Modelo_RegistrarVentas modelo){
         this.RegistroVentas = RegistroVentas;
@@ -32,6 +33,15 @@ public class ControladorRegistrarVentas implements MouseListener {
     private void iniciarEventos() {
         RegistroVentas.getTablaInventario().addMouseListener(this);
         RegistroVentas.getTablacarrito().addMouseListener(this);
+        RegistroVentas.getBtneliminar().addActionListener(_->{
+            if (RegistroVentas.getTablacarrito().isRowSelected(RegistroVentas.getTablacarrito().getSelectedRow())) {
+                int id_carrito = Integer.parseInt(RegistroVentas.getTablacarrito().getValueAt(RegistroVentas.getTablacarrito().getSelectedRow(), 0).toString());
+                objProducto = new carrito();
+                objProducto.setId_carrito(id_carrito);
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un producto de la tabla");
+            }
+        });
         RegistroVentas.getBtnCarrito().addActionListener(_ -> {
             try {
                 // Validar entrada
@@ -39,7 +49,6 @@ public class ControladorRegistrarVentas implements MouseListener {
                     JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida.");
                     return;
                 }
-
                 // Obtener datos del cliente
                 if(times==0){
                     objCliente = new clientes();
@@ -126,9 +135,9 @@ public class ControladorRegistrarVentas implements MouseListener {
                 );
 
                 if (respuesta == 0) {
-                    ArrayList<ventas> resultados = pdf.DatosCliente(String.valueOf(objVentas.getId_cliente()));
-                    // TODO: Implementar lógica para generar el PDF
-                    // pdf.generarFactura(productos, resultados);
+                    BoletaPDF boletaPDF = new BoletaPDF();
+                    listaBoleta = boletaPDF.generarDatos(objCliente);
+                    boletaPDF.generarFactura(listaBoleta , objCliente);
                 }
 
                 // Limpiar las tablas y reinicializar los objetos
@@ -168,11 +177,22 @@ public class ControladorRegistrarVentas implements MouseListener {
             objInventario.setPrecio_venta((Double)RegistroVentas.getTablaInventario().getValueAt(selectRow, 4));
             int id = objInventario.ObtenerIdInventario(objInventario);
             objInventario.setId_inventario(id);
-            System.out.println(objInventario.getPrecio_venta());
-            System.out.println(objInventario.getTalla());
-            System.out.println(objInventario.getColor());
-            System.out.println(objInventario.getCodigo());
 
+        }
+        if(e.getSource()==RegistroVentas.getTablacarrito()){
+            int selectRow = RegistroVentas.getTablacarrito().getSelectedRow();
+            objInventario = new inventario();
+            objInventario.setCodigo((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 0));
+            objInventario.setMarca((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 1));
+            objInventario.setTalla(Integer.parseInt(String.valueOf(RegistroVentas.getTablaInventario().getValueAt(selectRow, 2))));
+            objInventario.setColor((String)RegistroVentas.getTablaInventario().getValueAt(selectRow, 3));
+            objInventario.setPrecio_venta((Double)RegistroVentas.getTablaInventario().getValueAt(selectRow, 4));
+
+            int id = objInventario.ObtenerIdInventario(objInventario);
+            objProducto = new carrito();
+            int idcarrito = objProducto.ObtenerID(id);
+            objProducto.EliminarProducto(idcarrito);
+            RegistroVentas.getModelocarrito().removeRow(selectRow);
         }
     }
 

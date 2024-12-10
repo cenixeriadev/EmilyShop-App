@@ -169,13 +169,14 @@ public class inventario {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("UPDATE inventario SET talla=?, marca=?, color=?, precio_venta=?  ,codigo = ?  WHERE id_inventario=?");
+            pt = cn.prepareStatement("UPDATE inventario SET talla=?, marca=?, color=?, precio_venta=?  ,codigo = ? ,stock = ? WHERE id_inventario=?");
             pt.setInt(1, objInventario.getTalla());
             pt.setString(2, objInventario.getMarca());
             pt.setString(3, objInventario.getColor());
             pt.setDouble(4, objInventario.getPrecio_venta());
             pt.setString(5, objInventario.getCodigo());
-            pt.setInt(6,objInventario.getIdInventario());
+            pt.setInt(6, objInventario.getStock());
+            pt.setInt(7,objInventario.getIdInventario());
             estado = pt.executeUpdate();
             cn.close();
             pt.close();

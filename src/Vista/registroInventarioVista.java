@@ -1,6 +1,7 @@
 
 package Vista;
 
+import Utilitario.BotonPersonalizado;
 import Utilitario.PanelDegradadoAzul;
 
 import javax.swing.*;
@@ -122,7 +123,7 @@ public class registroInventarioVista extends JFrame{
         txtdescripcion.setBounds(695, 280, 200, 30);
         panelusuario.add(txtdescripcion);
 
-        btnregistrar = new JButton("Registrar");
+        btnregistrar = new BotonPersonalizado("Registrar","src/Recursos/registrar.png",null);
         btnregistrar.setBounds(530,360,140,40);
         panelusuario.add(btnregistrar);
 

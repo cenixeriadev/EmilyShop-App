@@ -21,12 +21,25 @@ public class Modelo_Inventario implements MetodosInventario {
         DefaultTableModel modelo = vistages.getModeloInventario();
         modelo.setRowCount(0);
         listaInventario = objInventario.listarInventario();
-        AgregarInventario(modelo, listaInventario, vistages.getTablaInventario());
+        for(inventario objinventario : listaInventario){
+            if(objinventario.ObtenerEstado(objinventario).equals("activo")){
+                Object[] fila = {
+                        objinventario.getCodigo(),
+                        objinventario.getMarca(),
+                        objinventario.getTalla(),
+                        objinventario.getColor(),
+                        objinventario.getStock(),
+                        objinventario.getPrecio_venta()
+                };
+                modelo.addRow(fila);
+            }
+        }
+        vistages.getTablaInventario().setModel(modelo);
     }
 
 
     @Override
-    public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  ,int idinventario ,  int i ) {
+    public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  , String cantidad ,int idinventario ,  int i ) {
         if (i != -1) {
             objInventario  = new inventario();
             objInventario.setId_inventario(idinventario);
@@ -35,6 +48,7 @@ public class Modelo_Inventario implements MetodosInventario {
             objInventario.setColor(Color);
             objInventario.setPrecio_venta(Double.parseDouble(Precio));
             objInventario.setCodigo(Codigo);
+            objInventario.setStock(Integer.parseInt(cantidad));
             int resultado = objInventario.ModificarProducto(objInventario);
             if (resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
@@ -97,19 +111,5 @@ public class Modelo_Inventario implements MetodosInventario {
         Limpieza.LimpiarCampos(marca,codigo,PrecioCosto , PrecioVenta ,descripcion);
 
     }
-    static void AgregarInventario(DefaultTableModel modelo, ArrayList<inventario> listaInventario, JTable tablaInventario) {
-        for(inventario objinventario : listaInventario){
-            if(objinventario.ObtenerEstado(objinventario).equals("activo")){
-                Object[] fila = {
-                        objinventario.getCodigo(),
-                        objinventario.getMarca(),
-                        objinventario.getTalla(),
-                        objinventario.getColor(),
-                        objinventario.getPrecio_venta()
-                };
-                modelo.addRow(fila);
-            }
-        }
-        tablaInventario.setModel(modelo);
-    }
+
 }

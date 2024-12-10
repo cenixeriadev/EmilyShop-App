@@ -4,6 +4,7 @@ import java.sql.*;
 
 import Utilitario.ConexionBD;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 
@@ -81,7 +82,7 @@ public class ventas {
             ps.close();
             cn.close();
         } catch (SQLException e) {
-            e.printStackTrace(); // Manejo de excepciones
+            JOptionPane.showMessageDialog(null , "Error inesperado en la bd"); // Manejo de excepciones
         }
         return listaInventarioD;
     }

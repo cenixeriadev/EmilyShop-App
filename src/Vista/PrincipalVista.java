@@ -14,7 +14,7 @@ public class PrincipalVista extends JFrame {
     JMenuItem gestionUsuario;
     JMenuItem registrarProducto, gestionarInventario;
     JMenuItem registrarVenta, gestionarVentas;
-    JMenuItem reporteDia, reporteSemana, reporteMes;
+    JMenuItem reporte;
     JMenuItem cerrarSesion;
 
     JPanel panelprincipal;
@@ -69,15 +69,10 @@ public class PrincipalVista extends JFrame {
         reporteMenu = new JMenu("    REPORTE GENERAL    ");
         reporteMenu.setForeground(Color.WHITE);
         reporteMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        reporteDia = new JMenuItem(" Reporte del Día");
-        reporteDia.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteSemana = new JMenuItem(" Reporte de la Semana");
-        reporteSemana.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteMes = new JMenuItem(" Reporte del Mes");
-        reporteMes.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteMenu.add(reporteDia);
-        reporteMenu.add(reporteSemana);
-        reporteMenu.add(reporteMes);
+        reporte = new JMenuItem(" Reportes");
+        reporte.setFont(new Font("Arial", Font.BOLD, 17));
+        reporteMenu.add(reporte);
+
 
         cerrarMenu = new JMenu("    CERRAR SESIÓN    ");
         cerrarMenu.setForeground(Color.WHITE);
@@ -152,6 +147,9 @@ public class PrincipalVista extends JFrame {
     }
     public JMenuItem getGestionarVentas(){
         return gestionarVentas;
+    }
+    public JMenuItem getReporte(){
+        return reporte;
     }
     public JMenuItem getCerrarSesion(){
         return cerrarSesion;

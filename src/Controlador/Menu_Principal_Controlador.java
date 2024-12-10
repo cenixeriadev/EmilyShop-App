@@ -16,6 +16,7 @@ public class Menu_Principal_Controlador {
     private final gestionUsuarioVista gestionUsuario = new gestionUsuarioVista();
     private final registroVentaVista registroVenta = new registroVentaVista();
     private final gestioninventarioVista gestionInventario = new gestioninventarioVista();
+    private final ReporteVista resporteVista = new ReporteVista();
 
     public Menu_Principal_Controlador(PrincipalVista menu) {
         this.menu = menu;
@@ -35,6 +36,7 @@ public class Menu_Principal_Controlador {
         mainPanel.add(registroInventario.getPanelusuario(), "RegistroInventario");
         mainPanel.add(registroVenta.getPanelregistroventas(), "RegistroVentas");
         mainPanel.add(gestionarVentas.getPanelusuario(), "GestionarVentas");
+        mainPanel.add(resporteVista.getPanelUsuario() , "ReporteGeneral");
 
         // Agregar el panel principal al marco principal
         menu.add(mainPanel, BorderLayout.CENTER);
@@ -59,6 +61,7 @@ public class Menu_Principal_Controlador {
         menu.getGestionarInventario().addActionListener(e -> mostrarVista("GestionInventario"));
         menu.getRegistrarVenta().addActionListener(e -> mostrarVista("RegistroVentas"));
         menu.getRegistrarProducto().addActionListener(e -> mostrarVista("RegistroInventario"));
+        menu.getReporte().addActionListener(e -> mostrarVista("ReporteGeneral"));
         menu.getCerrarSesion().addActionListener(_ -> {
             menu.dispose();
             LoginVista vista = new LoginVista();

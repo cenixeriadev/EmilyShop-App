@@ -1,5 +1,6 @@
 package Vista;
 
+import Utilitario.BotonPersonalizado;
 import Utilitario.PanelDegradadoAzul;
 
 import javax.swing.*;
@@ -61,11 +62,11 @@ public class gestionUsuarioVista extends JFrame {
         panelusuario.add(scrollPane);
 
 
-        btnactualizar = new JButton("Actualizar");
-        btnactualizar.setBounds(80,340,140,40);
+        btnactualizar = new BotonPersonalizado("Actualizar","src/Recursos/actualizar.png",null);
+        btnactualizar.setBounds(70, 340, 200, 40);
         panelusuario.add(btnactualizar);
        
-        btneliminar = new JButton("Eliminar");
+        btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
         btneliminar.setBounds(300,340,140,40);
         panelusuario.add(btneliminar);
         
