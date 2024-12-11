@@ -23,6 +23,7 @@ public class ControladorRegistrarVentas implements MouseListener {
     private int idcarrito;
     private int selectRow;
     private ArrayList<BoletaPDF> listaBoleta;
+    private int cantidadCarrito  = 0;
 
     public ControladorRegistrarVentas(registroVentaVista RegistroVentas, Modelo_RegistrarVentas modelo){
         this.RegistroVentas = RegistroVentas;
@@ -63,6 +64,14 @@ public class ControladorRegistrarVentas implements MouseListener {
                         return;
                     }
                     objCliente.setId_cliente(id_cliente);
+                }
+                cantidadCarrito += Integer.parseInt(RegistroVentas.getTxtcantidad().getText());
+                int stockD = objInventario.getStockDisponible(objInventario);//TODO:  resolver bug de inventario
+                stockD -=cantidadCarrito;
+                if(Integer.parseInt(RegistroVentas.getTxtcantidad().getText())> stockD || cantidadCarrito> stockD){
+                    JOptionPane.showMessageDialog(null , "No hay stock disponible!");
+                    cantidadCarrito = 0;
+                    return;
                 }
 
                 // Calcular subtotal

@@ -187,6 +187,25 @@ public class inventario {
         return  estado;
 
     }
+    public int getStockDisponible(inventario objInventario){
+        int stockD = 0;
+        try{
+            cn  = ConexionBD.getConexionBD();
+            pt = cn.prepareStatement("SELECT stock FROM inventario WHERE id_inventario = ?;");
+            pt.setInt(1, objInventario.getIdInventario());
+            rs = pt.executeQuery();
+            if(rs.next()){
+                stockD = rs.getInt("stock");
+            }
+            rs.close();
+            pt.close();
+            cn.close();
+            return stockD;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null , "Error al obtener stock disponible");
+        }
+        return stockD;
+    }
     public String ObtenerEstado(inventario objInventario){
         String estado = "inactivo";
         try {

@@ -1,5 +1,6 @@
 package Controlador;
 
+import Utilitario.Limpieza;
 import Vista.*;
 import Modelo.*;
 
@@ -60,12 +61,31 @@ public class Menu_Principal_Controlador {
 
     private void configurarMenu() {
         // Configurar las acciones del menú principal
-        menu.getGestionUsuario().addActionListener(e -> mostrarVista("GestionUsuario"));
-        menu.getGestionarInventario().addActionListener(e -> mostrarVista("GestionInventario"));
-        menu.getRegistrarVenta().addActionListener(e -> mostrarVista("RegistroVentas"));
+        menu.getGestionUsuario().addActionListener(e -> {
+            gestionInventario.getTablaInventario().clearSelection();
+            registroVenta.getTablacarrito().clearSelection();
+            registroVenta.getTablaInventario().clearSelection();
+            Limpieza.LimpiarCampos(gestionInventario.getTxtCodigo(), gestionInventario.getTxtColor(), gestionInventario.getTxtModelo(), gestionInventario.getTxtCosto(), gestionInventario.getTxtTalla() ,gestionInventario.getTxtCantidad());
+            mostrarVista("GestionUsuario");
+        });
+        menu.getGestionarInventario().addActionListener(e ->{
+            registroVenta.getTablacarrito().clearSelection();
+            registroVenta.getTablaInventario().clearSelection();
+            gestionUsuario.getTablaUsuario().clearSelection();
+            Limpieza.LimpiarCampos(gestionUsuario.getTxtnombre(), gestionUsuario.getTxttelefono(), gestionUsuario.getTxtusuario());
+            mostrarVista("GestionInventario");
+        });
+        menu.getRegistrarVenta().addActionListener(e ->{
+            gestionInventario.getTablaInventario().clearSelection();
+            gestionUsuario.getTablaUsuario().clearSelection();
+            mostrarVista("RegistroVentas");
+        });
         menu.getRegistrarProducto().addActionListener(e -> mostrarVista("RegistroInventario"));
         menu.getReporte().addActionListener(e -> mostrarVista("ReporteGeneral"));
-        menu.getCerrarSesion().addActionListener(_ -> {
+        menu.getGestionarVentas().addActionListener(e->{
+            mostrarVista("GestionarVentas");
+        });
+        menu.getCerrarSesion().addActionListener(e -> {
             menu.dispose();
             LoginVista vista = new LoginVista();
             Modelo_Login modelologin = new Modelo_Login();
@@ -73,6 +93,7 @@ public class Menu_Principal_Controlador {
             vista.setVisible(true);
 
         });
+
     }
 
     private void mostrarVista(String vista) {
