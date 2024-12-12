@@ -7,7 +7,7 @@ import Modelo.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu_Principal_Controlador {
+public class  Menu_Principal_Controlador {
     private final PrincipalVista menu;
     private final JPanel mainPanel;
     private final CardLayout cardLayout;
@@ -39,6 +39,7 @@ public class Menu_Principal_Controlador {
         mainPanel.add(gestionarVentas.getPanelusuario(), "GestionarVentas");
         mainPanel.add(reporteVista.getPanelUsuario() , "ReporteGeneral");
 
+
         // Agregar el panel principal al marco principal
         menu.add(mainPanel, BorderLayout.CENTER);
     }
@@ -55,12 +56,17 @@ public class Menu_Principal_Controlador {
 
         new ControladorReportes(reporteVista);
 
-
-
     }
 
     private void configurarMenu() {
         // Configurar las acciones del menú principal
+        menu.getCrearUsuario().addActionListener(e->{
+            RegistroUsuarioVista crearUsuarioVista = new RegistroUsuarioVista();
+            Modelo_CrearUsuario modeloCrearUsuario = new Modelo_CrearUsuario(crearUsuarioVista);
+
+            new ControladorCrearUsuario(crearUsuarioVista , modeloCrearUsuario);
+            crearUsuarioVista.setVisible(true);
+        });
         menu.getGestionUsuario().addActionListener(e -> {
             gestionInventario.getTablaInventario().clearSelection();
             registroVenta.getTablacarrito().clearSelection();

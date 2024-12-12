@@ -16,6 +16,7 @@ public class PrincipalVista extends JFrame {
     JMenuItem registrarVenta, gestionarVentas;
     JMenuItem reporte;
     JMenuItem cerrarSesion;
+    JMenuItem crearUsuario;
 
     JPanel panelprincipal;
 
@@ -40,7 +41,10 @@ public class PrincipalVista extends JFrame {
         usuarioMenu.setFont(new Font("Arial", Font.BOLD, 20));
         gestionUsuario = new JMenuItem("Gestionar Usuario");
         gestionUsuario.setFont(new Font("Arial", Font.BOLD, 17));
+        crearUsuario = new JMenuItem("Crear Usuario");
+        crearUsuario.setFont(new Font("Arial", Font.BOLD, 17));
         usuarioMenu.add(gestionUsuario);
+        usuarioMenu.add(crearUsuario);
 
         // Menú Inventario
         inventarioMenu = new JMenu("    INVENTARIO    ");
@@ -126,7 +130,7 @@ public class PrincipalVista extends JFrame {
         add(panelprincipal);
 
         // Componentes del panel principal
-        lblbienvenida = createLabel("BIENVENIDO \n "+ names, 290, 150, 580, 60, 45);
+        lblbienvenida = createLabel("BIENVENIDO \n "+ names, 250, 150, 800, 60, 45);
         lblmensaje1 = createLabel("Seleccione la opción que desea realizar", 390, 160, 580, 150, 20);
         lblmensaje6 = createLabel("Calzados Emily´s", 480, 470, 300, 30, 16);
         lblilogoempresa2 = createImageLabel("src/Recursos/nuevologo.png", 230, 230, 430, 260);
@@ -151,6 +155,9 @@ public class PrincipalVista extends JFrame {
     public JMenuItem getReporte(){
         return reporte;
     }
+    public JMenuItem getCrearUsuario(){
+        return crearUsuario;
+    }
     public JMenuItem getCerrarSesion(){
         return cerrarSesion;
     }
@@ -160,7 +167,6 @@ public class PrincipalVista extends JFrame {
     public JPanel getPanelprincipal(){
         return panelprincipal;
     }
-    // Método auxiliar para crear JLabels de imágenes
     private JLabel createImageLabel(String imagePath, int width, int height, int x, int y) {
         ImageIcon imageIcon = new ImageIcon(imagePath);
         Image image = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);

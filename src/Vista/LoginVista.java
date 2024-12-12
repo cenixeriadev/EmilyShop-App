@@ -11,7 +11,7 @@ public class LoginVista extends JFrame {
     JPanel panel1, panel2;
     JLabel  lblimagen2, lblimagen3, lblimagen4;
     JTextField txtusuario, txtcontra;
-    JButton btninicio, btnnuevo;
+    JButton btninicio;
 
     public LoginVista() {
         setSize(600, 500);
@@ -60,18 +60,13 @@ public class LoginVista extends JFrame {
         txtcontra = crearCampoTexto("  Ingrese contraseña", 70, 230);
         panel2.add(txtcontra);
 
-        btninicio = crearBoton("INICIAR SESIÓN", 35, 300);
+        btninicio = crearBoton("INICIAR SESIÓN", 105, 300);
         
         panel2.add(btninicio);
 
-        btnnuevo = crearBoton("CREAR CUENTA", 180, 300);
-        panel2.add(btnnuevo);
     }
     public JButton getbtnInicio(){
         return btninicio;
-    }
-    public JButton getbtnNuevo(){
-        return btnnuevo;
     }
     public JTextField getTxtusuario(){
         return txtusuario;

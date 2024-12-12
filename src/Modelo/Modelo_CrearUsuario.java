@@ -1,6 +1,10 @@
 package Modelo;
 
 import Vista.RegistroUsuarioVista;
+import Vista.gestionUsuarioVista;
+
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 public class Modelo_CrearUsuario {
     RegistroUsuarioVista registroVista;
@@ -8,6 +12,7 @@ public class Modelo_CrearUsuario {
     public Modelo_CrearUsuario(RegistroUsuarioVista registrovista){
         this.registroVista = registrovista;
     }
+
     public void RegistrarUsuario(){
         String nombre = registroVista.getTxtnombre().getText();
         String usuario = registroVista.getTxtusuario().getText();

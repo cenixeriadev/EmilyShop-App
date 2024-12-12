@@ -43,13 +43,6 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
                     }
                 }
             });
-            login.getbtnNuevo().addActionListener(_->{
-                RegistroUsuarioVista registrar = new RegistroUsuarioVista();
-                new ControladorCrearUsuario(registrar);
-                login.dispose();
-
-                registrar.setVisible(true);
-            });
 
             login.getbtnInicio().addActionListener(_ -> {
                 handleLogin();

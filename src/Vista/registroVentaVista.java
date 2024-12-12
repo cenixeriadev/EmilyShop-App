@@ -22,8 +22,9 @@ public class registroVentaVista extends JFrame {
     DefaultTableModel modeloInventario,modelocarrito;
     
     JLabel lblmetodo, lblcarrito,lblcliente,lbltelefono;
-    JTextField txtcliente, txtcodigo,txttelefono , txtcantidad;
-    
+    JTextField txtcliente, txtcodigo,txttelefono;
+    JSpinner spCantidad;
+    SpinnerNumberModel modelosp;
     JButton btnregistrar,btnbuscar,btneliminar ,btnCarrito;
     
     public registroVentaVista() {
@@ -74,9 +75,10 @@ public class registroVentaVista extends JFrame {
         lblcantidad.setBounds(65,220,200,30);
         panelregistroventas.add(lblcantidad);
 
-        txtcantidad = new JTextField("");
-        txtcantidad.setBounds(185,220,200,30);
-        panelregistroventas.add(txtcantidad);
+        modelosp = new SpinnerNumberModel(1, 1, 100, 1);
+        spCantidad = new JSpinner(modelosp);
+        spCantidad.setBounds(185, 220, 100, 30);
+        panelregistroventas.add(spCantidad);
         
         lblmetodo=new JLabel("M. de Pago:");
         lblmetodo.setForeground(Color.WHITE);
@@ -238,7 +240,7 @@ public class registroVentaVista extends JFrame {
     public JComboBox<String> getCbbmetodo(){
         return cbbmetodo;
     }
-    public JTextField getTxtcantidad(){return txtcantidad;}
+    public JSpinner getSpCantidad(){return spCantidad;}
     public JComboBox<String> getTalla(){return cbbtallas;}
     public JComboBox<String> getColor(){return cbbcolor;}
 

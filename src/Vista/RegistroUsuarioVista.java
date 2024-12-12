@@ -13,12 +13,12 @@ public class RegistroUsuarioVista extends JFrame {
             ,lblcrearusuario;
     JTextField txtusuario, txtcontra,txtnombre,txttelefono;
     
-    JButton btncrear , btnvolver;
+    JButton btncrear;
 
     public RegistroUsuarioVista() {
         setSize(600, 500);
         setTitle("Login-Ventas-Inventario");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -84,11 +84,8 @@ public class RegistroUsuarioVista extends JFrame {
         panel2.add(txttelefono);
 
         
-        btncrear = crearBoton("CREAR", 10, 345);
+        btncrear = crearBoton("CREAR", 90, 345);
         panel2.add(btncrear);
-
-        btnvolver = crearBoton("VOLVER" , 200 , 345);
-        panel2.add(btnvolver);
 
     }
     public JTextField getTxtusuario(){
@@ -105,9 +102,6 @@ public class RegistroUsuarioVista extends JFrame {
     }
     public JButton getBtncrear(){
         return btncrear;
-    }
-    public JButton getBtnvolver(){
-        return btnvolver;
     }
 
     private JTextField crearCampoTexto(String placeholder, int x, int y) {

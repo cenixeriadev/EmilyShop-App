@@ -10,10 +10,9 @@ import java.awt.event.MouseListener;
 
 public class ControladorGestionarUsuario implements MouseListener {
     private final gestionUsuarioVista vista;
-    private Modelo_GestionarUsuario modelo ;
+    private final Modelo_GestionarUsuario modelo ;
     private int selectRow;
     private int IDusuario;
-    private usuarios objUsuario;
 
     public ControladorGestionarUsuario(gestionUsuarioVista vista, Modelo_GestionarUsuario modelo) {
         this.vista = vista;
@@ -22,11 +21,10 @@ public class ControladorGestionarUsuario implements MouseListener {
         vista.getTablaUsuario().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         iniciarEventos();
     }
-
     public void iniciarEventos() {
         vista.getTablaUsuario().addMouseListener(this);
 
-        vista.getBtneliminar().addActionListener(_ -> {
+        vista.getBtneliminar().addActionListener(e -> {
             try {
                 if (vista.getTablaUsuario().isRowSelected(selectRow)) {
                     modelo.EliminarUsuario(IDusuario);
@@ -36,11 +34,11 @@ public class ControladorGestionarUsuario implements MouseListener {
                 }
                 Limpieza.LimpiarCampos(vista.getTxtnombre(), vista.getTxttelefono(), vista.getTxtusuario());
                 vista.getTablaUsuario().clearSelection();
-            } catch (Exception e) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error al eliminar el usuario");
             }
         });
-        vista.getBtnactualizar().addActionListener(_ -> {
+        vista.getBtnactualizar().addActionListener(e -> {
             try {
                 modelo.ActualizarUsuario(
                         vista.getTxtnombre().getText(),
@@ -51,7 +49,7 @@ public class ControladorGestionarUsuario implements MouseListener {
                 modelo.CargarUsuarios();
                 Limpieza.LimpiarCampos(vista.getTxtnombre(), vista.getTxttelefono(), vista.getTxtusuario());
                 vista.getTablaUsuario().clearSelection();
-            } catch (Exception e) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Debe completar los campos para actualizar");
             }
         });
@@ -61,17 +59,17 @@ public class ControladorGestionarUsuario implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == vista.getTablaUsuario()) {
-            selectRow = vista.getTablaUsuario().getSelectedRow();
-            objUsuario = new usuarios();
-            vista.getTxtnombre().setText((String)(vista.getTablaUsuario().getValueAt(selectRow  , 0)));
-            vista.getTxttelefono().setText((String)(vista.getTablaUsuario().getValueAt(selectRow , 1)));
-            vista.getTxtusuario().setText((String)(vista.getTablaUsuario().getValueAt(selectRow , 2)));
-            //Usuariovist.getTxtcontra().setText((String)(Usuariovist.getTablaUsuario().getValueAt(selectRow  , 3)));
-            objUsuario.setNombre(vista.getTxtnombre().getText());
-            //objUsuario.setContraseña(Usuariovist.getTxtcontra().getText());
-            objUsuario.setTelefono(vista.getTxttelefono().getText());
-            objUsuario.setNombre_usuario(vista.getTxtusuario().getText());
-            IDusuario = objUsuario.ObtenerIdUsuario(objUsuario);
+            if(selectRow!=-1){
+                selectRow = vista.getTablaUsuario().getSelectedRow();
+                usuarios objUsuario = new usuarios();
+                vista.getTxtnombre().setText((String)(vista.getTablaUsuario().getValueAt(selectRow  , 0)));
+                vista.getTxttelefono().setText((String)(vista.getTablaUsuario().getValueAt(selectRow , 1)));
+                vista.getTxtusuario().setText((String)(vista.getTablaUsuario().getValueAt(selectRow , 2)));
+                objUsuario.setNombre(vista.getTxtnombre().getText());
+                objUsuario.setTelefono(vista.getTxttelefono().getText());
+                objUsuario.setNombre_usuario(vista.getTxtusuario().getText());
+                IDusuario = objUsuario.ObtenerIdUsuario(objUsuario);
+            }
         }
     }
 

@@ -27,19 +27,20 @@ public class ControladorInventario implements MouseListener {
     public  void iniciarEventos(){
         gsvista.getTablaInventario().addMouseListener(this);
 
-        rgvista.getBtnregistrar().addActionListener(_ -> modelo.AgregarProducto(rgvista.getTxtmarca() ,rgvista.getTxtcodigo() , rgvista.getCbbtalla() ,rgvista.getCbbcolor() ,rgvista.getTxtcosto() , rgvista.getTxtpventa() , rgvista.getSpcantidad() , rgvista.getTxtdescripcion()));
-        gsvista.getBtnactualizar().addActionListener(_ -> {
+
+        rgvista.getBtnregistrar().addActionListener(e -> modelo.AgregarProducto(rgvista.getTxtmarca() ,rgvista.getTxtcodigo() , rgvista.getCbbtalla() ,rgvista.getCbbcolor() ,rgvista.getTxtcosto() , rgvista.getTxtpventa() , rgvista.getSpcantidad() , rgvista.getTxtdescripcion()));
+        gsvista.getBtnactualizar().addActionListener(e -> {
             try {
                 modelo.ModificarProducto(gsvista.getTxtTalla().getText(), gsvista.getTxtModelo().getText(), gsvista.getTxtColor().getText(), gsvista.getTxtCodigo().getText(), gsvista.getTxtCosto().getText(),gsvista.getTxtCantidad().getText() , IDinventario, selectRow);
 
 
                 Limpieza.LimpiarCampos(gsvista.getTxtCodigo(), gsvista.getTxtColor(), gsvista.getTxtModelo(), gsvista.getTxtCosto(), gsvista.getTxtTalla() ,gsvista.getTxtCantidad());
                 gsvista.getTablaInventario().clearSelection();
-            }catch(Exception e){
+            }catch(Exception ex){
                 JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");
             }
         });
-        gsvista.getBtneliminar().addActionListener(_ ->{
+        gsvista.getBtneliminar().addActionListener(e ->{
             try {
                 if(gsvista.getTablaInventario().isRowSelected(selectRow)){
                     modelo.EliminarProducto(IDinventario);
@@ -51,7 +52,7 @@ public class ControladorInventario implements MouseListener {
                 }
                 Limpieza.LimpiarCampos(gsvista.getTxtCodigo() , gsvista.getTxtColor() , gsvista.getTxtModelo() , gsvista.getTxtCosto() , gsvista.getTxtTalla() , gsvista.getTxtCantidad());
                 gsvista.getTablaInventario().clearSelection();
-            }catch (Exception e){
+            }catch (Exception ex){
                 JOptionPane.showMessageDialog(null , "Debe seleccionar un producto de la tabla  ");
             }
         });
@@ -60,21 +61,24 @@ public class ControladorInventario implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==gsvista.getTablaInventario()){
-            selectRow = gsvista.getTablaInventario().getSelectedRow();// codigo  marca talla color pcosto
-            inventario objInventario = new inventario();
-            objInventario.setCodigo((String)gsvista.getTablaInventario().getValueAt(selectRow, 0));
-            objInventario.setMarca((String)gsvista.getTablaInventario().getValueAt(selectRow , 1));
-            objInventario.setTalla((Integer) gsvista.getTablaInventario().getValueAt(selectRow, 2));
-            objInventario.setColor((String)gsvista.getTablaInventario().getValueAt(selectRow, 3));
-            objInventario.setStock((Integer)gsvista.getTablaInventario().getValueAt(selectRow , 4));
-            objInventario.setPrecio_venta((Double)gsvista.getTablaInventario().getValueAt(selectRow, 5));
-            IDinventario = objInventario.ObtenerIdInventario(objInventario);
-            gsvista.getTxtCodigo().setText(objInventario.getCodigo());
-            gsvista.getTxtColor().setText(objInventario.getColor());
-            gsvista.getTxtCosto().setText(Double.toString(objInventario.getPrecio_venta()));
-            gsvista.getTxtTalla().setText(String.valueOf(objInventario.getTalla()));
-            gsvista.getTxtModelo().setText(objInventario.getMarca());
-            gsvista.getTxtCantidad().setText(String.valueOf(objInventario.getStock()));
+            if(selectRow!=-1){
+                selectRow = gsvista.getTablaInventario().getSelectedRow();
+                inventario objInventario = new inventario();
+                objInventario.setCodigo((String)gsvista.getTablaInventario().getValueAt(selectRow, 0));
+                objInventario.setMarca((String)gsvista.getTablaInventario().getValueAt(selectRow , 1));
+                objInventario.setTalla((Integer) gsvista.getTablaInventario().getValueAt(selectRow, 2));
+                objInventario.setColor((String)gsvista.getTablaInventario().getValueAt(selectRow, 3));
+                objInventario.setStock((Integer)gsvista.getTablaInventario().getValueAt(selectRow , 4));
+                objInventario.setPrecio_venta((Double)gsvista.getTablaInventario().getValueAt(selectRow, 5));
+                IDinventario = objInventario.ObtenerIdInventario(objInventario);
+                gsvista.getTxtCodigo().setText(objInventario.getCodigo());
+                gsvista.getTxtColor().setText(objInventario.getColor());
+                gsvista.getTxtCosto().setText(Double.toString(objInventario.getPrecio_venta()));
+                gsvista.getTxtTalla().setText(String.valueOf(objInventario.getTalla()));
+                gsvista.getTxtModelo().setText(objInventario.getMarca());
+                gsvista.getTxtCantidad().setText(String.valueOf(objInventario.getStock()));
+            }
+
 
         }
     }
