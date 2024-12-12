@@ -63,7 +63,6 @@ public class usuarios {
             cn = ConexionBD.getConexionBD();
             ps = cn.prepareStatement("SELECT id_usuario FROM usuarios WHERE nombre_usuario = ?   AND nombre = ? AND telefono = ?;");
             ps.setString(1, Usuario.getNombre_usuario());
-           // ps.setString(2, Usuario.getContraseña());
             ps.setString(2 , Usuario.getNames());
             ps.setString(3, Usuario.getTelefono());
             rs = ps.executeQuery();
@@ -127,7 +126,6 @@ public class usuarios {
             cn = ConexionBD.getConexionBD();
             ps = cn.prepareStatement("UPDATE usuarios SET nombre=? , nombre_usuario = ? , telefono = ? WHERE id_usuario=?");
             ps.setString(1, user.getNames());
-            //ps.setString(2, user.getContraseña());
             ps.setString(2 , user.getNombre_usuario());
             ps.setString(3, user.getTelefono());
             ps.setInt(4, user.getId_usuario());

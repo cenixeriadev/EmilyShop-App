@@ -125,24 +125,54 @@ public class inventario {
         return  estado;
 
     }
-    public int  EliminarProducto(int id_inventario){
-        int estado = 0;
+    public void DesactivarTrigger(){
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("UPDATE inventario SET estado = ? , stock=?  WHERE id_inventario=?");
-            pt.setString(1, "inactivo");
-            pt.setInt(2,0);
-            pt.setInt(3, id_inventario);
-            estado =  pt.executeUpdate();
+            pt = cn.prepareStatement("SET @DISABLE_TRIGGER = 1;");
+            pt.executeQuery();
             cn.close();
             pt.close();
-        }catch (SQLException e) {
-            JOptionPane.showMessageDialog(null  , "Error executing");
+        }catch(Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    public void ActivarTrigger(){
+        try{
+            cn  = ConexionBD.getConexionBD();
+            Statement smt = cn.createStatement();
+            smt.execute("SET @DISABLE_TRIGGER = 1;");
+
+            cn.close();
+            smt.close();
+        }catch(Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    public int EliminarProducto(int id_inventario) {
+        int estado = 0;
+        try {
+            cn = ConexionBD.getConexionBD();
+
+            // Actualizar el stock y el estado del producto
+            pt = cn.prepareStatement("UPDATE inventario SET stock = ? WHERE id_inventario = ?");
+            pt.setInt(1, 0);
+            pt.setInt(2, id_inventario);
+            estado = pt.executeUpdate();
+
+            // Reactivar el trigger
+
+
+            // Cerrar conexiones
+            pt.close();
+            cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error executing: " + e.getMessage());
             return estado;
         }
 
         return estado;
     }
+
     public int ObtenerIdInventario(inventario objInventario){
         int idInventario = 0;
         try{
