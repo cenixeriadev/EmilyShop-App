@@ -38,6 +38,7 @@ public class Modelo_RegistrarVentas {
                         objinventario.getMarca(),
                         objinventario.getTalla(),
                         objinventario.getColor(),
+                        objinventario.getStock(),
                         objinventario.getPrecio_venta()
                 };
                 model.addRow(fila);

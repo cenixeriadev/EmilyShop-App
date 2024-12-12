@@ -16,7 +16,7 @@ public class PrincipalVista extends JFrame {
     JMenuItem registrarVenta, gestionarVentas;
     JMenuItem reporte;
     JMenuItem cerrarSesion;
-    JMenuItem crearUsuario;
+
 
     JPanel panelprincipal;
 
@@ -41,10 +41,8 @@ public class PrincipalVista extends JFrame {
         usuarioMenu.setFont(new Font("Arial", Font.BOLD, 20));
         gestionUsuario = new JMenuItem("Gestionar Usuario");
         gestionUsuario.setFont(new Font("Arial", Font.BOLD, 17));
-        crearUsuario = new JMenuItem("Crear Usuario");
-        crearUsuario.setFont(new Font("Arial", Font.BOLD, 17));
+
         usuarioMenu.add(gestionUsuario);
-        usuarioMenu.add(crearUsuario);
 
         // Menú Inventario
         inventarioMenu = new JMenu("    INVENTARIO    ");
@@ -154,9 +152,6 @@ public class PrincipalVista extends JFrame {
     }
     public JMenuItem getReporte(){
         return reporte;
-    }
-    public JMenuItem getCrearUsuario(){
-        return crearUsuario;
     }
     public JMenuItem getCerrarSesion(){
         return cerrarSesion;

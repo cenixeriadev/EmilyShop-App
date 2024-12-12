@@ -1,7 +1,10 @@
 package Controlador;
 
+import Modelo.Modelo_CrearUsuario;
 import Modelo.Modelo_GestionarUsuario;
 import Modelo.usuarios;
+import Utilitario.ValidadorCampos;
+import Vista.RegistroUsuarioVista;
 import Vista.gestionUsuarioVista;
 import Utilitario.Limpieza;
 import javax.swing.*;
@@ -51,6 +54,31 @@ public class ControladorGestionarUsuario implements MouseListener {
                 vista.getTablaUsuario().clearSelection();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Debe completar los campos para actualizar");
+            }
+        });
+        vista.getBtnCrearUsuario().addActionListener(e->{
+            try{
+                RegistroUsuarioVista vistaCrear = new RegistroUsuarioVista();
+                Modelo_CrearUsuario model = new Modelo_CrearUsuario(vistaCrear);
+                vistaCrear.setVisible(true);
+                vistaCrear.getBtncrear().addActionListener(o->{
+                    if(vistaCrear.getTxtcontra().getText().equals("  Ingrese contraseña") || vistaCrear.getTxtnombre().getText().equals("  Ingrese Nombre y apellido") || vistaCrear.getTxttelefono().getText().equals("   Ingrese Numero de Telefono") || vistaCrear.getTxtusuario().getText().equals("  Ingrese usuario")) {
+                        JOptionPane.showMessageDialog(null, "Debe llenar todos los campos requeridos");
+                    }else {
+                        if (!ValidadorCampos.validacion(vistaCrear.getTxttelefono(), "^9\\d{8}$") || !ValidadorCampos.validacion(vistaCrear.getTxtnombre(), "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{2,50}$")){
+                            JOptionPane.showMessageDialog(null, "Debe ingresar campos validos!");
+
+                        }
+                        else{
+                            model.RegistrarUsuario();
+                            vistaCrear.dispose();
+                            modelo.CargarUsuarios();
+                        }
+
+                    }
+                });
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "Error al crear el usuario");
             }
         });
     }

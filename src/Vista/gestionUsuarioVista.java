@@ -19,7 +19,7 @@ public class gestionUsuarioVista extends JFrame {
     JLabel lblusuario, lblnombre, lbltelefono;
     JTextField txtusuario, txtnombre, txttelefono;
     
-    JButton btneliminar, btnactualizar;
+    JButton btneliminar, btnactualizar , btnCrearUsuario;
     
     public gestionUsuarioVista() {
         setTitle("Menu Calzados Emily´s");
@@ -69,6 +69,10 @@ public class gestionUsuarioVista extends JFrame {
         btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
         btneliminar.setBounds(300,340,140,40);
         panelusuario.add(btneliminar);
+
+        btnCrearUsuario = new BotonPersonalizado("Crear Usuario" , "src/Recursos/nuevousuario.png" , null);
+        btnCrearUsuario.setBounds(200 , 400 , 200 , 40);
+        panelusuario.add(btnCrearUsuario);
         
         lblnombre= new JLabel("Nombre y Apellido");
         lblnombre.setBounds(25,160,200,30);
@@ -126,6 +130,7 @@ public class gestionUsuarioVista extends JFrame {
     public DefaultTableModel getModeloUsuario(){
         return modeloUsuario;
     }
+    public JButton getBtnCrearUsuario(){return btnCrearUsuario;}
 
 }
 

@@ -60,13 +60,6 @@ public class  Menu_Principal_Controlador {
 
     private void configurarMenu() {
         // Configurar las acciones del menú principal
-        menu.getCrearUsuario().addActionListener(e->{
-            RegistroUsuarioVista crearUsuarioVista = new RegistroUsuarioVista();
-            Modelo_CrearUsuario modeloCrearUsuario = new Modelo_CrearUsuario(crearUsuarioVista);
-
-            new ControladorCrearUsuario(crearUsuarioVista , modeloCrearUsuario);
-            crearUsuarioVista.setVisible(true);
-        });
         menu.getGestionUsuario().addActionListener(e -> {
             gestionInventario.getTablaInventario().clearSelection();
             registroVenta.getTablacarrito().clearSelection();

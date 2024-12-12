@@ -195,7 +195,8 @@ public class ControladorRegistrarVentas implements MouseListener {
             objInventario.setMarca((String) table.getValueAt(selectedRow, 1));
             objInventario.setTalla(Integer.parseInt(String.valueOf(table.getValueAt(selectedRow, 2))));
             objInventario.setColor((String) table.getValueAt(selectedRow, 3));
-            objInventario.setPrecio_venta((Double) table.getValueAt(selectedRow, 4));
+            objInventario.setStock((Integer) table.getValueAt(selectedRow, 4));
+            objInventario.setPrecio_venta((Double) table.getValueAt(selectedRow, 5));
             int id = objInventario.ObtenerIdInventario(objInventario);
             objInventario.setId_inventario(id);
 
