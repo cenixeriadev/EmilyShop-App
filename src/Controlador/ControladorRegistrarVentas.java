@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.*;
 import Utilitario.Limpieza;
 import Utilitario.BoletaPDF;
+import Utilitario.ValidadorCampos;
 import Vista.registroVentaVista;
 
 import javax.swing.*;
@@ -53,6 +54,11 @@ public class ControladorRegistrarVentas implements MouseListener {
         RegistroVentas.getBtnCarrito().addActionListener(e -> {
             try {
                 // Validar entrada
+                if(!ValidadorCampos.validacion(RegistroVentas.getTxtcliente() , "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{2,50}$") || !ValidadorCampos.validacion(RegistroVentas.getTxttelefono() , "^9\\d{8}$")){
+                    JOptionPane.showMessageDialog(null , "Debe ingresar un nombre o numero telefonico valido!");
+                    RegistroVentas.getTablaInventario().clearSelection();
+                    return;
+                }
                 if(objInventario==null){
                     JOptionPane.showMessageDialog(null , "Debe seleccionar un producto para añadir al carrito!");
                     return;

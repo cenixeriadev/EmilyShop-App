@@ -5,7 +5,6 @@ import Utilitario.ConexionBD;
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.concurrent.locks.StampedLock;
 
 
 public class inventario {
@@ -19,6 +18,7 @@ public class inventario {
     private String codigo;
     private String color ;
     private String descripcion;
+    private String estado;
 
 
     public void setDescripcion(String descripcion){this.descripcion = descripcion;}
@@ -38,6 +38,9 @@ public class inventario {
     }
     public void setColor(String color){
         this.color = color;
+    }
+    public void setEstado(String estado){
+        this.estado = estado;
     }
 
     public void setCodigo(String codigo){
@@ -67,6 +70,7 @@ public class inventario {
         return talla; 
     }
     public String getDescripcion(){return descripcion;}
+    public String getEstado(){return estado;}
 
     Connection cn  = null;
     PreparedStatement pt = null;
@@ -175,14 +179,15 @@ public class inventario {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("UPDATE inventario SET talla=?, marca=?, color=?, precio_venta=?  ,codigo = ? ,stock = ? WHERE id_inventario=?");
+            pt = cn.prepareStatement("UPDATE inventario SET talla=?, marca=?, color=?, precio_venta=?  ,codigo = ? ,stock = ?  ,descripcion = ? WHERE id_inventario=?");
             pt.setInt(1, objInventario.getTalla());
             pt.setString(2, objInventario.getMarca());
             pt.setString(3, objInventario.getColor());
             pt.setDouble(4, objInventario.getPrecio_venta());
             pt.setString(5, objInventario.getCodigo());
             pt.setInt(6, objInventario.getStock());
-            pt.setInt(7,objInventario.getIdInventario());
+            pt.setString(7 , objInventario.getDescripcion());
+            pt.setInt(8,objInventario.getIdInventario());
             estado = pt.executeUpdate();
             cn.close();
             pt.close();
@@ -228,6 +233,24 @@ public class inventario {
             System.out.println("Error al obtener estado: " + e.getMessage());
         }
         return estado;
+    }
+    public String ObtenerDescripcion(inventario objInventario){
+        String descp = "";
+        try {
+            cn = ConexionBD.getConexionBD();
+            pt = cn.prepareStatement("SELECT descripcion FROM inventario WHERE id_inventario=?");
+            pt.setInt(1, objInventario.getIdInventario());
+            rs = pt.executeQuery();
+            if (rs.next()) {
+                descp = rs.getString("descripcion");
+            }
+            rs.close();
+            pt.close();
+            cn.close();
+        }catch (SQLException e){
+            System.out.println("Error al obtener estado: " + e.getMessage());
+        }
+        return descp;
     }
     
 }

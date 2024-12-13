@@ -16,8 +16,8 @@ public class gestioninventarioVista extends JFrame {
     JTable tablaInventario;
     DefaultTableModel modeloInventario;
     
-    JLabel lblmodelo, lblcodigo, lblcosto, lbltalla, lblcolor , lblCantidad;
-    JTextField txtmodelo, txtcodigo, txtcosto, txttalla, txtcolor , txtcantidad;
+    JLabel lblmodelo, lblcodigo, lblcosto, lbltalla, lblcolor , lblCantidad , lblDescripcion;
+    JTextField txtmodelo, txtcodigo, txtcosto, txttalla, txtcolor , txtcantidad, txtDescripcion;
     
     JButton btneliminar, btnactualizar;
     
@@ -122,20 +122,26 @@ public class gestioninventarioVista extends JFrame {
         txtcantidad.setBounds(215,340,200,30);
         panelusuario.add(txtcantidad);
 
+        lblDescripcion = new JLabel("Descripcion");
+        lblDescripcion.setForeground(Color.WHITE);
+        lblDescripcion.setFont(new Font("Times New Roman", Font.BOLD,20));
+        lblDescripcion.setBounds(115,380,140,30);
+        panelusuario.add(lblDescripcion);
+
+        txtDescripcion = new JTextField();
+        txtDescripcion.setBounds(215 , 380 , 200, 30);
+        panelusuario.add(txtDescripcion);
+
         btnactualizar = new BotonPersonalizado("Actualizar","src/Recursos/actualizar.png",null);
-        btnactualizar.setBounds(80, 420, 200, 40);
+        btnactualizar.setBounds(80, 460, 200, 40);
         panelusuario.add(btnactualizar);
        
         btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
-        btneliminar.setBounds(300,420,140,40);
+        btneliminar.setBounds(300,460,140,40);
         panelusuario.add(btneliminar);
         
 
         
-    }
-    public static void main(String[] args) throws Exception {
-        gestioninventarioVista vista = new gestioninventarioVista();
-        vista.setVisible(true);
     }
     public JPanel getPanelInventario(){
         return panelusuario;
@@ -170,6 +176,7 @@ public class gestioninventarioVista extends JFrame {
     public JTextField getTxtCantidad(){
         return txtcantidad;
     }
+    public JTextField getTxtDescripcion(){return txtDescripcion;}
 
 }
 

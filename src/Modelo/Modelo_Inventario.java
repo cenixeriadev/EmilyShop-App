@@ -38,7 +38,7 @@ public class Modelo_Inventario implements MetodosInventario {
 
 
     @Override
-    public void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio  , String cantidad ,int idinventario ,  int i ) {
+    public void ModificarProducto(String descripcion,String talla , String modelo , String Color , String Codigo ,String Precio  , String cantidad ,int idinventario ,  int i ) {
         if (i != -1) {
             objInventario  = new inventario();
             objInventario.setId_inventario(idinventario);
@@ -48,6 +48,7 @@ public class Modelo_Inventario implements MetodosInventario {
             objInventario.setPrecio_venta(Double.parseDouble(Precio));
             objInventario.setCodigo(Codigo);
             objInventario.setStock(Integer.parseInt(cantidad));
+            objInventario.setDescripcion(descripcion);
             int resultado = objInventario.ModificarProducto(objInventario);
             if (resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Producto modificado correctamente");
@@ -97,10 +98,13 @@ public class Modelo_Inventario implements MetodosInventario {
             objInventario.setPrecio_venta(precioVenta);
             objInventario.setStock(cantidad);
             objInventario.setDescripcion(Descripcion);
+
+
             resultado = objInventario.AgregarProducto(objInventario);
             if( resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
             }
+
 
         } catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos para los precios");

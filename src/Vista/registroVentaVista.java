@@ -188,7 +188,7 @@ public class registroVentaVista extends JFrame {
         tablaInventario.getTableHeader().setEnabled(false);
         
         JScrollPane scrollPane2 = new JScrollPane(tablaInventario);
-        scrollPane2.setBounds(700, 290, 400, 240);
+        scrollPane2.setBounds(700, 290, 425, 240);
         panelregistroventas.add(scrollPane2);
 
         

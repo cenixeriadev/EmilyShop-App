@@ -78,7 +78,6 @@ public class ControladorGestionarUsuario implements MouseListener {
             }
         });
     }
-    // Método para manejar la acción de crear usuario
     private void crearUsuario() {
         if (vistaCrear.getTxtcontra().getText().equals("  Ingrese contraseña") ||
                 vistaCrear.getTxtnombre().getText().equals("  Ingrese Nombre y apellido") ||

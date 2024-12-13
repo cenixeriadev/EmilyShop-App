@@ -4,7 +4,6 @@ import Utilitario.ConexionBD;
 
 import javax.swing.*;
 import java.sql.*;
-import java.util.ArrayList;
 
 
 public class carrito {
@@ -52,15 +51,9 @@ public class carrito {
         return id_cliente;
     }
 
-
-
-
     Connection cn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    ArrayList<carrito> listaProducto = null;
-    carrito objProducto = null;
-
 
     public int AgregarProducto(carrito producto){
         int estado = 0;

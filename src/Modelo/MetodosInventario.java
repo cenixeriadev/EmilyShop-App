@@ -7,7 +7,7 @@ public interface MetodosInventario {
     void CargarDatos();
 
 
-    void ModificarProducto(String talla , String modelo , String Color , String Codigo ,String Precio ,String cantidad,  int idinventario , int i );
+    void ModificarProducto(String descripcion , String talla , String modelo , String Color , String Codigo ,String Precio ,String cantidad,  int idinventario , int i );
 
     void EliminarProducto(int id);
 

@@ -98,6 +98,7 @@ public class Modelo_Reporte_Ventas {
     public ArrayList<Modelo_Reporte_Ventas> getTablasProductosVendidos(String fechaInicio, String fechaFinal){
         try{
             cn = ConexionBD.getConexionBD();
+            String fechaFinalAjustada = fechaFinal + " 23:59:59";
             pt = cn.prepareStatement("""
                 SELECT\s
                     i.codigo AS Código,
@@ -112,12 +113,12 @@ public class Modelo_Reporte_Ventas {
                     detalle_ventas d ON v.id_venta = d.id_venta
                 INNER JOIN\s
                     inventario i ON d.id_inventario = i.id_inventario
-                WHERE v.fecha_venta BETWEEN ? AND ?
+                WHERE v.fecha_venta>= ? AND v.fecha_venta<=?
                 ORDER BY\s
                     v.fecha_venta;
             """);
             pt.setString(1, fechaInicio);
-            pt.setString(2, fechaFinal);
+            pt.setString(2, fechaFinalAjustada);
             rs = pt.executeQuery();
             while (rs.next()){
                 Rventas = new Modelo_Reporte_Ventas();
@@ -140,13 +141,15 @@ public class Modelo_Reporte_Ventas {
     }
 
 
-    public int cantidadVendida(String fechaInicio , String fechFinal){
+    public int cantidadVendida(String fechaInicio , String fechaFinal){
         int total = 0;
         try{
             cn = ConexionBD.getConexionBD();
+            String fechaFinalAjustada = fechaFinal + " 23:59:59";
+            String fechaInicioAjustada = fechaInicio + " 00:00:00";
             pt = cn.prepareStatement("SELECT SUM(d.cantidad) AS cantidadV FROM ventas v INNER JOIN detalle_ventas d on d.id_venta = v.id_venta WHERE v.fecha_venta BETWEEN ? AND ?;");
-            pt.setString(1, fechaInicio);
-            pt.setString(2, fechFinal);
+            pt.setString(1, fechaInicioAjustada);
+            pt.setString(2, fechaFinalAjustada);
             rs = pt.executeQuery();
 
             if(rs.next()){
@@ -165,6 +168,8 @@ public class Modelo_Reporte_Ventas {
         double gananciaTotal = 0.00;
         try{
             cn = ConexionBD.getConexionBD();
+            String fechaInicioAjustada = fechaInicio + " 00:00:00";
+            String fechaFinalAjustada = fechaFinal + " 23:59:59";
             pt = cn.prepareStatement("""
                     SELECT\s
                         SUM(v.total_venta - subquery.costo_total) AS utilidad
@@ -185,8 +190,8 @@ public class Modelo_Reporte_Ventas {
                     WHERE\s
                         v.fecha_venta BETWEEN ? AND ?;
                     """);
-            pt.setString(1, fechaInicio);
-            pt.setString(2, fechaFinal);
+            pt.setString(1, fechaInicioAjustada);
+            pt.setString(2, fechaFinalAjustada);
             rs = pt.executeQuery();
 
             if(rs.next()){
@@ -205,13 +210,14 @@ public class Modelo_Reporte_Ventas {
     public ArrayList<Modelo_Reporte_Ventas> getTablaVentasMpago(String fechaInicio, String fechaFinal){
         try{
             cn = ConexionBD.getConexionBD();
+
             pt = cn.prepareStatement("""
                     WITH RECURSIVE fechas AS (
                         SELECT ? AS fecha
                         UNION ALL
                         SELECT DATE_ADD(fecha, INTERVAL 1 DAY)
                         FROM fechas
-                        WHERE fecha < ?
+                        WHERE fecha <?
                     )
                     SELECT\s
                         f.fecha AS Dia,
@@ -256,9 +262,11 @@ public class Modelo_Reporte_Ventas {
         int total = 0;
         try{
             cn = ConexionBD.getConexionBD();
+            String fechaFinalAjustada = fechaFinal + " 23:59:59";
+            String fechaInicioAjustada = fechaInicio + " 00:00:00";
             pt = cn.prepareStatement("SELECT SUM(total_venta) FROM ventas WHERE fecha_venta<=? AND fecha_venta>=?");
-            pt.setString(1, fechaFinal);
-            pt.setString(2, fechaInicio);
+            pt.setString(1, fechaFinalAjustada);
+            pt.setString(2, fechaInicioAjustada);
             rs = pt.executeQuery();
             if(rs.next()){
                 total =  rs.getInt(1);
