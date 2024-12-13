@@ -5,6 +5,7 @@ import Utilitario.ConexionBD;
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.concurrent.locks.StampedLock;
 
 
 public class inventario {
@@ -125,29 +126,7 @@ public class inventario {
         return  estado;
 
     }
-    public void DesactivarTrigger(){
-        try{
-            cn  = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("SET @DISABLE_TRIGGER = 1;");
-            pt.executeQuery();
-            cn.close();
-            pt.close();
-        }catch(Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-    public void ActivarTrigger(){
-        try{
-            cn  = ConexionBD.getConexionBD();
-            Statement smt = cn.createStatement();
-            smt.execute("SET @DISABLE_TRIGGER = 1;");
 
-            cn.close();
-            smt.close();
-        }catch(Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
     public int EliminarProducto(int id_inventario) {
         int estado = 0;
         try {
@@ -159,10 +138,6 @@ public class inventario {
             pt.setInt(2, id_inventario);
             estado = pt.executeUpdate();
 
-            // Reactivar el trigger
-
-
-            // Cerrar conexiones
             pt.close();
             cn.close();
         } catch (SQLException e) {

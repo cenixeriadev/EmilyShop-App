@@ -8,6 +8,8 @@ import Vista.RegistroUsuarioVista;
 import Vista.gestionUsuarioVista;
 import Utilitario.Limpieza;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,6 +18,8 @@ public class ControladorGestionarUsuario implements MouseListener {
     private final Modelo_GestionarUsuario modelo ;
     private int selectRow;
     private int IDusuario;
+    RegistroUsuarioVista vistaCrear = new RegistroUsuarioVista();
+    Modelo_CrearUsuario model = new Modelo_CrearUsuario(vistaCrear);
 
     public ControladorGestionarUsuario(gestionUsuarioVista vista, Modelo_GestionarUsuario modelo) {
         this.vista = vista;
@@ -58,23 +62,15 @@ public class ControladorGestionarUsuario implements MouseListener {
         });
         vista.getBtnCrearUsuario().addActionListener(e->{
             try{
-                RegistroUsuarioVista vistaCrear = new RegistroUsuarioVista();
-                Modelo_CrearUsuario model = new Modelo_CrearUsuario(vistaCrear);
+
                 vistaCrear.setVisible(true);
-                vistaCrear.getBtncrear().addActionListener(o->{
-                    if(vistaCrear.getTxtcontra().getText().equals("  Ingrese contraseña") || vistaCrear.getTxtnombre().getText().equals("  Ingrese Nombre y apellido") || vistaCrear.getTxttelefono().getText().equals("   Ingrese Numero de Telefono") || vistaCrear.getTxtusuario().getText().equals("  Ingrese usuario")) {
-                        JOptionPane.showMessageDialog(null, "Debe llenar todos los campos requeridos");
-                    }else {
-                        if (!ValidadorCampos.validacion(vistaCrear.getTxttelefono(), "^9\\d{8}$") || !ValidadorCampos.validacion(vistaCrear.getTxtnombre(), "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{2,50}$")){
-                            JOptionPane.showMessageDialog(null, "Debe ingresar campos validos!");
-
-                        }
-                        else{
-                            model.RegistrarUsuario();
-                            vistaCrear.dispose();
-                            modelo.CargarUsuarios();
-                        }
-
+                vistaCrear.getBtncrear().addActionListener(ex-> crearUsuario());
+                vistaCrear.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                        KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "crearUsuario");
+                vistaCrear.getRootPane().getActionMap().put("crearUsuario", new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        crearUsuario();
                     }
                 });
             }catch(Exception ex){
@@ -82,6 +78,27 @@ public class ControladorGestionarUsuario implements MouseListener {
             }
         });
     }
+    // Método para manejar la acción de crear usuario
+    private void crearUsuario() {
+        if (vistaCrear.getTxtcontra().getText().equals("  Ingrese contraseña") ||
+                vistaCrear.getTxtnombre().getText().equals("  Ingrese Nombre y apellido") ||
+                vistaCrear.getTxttelefono().getText().equals("   Ingrese Numero de Telefono") ||
+                vistaCrear.getTxtusuario().getText().equals("  Ingrese usuario")) {
+
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos requeridos");
+        } else {
+            if (!ValidadorCampos.validacion(vistaCrear.getTxttelefono(), "^9\\d{8}$") ||
+                    !ValidadorCampos.validacion(vistaCrear.getTxtnombre(), "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{2,50}$")) {
+
+                JOptionPane.showMessageDialog(null, "Debe ingresar campos válidos!");
+            } else {
+                model.RegistrarUsuario();
+                vistaCrear.dispose();
+                modelo.CargarUsuarios();
+            }
+        }
+    }
+
 
 
     @Override

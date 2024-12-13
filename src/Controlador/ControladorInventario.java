@@ -7,8 +7,7 @@ import Vista.gestioninventarioVista;
 import Vista.registroInventarioVista;
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class ControladorInventario implements MouseListener {
     private final  gestioninventarioVista  gsvista;
@@ -27,7 +26,14 @@ public class ControladorInventario implements MouseListener {
     public  void iniciarEventos(){
         gsvista.getTablaInventario().addMouseListener(this);
 
-
+        rgvista.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "login");
+        rgvista.getRootPane().getActionMap().put("login", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modelo.AgregarProducto(rgvista.getTxtmarca() ,rgvista.getTxtcodigo() , rgvista.getCbbtalla() ,rgvista.getCbbcolor() ,rgvista.getTxtcosto() , rgvista.getTxtpventa() , rgvista.getSpcantidad() , rgvista.getTxtdescripcion());
+            }
+        });
         rgvista.getBtnregistrar().addActionListener(e -> modelo.AgregarProducto(rgvista.getTxtmarca() ,rgvista.getTxtcodigo() , rgvista.getCbbtalla() ,rgvista.getCbbcolor() ,rgvista.getTxtcosto() , rgvista.getTxtpventa() , rgvista.getSpcantidad() , rgvista.getTxtdescripcion()));
         gsvista.getBtnactualizar().addActionListener(e -> {
             try {

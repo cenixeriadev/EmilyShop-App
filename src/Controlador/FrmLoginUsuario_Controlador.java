@@ -4,11 +4,9 @@ import Utilitario.PantallaCarga;
 import Modelo.Modelo_Login;
 import Vista.LoginVista;
 import Vista.PrincipalVista;
-import Vista.RegistroUsuarioVista;
-
 import javax.swing.*;
 
-import java.awt.event.KeyAdapter;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 
@@ -24,25 +22,15 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
     }
     private void Iniciar(){
         try {
-            login.getTxtusuario().addKeyListener(new KeyAdapter() {
+            login.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                    KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "login");
+            login.getRootPane().getActionMap().put("login", new AbstractAction() {
                 @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                        handleLogin();
-
-                    }
+                public void actionPerformed(ActionEvent e) {
+                    handleLogin();
                 }
             });
 
-            login.getTxtContra().addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                        handleLogin();
-
-                    }
-                }
-            });
 
             login.getbtnInicio().addActionListener(_ -> {
                 handleLogin();
@@ -79,6 +67,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
             @Override
             protected void done() {
                 pantallaCarga.dispose();
+                removerObserver();
                 PrincipalVista vista = new PrincipalVista(nombre_Usuario);
                 new Menu_Principal_Controlador(vista);
                 vista.setVisible(true);

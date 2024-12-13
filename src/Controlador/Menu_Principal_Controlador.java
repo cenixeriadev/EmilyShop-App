@@ -77,6 +77,8 @@ public class  Menu_Principal_Controlador {
         menu.getRegistrarVenta().addActionListener(e ->{
             gestionInventario.getTablaInventario().clearSelection();
             gestionUsuario.getTablaUsuario().clearSelection();
+            Limpieza.LimpiarCampos(gestionInventario.getTxtCodigo(), gestionInventario.getTxtColor(), gestionInventario.getTxtModelo(), gestionInventario.getTxtCosto(), gestionInventario.getTxtTalla() ,gestionInventario.getTxtCantidad());
+            Limpieza.LimpiarCampos(gestionUsuario.getTxtnombre(), gestionUsuario.getTxttelefono(), gestionUsuario.getTxtusuario());
             mostrarVista("RegistroVentas");
         });
         menu.getRegistrarProducto().addActionListener(e -> mostrarVista("RegistroInventario"));

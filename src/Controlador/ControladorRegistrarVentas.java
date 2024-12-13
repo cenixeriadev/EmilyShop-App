@@ -41,7 +41,7 @@ public class ControladorRegistrarVentas implements MouseListener {
                 objProducto = new carrito();
                 objProducto.setId_carrito(idcarrito);
                 objProducto.EliminarProducto(idcarrito);
-                DefaultTableModel model = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();//TODO: en inventario al "eliminar" una fila esta se elimina con CargarDatos
+                DefaultTableModel model = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();
                 model.removeRow(selectRow);
                 RegistroVentas.getTablaInventario().clearSelection();
                 objInventario = null;
@@ -85,7 +85,9 @@ public class ControladorRegistrarVentas implements MouseListener {
                 }
 
                 // Calcular subtotal
-                double subtotal = ((Double)(RegistroVentas.getSpCantidad().getValue())) * objInventario.getPrecio_venta();
+                int cantidadV = (Integer)RegistroVentas.getSpCantidad().getValue();
+                double precioVenta = objInventario.getPrecio_venta();
+                double subtotal = cantidadV * precioVenta;
 
                 // Crear objeto de carrito
                 objProducto = new carrito();

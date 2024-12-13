@@ -34,7 +34,7 @@ public class Modelo_Login {
                 if (inputUsername.equals(usuario.getNombre_usuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
                     estado = true;
                     nombre = usuario.getNames();
-                    break; // Salir del bucle tan pronto como se encuentre una coincidencia
+                    break;
                 }
             }
             if (estado) {

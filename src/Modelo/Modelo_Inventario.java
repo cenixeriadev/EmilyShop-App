@@ -62,9 +62,9 @@ public class Modelo_Inventario implements MetodosInventario {
 
     @Override
     public void EliminarProducto(int id) {//debe estar en funcion del idinventario
-        objInventario.DesactivarTrigger();
+
         int resultado = objInventario.EliminarProducto(id);
-        objInventario.ActivarTrigger();
+        
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
         } else {
