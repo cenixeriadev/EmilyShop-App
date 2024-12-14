@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class PrincipalVista extends JFrame {
     // Barra de menú y menús
-    private String names;
+    private final String names;
     JLabel lblimagennike, lblimagenadidas, lblimagenquelind, lblimagenpuma, lblimagenmarcas, lblimagenreebok,lblimagenirun, lblilogoempresa2;
     JLabel lblbienvenida, lblmensaje1, lblmensaje6;
     JMenuBar menuBar;

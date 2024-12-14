@@ -68,15 +68,15 @@ public class PDFventas {
             tablaInfo.setWidthPercentage(100);
             tablaInfo.setSpacingAfter(10);
 
-            tablaInfo.addCell(celda("Fecha de Inicio", BaseColor.LIGHT_GRAY));
+            tablaInfo.addCell(celda("Fecha de Inicio"));
             tablaInfo.addCell(fechaInicioMod);
-            tablaInfo.addCell(celda("Fecha de Fin", BaseColor.LIGHT_GRAY));
+            tablaInfo.addCell(celda("Fecha de Fin"));
             tablaInfo.addCell(fechaFinalMod);
-            tablaInfo.addCell(celda("Ventas Totales", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell("S/. "+ String.valueOf(totalVentas));
-            tablaInfo.addCell(celda("Margen de Ganancia", BaseColor.LIGHT_GRAY));
-            tablaInfo.addCell( "S/. "+ String.valueOf(MargenDeGanancia));
-            tablaInfo.addCell(celda("Cantidad Vendida", BaseColor.LIGHT_GRAY));
+            tablaInfo.addCell(celda("Ventas Totales"));
+            tablaInfo.addCell("S/. "+ totalVentas);
+            tablaInfo.addCell(celda("Margen de Ganancia"));
+            tablaInfo.addCell( "S/. "+ MargenDeGanancia);
+            tablaInfo.addCell(celda("Cantidad Vendida"));
             tablaInfo.addCell(String.valueOf(cantidadVendida));
 
             documento.add(tablaInfo);
@@ -96,11 +96,11 @@ public class PDFventas {
             tablaVentasDia.setWidthPercentage(100);
             tablaVentasDia.setSpacingAfter(10);
 
-            tablaVentasDia.addCell(celda("Día", BaseColor.LIGHT_GRAY));
-            tablaVentasDia.addCell(celda("Ventas Yape", BaseColor.LIGHT_GRAY));
-            tablaVentasDia.addCell(celda("Ventas Efectivo", BaseColor.LIGHT_GRAY));
-            tablaVentasDia.addCell(celda("Ventas Tarjeta", BaseColor.LIGHT_GRAY));
-            tablaVentasDia.addCell(celda("Ventas Totales", BaseColor.LIGHT_GRAY));
+            tablaVentasDia.addCell(celda("Día"));
+            tablaVentasDia.addCell(celda("Ventas Yape"));
+            tablaVentasDia.addCell(celda("Ventas Efectivo"));
+            tablaVentasDia.addCell(celda("Ventas Tarjeta"));
+            tablaVentasDia.addCell(celda("Ventas Totales"));
 
             System.out.println(listaTablaVentasMpago.size());
             System.out.println(listaTablaProductosVendidos.size());
@@ -136,7 +136,7 @@ public class PDFventas {
                     "Código", "Marca", "Cantidad", "Método de Pago", "Precio Venta", "Fecha de Venta"
             };
             for (String encabezado : encabezados) {
-                tablaProductos.addCell(celda(encabezado, BaseColor.LIGHT_GRAY));
+                tablaProductos.addCell(celda(encabezado));
             }
 
 
@@ -164,9 +164,9 @@ public class PDFventas {
         }
     }
 
-    private static PdfPCell celda(String texto, BaseColor colorFondo) {
+    private static PdfPCell celda(String texto) {
         PdfPCell celda = new PdfPCell(new Phrase(texto));
-        celda.setBackgroundColor(colorFondo);
+        celda.setBackgroundColor(BaseColor.LIGHT_GRAY);
         celda.setHorizontalAlignment(Element.ALIGN_CENTER);
         celda.setVerticalAlignment(Element.ALIGN_MIDDLE);
         celda.setPadding(5);

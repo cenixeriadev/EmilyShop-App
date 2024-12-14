@@ -29,7 +29,6 @@ public class LoginVista extends JFrame {
 
         panel2 = new PanelConImagenFondo2("src/Recursos/nuevofondo2.jpeg");
         panel2.setBounds(250, 0, 350, 500);
-        //panel2.setBackground(new Color(240, 240, 240));
         panel2.setLayout(null);
         add(panel2);
 
@@ -47,7 +46,7 @@ public class LoginVista extends JFrame {
         lblimagen3.setBounds(30, 180, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen3);
 
-        txtusuario = crearCampoTexto("  Ingrese usuario", 70, 180);
+        txtusuario = crearCampoTexto("  Ingrese usuario", 180);
         panel2.add(txtusuario);
 
         ImageIcon imageIcon4 = new ImageIcon("src/Recursos/nuevocandado.png");
@@ -57,10 +56,10 @@ public class LoginVista extends JFrame {
         lblimagen4.setBounds(30, 230, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen4);
 
-        txtcontra = crearCampoTexto("  Ingrese contraseña", 70, 230);
+        txtcontra = crearCampoTexto("  Ingrese contraseña", 230);
         panel2.add(txtcontra);
 
-        btninicio = crearBoton("INICIAR SESIÓN", 105, 300);
+        btninicio = crearBoton();
         
         panel2.add(btninicio);
 
@@ -75,9 +74,9 @@ public class LoginVista extends JFrame {
         return txtcontra;
     }
 
-    private JTextField crearCampoTexto(String placeholder, int x, int y) {
+    private JTextField crearCampoTexto(String placeholder, int y) {
         JTextField textField = new JTextField();
-        textField.setBounds(x, y, 240, 40);
+        textField.setBounds(70, y, 240, 40);
         textField.setOpaque(false);
         textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
         textField.setForeground(Color.WHITE);
@@ -85,9 +84,9 @@ public class LoginVista extends JFrame {
         return textField;
     }
 
-    private JButton crearBoton(String texto, int x, int y) {
-        JButton button = new JButton(texto);
-        button.setBounds(x, y, 130, 40);
+    private JButton crearBoton() {
+        JButton button = new JButton("INICIAR SESIÓN");
+        button.setBounds(105, 300, 130, 40);
         button.setForeground(Color.WHITE);
         button.setContentAreaFilled(false);
         button.setBorder(new LineBorder(Color.WHITE, 2, true)); // Borde con esquinas redondeadas

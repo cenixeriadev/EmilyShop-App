@@ -56,6 +56,9 @@ public class  Menu_Principal_Controlador {
 
         new ControladorReportes(reporteVista);
 
+        Modelo_GestionarVentas modeloGestionarVentas = new Modelo_GestionarVentas(gestionarVentas);
+        new ControladorGestionarVentas(gestionarVentas, modeloGestionarVentas);
+
     }
 
     private void configurarMenu() {
@@ -83,9 +86,7 @@ public class  Menu_Principal_Controlador {
         });
         menu.getRegistrarProducto().addActionListener(e -> mostrarVista("RegistroInventario"));
         menu.getReporte().addActionListener(e -> mostrarVista("ReporteGeneral"));
-        menu.getGestionarVentas().addActionListener(e->{
-            mostrarVista("GestionarVentas");
-        });
+        menu.getGestionarVentas().addActionListener(e-> mostrarVista("GestionarVentas"));
         menu.getCerrarSesion().addActionListener(e -> {
             menu.dispose();
             LoginVista vista = new LoginVista();

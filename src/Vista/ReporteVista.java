@@ -4,7 +4,6 @@ import javax.swing.*;
 import Utilitario.BotonPersonalizado;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
-import java.util.Date;
 import Utilitario.PanelDegradadoAzul;
 
 public class ReporteVista extends JFrame{
@@ -12,9 +11,7 @@ public class ReporteVista extends JFrame{
     JPanel panelusuario;
 
     //--------------nuevo------------------
-    JLabel lblUsuario, lblInventario, lblVentas, lblespecifico,lblReporte;
-    //JButton btnUsuario, btnInventario, btnVentas;
-    JCheckBox checkespecifico;
+    JLabel  lblInventario, lblVentas, lblReporte;
     JButton btnInventario , btnVentas;
     JLabel lblFechaDesde, lblFechaHasta;
     JDateChooser dateChooserDesde, dateChooserHasta;

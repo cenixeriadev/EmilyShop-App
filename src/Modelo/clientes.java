@@ -1,11 +1,8 @@
 package Modelo;
 
 import Utilitario.ConexionBD;
-import Utilitario.ValidationPassword;
-
 import javax.swing.*;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class clientes {
     private int id_cliente;
@@ -23,12 +20,6 @@ public class clientes {
     public int getId_cliente(){return id_cliente;}
     public String getNombre_apellido(){return nombre_apellido;}
     public String getTelefono(){return telefono;}
-
-    Connection cn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    ArrayList<clientes> listaClientes = null;
-    clientes objCliente = null;
 
     public int AgregarCliente(clientes objCliente) {
         int generatedId = -1;

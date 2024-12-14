@@ -55,8 +55,8 @@ public class carrito {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public int AgregarProducto(carrito producto){
-        int estado = 0;
+    public void AgregarProducto(carrito producto){
+
         try{
             cn = ConexionBD.getConexionBD();
             ps = cn.prepareStatement("INSERT INTO carrito (id_inventario, id_cliente, cantidad, precio_unitario , subtotal ) VALUES (?,?,?,?,?)");
@@ -65,28 +65,25 @@ public class carrito {
             ps.setInt(3, producto.getCantidad());
             ps.setDouble(4, producto.getPrecio_unitario());
             ps.setDouble(5, producto.getSubtotal());
-            estado = ps.executeUpdate();
+            ps.executeUpdate();
             cn.close();
             ps.close();
         }catch (Exception e){
             JOptionPane.showMessageDialog(null  , "Error al agregar producto a carrito");
         }
-        return estado;
     }
 
-    public int EliminarProducto(int id_carrito){
-        int estado = 0;
+    public void EliminarProducto(int id_carrito){
         try{
             cn = ConexionBD.getConexionBD();
             ps = cn.prepareStatement("DELETE FROM carrito WHERE id_carrito=?");
             ps.setInt(1, id_carrito);
-            estado = ps.executeUpdate();
+            ps.executeUpdate();
             cn.close();
             ps.close();
         }catch (Exception e){
-            return estado;
+            JOptionPane.showMessageDialog(null  , "Error al eliminar producto de carrito");
         }
-        return estado;
     }
     public int ObtenerID(int id_inventario){
         int IdProducto = 0;

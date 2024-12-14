@@ -6,6 +6,7 @@ import Modelo.inventario;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
@@ -13,8 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class PDFinventario {
-    private ArrayList<inventario> listaInventario ;
-    private Modelo_Reporte_Ventas modelo = new Modelo_Reporte_Ventas();
+    private final Modelo_Reporte_Ventas modelo = new Modelo_Reporte_Ventas();
     public void generarReporteInventario() {
         String rutaArchivo = "src/pdf/reporte_inventario_zapatillas.pdf";//cambiar nombre de archivo
 
@@ -64,9 +64,9 @@ public class PDFinventario {
             tablaInfo.setWidthPercentage(100);
             tablaInfo.setSpacingAfter(10);
 
-            tablaInfo.addCell(celda("Total de Zapatillas en Inventario", BaseColor.LIGHT_GRAY));
+            tablaInfo.addCell(celda("Total de Zapatillas en Inventario"));
             tablaInfo.addCell(String.valueOf(modelo.TotalProductos()));
-            tablaInfo.addCell(celda("Última Actualización", BaseColor.LIGHT_GRAY));
+            tablaInfo.addCell(celda("Última Actualización"));
             tablaInfo.addCell(fechaActual);
 
             documento.add(tablaInfo);
@@ -83,12 +83,12 @@ public class PDFinventario {
             // Encabezados con diseño
             String[] encabezados = {"Código", "Marca", "Color", "Talla", "Cantidad","P.Compra","P.Venta"};
             for (String encabezado : encabezados) {
-                tablaInventario.addCell(celda(encabezado, BaseColor.LIGHT_GRAY)); // azul
+                tablaInventario.addCell(celda(encabezado)); // azul
             }
 
             // Datos de ejemplo
             inventario objinventario = new inventario();
-            listaInventario = objinventario.listarInventario();
+            ArrayList<inventario> listaInventario = objinventario.listarInventario();
             for (inventario ObjInventario : listaInventario) { // codigo  marca color  talla  cantidad P.compra PVenta
                 tablaInventario.addCell(ObjInventario.getCodigo());
                 tablaInventario.addCell(ObjInventario.getMarca());
@@ -116,13 +116,13 @@ public class PDFinventario {
             Desktop.getDesktop().open(new File(rutaArchivo));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null , "Error al generar reporte inventario");
         }
     }
 
-    private static PdfPCell celda(String texto, BaseColor colorFondo) {
+    private static PdfPCell celda(String texto) {
         PdfPCell celda = new PdfPCell(new Phrase(texto, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
-        celda.setBackgroundColor(colorFondo);
+        celda.setBackgroundColor(BaseColor.LIGHT_GRAY);
         celda.setHorizontalAlignment(Element.ALIGN_CENTER);
         celda.setVerticalAlignment(Element.ALIGN_MIDDLE);
         celda.setPadding(5);

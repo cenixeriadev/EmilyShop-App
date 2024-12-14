@@ -18,7 +18,6 @@ public class ControladorRegistrarVentas implements MouseListener {
     private final registroVentaVista RegistroVentas;
     private final Modelo_RegistrarVentas modelo;
     private  carrito objProducto;
-    private  ventas objVentas;
     private clientes objCliente;
     private  inventario objInventario;
     private int times = 0;

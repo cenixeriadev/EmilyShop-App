@@ -17,7 +17,7 @@ public class ConexionBD {
             System.out.println("Error: No se encontró el driver de MySQL");
 
         } catch (SQLException e) {
-            System.out.println("No se pudo conectar a la base de datos   (‾◡◝)");
+            System.out.println("No se pudo conectar a la base de datos!");
         }
         return Database;
     }

@@ -1,10 +1,6 @@
 package Modelo;
 
 import Vista.RegistroUsuarioVista;
-import Vista.gestionUsuarioVista;
-
-import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
 
 public class Modelo_CrearUsuario {
     RegistroUsuarioVista registroVista;

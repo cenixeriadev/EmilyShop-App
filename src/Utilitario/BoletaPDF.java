@@ -20,7 +20,6 @@ public class BoletaPDF {
     ResultSet rs = null;
     Connection cn = null;
     private  ArrayList<BoletaPDF> listaBoleta;
-    private BoletaPDF objBoleta;
     private int cantidad;
     private String metodoPago;
     private String descripcion;
@@ -87,7 +86,7 @@ public class BoletaPDF {
             rs = ps.executeQuery();
             listaBoleta = new ArrayList<>();
             while (rs.next()) {
-                objBoleta = new BoletaPDF();
+                BoletaPDF objBoleta = new BoletaPDF();
                 objBoleta.setCantidad(rs.getInt("cantidad"));
                 objBoleta.setMetodoPago(rs.getString("metodo_pago"));
                 objBoleta.setDescripcion(rs.getString("descripcion"));
@@ -205,14 +204,14 @@ public class BoletaPDF {
             }
             double totalventa = 0;
             // Agregar filas de ejemplo
-            for (int i = 0; i <= listaBoleta.size()-1 ; i++) {
+            for (int i = 0; i <= boleta.size()-1 ; i++) {
                 tablaProductos.addCell(String.valueOf(i+1));
-                tablaProductos.addCell(String.valueOf(listaBoleta.get(i).getCantidad()));
-                tablaProductos.addCell(listaBoleta.get(i).getMetodoPago());
-                tablaProductos.addCell(listaBoleta.get(i).getMarca() +" " +  listaBoleta.get(i).getColor()+ " " + String.valueOf(listaBoleta.get(i).getTalla()) + " " + listaBoleta.get(i).getDescripcion());
-                tablaProductos.addCell(String.valueOf(listaBoleta.get(i).getPrecioUnitario()) +" Soles");//precio unitario
-                tablaProductos.addCell(String.valueOf(listaBoleta.get(i).getSubtotal())+" Soles");//precio total del producto
-                totalventa += listaBoleta.get(i).getSubtotal();
+                tablaProductos.addCell(String.valueOf(boleta.get(i).getCantidad()));
+                tablaProductos.addCell(boleta.get(i).getMetodoPago());
+                tablaProductos.addCell(boleta.get(i).getMarca() +" " +  boleta.get(i).getColor()+ " " + boleta.get(i).getTalla() + " " + boleta.get(i).getDescripcion());
+                tablaProductos.addCell(boleta.get(i).getPrecioUnitario() +" Soles");
+                tablaProductos.addCell(boleta.get(i).getSubtotal() +" Soles");
+                totalventa += boleta.get(i).getSubtotal();
             }
 
             doc.add(tablaProductos);
@@ -224,7 +223,7 @@ public class BoletaPDF {
             totales.setWidths(new float[]{1,1});
 
             totales.addCell(new PdfPCell(new Phrase("TOTAL:", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
-            totales.addCell(new PdfPCell(new Phrase(String.valueOf(totalventa)+" Soles")));
+            totales.addCell(new PdfPCell(new Phrase(totalventa +" Soles")));
 
             doc.add(totales);
 

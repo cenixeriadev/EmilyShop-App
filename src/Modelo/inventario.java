@@ -18,7 +18,6 @@ public class inventario {
     private String codigo;
     private String color ;
     private String descripcion;
-    private String estado;
 
 
     public void setDescripcion(String descripcion){this.descripcion = descripcion;}
@@ -39,9 +38,7 @@ public class inventario {
     public void setColor(String color){
         this.color = color;
     }
-    public void setEstado(String estado){
-        this.estado = estado;
-    }
+
 
     public void setCodigo(String codigo){
         this.codigo = codigo;
@@ -70,7 +67,6 @@ public class inventario {
         return talla; 
     }
     public String getDescripcion(){return descripcion;}
-    public String getEstado(){return estado;}
 
     Connection cn  = null;
     PreparedStatement pt = null;

@@ -4,8 +4,7 @@ package Vista;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+
 
 public class RegistroUsuarioVista extends JFrame {
     JPanel panel1, panel2;
@@ -71,20 +70,20 @@ public class RegistroUsuarioVista extends JFrame {
         panel2.add(lblcrearusuario);
         
         
-        txtusuario = crearCampoTexto("  Ingrese usuario", 70, 230);
+        txtusuario = crearCampoTexto("  Ingrese usuario", 230);
         panel2.add(txtusuario);
         
-        txtcontra = crearCampoTexto("  Ingrese contraseña", 70, 280);
+        txtcontra = crearCampoTexto("  Ingrese contraseña", 280);
         panel2.add(txtcontra);
         
-        txtnombre=crearCampoTexto("  Ingrese Nombre y apellido",70,130);
+        txtnombre=crearCampoTexto("  Ingrese Nombre y apellido", 130);
         panel2.add(txtnombre);
         
-        txttelefono=crearCampoTexto("   Ingrese Numero de Telefono",70, 180);
+        txttelefono=crearCampoTexto("   Ingrese Numero de Telefono", 180);
         panel2.add(txttelefono);
 
         
-        btncrear = crearBoton("CREAR", 90, 345);
+        btncrear = crearBoton();
         panel2.add(btncrear);
 
     }
@@ -104,9 +103,9 @@ public class RegistroUsuarioVista extends JFrame {
         return btncrear;
     }
 
-    private JTextField crearCampoTexto(String placeholder, int x, int y) {
+    private JTextField crearCampoTexto(String placeholder, int y) {
         JTextField textField = new JTextField();
-        textField.setBounds(x, y, 240, 40);
+        textField.setBounds(70, y, 240, 40);
         textField.setOpaque(false);
         textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
         textField.setForeground(Color.WHITE);
@@ -114,9 +113,9 @@ public class RegistroUsuarioVista extends JFrame {
         return textField;
     }
 
-    private JButton crearBoton(String texto, int x, int y) {
-        JButton button = new JButton(texto);
-        button.setBounds(x, y, 130, 40);
+    private JButton crearBoton() {
+        JButton button = new JButton("CREAR");
+        button.setBounds(90, 345, 130, 40);
         button.setForeground(Color.WHITE);
         button.setContentAreaFilled(false);
         button.setBorder(new LineBorder(Color.WHITE, 2, true)); // Borde con esquinas redondeadas
@@ -128,7 +127,7 @@ public class RegistroUsuarioVista extends JFrame {
 
 // Clase para establecer una imagen de fondo en el panel
 class PanelConImagenFondo2 extends JPanel {
-    private Image imagenFondo;
+    private final Image imagenFondo;
 
     public PanelConImagenFondo2(String rutaImagen) {
         this.imagenFondo = new ImageIcon(rutaImagen).getImage();
@@ -142,35 +141,4 @@ class PanelConImagenFondo2 extends JPanel {
 }
 
 // Clase para manejar los placeholders en los JTextField
-class Placeholder2 implements FocusListener {
-    private final JTextField textField;
-    private final String placeholder;
-    private boolean showingPlaceholder;
 
-    public Placeholder2(JTextField textField, String placeholder) {
-        this.textField = textField;
-        this.placeholder = placeholder;
-        this.showingPlaceholder = true;
-        textField.setText(placeholder);
-        textField.setForeground(Color.LIGHT_GRAY);
-        textField.addFocusListener(this);
-    }
-
-    @Override
-    public void focusGained(FocusEvent e) {
-        if (showingPlaceholder) {
-            textField.setText("");
-            textField.setForeground(Color.WHITE);
-            showingPlaceholder = false;
-        }
-    }
-
-    @Override
-    public void focusLost(FocusEvent e) {
-        if (textField.getText().isEmpty()) {
-            textField.setText(placeholder);
-            textField.setForeground(Color.LIGHT_GRAY);
-            showingPlaceholder = true;
-        }
-    }
-}

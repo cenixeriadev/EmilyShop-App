@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class BotonPersonalizado extends JButton {
 
-    private Color colorFondo;
+    private final Color colorFondo;
 
     public BotonPersonalizado(String texto, String icono, Color colorFondo) {
         super(texto);

@@ -32,9 +32,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
             });
 
 
-            login.getbtnInicio().addActionListener(_ -> {
-                handleLogin();
-            });
+            login.getbtnInicio().addActionListener(e -> handleLogin());
         }catch (Exception e){
             JOptionPane.showMessageDialog(null , "Ocurrio un error inesperado : " + e.getMessage());
         }
@@ -45,7 +43,7 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
     }
     private void  handleLogin() {
         String inputUsername =  login.getTxtusuario().getText();
-        String password = new String(login.getTxtContra().getText());
+        String password = login.getTxtContra().getText();
         modelo.validarCredenciales(inputUsername, password);
 
     }

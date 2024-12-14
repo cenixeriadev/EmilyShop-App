@@ -1,6 +1,7 @@
 package Modelo;
 
 import Utilitario.ConexionBD;
+import Utilitario.InventarioDisponible;
 import Vista.registroVentaVista;
 
 import javax.swing.*;
@@ -13,24 +14,13 @@ import java.util.ArrayList;
 public class Modelo_RegistrarVentas {
     private final registroVentaVista vista;
     ArrayList<inventario> listaDisponible = new ArrayList<>();
-    //ventas objVentas;
-    ventas objVentas = new ventas();
-    carrito objProducto = new carrito();
     public Modelo_RegistrarVentas(registroVentaVista vista){
         this.vista = vista;
-    }
-    public void EliminarProducto(int id){
-        int resultado = objProducto.EliminarProducto(id);
-        if(resultado>0){
-            JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
-        }else{
-            JOptionPane.showMessageDialog(null, "Error al eliminar el producto");
-        }
     }
     public void CargarInventarioD(String talla,String color ,String codigo) {
         DefaultTableModel model = vista.getModeloInventario();
         model.setRowCount(0);
-        listaDisponible = objVentas.listarInventarioDisponible(talla , color ,codigo);
+        listaDisponible = InventarioDisponible.listarInventarioDisponible(talla , color ,codigo);
         for(inventario objinventario : listaDisponible){
             if(objinventario.ObtenerEstado(objinventario).equals("activo")){
                 Object[] fila = {
