@@ -128,7 +128,7 @@ public class PrincipalVista extends JFrame {
         add(panelprincipal);
 
         // Componentes del panel principal
-        lblbienvenida = createLabel("BIENVENIDO \n "+ names, 250, 150, 800, 60, 45);
+        lblbienvenida = createLabel("BIENVENIDO \n "+ names, 120, 150, 900, 60, 45);
         lblmensaje1 = createLabel("Seleccione la opción que desea realizar", 390, 160, 580, 150, 20);
         lblmensaje6 = createLabel("Calzados Emily´s", 480, 470, 300, 30, 16);
         lblilogoempresa2 = createImageLabel("src/Recursos/nuevologo.png", 230, 230, 430, 260);
