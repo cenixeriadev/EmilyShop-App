@@ -8,10 +8,8 @@ import Vista.RegistroUsuarioVista;
 import Vista.gestionUsuarioVista;
 import Utilitario.Limpieza;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.util.Arrays;
 
 public class ControladorGestionarUsuario implements MouseListener {
     private final gestionUsuarioVista vista;
@@ -20,7 +18,6 @@ public class ControladorGestionarUsuario implements MouseListener {
     private int IDusuario;
     RegistroUsuarioVista vistaCrear = new RegistroUsuarioVista();
     Modelo_CrearUsuario model = new Modelo_CrearUsuario(vistaCrear);
-
     public ControladorGestionarUsuario(gestionUsuarioVista vista, Modelo_GestionarUsuario modelo) {
         this.vista = vista;
         this.modelo = modelo;
@@ -62,9 +59,10 @@ public class ControladorGestionarUsuario implements MouseListener {
         });
         vista.getBtnCrearUsuario().addActionListener(e->{
             try{
-
                 vistaCrear.setVisible(true);
-                vistaCrear.getBtncrear().addActionListener(ex-> crearUsuario());
+                vistaCrear.getBtncrear().addActionListener(ex-> {
+                    crearUsuario();
+                });
                 vistaCrear.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
                         KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "crearUsuario");
                 vistaCrear.getRootPane().getActionMap().put("crearUsuario", new AbstractAction() {
@@ -73,10 +71,27 @@ public class ControladorGestionarUsuario implements MouseListener {
                         crearUsuario();
                     }
                 });
+                vistaCrear.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        System.out.println(Arrays.stream(vistaCrear.getBtncrear().getActionListeners()).count());//debug
+                        for(int i = 0; i < Arrays.stream(vistaCrear.getBtncrear().getActionListeners()).count(); i++){
+                            vistaCrear.getBtncrear().removeActionListener(vistaCrear.getBtncrear().getActionListeners()[i]);
+                        }
+                    }
+                });
+
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, "Error al crear el usuario");
             }
         });
+    }
+    private void limpiarYConfigurarCampos() {
+        vistaCrear.getTxtcontra().setText("  Ingrese contraseña");
+        vistaCrear.getTxtnombre().setText("  Ingrese Nombre y apellido");
+        vistaCrear.getTxttelefono().setText("   Ingrese Numero de Telefono");
+        vistaCrear.getTxtusuario().setText("  Ingrese usuario");
+        vistaCrear.getTxtcontra().requestFocus();
     }
     private void crearUsuario() {
         if (vistaCrear.getTxtcontra().getText().equals("  Ingrese contraseña") ||
@@ -92,9 +107,11 @@ public class ControladorGestionarUsuario implements MouseListener {
                 JOptionPane.showMessageDialog(null, "Debe ingresar campos válidos!");
             } else {
                 model.RegistrarUsuario();
-                vistaCrear.dispose();
                 modelo.CargarUsuarios();
+                JOptionPane.showMessageDialog(null , "Usuario creado exitosamente!");
+                vistaCrear.dispose();
             }
+            limpiarYConfigurarCampos();
         }
     }
 

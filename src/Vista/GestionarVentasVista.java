@@ -99,13 +99,13 @@ public class GestionarVentasVista extends JFrame {
         txttelefono.setBounds(80,320,200,30);
         panelusuario.add(txttelefono);
 
-        btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
+        btneliminar = new BotonPersonalizado("Eliminar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\tachito.png",null);
         btneliminar.setBounds(150,410,160,40);
         btneliminar.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         btneliminar.setBackground(Color.red);
         panelusuario.add(btneliminar);
 
-        btnbuscar = new BotonPersonalizado("Buscar","src/Recursos/buscar.png",null);
+        btnbuscar = new BotonPersonalizado("Buscar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\buscar.png",null);
         btnbuscar.setBounds(250,260,150,40); // Ajustar posición y tamaño
         panelusuario.add(btnbuscar);
 

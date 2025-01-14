@@ -16,7 +16,7 @@ import java.util.Date;
 public class PDFinventario {
     private final Modelo_Reporte_Ventas modelo = new Modelo_Reporte_Ventas();
     public void generarReporteInventario() {
-        String rutaArchivo = "src/pdf/reporte_inventario_zapatillas.pdf";//cambiar nombre de archivo
+        String rutaArchivo = "C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\pdf\\reporte_inventario_zapatillas.pdf";//cambiar nombre de archivo
 
         // Crear documento
         Document documento = new Document();

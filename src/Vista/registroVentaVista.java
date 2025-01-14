@@ -150,19 +150,19 @@ public class registroVentaVista extends JFrame {
         
         // -----------Boton Boleta------------
 
-        btnbuscar = new BotonPersonalizado("Buscar","src/Recursos/buscar.png",null);
+        btnbuscar = new BotonPersonalizado("Buscar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\buscar.png",null);
         btnbuscar.setBounds(920,180,150,40); // Ajustar posición y tamaño
         panelregistroventas.add(btnbuscar);
 
-        btnCarrito = new BotonPersonalizado("Carrito","src/Recursos/carrito.png",null);
+        btnCarrito = new BotonPersonalizado("Carrito","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\carrito.png",null);
         btnCarrito.setBounds(440, 140, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btnCarrito);
 
-        btnregistrar = new BotonPersonalizado("Registrar","src/Recursos/registrar.png",null);
+        btnregistrar = new BotonPersonalizado("Registrar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\registrar.png",null);
         btnregistrar.setBounds(440, 200, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btnregistrar);
 
-        btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
+        btneliminar = new BotonPersonalizado("Eliminar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\tachito.png",null);
         btneliminar.setBounds(440, 260, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btneliminar);
 

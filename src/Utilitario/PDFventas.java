@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class PDFventas {
 
     public static void GenerarPdfVentas(String fechaInicio , String fechaFinal , ArrayList<Modelo_Reporte_Ventas> listaTablaVentasMpago , ArrayList<Modelo_Reporte_Ventas> listaTablaProductosVendidos, double totalVentas , double MargenDeGanancia , int cantidadVendida) {
-        String rutaArchivo = "src/pdf/reporte_semanal_ventas.pdf";
+        String rutaArchivo = "C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\pdf\\reporteVentas.pdf";
 
         // Crear documento
         Document documento = new Document();

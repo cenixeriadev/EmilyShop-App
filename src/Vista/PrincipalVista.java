@@ -92,12 +92,12 @@ public class PrincipalVista extends JFrame {
         setJMenuBar(menuBar);
 
         // Imágenes superiores
-        lblimagennike = createImageLabel("src/Recursos/nike.jpeg", 190, 70, 0, 0);
-        lblimagenadidas = createImageLabel("src/Recursos/adidas.jpeg", 190, 70, 190, 0);
-        lblimagenquelind = createImageLabel("src/Recursos/quelind.jpeg", 190, 70, 380, 0);
-        lblimagenpuma = createImageLabel("src/Recursos/puma.jpeg", 190, 70, 570, 0);
-        lblimagenreebok = createImageLabel("src/Recursos/reebok.jpeg", 190, 70, 760, 0);
-        lblimagenirun = createImageLabel("src/Recursos/irun.jpeg", 190, 70, 950, 0);
+        lblimagennike = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nike.jpeg", 190, 70, 0, 0);
+        lblimagenadidas = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\adidas.jpeg", 190, 70, 190, 0);
+        lblimagenquelind = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\quelind.jpeg", 190, 70, 380, 0);
+        lblimagenpuma = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\puma.jpeg", 190, 70, 570, 0);
+        lblimagenreebok = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\reebok.jpeg", 190, 70, 760, 0);
+        lblimagenirun = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\irun.jpeg", 190, 70, 950, 0);
 
         add(lblimagennike);
         add(lblimagenadidas);
@@ -107,15 +107,15 @@ public class PrincipalVista extends JFrame {
         add(lblimagenirun);
 
         // Imágenes inferiores
-        lblimagenmarcas = createImageLabel("src/Recursos/marcas.jpeg", 760, 190, 0, 580);
-        JLabel lblimagenmarcas2 = createImageLabel("src/Recursos/marcas2.jpeg", 380, 190, 760, 580);
+        lblimagenmarcas = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\marcas.jpeg", 760, 190, 0, 580);
+        JLabel lblimagenmarcas2 = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\marcas2.jpeg", 380, 190, 760, 580);
 
         add(lblimagenmarcas);
         add(lblimagenmarcas2);
 
         // Panel principal con imagen de fondo
         panelprincipal = new JPanel() {
-            private final Image imagenFondo = new ImageIcon("src/Recursos/nuevofondo5.jpeg").getImage();
+            private final Image imagenFondo = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevofondo5.jpeg").getImage();
 
             @Override
             protected void paintComponent(Graphics g) {
@@ -131,7 +131,7 @@ public class PrincipalVista extends JFrame {
         lblbienvenida = createLabel("BIENVENIDO \n "+ names, 120, 150, 900, 60, 45);
         lblmensaje1 = createLabel("Seleccione la opción que desea realizar", 390, 160, 580, 150, 20);
         lblmensaje6 = createLabel("Calzados Emily´s", 480, 470, 300, 30, 16);
-        lblilogoempresa2 = createImageLabel("src/Recursos/nuevologo.png", 230, 230, 430, 260);
+        lblilogoempresa2 = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevologo.png", 230, 230, 430, 260);
 
         panelprincipal.add(lblbienvenida);
         panelprincipal.add(lblmensaje1);

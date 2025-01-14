@@ -22,24 +22,24 @@ public class LoginVista extends JFrame {
         setLocationRelativeTo(null);
 
         // Cambiar panel1 para que use una imagen de fondo
-        panel1 = new PanelConImagenFondo("src/Recursos/fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen
+        panel1 = new PanelConImagenFondo("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen
         panel1.setBounds(0, 0, 250, 500);
         panel1.setLayout(null);
         add(panel1);
 
-        panel2 = new PanelConImagenFondo2("src/Recursos/nuevofondo2.jpeg");
+        panel2 = new PanelConImagenFondo2("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevofondo2.jpeg");
         panel2.setBounds(250, 0, 350, 500);
         panel2.setLayout(null);
         add(panel2);
 
-        ImageIcon imageIcon2 = new ImageIcon("src/Recursos/nuevologo.png");
+        ImageIcon imageIcon2 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevologo.png");
         Image img2 = imageIcon2.getImage(); // Convertir a Image
         Image newImg2 = img2.getScaledInstance(110, 110, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen2 = new JLabel(new ImageIcon(newImg2)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen2.setBounds(120,85, 110, 110);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen2);
 
-        ImageIcon imageIcon3 = new ImageIcon("src/Recursos/nuevousuario.png");
+        ImageIcon imageIcon3 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevousuario.png");
         Image img3 = imageIcon3.getImage(); // Convertir a Image
         Image newImg3 = img3.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen3 = new JLabel(new ImageIcon(newImg3)); // Crear un nuevo ImageIcon con la imagen redimensionada
@@ -49,7 +49,7 @@ public class LoginVista extends JFrame {
         txtusuario = crearCampoTexto("  Ingrese usuario", 180);
         panel2.add(txtusuario);
 
-        ImageIcon imageIcon4 = new ImageIcon("src/Recursos/nuevocandado.png");
+        ImageIcon imageIcon4 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevocandado.png");
         Image img4 = imageIcon4.getImage(); // Convertir a Image
         Image newImg4 = img4.getScaledInstance(50, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen4 = new JLabel(new ImageIcon(newImg4)); // Crear un nuevo ImageIcon con la imagen redimensionada

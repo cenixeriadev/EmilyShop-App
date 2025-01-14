@@ -62,15 +62,15 @@ public class gestionUsuarioVista extends JFrame {
         panelusuario.add(scrollPane);
 
 
-        btnactualizar = new BotonPersonalizado("Actualizar","src/Recursos/actualizar.png",null);
+        btnactualizar = new BotonPersonalizado("Actualizar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\actualizar.png",null);
         btnactualizar.setBounds(70, 340, 200, 40);
         panelusuario.add(btnactualizar);
        
-        btneliminar = new BotonPersonalizado("Eliminar","src/Recursos/tachito.png",null);
+        btneliminar = new BotonPersonalizado("Eliminar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\tachito.png",null);
         btneliminar.setBounds(300,340,140,40);
         panelusuario.add(btneliminar);
 
-        btnCrearUsuario = new BotonPersonalizado("Crear Usuario" , "src/Recursos/nuevousuario.png" , null);
+        btnCrearUsuario = new BotonPersonalizado("Crear Usuario" , "C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevousuario.png" , null);
         btnCrearUsuario.setBounds(200 , 400 , 200 , 40);
         panelusuario.add(btnCrearUsuario);
         
