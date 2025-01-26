@@ -84,14 +84,20 @@ public class  Menu_Principal_Controlador {
             Limpieza.LimpiarCampos(gestionUsuario.getTxtnombre(), gestionUsuario.getTxttelefono(), gestionUsuario.getTxtusuario());
             mostrarVista("RegistroVentas");
         });
-        menu.getRegistrarProducto().addActionListener(e -> mostrarVista("RegistroInventario"));
+        menu.getRegistrarProducto().addActionListener(e -> {
+            gestionUsuario.getTablaUsuario().clearSelection();
+            registroVenta.getTablacarrito().clearSelection();
+            registroVenta.getTablaInventario().clearSelection();
+            Limpieza.LimpiarCampos(gestionUsuario.getTxtnombre() , gestionUsuario.getTxttelefono() , gestionUsuario.getTxtusuario());
+            mostrarVista("RegistroInventario");
+        });
         menu.getReporte().addActionListener(e -> mostrarVista("ReporteGeneral"));
         menu.getGestionarVentas().addActionListener(e-> mostrarVista("GestionarVentas"));
         menu.getCerrarSesion().addActionListener(e -> {
             menu.dispose();
             LoginVista vista = new LoginVista();
-            Modelo_Login modelologin = new Modelo_Login();
-            new FrmLoginUsuario_Controlador(vista, modelologin);
+            Modelo_Login modelo_login = new Modelo_Login();
+            new FrmLoginUsuario_Controlador(vista, modelo_login);
             vista.setVisible(true);
 
         });

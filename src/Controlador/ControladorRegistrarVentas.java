@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class ControladorRegistrarVentas implements MouseListener {
@@ -23,6 +24,7 @@ public class ControladorRegistrarVentas implements MouseListener {
     private int times = 0;
     private int idcarrito;
     private int selectRow;
+    private int id_cliente;
     private ArrayList<BoletaPDF> listaBoleta;
 
     public ControladorRegistrarVentas(registroVentaVista RegistroVentas, Modelo_RegistrarVentas modelo){
@@ -43,6 +45,9 @@ public class ControladorRegistrarVentas implements MouseListener {
                 objProducto.EliminarProducto(idcarrito);
                 DefaultTableModel model = (DefaultTableModel) RegistroVentas.getTablacarrito().getModel();
                 model.removeRow(selectRow);
+                if(model.getRowCount()==0) {
+                    objCliente.EliminarCliente(id_cliente);
+                }
                 RegistroVentas.getTablaInventario().clearSelection();
                 objInventario = null;
             } else {
@@ -58,6 +63,11 @@ public class ControladorRegistrarVentas implements MouseListener {
                     RegistroVentas.getTablaInventario().clearSelection();
                     return;
                 }
+                if(Objects.equals(RegistroVentas.getCbbmetodo().getSelectedItem(), "Seleccione metodo")) {
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un metodo de pago!");
+                    return;
+                }
+                    
                 if(objInventario==null){
                     JOptionPane.showMessageDialog(null , "Debe seleccionar un producto para añadir al carrito!");
                     return;
@@ -68,13 +78,14 @@ public class ControladorRegistrarVentas implements MouseListener {
                     objCliente = new clientes();
                     objCliente.setNombre(RegistroVentas.getTxtcliente().getText());
                     objCliente.setTelefono(RegistroVentas.getTxttelefono().getText());
-                    int id_cliente = objCliente.AgregarCliente(objCliente);
+                    id_cliente = objCliente.AgregarCliente(objCliente);
                     if (id_cliente <= 0) {
                         JOptionPane.showMessageDialog(null, "Error al registrar el cliente.");
                         return;
                     }
                     objCliente.setId_cliente(id_cliente);
                 }
+                RegistroVentas.getTablaInventario().clearSelection();
                 int totalEnCarrito = 0;
 
                 int cantidad = (Integer)(RegistroVentas.getSpCantidad().getValue());
@@ -85,7 +96,7 @@ public class ControladorRegistrarVentas implements MouseListener {
                 totalEnCarrito += cantidad;
                 if(totalEnCarrito > objInventario.getStockDisponible(objInventario)){
                     JOptionPane.showMessageDialog(null , "No hay stock disponible!");
-                    RegistroVentas.getTablacarrito().clearSelection();
+                    RegistroVentas.getTablaInventario().clearSelection();
                     return;
                 }
 
@@ -200,10 +211,16 @@ public class ControladorRegistrarVentas implements MouseListener {
             objInventario = new inventario();
             objInventario.setCodigo((String) table.getValueAt(selectedRow, 0));
             objInventario.setMarca((String) table.getValueAt(selectedRow, 1));
-            objInventario.setTalla(Integer.parseInt(String.valueOf(table.getValueAt(selectedRow, 2))));
+            objInventario.setTalla((Integer) (table.getValueAt(selectedRow, 2)));
             objInventario.setColor((String) table.getValueAt(selectedRow, 3));
-            objInventario.setStock((Integer) table.getValueAt(selectedRow, 4));
-            objInventario.setPrecio_venta((Double) table.getValueAt(selectedRow, 5));
+            if(table==RegistroVentas.getTablacarrito()) {
+                objInventario.setPrecio_venta((Double) table.getValueAt(selectedRow, 4));
+                objInventario.setStock((Integer)(table.getValueAt(selectedRow, 5)));
+            }
+            else if (table==RegistroVentas.getTablaInventario()) {
+                objInventario.setStock((Integer) (table.getValueAt(selectedRow, 4)));
+                objInventario.setPrecio_venta((Double) table.getValueAt(selectedRow, 5));
+            }
             int id = objInventario.ObtenerIdInventario(objInventario);
             objInventario.setId_inventario(id);
 

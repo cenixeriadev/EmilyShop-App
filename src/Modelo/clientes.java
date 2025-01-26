@@ -45,6 +45,16 @@ public class clientes {
         }
         return generatedId;
     }
+    public void EliminarCliente(int id){
+        String sql = "DELETE FROM clientes WHERE id_cliente =?";
+        try (Connection cn = ConexionBD.getConexionBD(); 
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error con la base de datos: " + e.getMessage());
+        }
+    }
 
 
 }

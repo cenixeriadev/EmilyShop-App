@@ -175,6 +175,7 @@ public class Modelo_GestionarVentas {
             cn.commit();
         } catch (SQLException e) {
             // Revertir transacción en caso de error
+            JOptionPane.showMessageDialog(null , "Error al eliminar venta!");
             cn.rollback();
             throw e;
         } finally {

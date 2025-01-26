@@ -133,9 +133,10 @@ public class inventario {
             cn = ConexionBD.getConexionBD();
 
             // Actualizar el stock y el estado del producto
-            pt = cn.prepareStatement("UPDATE inventario SET stock = ? WHERE id_inventario = ?");
+            pt = cn.prepareStatement("UPDATE inventario SET stock = ? , estado = ? WHERE id_inventario = ?");
             pt.setInt(1, 0);
-            pt.setInt(2, id_inventario);
+            pt.setString(2, "inactivo");
+            pt.setInt(3, id_inventario);
             estado = pt.executeUpdate();
 
             pt.close();

@@ -284,7 +284,7 @@ public class Modelo_Reporte_Ventas {
         int total = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            pt = cn.prepareStatement("SELECT COUNT(id_inventario) FROM inventario WHERE estado = ?;");
+            pt = cn.prepareStatement("SELECT SUM(stock) FROM inventario WHERE estado = ?;");
             pt.setString(1, "activo");
             rs = pt.executeQuery();
             if(rs.next()){
