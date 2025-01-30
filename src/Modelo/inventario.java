@@ -194,12 +194,12 @@ public class inventario {
         return  estado;
 
     }
-    public int getStockDisponible(inventario objInventario){
+    public int getStockDisponible(carrito objCarrito){
         int stockD = 0;
         try{
             cn  = ConexionBD.getConexionBD();
             pt = cn.prepareStatement("SELECT stock FROM inventario WHERE id_inventario = ?;");
-            pt.setInt(1, objInventario.getIdInventario());
+            pt.setInt(1, objCarrito.getId_inventario());
             rs = pt.executeQuery();
             if(rs.next()){
                 stockD = rs.getInt("stock");

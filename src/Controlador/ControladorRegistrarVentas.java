@@ -26,6 +26,7 @@ public class ControladorRegistrarVentas implements MouseListener {
     private int selectRow;
     private int id_cliente;
     private ArrayList<BoletaPDF> listaBoleta;
+    private final ArrayList<carrito> listaCarrito = new ArrayList<carrito>();
 
     public ControladorRegistrarVentas(registroVentaVista RegistroVentas, Modelo_RegistrarVentas modelo){
         this.RegistroVentas = RegistroVentas;
@@ -51,7 +52,7 @@ public class ControladorRegistrarVentas implements MouseListener {
                 RegistroVentas.getTablaInventario().clearSelection();
                 objInventario = null;
             } else {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar un producto de la tabla");
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un producto del carrito!");
             }
         });
 
@@ -65,6 +66,7 @@ public class ControladorRegistrarVentas implements MouseListener {
                 }
                 if(Objects.equals(RegistroVentas.getCbbmetodo().getSelectedItem(), "Seleccione metodo")) {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un metodo de pago!");
+                    RegistroVentas.getTablaInventario().clearSelection();
                     return;
                 }
                     
@@ -84,21 +86,22 @@ public class ControladorRegistrarVentas implements MouseListener {
                         return;
                     }
                     objCliente.setId_cliente(id_cliente);
+                    times = 1;
                 }
-                RegistroVentas.getTablaInventario().clearSelection();
-                int totalEnCarrito = 0;
-
-                int cantidad = (Integer)(RegistroVentas.getSpCantidad().getValue());
-                for (int i = 0; i < RegistroVentas.getTablacarrito().getRowCount(); i++) {
-                    int cantidadCarrito = Integer.parseInt(RegistroVentas.getTablacarrito().getValueAt(i, 5).toString());
-                    totalEnCarrito += cantidadCarrito;
-                }
-                totalEnCarrito += cantidad;
-                if(totalEnCarrito > objInventario.getStockDisponible(objInventario)){
-                    JOptionPane.showMessageDialog(null , "No hay stock disponible!");
-                    RegistroVentas.getTablaInventario().clearSelection();
-                    return;
-                }
+                //RegistroVentas.getTablaInventario().clearSelection();
+//                int totalEnCarrito = 0;
+//
+//                int cantidad = (Integer)(RegistroVentas.getSpCantidad().getValue());
+//                for (int i = 0; i < RegistroVentas.getTablacarrito().getRowCount(); i++) {
+//                    int cantidadCarrito = Integer.parseInt(RegistroVentas.getTablacarrito().getValueAt(i, 5).toString());
+//                    totalEnCarrito += cantidadCarrito;
+//                }
+//                totalEnCarrito += cantidad;
+//                if(totalEnCarrito > objInventario.getStockDisponible(objInventario)){
+//                    JOptionPane.showMessageDialog(null , "No hay stock disponible!");
+//                    RegistroVentas.getTablaInventario().clearSelection();
+//                    return;
+//                }
 
                 // Calcular subtotal
                 int cantidadV = (Integer)RegistroVentas.getSpCantidad().getValue();
@@ -112,10 +115,44 @@ public class ControladorRegistrarVentas implements MouseListener {
                 objProducto.setPrecio_unitario(objInventario.getPrecio_venta());
                 objProducto.setId_cliente(objCliente.getId_cliente());
                 objProducto.setSubtotal(subtotal);
-                objProducto.AgregarProducto(objProducto);
+                System.out.println("Asignando valores a producto");
+                
+                
+                DefaultTableModel model = RegistroVentas.getModelocarrito();
+                if(model.getRowCount()==0) {
+                    if(objProducto.getCantidad()>objInventario.getStockDisponible(objProducto)) {
+                        JOptionPane.showMessageDialog(null, "No hay stock disponible para la cantidad solicitada!");
+                        RegistroVentas.getTablaInventario().clearSelection();
+                        return;
+                    }
+                    listaCarrito.add(objProducto);
+                    objProducto.AgregarProducto(objProducto);
+                }else{
+                    boolean encontrado = false;
+                    for (carrito producto : listaCarrito) {
+                        if (objProducto.getId_inventario() == producto.getId_inventario()) {
+                            if (producto.getCantidad() + objProducto.getCantidad() > objInventario.getStockDisponible(producto)) {
+                                JOptionPane.showMessageDialog(null, "No hay stock disponible para la cantidad solicitada!");
+                                return;
+                            } else {
+                                objProducto.AgregarProducto(objProducto);
+                                producto.setCantidad(producto.getCantidad() + objProducto.getCantidad());
+                            }
+                            encontrado = true;
+                            break;  // Salir del bucle una vez encontrado
+                        }
+                    }
+
+// Si no se encontró el producto, se agrega fuera del bucle
+                    if (!encontrado) {
+                        listaCarrito.add(objProducto);
+                        objProducto.AgregarProducto(objProducto);
+                    }
+
+                }
 
                 // Agregar al modelo de la tabla
-                DefaultTableModel model = RegistroVentas.getModelocarrito();
+                
                 Object[] fila = {
                         objInventario.getCodigo(),
                         objInventario.getMarca(),
@@ -127,11 +164,8 @@ public class ControladorRegistrarVentas implements MouseListener {
                 };
                 model.addRow(fila);
                 RegistroVentas.getTablaInventario().clearSelection();
-                times = 1;
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Error en el formato de los datos: " + ex.getMessage());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error inesperado: " + ex.getMessage());
             }
         });
 
@@ -153,6 +187,7 @@ public class ControladorRegistrarVentas implements MouseListener {
 
                 modelo.VentaConfirmada(objCliente, (String)RegistroVentas.getCbbmetodo().getSelectedItem());
                 times = 0;
+                listaCarrito.clear();
                 Limpieza.LimpiarCampos(RegistroVentas.getTxtcliente() , RegistroVentas.getTxttelefono());
                 // Preguntar si el usuario quiere generar un PDF
                 ImageIcon icon = new ImageIcon("src/Recursos/iconoPregunta.png");
