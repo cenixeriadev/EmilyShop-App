@@ -88,20 +88,6 @@ public class ControladorRegistrarVentas implements MouseListener {
                     objCliente.setId_cliente(id_cliente);
                     times = 1;
                 }
-                //RegistroVentas.getTablaInventario().clearSelection();
-//                int totalEnCarrito = 0;
-//
-//                int cantidad = (Integer)(RegistroVentas.getSpCantidad().getValue());
-//                for (int i = 0; i < RegistroVentas.getTablacarrito().getRowCount(); i++) {
-//                    int cantidadCarrito = Integer.parseInt(RegistroVentas.getTablacarrito().getValueAt(i, 5).toString());
-//                    totalEnCarrito += cantidadCarrito;
-//                }
-//                totalEnCarrito += cantidad;
-//                if(totalEnCarrito > objInventario.getStockDisponible(objInventario)){
-//                    JOptionPane.showMessageDialog(null , "No hay stock disponible!");
-//                    RegistroVentas.getTablaInventario().clearSelection();
-//                    return;
-//                }
 
                 // Calcular subtotal
                 int cantidadV = (Integer)RegistroVentas.getSpCantidad().getValue();
@@ -115,8 +101,6 @@ public class ControladorRegistrarVentas implements MouseListener {
                 objProducto.setPrecio_unitario(objInventario.getPrecio_venta());
                 objProducto.setId_cliente(objCliente.getId_cliente());
                 objProducto.setSubtotal(subtotal);
-                System.out.println("Asignando valores a producto");
-                
                 
                 DefaultTableModel model = RegistroVentas.getModelocarrito();
                 if(model.getRowCount()==0) {
@@ -143,7 +127,7 @@ public class ControladorRegistrarVentas implements MouseListener {
                         }
                     }
 
-// Si no se encontró el producto, se agrega fuera del bucle
+                    // Si no se encontró el producto, se agrega fuera del bucle
                     if (!encontrado) {
                         listaCarrito.add(objProducto);
                         objProducto.AgregarProducto(objProducto);
