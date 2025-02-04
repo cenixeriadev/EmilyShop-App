@@ -34,7 +34,6 @@ Overall, this Java Swing application represents a robust solution for small-scal
 - Product Management
 - Order Processing
 - Shopping Cart
-- Payment Gateway Integration
 
 ## Installation
 To install and run EmilyShop-App locally, follow these steps:
