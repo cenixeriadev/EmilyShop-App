@@ -13,7 +13,7 @@ In this project, we present a desktop application developed using Java Swing for
 
 ## Introduction
 
-In this project, we present a desktop application developed using **Java Swing** for managing sales and inventory in a small shoe store. The main objective of this system is to streamline daily operations, ensuring efficient stock control and accurate sales tracking.
+We present a desktop application developed using **Java Swing** for managing sales and inventory in a small shoe store. The main objective of this system is to streamline daily operations, ensuring efficient stock control and accurate sales tracking.
 
 The application provides a user-friendly **graphical interface (GUI)** that allows store managers and employees to perform essential tasks such as:
 - **Registering and updating products** in the inventory.
