@@ -1,6 +1,6 @@
 # EmilyShop-App
 
-It's just work for my university :v
+In this project, we present a desktop application developed using Java Swing for managing sales and inventory in a small shoe store. The main objective of this system is to streamline daily operations, ensuring efficient stock control and accurate sales tracking.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -12,7 +12,22 @@ It's just work for my university :v
 - [Contact](#contact)
 
 ## Introduction
-EmilyShop-App is a Java-based application developed as a university project. The application aims to provide a simple and effective way to manage an online shop.
+
+In this project, we present a desktop application developed using **Java Swing** for managing sales and inventory in a small shoe store. The main objective of this system is to streamline daily operations, ensuring efficient stock control and accurate sales tracking.
+
+The application provides a user-friendly **graphical interface (GUI)** that allows store managers and employees to perform essential tasks such as:
+- **Registering and updating products** in the inventory.
+- **Processing sales transactions** and generating receipts.
+- **Tracking stock levels** to prevent shortages.
+- **Managing customer information** for future reference.
+- **Generating PDF reports** for inventory and sales within a specified date range.
+
+The system utilizes **MySQL** as its database management system, implemented through **XAMPP**, ensuring reliable data storage and retrieval. By leveraging **Java Swing**, the application ensures a responsive and intuitive experience, making it easy for users to interact with the system. The system is designed to handle real-time inventory updates, ensuring that sales automatically adjust stock levels. Additionally, the program includes **basic reporting features** to provide insights into sales performance and inventory status.
+
+This project demonstrates the practical application of **object-oriented programming (OOP)** and database management in Java. It was developed as a **university project**, serving as a valuable tool for small businesses looking to modernize their operations while providing a foundation for further enhancements, such as integrating a database or expanding functionalities based on business needs.
+
+Overall, this Java Swing application represents a robust solution for small-scale retail businesses seeking to improve efficiency and accuracy in their daily operations.
+
 
 ## Features
 - User Authentication
@@ -55,7 +70,7 @@ Contributions are welcome! If you have any ideas, suggestions, or bug reports, p
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
-If you have any questions or need further assistance, feel free to contact me at [your-email@example.com].
+If you have any questions or need further assistance, feel free to contact me at [codeartprogrammer@gmail.com].
 
 ---
 
