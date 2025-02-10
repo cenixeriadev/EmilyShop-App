@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class usuarios {
     private int id_usuario;
     private String nombre;
-    private String contraseña;
+    private String password;
     private String nombre_usuario;
     private String telefono;
 
@@ -31,8 +31,8 @@ public class usuarios {
         this.nombre = nombre;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContraseña(String password) {
+        this.password = password;
     }
 
     public String getNombre_usuario() {
@@ -49,7 +49,7 @@ public class usuarios {
     }
 
     public String getContraseña() {
-        return contraseña;
+        return password;
     }
 
     Connection cn = null;
@@ -88,7 +88,7 @@ public class usuarios {
                 User = new usuarios();
                 User.setId_usuario(rs.getInt("id_usuario"));
                 User.setNombre(rs.getString("nombre"));
-                User.setContraseña(rs.getString("contraseña"));
+                User.setContraseña(rs.getString("password"));
                 User.setNombre_usuario(rs.getString("nombre_usuario"));
                 User.setTelefono(rs.getString("telefono"));
                 listaUsuario.add(User);
@@ -106,7 +106,7 @@ public class usuarios {
         int res = 0;
         try{
             cn = ConexionBD.getConexionBD();
-            ps = cn.prepareStatement("INSERT INTO usuarios(nombre , contraseña , nombre_usuario , telefono) VALUES(?,?,? ,?);");
+            ps = cn.prepareStatement("INSERT INTO usuarios(nombre , password , nombre_usuario , telefono) VALUES(?,?,? ,?);");
             String hashContraseña = ValidationPassword.encriptar(user.getContraseña());
             ps.setString(1, user.getNames());
             ps.setString(2, hashContraseña);

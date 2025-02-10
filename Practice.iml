@@ -10,15 +10,6 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-5.1.15-bin (1).jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/jbcrypt-0.4.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -37,7 +28,16 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/Dependencias_Externas/jcalendar-1.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/lib/jcalendar-1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

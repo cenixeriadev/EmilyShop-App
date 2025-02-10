@@ -1,0 +1,30 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: tienda_de_zapatillas
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+    restart: always
+
+  app:
+    build: .
+    container_name: swing-app
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/tienda_de_zapatillas
+      DB_USER: root
+      DB_PASSWORD: ""
+      DISPLAY: host.docker.internal:0.0
+    volumes:
+      - ./Recursos:/app/Recursos
+    depends_on:
+      - mysql
+    
+
+volumes:
+  mysql-data:

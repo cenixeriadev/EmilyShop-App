@@ -8,8 +8,8 @@ public class ConexionBD {
     public static Connection getConexionBD() {
         Connection Database = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/tienda_de_zapatillas";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://mysql:3306/tienda_de_zapatillas?useSSL=false&serverTimezone=UTC";
             String user = "root";
             String password = "";
             Database = DriverManager.getConnection(url, user, password);
