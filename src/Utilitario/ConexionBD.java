@@ -9,7 +9,7 @@ public class ConexionBD {
         Connection Database = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://mysql:3306/tienda_de_zapatillas?useSSL=false&serverTimezone=UTC";
+            String url = "jdbc:mysql://localhost:3306/tienda_de_zapatillas";
             String user = "root";
             String password = "";
             Database = DriverManager.getConnection(url, user, password);

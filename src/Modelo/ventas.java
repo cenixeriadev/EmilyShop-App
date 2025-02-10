@@ -56,56 +56,7 @@ public class ventas {
     ArrayList<inventario> listaInventarioD = null;
     ventas objVentas = null;
     inventario objInventarioD = null;
-
-
-    public ArrayList<inventario> listarInventarioDisponible(String talla, String color, String codigo) {
-        ArrayList<inventario> listaInventarioD = new ArrayList<>();
-        try {
-            Connection cn = ConexionBD.getConexionBD();
-            StringBuilder query = new StringBuilder("SELECT * FROM inventario WHERE 1=1");
-            if (talla != null && !talla.equals("Seleccionar una talla")) {
-                query.append(" AND talla = ?");
-            }
-            if(codigo != null && !codigo.isEmpty()){
-                query.append(" AND codigo = ?");
-            }
-            if(color != null && !color.equals("Seleccionar un color")) {
-                query.append(" AND color = ?");
-            }
-            PreparedStatement ps = cn.prepareStatement(query.toString());
-
-            int paramIndex = 1;
-            if (talla != null && !talla.equals("Seleccionar una talla")) {
-                ps.setInt(paramIndex++, Integer.parseInt(talla));
-            }
-            if (codigo != null && !codigo.isEmpty()) {
-                ps.setString(paramIndex++, codigo);
-            }
-            if (color != null && !color.equals("Seleccionar un color")) {
-                ps.setString(paramIndex++, color);
-            }
-
-            ResultSet rs = ps.executeQuery();
-
-            // Procesar resultados
-            while (rs.next()) {
-                inventario objInventario = new inventario();
-                objInventario.setModel(rs.getString("modelo"));
-                objInventario.setCodigo(rs.getString("codigo"));
-                objInventario.setTalla(rs.getInt("talla"));
-                objInventario.setColor(rs.getString("color"));
-                objInventario.setIdinventario(rs.getInt("idinventario"));
-                objInventario.setPrecioCosto(rs.getInt("preciocosto"));
-                listaInventarioD.add(objInventario);
-            }
-            rs.close();
-            ps.close();
-            cn.close();
-        } catch (SQLException e) {
-            e.printStackTrace(); // Manejo de excepciones
-        }
-        return listaInventarioD;
-    }
+    
 
 
     public ArrayList<ventas> listarVentas() {
