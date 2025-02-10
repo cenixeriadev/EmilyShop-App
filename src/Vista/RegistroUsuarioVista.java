@@ -4,8 +4,7 @@ package Vista;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+
 
 public class RegistroUsuarioVista extends JFrame {
     JPanel panel1, panel2;
@@ -18,44 +17,45 @@ public class RegistroUsuarioVista extends JFrame {
     public RegistroUsuarioVista() {
         setSize(600, 500);
         setTitle("Login-Ventas-Inventario");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setLayout(null);
+        setLocationRelativeTo(null);
 
         // Cambiar panel1 para que use una imagen de fondo
-        panel1 = new PanelConImagenFondo("src/Recursos/fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen
+        panel1 = new PanelConImagenFondo("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen
         panel1.setBounds(0, 0, 250, 500);
         panel1.setLayout(null);
         add(panel1);
 
-        panel2 = new PanelConImagenFondo2("src/Recursos/nuevofondo3.jpeg");
+        panel2 = new PanelConImagenFondo2("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevofondo3.jpeg");
         panel2.setBounds(250, 0, 350, 500);
         panel2.setBackground(new Color(240, 240, 240));
         panel2.setLayout(null);
         add(panel2);
         
-        ImageIcon imageIcon3 = new ImageIcon("src/Recursos/nuevousuario.png");
+        ImageIcon imageIcon3 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevousuario.png");
         Image img3 = imageIcon3.getImage(); // Convertir a Image
         Image newImg3 = img3.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen3 = new JLabel(new ImageIcon(newImg3)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen3.setBounds(30, 230, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen3);
 
-        ImageIcon imageIcon4 = new ImageIcon("src/Recursos/nuevocandado.png");
+        ImageIcon imageIcon4 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevocandado.png");
         Image img4 = imageIcon4.getImage(); // Convertir a Image
         Image newImg4 = img4.getScaledInstance(50, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen4 = new JLabel(new ImageIcon(newImg4)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen4.setBounds(30, 280, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen4);
         
-        ImageIcon imageIcon5 = new ImageIcon("src/Recursos/nombre.png");
+        ImageIcon imageIcon5 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nombre.png");
         Image img5 = imageIcon5.getImage(); // Convertir a Image
         Image newImg5 = img5.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen5 = new JLabel(new ImageIcon(newImg5)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen5.setBounds(30, 130, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen5);
         
-        ImageIcon imageIcon6 = new ImageIcon("src/Recursos/telefono.png");
+        ImageIcon imageIcon6 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\telefono.png");
         Image img6 = imageIcon6.getImage(); // Convertir a Image
         Image newImg6 = img6.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen6 = new JLabel(new ImageIcon(newImg6)); // Crear un nuevo ImageIcon con la imagen redimensionada
@@ -70,20 +70,20 @@ public class RegistroUsuarioVista extends JFrame {
         panel2.add(lblcrearusuario);
         
         
-        txtusuario = crearCampoTexto("  Ingrese usuario", 70, 230);
+        txtusuario = crearCampoTexto("  Ingrese usuario", 230);
         panel2.add(txtusuario);
         
-        txtcontra = crearCampoTexto("  Ingrese contraseña", 70, 280);
+        txtcontra = crearCampoTexto("  Ingrese contraseña", 280);
         panel2.add(txtcontra);
         
-        txtnombre=crearCampoTexto("  Ingrese Nombre y apellido",70,130);
+        txtnombre=crearCampoTexto("  Ingrese Nombre y apellido", 130);
         panel2.add(txtnombre);
         
-        txttelefono=crearCampoTexto("   Ingrese Numero de Telefono",70, 180);
+        txttelefono=crearCampoTexto("   Ingrese Numero de Telefono", 180);
         panel2.add(txttelefono);
 
         
-        btncrear = crearBoton("CREAR", 100, 345);
+        btncrear = crearBoton();
         panel2.add(btncrear);
 
     }
@@ -103,9 +103,9 @@ public class RegistroUsuarioVista extends JFrame {
         return btncrear;
     }
 
-    private JTextField crearCampoTexto(String placeholder, int x, int y) {
+    private JTextField crearCampoTexto(String placeholder, int y) {
         JTextField textField = new JTextField();
-        textField.setBounds(x, y, 240, 40);
+        textField.setBounds(70, y, 240, 40);
         textField.setOpaque(false);
         textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
         textField.setForeground(Color.WHITE);
@@ -113,9 +113,9 @@ public class RegistroUsuarioVista extends JFrame {
         return textField;
     }
 
-    private JButton crearBoton(String texto, int x, int y) {
-        JButton button = new JButton(texto);
-        button.setBounds(x, y, 130, 40);
+    private JButton crearBoton() {
+        JButton button = new JButton("CREAR");
+        button.setBounds(90, 345, 130, 40);
         button.setForeground(Color.WHITE);
         button.setContentAreaFilled(false);
         button.setBorder(new LineBorder(Color.WHITE, 2, true)); // Borde con esquinas redondeadas
@@ -127,7 +127,7 @@ public class RegistroUsuarioVista extends JFrame {
 
 // Clase para establecer una imagen de fondo en el panel
 class PanelConImagenFondo2 extends JPanel {
-    private Image imagenFondo;
+    private final Image imagenFondo;
 
     public PanelConImagenFondo2(String rutaImagen) {
         this.imagenFondo = new ImageIcon(rutaImagen).getImage();
@@ -141,35 +141,4 @@ class PanelConImagenFondo2 extends JPanel {
 }
 
 // Clase para manejar los placeholders en los JTextField
-class Placeholder2 implements FocusListener {
-    private final JTextField textField;
-    private final String placeholder;
-    private boolean showingPlaceholder;
 
-    public Placeholder2(JTextField textField, String placeholder) {
-        this.textField = textField;
-        this.placeholder = placeholder;
-        this.showingPlaceholder = true;
-        textField.setText(placeholder);
-        textField.setForeground(Color.LIGHT_GRAY);
-        textField.addFocusListener(this);
-    }
-
-    @Override
-    public void focusGained(FocusEvent e) {
-        if (showingPlaceholder) {
-            textField.setText("");
-            textField.setForeground(Color.WHITE);
-            showingPlaceholder = false;
-        }
-    }
-
-    @Override
-    public void focusLost(FocusEvent e) {
-        if (textField.getText().isEmpty()) {
-            textField.setText(placeholder);
-            textField.setForeground(Color.LIGHT_GRAY);
-            showingPlaceholder = true;
-        }
-    }
-}

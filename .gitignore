@@ -28,3 +28,4 @@ bin/
 .DS_Store
 
 /src/pdf
+/src/target/*.jar

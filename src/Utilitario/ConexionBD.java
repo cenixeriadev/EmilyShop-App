@@ -8,18 +8,16 @@ public class ConexionBD {
     public static Connection getConexionBD() {
         Connection Database = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/inventariotienda1";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://mysql:3306/tienda_de_zapatillas?useSSL=false&serverTimezone=UTC";
             String user = "root";
             String password = "";
             Database = DriverManager.getConnection(url, user, password);
-            System.out.println("(～￣▽￣)～");
-
         } catch (ClassNotFoundException e) {
             System.out.println("Error: No se encontró el driver de MySQL");
 
         } catch (SQLException e) {
-            System.out.println("No se pudo conectar a la base de datos   (‾◡◝)");
+            System.out.println("No se pudo conectar a la base de datos!");
         }
         return Database;
     }

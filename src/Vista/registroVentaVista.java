@@ -1,6 +1,9 @@
 
 package Vista;
 
+import Utilitario.BotonPersonalizado;
+import Utilitario.PanelDegradadoAzul;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -8,7 +11,7 @@ import java.awt.*;
 public class registroVentaVista extends JFrame {
 
     // Barra de menú y menús
-    JLabel lblbienvenida, lblbuscar, lblcodigo2 ,lblprecioventa;
+    JLabel lblbienvenida, lblbuscar, lblcodigo2 , lblcantidad;
 
     
     JPanel panelregistroventas;
@@ -19,8 +22,9 @@ public class registroVentaVista extends JFrame {
     DefaultTableModel modeloInventario,modelocarrito;
     
     JLabel lblmetodo, lblcarrito,lblcliente,lbltelefono;
-    JTextField txtcliente,txtcodigo2,txttelefono , txtprecioventa;
-    
+    JTextField txtcliente, txtcodigo,txttelefono;
+    JSpinner spCantidad;
+    SpinnerNumberModel modelosp;
     JButton btnregistrar,btnbuscar,btneliminar ,btnCarrito;
     
     public registroVentaVista() {
@@ -32,7 +36,7 @@ public class registroVentaVista extends JFrame {
         
 
         //-----------panel ventas----------
-        panelregistroventas = new PanelDegradadoAzul8();
+        panelregistroventas = new PanelDegradadoAzul();
         panelregistroventas.setBounds(0,70,1140,540);
         panelregistroventas.setLayout(null);
         add(panelregistroventas);
@@ -65,15 +69,16 @@ public class registroVentaVista extends JFrame {
         txttelefono.setBounds(185,180,200,30);
         panelregistroventas.add(txttelefono);
 
-        lblprecioventa = new JLabel("P. de venta:  ");
-        lblprecioventa.setForeground(Color.WHITE);
-        lblprecioventa.setFont(new Font("Times New Roman", Font.BOLD,20));
-        lblprecioventa.setBounds(65,220,200,30);
-        panelregistroventas.add(lblprecioventa);
+        lblcantidad = new JLabel("Cantidad: ");
+        lblcantidad.setForeground(Color.WHITE);
+        lblcantidad.setFont(new Font("Times New Roman", Font.BOLD,20));
+        lblcantidad.setBounds(65,220,200,30);
+        panelregistroventas.add(lblcantidad);
 
-        txtprecioventa = new JTextField("");
-        txtprecioventa.setBounds(185,220,200,30);
-        panelregistroventas.add(txtprecioventa);
+        modelosp = new SpinnerNumberModel(1, 1, 100, 1);
+        spCantidad = new JSpinner(modelosp);
+        spCantidad.setBounds(185, 220, 100, 30);
+        panelregistroventas.add(spCantidad);
         
         lblmetodo=new JLabel("M. de Pago:");
         lblmetodo.setForeground(Color.WHITE);
@@ -81,7 +86,7 @@ public class registroVentaVista extends JFrame {
         lblmetodo.setBounds(65,260,140,30);
         panelregistroventas.add(lblmetodo);
         
-        cbbmetodo = new JComboBox<>(new String[]{"Seleccione metodo",  "Yape", "IZIPAY", "Plin", "Efectivo","Transferencia"});
+        cbbmetodo = new JComboBox<>(new String[]{"Seleccione metodo",  "Yape", "Efectivo","Tarjeta"});
         cbbmetodo.setBounds(185, 260, 200, 30);
         panelregistroventas.add(cbbmetodo);
         
@@ -94,7 +99,7 @@ public class registroVentaVista extends JFrame {
         
         // --------------tabla carrito--------------
         
-        modelocarrito = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color","Precio","M. Pago","Telefono"}, 0){
+        modelocarrito = new DefaultTableModel(new String[]{"Codigo", "Marca", "Talla", "Color","P.Unitario","Cantidad" , "M. Pago" }, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -138,32 +143,32 @@ public class registroVentaVista extends JFrame {
         lblcodigo2.setBounds(700,170,150,30);
         panelregistroventas.add(lblcodigo2);
         
-        txtcodigo2= new JTextField();
-        txtcodigo2.setBounds(770,170,100,30);
-        panelregistroventas.add(txtcodigo2);
+        txtcodigo = new JTextField();
+        txtcodigo.setBounds(770,170,100,30);
+        panelregistroventas.add(txtcodigo);
             
         
         // -----------Boton Boleta------------
 
-        btnbuscar = crearBotonPersonalizado("Buscar", "src/Recursos/buscar.png");
+        btnbuscar = new BotonPersonalizado("Buscar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\buscar.png",null);
         btnbuscar.setBounds(920,180,150,40); // Ajustar posición y tamaño
         panelregistroventas.add(btnbuscar);
 
-        btnCarrito = crearBotonPersonalizado("Añadir al carrito", "src/Recursos/carrito.png");
+        btnCarrito = new BotonPersonalizado("Carrito","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\carrito.png",null);
         btnCarrito.setBounds(440, 140, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btnCarrito);
 
-        btnregistrar = crearBotonPersonalizado("Registrar", "src/Recursos/registrar.png");
+        btnregistrar = new BotonPersonalizado("Registrar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\registrar.png",null);
         btnregistrar.setBounds(440, 200, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btnregistrar);
 
-        btneliminar = crearBotonPersonalizado("Eliminar", "src/Recursos/tachito.png");
+        btneliminar = new BotonPersonalizado("Eliminar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\tachito.png",null);
         btneliminar.setBounds(440, 260, 200, 50); // Ajustar posición y tamaño
         panelregistroventas.add(btneliminar);
 
         
         // --------------tabla buscar producto--------------
-        modeloInventario = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color"}, 0){
+        modeloInventario = new DefaultTableModel(new String[]{"Codigo", "Marca", "Talla", "Color" ,"Cantidad", "P.Venta"}, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -183,7 +188,7 @@ public class registroVentaVista extends JFrame {
         tablaInventario.getTableHeader().setEnabled(false);
         
         JScrollPane scrollPane2 = new JScrollPane(tablaInventario);
-        scrollPane2.setBounds(700, 290, 400, 240);
+        scrollPane2.setBounds(700, 290, 425, 240);
         panelregistroventas.add(scrollPane2);
 
         
@@ -223,8 +228,8 @@ public class registroVentaVista extends JFrame {
     public DefaultTableModel getModelocarrito(){
         return modelocarrito;
     }
-    public JTextField getTxtcodigo2(){
-        return txtcodigo2;
+    public JTextField getTxtcodigo(){
+        return txtcodigo;
     }
     public JTextField getTxttelefono(){
         return txttelefono;
@@ -235,67 +240,11 @@ public class registroVentaVista extends JFrame {
     public JComboBox<String> getCbbmetodo(){
         return cbbmetodo;
     }
-    public JTextField getTxtprecioventa(){return txtprecioventa;}
+    public JSpinner getSpCantidad(){return spCantidad;}
     public JComboBox<String> getTalla(){return cbbtallas;}
     public JComboBox<String> getColor(){return cbbcolor;}
-    private JButton crearBotonPersonalizado(String texto, String icono) {
-        JButton boton = new JButton(texto) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-                // Cambiar color según el estado (presionado o no)
-                g2d.setColor(getModel().isPressed() ? new Color(200, 200, 200) : new Color(35, 53, 67));//255, 182, 193
-                g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 50, 50);
-
-                // Dibujar borde redondeado
-                g2d.setColor(Color.LIGHT_GRAY);
-                g2d.setStroke(new BasicStroke(2));
-                g2d.drawRoundRect(1, 1, getWidth() - 2, getHeight() - 2, 50, 50);
-
-                super.paintComponent(g);
-            }
-        };
-
-        // Configuración básica del botón
-        boton.setFont(new Font("Arial", Font.BOLD, 16));
-        boton.setForeground(Color.WHITE);
-        boton.setContentAreaFilled(false); // Evitar fondo estándar del botón
-        boton.setFocusPainted(false);      // Quitar efecto de foco
-        boton.setBorderPainted(false);    // Quitar borde predeterminado
-
-        // Configurar icono si se proporciona
-        if (icono != null) {
-            ImageIcon iconoOriginal = new ImageIcon(icono);
-            Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-            boton.setIcon(new ImageIcon(imagenEscalada));
-            boton.setHorizontalTextPosition(SwingConstants.RIGHT);
-            boton.setVerticalTextPosition(SwingConstants.CENTER);
-        }
-
-        return boton;
-    }
-
-}
 
 
-class PanelDegradadoAzul8 extends JPanel {
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        
-        // Colores y posiciones para el degradado de tres colores
-        Color[] colores = {new Color(25, 43, 57), new Color(60, 78, 92), new Color(25, 43, 57)};
-        float[] posiciones = {0.0f, 0.5f, 1.0f}; // Posiciones relativas de cada color
-
-        // Crear el degradado horizontal de derecha a izquierda
-        LinearGradientPaint gradiente = new LinearGradientPaint(getWidth(), 0, 0, 0, posiciones, colores);
-        
-        g2d.setPaint(gradiente);
-        g2d.fillRect(0, 0, getWidth(), getHeight());
-    }
 }
 
    

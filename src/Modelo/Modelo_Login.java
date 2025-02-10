@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Modelo_Login {
     List<FrmLoginUsuario_Controlador> observers =  new ArrayList<>();
-    usuario user = new usuario();
+    usuarios user = new usuarios();
 
     public void addObserver(FrmLoginUsuario_Controlador observer) {
 
@@ -23,28 +23,34 @@ public class Modelo_Login {
     public void validarCredenciales(String inputUsername, String inputPassword) {
         try {
 
-            ArrayList<usuario> usuarios = user.ListarUsuario();
+            ArrayList<usuarios> usuarios = user.ListarUsuario();
             boolean estado = false;
-            for (usuario usuario : usuarios) {
-                if (inputUsername.equals(usuario.getNombUsuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
+            String nombre = "";
+            if(inputPassword.equals("  Ingrese contraseña") || inputUsername.equals("  Ingrese usuario")){
+                JOptionPane.showMessageDialog(null, "Debes llenar todos los campos requeridos");
+                return;
+            }
+            for (Modelo.usuarios usuario : usuarios) {
+                if (inputUsername.equals(usuario.getNombre_usuario()) && ValidationPassword.verificar(inputPassword , usuario.getContraseña())) {
                     estado = true;
-                    break; // Salir del bucle tan pronto como se encuentre una coincidencia
+                    nombre = usuario.getNames();
+                    break;
                 }
             }
             if (estado) {
-                notificarObserverExito();
+                notificarObserverExito(nombre);
             } else {
                 notificarObserverFallo();
 
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null , "Fail in connection with database");
+            JOptionPane.showMessageDialog(null , "Fail in connection with database"+ e.getMessage());
         }
 
     }
-    private void notificarObserverExito() {
+    private void notificarObserverExito(String nombre_Usuario) {
         for (FrmLoginUsuario_Controlador observer : observers) {
-            observer.loginExitoso();
+            observer.loginExitoso(nombre_Usuario);
         }
     }
     private void notificarObserverFallo() {

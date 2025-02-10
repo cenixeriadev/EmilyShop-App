@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class PrincipalVista extends JFrame {
     // Barra de menú y menús
+    private final String names;
     JLabel lblimagennike, lblimagenadidas, lblimagenquelind, lblimagenpuma, lblimagenmarcas, lblimagenreebok,lblimagenirun, lblilogoempresa2;
     JLabel lblbienvenida, lblmensaje1, lblmensaje6;
     JMenuBar menuBar;
@@ -12,17 +13,23 @@ public class PrincipalVista extends JFrame {
 
     JMenuItem gestionUsuario;
     JMenuItem registrarProducto, gestionarInventario;
-    JMenuItem registrarVenta, gestionarVentas, generarBoleta;
-    JMenuItem reporteDia, reporteSemana, reporteMes;
+    JMenuItem registrarVenta, gestionarVentas;
+    JMenuItem reporte;
     JMenuItem cerrarSesion;
+
 
     JPanel panelprincipal;
 
-    public PrincipalVista() {
+    public PrincipalVista(String names) {
+        this.names = names;
+        Iniciar();
+    }
+    public void Iniciar(){
         setTitle("Menu Calzados Emily´s");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1140, 840);
         setResizable(false);
+        setLocationRelativeTo(null);
 
         // -------Crear la barra de menú-------------
         menuBar = new JMenuBar();
@@ -34,6 +41,7 @@ public class PrincipalVista extends JFrame {
         usuarioMenu.setFont(new Font("Arial", Font.BOLD, 20));
         gestionUsuario = new JMenuItem("Gestionar Usuario");
         gestionUsuario.setFont(new Font("Arial", Font.BOLD, 17));
+
         usuarioMenu.add(gestionUsuario);
 
         // Menú Inventario
@@ -55,25 +63,18 @@ public class PrincipalVista extends JFrame {
         registrarVenta.setFont(new Font("Arial", Font.BOLD, 17));
         gestionarVentas = new JMenuItem(" Gestionar Ventas");
         gestionarVentas.setFont(new Font("Arial", Font.BOLD, 17));
-        generarBoleta = new JMenuItem(" Generar Boleta");
-        generarBoleta.setFont(new Font("Arial", Font.BOLD, 17));
+
         ventasMenu.add(registrarVenta);
         ventasMenu.add(gestionarVentas);
-        ventasMenu.add(generarBoleta);
 
         // Menú Reporte General
         reporteMenu = new JMenu("    REPORTE GENERAL    ");
         reporteMenu.setForeground(Color.WHITE);
         reporteMenu.setFont(new Font("Arial", Font.BOLD, 20));
-        reporteDia = new JMenuItem(" Reporte del Día");
-        reporteDia.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteSemana = new JMenuItem(" Reporte de la Semana");
-        reporteSemana.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteMes = new JMenuItem(" Reporte del Mes");
-        reporteMes.setFont(new Font("Arial", Font.BOLD, 17));
-        reporteMenu.add(reporteDia);
-        reporteMenu.add(reporteSemana);
-        reporteMenu.add(reporteMes);
+        reporte = new JMenuItem(" Reportes");
+        reporte.setFont(new Font("Arial", Font.BOLD, 17));
+        reporteMenu.add(reporte);
+
 
         cerrarMenu = new JMenu("    CERRAR SESIÓN    ");
         cerrarMenu.setForeground(Color.WHITE);
@@ -91,12 +92,12 @@ public class PrincipalVista extends JFrame {
         setJMenuBar(menuBar);
 
         // Imágenes superiores
-        lblimagennike = createImageLabel("src/Recursos/nike.jpeg", 190, 70, 0, 0);
-        lblimagenadidas = createImageLabel("src/Recursos/adidas.jpeg", 190, 70, 190, 0);
-        lblimagenquelind = createImageLabel("src/Recursos/quelind.jpeg", 190, 70, 380, 0);
-        lblimagenpuma = createImageLabel("src/Recursos/puma.jpeg", 190, 70, 570, 0);
-        lblimagenreebok = createImageLabel("src/Recursos/reebok.jpeg", 190, 70, 760, 0);
-        lblimagenirun = createImageLabel("src/Recursos/irun.jpeg", 190, 70, 950, 0);
+        lblimagennike = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nike.jpeg", 190, 70, 0, 0);
+        lblimagenadidas = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\adidas.jpeg", 190, 70, 190, 0);
+        lblimagenquelind = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\quelind.jpeg", 190, 70, 380, 0);
+        lblimagenpuma = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\puma.jpeg", 190, 70, 570, 0);
+        lblimagenreebok = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\reebok.jpeg", 190, 70, 760, 0);
+        lblimagenirun = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\irun.jpeg", 190, 70, 950, 0);
 
         add(lblimagennike);
         add(lblimagenadidas);
@@ -106,15 +107,15 @@ public class PrincipalVista extends JFrame {
         add(lblimagenirun);
 
         // Imágenes inferiores
-        lblimagenmarcas = createImageLabel("src/Recursos/marcas.jpeg", 760, 190, 0, 580);
-        JLabel lblimagenmarcas2 = createImageLabel("src/Recursos/marcas2.jpeg", 380, 190, 760, 580);
+        lblimagenmarcas = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\marcas.jpeg", 760, 190, 0, 580);
+        JLabel lblimagenmarcas2 = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\marcas2.jpeg", 380, 190, 760, 580);
 
         add(lblimagenmarcas);
         add(lblimagenmarcas2);
 
         // Panel principal con imagen de fondo
         panelprincipal = new JPanel() {
-            private final Image imagenFondo = new ImageIcon("src/Recursos/nuevofondo5.jpeg").getImage();
+            private final Image imagenFondo = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevofondo5.jpeg").getImage();
 
             @Override
             protected void paintComponent(Graphics g) {
@@ -127,10 +128,10 @@ public class PrincipalVista extends JFrame {
         add(panelprincipal);
 
         // Componentes del panel principal
-        lblbienvenida = createLabel("BIENVENIDO \n USUARIO", 290, 150, 580, 60, 45);
+        lblbienvenida = createLabel("BIENVENIDO \n "+ names, 120, 150, 900, 60, 45);
         lblmensaje1 = createLabel("Seleccione la opción que desea realizar", 390, 160, 580, 150, 20);
         lblmensaje6 = createLabel("Calzados Emily´s", 480, 470, 300, 30, 16);
-        lblilogoempresa2 = createImageLabel("src/Recursos/nuevologo.png", 230, 230, 430, 260);
+        lblilogoempresa2 = createImageLabel("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevologo.png", 230, 230, 430, 260);
 
         panelprincipal.add(lblbienvenida);
         panelprincipal.add(lblmensaje1);
@@ -146,11 +147,11 @@ public class PrincipalVista extends JFrame {
     public JMenuItem getRegistrarVenta(){
         return registrarVenta;
     }
-    public JMenuItem getGenerarBoleta(){
-        return generarBoleta;
-    }
     public JMenuItem getGestionarVentas(){
         return gestionarVentas;
+    }
+    public JMenuItem getReporte(){
+        return reporte;
     }
     public JMenuItem getCerrarSesion(){
         return cerrarSesion;
@@ -161,7 +162,6 @@ public class PrincipalVista extends JFrame {
     public JPanel getPanelprincipal(){
         return panelprincipal;
     }
-    // Método auxiliar para crear JLabels de imágenes
     private JLabel createImageLabel(String imagePath, int width, int height, int x, int y) {
         ImageIcon imageIcon = new ImageIcon(imagePath);
         Image image = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);

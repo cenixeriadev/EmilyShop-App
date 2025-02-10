@@ -1,5 +1,8 @@
 package Vista;
 
+import Utilitario.BotonPersonalizado;
+import Utilitario.PanelDegradadoAzul;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -16,7 +19,7 @@ public class gestionUsuarioVista extends JFrame {
     JLabel lblusuario, lblnombre, lbltelefono;
     JTextField txtusuario, txtnombre, txttelefono;
     
-    JButton btneliminar, btnactualizar;
+    JButton btneliminar, btnactualizar , btnCrearUsuario;
     
     public gestionUsuarioVista() {
         setTitle("Menu Calzados Emily´s");
@@ -24,7 +27,7 @@ public class gestionUsuarioVista extends JFrame {
         setSize(1140, 840);
         setResizable(false);
         //-----------panel bienvenido----------
-        panelusuario = new PanelDegradadoAzul3();
+        panelusuario = new PanelDegradadoAzul();
         panelusuario.setBounds(0,70,1140,540);
         panelusuario.setLayout(null);
         add(panelusuario);
@@ -59,13 +62,17 @@ public class gestionUsuarioVista extends JFrame {
         panelusuario.add(scrollPane);
 
 
-        btnactualizar = new JButton("Actualizar");
-        btnactualizar.setBounds(80,340,140,40);
+        btnactualizar = new BotonPersonalizado("Actualizar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\actualizar.png",null);
+        btnactualizar.setBounds(70, 340, 200, 40);
         panelusuario.add(btnactualizar);
        
-        btneliminar = new JButton("Eliminar");
+        btneliminar = new BotonPersonalizado("Eliminar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\tachito.png",null);
         btneliminar.setBounds(300,340,140,40);
         panelusuario.add(btneliminar);
+
+        btnCrearUsuario = new BotonPersonalizado("Crear Usuario" , "C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevousuario.png" , null);
+        btnCrearUsuario.setBounds(200 , 400 , 200 , 40);
+        panelusuario.add(btnCrearUsuario);
         
         lblnombre= new JLabel("Nombre y Apellido");
         lblnombre.setBounds(25,160,200,30);
@@ -123,24 +130,9 @@ public class gestionUsuarioVista extends JFrame {
     public DefaultTableModel getModeloUsuario(){
         return modeloUsuario;
     }
+    public JButton getBtnCrearUsuario(){return btnCrearUsuario;}
 
 }
 
-class PanelDegradadoAzul3 extends JPanel {
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        
-        // Colores y posiciones para el degradado de tres colores
-        Color[] colores = {new Color(25, 43, 57), new Color(60, 78, 92), new Color(25, 43, 57)};
-        float[] posiciones = {0.0f, 0.5f, 1.0f}; // Posiciones relativas de cada color
 
-        // Crear el degradado horizontal de derecha a izquierda
-        LinearGradientPaint gradiente = new LinearGradientPaint(getWidth(), 0, 0, 0, posiciones, colores);
-        
-        g2d.setPaint(gradiente);
-        g2d.fillRect(0, 0, getWidth(), getHeight());
-    }
-}
 

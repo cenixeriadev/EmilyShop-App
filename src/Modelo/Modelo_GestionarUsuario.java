@@ -8,28 +8,28 @@ import java.util.ArrayList;
 
 public class Modelo_GestionarUsuario {
     gestionUsuarioVista vistagesusuario;
-    ArrayList<usuario> listaUsuarios = new ArrayList<>();
-    usuario Usuario;
+    ArrayList<usuarios> listaUsuarios = new ArrayList<>();
+    usuarios Usuario;
     public Modelo_GestionarUsuario(gestionUsuarioVista vistagesusuario){
         this.vistagesusuario = vistagesusuario;
     }
     public void CargarUsuarios(){
         DefaultTableModel modelo = vistagesusuario.getModeloUsuario();
-        int i = 0 ;
-        Usuario = new usuario();  // Reemplazar con la clase que gestiona la base de datos de usuarios.
+        modelo.setRowCount(0);
+        Usuario = new usuarios();
         listaUsuarios = Usuario.ListarUsuario();
-        modelo.setNumRows(listaUsuarios.size());
-        for(usuario obj : listaUsuarios){
-            modelo.setValueAt(String.valueOf(obj.getNames()), i, 0);
-            modelo.setValueAt(obj.getTelefono(), i, 1);
-            modelo.setValueAt(obj.getNombUsuario(), i, 2);
-            //modelo.setValueAt(String.valueOf(obj.getContraseña()), i, 3);
-            i++;
+        for(usuarios obj : listaUsuarios){
+            Object[] fila={
+                    String.valueOf(obj.getNames()),
+                    obj.getTelefono(),
+                    obj.getNombre_usuario()
+            };
+            modelo.addRow(fila);
         }
         vistagesusuario.getTablaUsuario().setModel(modelo);
     }
     public void EliminarUsuario(int idusuario){
-        Usuario = new usuario();
+        Usuario = new usuarios();
         int resultado = Usuario.EliminarUsuario(idusuario);
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
@@ -39,11 +39,11 @@ public class Modelo_GestionarUsuario {
         CargarUsuarios();
     }
     public void ActualizarUsuario(String names, String telefono, String nombusuario , int id){
-        Usuario = new usuario();
-        Usuario.setNombUsuario(nombusuario);
+        Usuario = new usuarios();
+        Usuario.setNombre_usuario(nombusuario);
         Usuario.setTelefono(telefono);
-        Usuario.setApellidoynombre(names);
-        Usuario.setIdusuario(id);
+        Usuario.setNombre(names);
+        Usuario.setId_usuario(id);
         int resultado = Usuario.EditarUsuario(Usuario);
         if( resultado > 0){
             JOptionPane.showMessageDialog(null, "Usuario actualizado correctamente");
@@ -51,11 +51,5 @@ public class Modelo_GestionarUsuario {
             throw new NullPointerException();
         }
         CargarUsuarios();
-    }
-    public void Limpiarcampos(JTextField... campos){
-        for(JTextField camp: campos){
-            camp.setText("");
-            camp.requestFocus();
-        }
     }
 }

@@ -1,5 +1,8 @@
 package Vista;
 
+import Utilitario.BotonPersonalizado;
+import Utilitario.PanelDegradadoAzul;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,8 +16,8 @@ public class gestioninventarioVista extends JFrame {
     JTable tablaInventario;
     DefaultTableModel modeloInventario;
     
-    JLabel lblmodelo, lblcodigo, lblcosto, lbltalla, lblcolor;
-    JTextField txtmodelo, txtcodigo, txtcosto, txttalla, txtcolor;
+    JLabel lblmodelo, lblcodigo, lblcosto, lbltalla, lblcolor , lblCantidad , lblDescripcion;
+    JTextField txtmodelo, txtcodigo, txtcosto, txttalla, txtcolor , txtcantidad, txtDescripcion;
     
     JButton btneliminar, btnactualizar;
     
@@ -24,7 +27,7 @@ public class gestioninventarioVista extends JFrame {
         setSize(1140, 840);
         setResizable(false);
         //-----------panel bienvenido----------
-        panelusuario = new PanelDegradadoAzul6();
+        panelusuario = new PanelDegradadoAzul();
         panelusuario.setBounds(0,70,1140,540);
         panelusuario.setLayout(null);
         add(panelusuario);
@@ -36,7 +39,7 @@ public class gestioninventarioVista extends JFrame {
         lblbienvenida.setFont(new Font("Times New Roman", Font.BOLD, 35)); // Estilo de fuente
         panelusuario.add(lblbienvenida);
 
-        modeloInventario = new DefaultTableModel(new String[]{"Modelo", "Codigo", "Talla", "Color","P. Costo"}, 0){
+        modeloInventario = new DefaultTableModel(new String[]{"Codigo", "Marca", "Talla", "Color","Cantidad" , "P. Venta"}, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -58,7 +61,7 @@ public class gestioninventarioVista extends JFrame {
         scrollPane.setBounds(600, 140, 500, 340);
         panelusuario.add(scrollPane);
 
-        lblmodelo=new JLabel("Modelo");
+        lblmodelo=new JLabel("Marca");
         lblmodelo.setForeground(Color.WHITE);
         lblmodelo.setFont(new Font("Times New Roman", Font.BOLD,20));
         lblmodelo.setBounds(115,140,140,30);
@@ -99,7 +102,7 @@ public class gestioninventarioVista extends JFrame {
         txtcolor.setBounds(215,260,200,30);
         panelusuario.add(txtcolor);
 
-        lblcosto=new JLabel("P. Costo");
+        lblcosto=new JLabel("P. Venta");
         lblcosto.setForeground(Color.WHITE);
         lblcosto.setFont(new Font("Times New Roman", Font.BOLD,20));
         lblcosto.setBounds(115,300,140,30);
@@ -108,13 +111,33 @@ public class gestioninventarioVista extends JFrame {
         txtcosto= new JTextField();
         txtcosto.setBounds(215,300,200,30);
         panelusuario.add(txtcosto);
-        
-        btnactualizar = new JButton("Actualizar");
-        btnactualizar.setBounds(80,360,140,40);
+
+        lblCantidad= new JLabel("Cantidad");
+        lblCantidad.setForeground(Color.WHITE);
+        lblCantidad.setFont(new Font("Times New Roman", Font.BOLD,20));
+        lblCantidad.setBounds(115,340,140,30);
+        panelusuario.add(lblCantidad);
+
+        txtcantidad= new JTextField();
+        txtcantidad.setBounds(215,340,200,30);
+        panelusuario.add(txtcantidad);
+
+        lblDescripcion = new JLabel("Descripcion");
+        lblDescripcion.setForeground(Color.WHITE);
+        lblDescripcion.setFont(new Font("Times New Roman", Font.BOLD,20));
+        lblDescripcion.setBounds(115,380,140,30);
+        panelusuario.add(lblDescripcion);
+
+        txtDescripcion = new JTextField();
+        txtDescripcion.setBounds(215 , 380 , 200, 30);
+        panelusuario.add(txtDescripcion);
+
+        btnactualizar = new BotonPersonalizado("Actualizar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\actualizar.png",null);
+        btnactualizar.setBounds(80, 460, 200, 40);
         panelusuario.add(btnactualizar);
        
-        btneliminar = new JButton("Eliminar");
-        btneliminar.setBounds(300,360,140,40);
+        btneliminar = new BotonPersonalizado("Eliminar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\tachito.png",null);
+        btneliminar.setBounds(300,460,140,40);
         panelusuario.add(btneliminar);
         
 
@@ -150,24 +173,11 @@ public class gestioninventarioVista extends JFrame {
     public JTextField getTxtCodigo(){
         return txtcodigo;
     }
-
-}
-
-class PanelDegradadoAzul6 extends JPanel {
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        
-        // Colores y posiciones para el degradado de tres colores
-        Color[] colores = {new Color(25, 43, 57), new Color(60, 78, 92), new Color(25, 43, 57)};
-        float[] posiciones = {0.0f, 0.5f, 1.0f}; // Posiciones relativas de cada color
-
-        // Crear el degradado horizontal de derecha a izquierda
-        LinearGradientPaint gradiente = new LinearGradientPaint(getWidth(), 0, 0, 0, posiciones, colores);
-        
-        g2d.setPaint(gradiente);
-        g2d.fillRect(0, 0, getWidth(), getHeight());
+    public JTextField getTxtCantidad(){
+        return txtcantidad;
     }
+    public JTextField getTxtDescripcion(){return txtDescripcion;}
+
 }
+
 

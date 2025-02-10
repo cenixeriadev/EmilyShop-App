@@ -4,11 +4,9 @@ import Utilitario.PantallaCarga;
 import Modelo.Modelo_Login;
 import Vista.LoginVista;
 import Vista.PrincipalVista;
-import Vista.RegistroUsuarioVista;
-
 import javax.swing.*;
 
-import java.awt.event.KeyAdapter;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 
@@ -24,36 +22,17 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
     }
     private void Iniciar(){
         try {
-            login.getTxtusuario().addKeyListener(new KeyAdapter() {
+            login.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                    KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "login");
+            login.getRootPane().getActionMap().put("login", new AbstractAction() {
                 @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                        handleLogin();
-
-                    }
+                public void actionPerformed(ActionEvent e) {
+                    handleLogin();
                 }
             });
 
-            login.getTxtContra().addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                        handleLogin();
 
-                    }
-                }
-            });
-            login.getbtnNuevo().addActionListener(_->{
-                RegistroUsuarioVista registrar = new RegistroUsuarioVista();
-                new ControladorCrearUsuario(registrar);
-                login.dispose();
-
-                registrar.setVisible(true);
-            });
-
-            login.getbtnInicio().addActionListener(_ -> {
-                handleLogin();
-            });
+            login.getbtnInicio().addActionListener(e -> handleLogin());
         }catch (Exception e){
             JOptionPane.showMessageDialog(null , "Ocurrio un error inesperado : " + e.getMessage());
         }
@@ -64,12 +43,12 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
     }
     private void  handleLogin() {
         String inputUsername =  login.getTxtusuario().getText();
-        String password = new String(login.getTxtContra().getText());
+        String password = login.getTxtContra().getText();
         modelo.validarCredenciales(inputUsername, password);
 
     }
     @Override
-    public void loginExitoso() {
+    public void loginExitoso(String nombre_Usuario) {
         PantallaCarga pantallaCarga = new PantallaCarga();
         pantallaCarga.setVisible(true);
         login.dispose();
@@ -86,7 +65,8 @@ public class FrmLoginUsuario_Controlador implements LoginObserver{
             @Override
             protected void done() {
                 pantallaCarga.dispose();
-                PrincipalVista vista = new PrincipalVista();
+                removerObserver();
+                PrincipalVista vista = new PrincipalVista(nombre_Usuario);
                 new Menu_Principal_Controlador(vista);
                 vista.setVisible(true);
             }
