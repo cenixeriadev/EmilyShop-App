@@ -101,9 +101,7 @@ public class PDFventas {
             tablaVentasDia.addCell(celda("Ventas Efectivo"));
             tablaVentasDia.addCell(celda("Ventas Tarjeta"));
             tablaVentasDia.addCell(celda("Ventas Totales"));
-
-            System.out.println(listaTablaVentasMpago.size());
-            System.out.println(listaTablaProductosVendidos.size());
+            
             for (Modelo_Reporte_Ventas reporteVenta : listaTablaVentasMpago) {
                 if (reporteVenta.getDia()!=null) {
                     tablaVentasDia.addCell(reporteVenta.getDia());
