@@ -2,6 +2,7 @@ package Vista;
 import javax.swing.*;
 
 import Utilitario.BotonPersonalizado;
+import Utilitario.ManagerPath;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import Utilitario.PanelDegradadoAzul;
@@ -43,7 +44,7 @@ public class ReporteVista extends JFrame{
         lblInventario.setBounds(450,160,300,40);
         panelusuario.add(lblInventario);
 
-        btnInventario = new BotonPersonalizado("CREAR ","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\reporte.png",null);
+        btnInventario = new BotonPersonalizado("CREAR ",ManagerPath.getRuta("reporte.png"),null);
         btnInventario.setBounds(500, 210, 160, 40);
         panelusuario.add(btnInventario);
 
@@ -53,7 +54,7 @@ public class ReporteVista extends JFrame{
         lblVentas.setBounds(450,260,300,40);
         panelusuario.add(lblVentas);
 
-        btnVentas = new BotonPersonalizado("CREAR","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\reporte.png",null);
+        btnVentas = new BotonPersonalizado("CREAR", ManagerPath.getRuta("reporte.png"),null);
         btnVentas.setBounds(500, 410, 160, 40);
         panelusuario.add(btnVentas);
 

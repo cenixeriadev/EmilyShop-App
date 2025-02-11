@@ -19,9 +19,10 @@ services:
       DB_URL: jdbc:mysql://mysql:3306/tienda_de_zapatillas
       DB_USER: root
       DB_PASSWORD: ""
+      DOCKER_ENV: "true"
       DISPLAY: host.docker.internal:0.0
     volumes:
-      - ./Recursos:/app/Recursos
+      - ./src/Recursos:/app/Recursos
     depends_on:
       - mysql
     

@@ -2,6 +2,7 @@
 package Vista;
 
 import Utilitario.BotonPersonalizado;
+import Utilitario.ManagerPath;
 import Utilitario.PanelDegradadoAzul;
 
 import javax.swing.*;
@@ -123,7 +124,7 @@ public class registroInventarioVista extends JFrame{
         txtdescripcion.setBounds(695, 280, 200, 30);
         panelusuario.add(txtdescripcion);
 
-        btnregistrar = new BotonPersonalizado("Registrar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\registrar.png",null);
+        btnregistrar = new BotonPersonalizado("Registrar", ManagerPath.getRuta("registrar.png"),null);
         btnregistrar.setBounds(530,360,140,40);
         panelusuario.add(btnregistrar);
 

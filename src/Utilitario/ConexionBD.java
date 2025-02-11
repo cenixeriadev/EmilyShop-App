@@ -9,7 +9,7 @@ public class ConexionBD {
         Connection Database = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/tienda_de_zapatillas";
+            String url = System.getenv("DOCKER_ENV")!=null? "jdbc:mysql://mysql:3306/tienda_de_zapatillas?useSSL=false&serverTimezone=UTC" : "jdbc:mysql://localhost:3306/tienda_de_zapatillas?useSSL=false&serverTimezone=UTC";
             String user = "root";
             String password = "";
             Database = DriverManager.getConnection(url, user, password);

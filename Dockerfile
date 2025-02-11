@@ -17,7 +17,7 @@ COPY src/target/Practice.jar /app/Practice.jar
 # Copiar las dependencias externas (si no están incluidas en el JAR)
 COPY src/lib /app/lib
 
-COPY Recursos /app/Recursos
+COPY src/Recursos /app/Recursos
 
 COPY db /app/db
 # Configurar el entorno gráfico (X11)

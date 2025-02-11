@@ -1,6 +1,7 @@
 package Vista;
 
 import Utilitario.BotonPersonalizado;
+import Utilitario.ManagerPath;
 import Utilitario.PanelDegradadoAzul;
 
 import javax.swing.*;
@@ -132,11 +133,11 @@ public class gestioninventarioVista extends JFrame {
         txtDescripcion.setBounds(215 , 380 , 200, 30);
         panelusuario.add(txtDescripcion);
 
-        btnactualizar = new BotonPersonalizado("Actualizar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\actualizar.png",null);
+        btnactualizar = new BotonPersonalizado("Actualizar", ManagerPath.getRuta("actualizar.png"),null);
         btnactualizar.setBounds(80, 460, 200, 40);
         panelusuario.add(btnactualizar);
        
-        btneliminar = new BotonPersonalizado("Eliminar","C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\tachito.png",null);
+        btneliminar = new BotonPersonalizado("Eliminar",ManagerPath.getRuta("tachito.png"),null);
         btneliminar.setBounds(300,460,140,40);
         panelusuario.add(btneliminar);
         

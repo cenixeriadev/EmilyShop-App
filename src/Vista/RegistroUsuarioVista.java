@@ -1,6 +1,8 @@
 
 package Vista;
 
+import Utilitario.ManagerPath;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -23,39 +25,39 @@ public class RegistroUsuarioVista extends JFrame {
         setLocationRelativeTo(null);
 
         // Cambiar panel1 para que use una imagen de fondo
-        panel1 = new PanelConImagenFondo("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\fondoadidas.jpeg"); // Cambia la ruta a la de tu imagen
+        panel1 = new PanelConImagenFondo(ManagerPath.getRuta("fondoadidas.jpeg")); // Cambia la ruta a la de tu imagen
         panel1.setBounds(0, 0, 250, 500);
         panel1.setLayout(null);
         add(panel1);
 
-        panel2 = new PanelConImagenFondo2("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevofondo3.jpeg");
+        panel2 = new PanelConImagenFondo2(ManagerPath.getRuta("nuevofondo3.jpeg"));
         panel2.setBounds(250, 0, 350, 500);
         panel2.setBackground(new Color(240, 240, 240));
         panel2.setLayout(null);
         add(panel2);
         
-        ImageIcon imageIcon3 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevousuario.png");
+        ImageIcon imageIcon3 = new ImageIcon(ManagerPath.getRuta("nuevousuario.png"));
         Image img3 = imageIcon3.getImage(); // Convertir a Image
         Image newImg3 = img3.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen3 = new JLabel(new ImageIcon(newImg3)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen3.setBounds(30, 230, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen3);
 
-        ImageIcon imageIcon4 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nuevocandado.png");
+        ImageIcon imageIcon4 = new ImageIcon(ManagerPath.getRuta("nuevocandado.png"));
         Image img4 = imageIcon4.getImage(); // Convertir a Image
         Image newImg4 = img4.getScaledInstance(50, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen4 = new JLabel(new ImageIcon(newImg4)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen4.setBounds(30, 280, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen4);
         
-        ImageIcon imageIcon5 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\nombre.png");
+        ImageIcon imageIcon5 = new ImageIcon(ManagerPath.getRuta("nombre.png"));
         Image img5 = imageIcon5.getImage(); // Convertir a Image
         Image newImg5 = img5.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen5 = new JLabel(new ImageIcon(newImg5)); // Crear un nuevo ImageIcon con la imagen redimensionada
         lblimagen5.setBounds(30, 130, 40, 40);  // Establecer las nuevas dimensiones
         panel2.add(lblimagen5);
         
-        ImageIcon imageIcon6 = new ImageIcon("C:\\Users\\Lenovo\\IdeaProjects\\Practice\\src\\Recursos\\telefono.png");
+        ImageIcon imageIcon6 = new ImageIcon(ManagerPath.getRuta("telefono.png"));
         Image img6 = imageIcon6.getImage(); // Convertir a Image
         Image newImg6 = img6.getScaledInstance(40, 40, Image.SCALE_SMOOTH); // Redimensionar la imagen
         lblimagen6 = new JLabel(new ImageIcon(newImg6)); // Crear un nuevo ImageIcon con la imagen redimensionada
