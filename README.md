@@ -40,7 +40,7 @@ To install and run EmilyShop-App locally, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/anthony12lolk1789/EmilyShop-App.git
+    git clone https://github.com/cenixeriadev/EmilyShop-App
     cd EmilyShop-App
     ```
 
