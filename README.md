@@ -47,12 +47,12 @@ To install and run EmilyShop-App locally, follow these steps:
 2. **Build the project:**
     Make sure you have JDK installed. You can build the project using your preferred IDE or use the command line:
     ```bash
-    javac -d bin src/*.java
+    javac -d bin -cp "src/lib/*" src/*.java src/Controlador/*.java src/Modelo/*.java src/Utilitario/*.java src/Vista/*.java
     ```
 
 3. **Run the application:**
     ```bash
-    java -cp bin Main
+    java -cp bin src/Main.java
     ```
 
 ## Usage
