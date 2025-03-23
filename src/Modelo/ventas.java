@@ -85,10 +85,11 @@ public class ventas {
         }
         return listaVentas;
     }
-    public int AgregarVentas(ventas Venta){
+    public int AgregarVentas(ventas Venta) throws SQLException {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
+            cn.setAutoCommit(false);
             ps = cn.prepareStatement("INSERT INTO ventas (cliente,metododepago, precio  ,codigo , telefono) VALUES (?,?,?,?,?);");
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
@@ -96,45 +97,60 @@ public class ventas {
             ps.setString(4, Venta.getCodigo());
             ps.setString(5, Venta.getTelefono());
             estado =  ps.executeUpdate();
-            cn.close();
+            cn.commit();
             ps.close();
         }catch (SQLException e){
             System.out.println("Ocurrio un error : " + e.getMessage());
+            cn.rollback();
             return  estado;
+        }finally{
+            cn.setAutoCommit(true);
+            cn.close(); 
         }
         return estado;
 
     }
-    public int EditarVentas(ventas Venta){
+    public int EditarVentas(ventas Venta)throws  SQLException {
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
+            cn.setAutoCommit(false);
             ps = cn.prepareStatement("UPDATE ventas SET cliente=?, metododepago=?, precio=? WHERE idventas=?");
             ps.setString(1, Venta.getCliente());
             ps.setString(2, Venta.getMetododepago());
             ps.setInt(3, Venta.getPrecio());
             ps.setInt(4, Venta.getIdVenta());
             estado =  ps.executeUpdate();
+            cn.commit();
             cn.close();
             ps.close();
         }catch (SQLException e){
             System.out.println("Ocurrio un error : " + e.getMessage());
+            cn.rollback();
             return estado;
+        }finally{
+            cn.setAutoCommit(true);
+            cn.close();
         }
         return estado;
     }
-    public int EliminarVentas(ventas Venta){
+    public int EliminarVentas(ventas Venta) throws SQLException{
         int estado = 0;
         try{
             cn  = ConexionBD.getConexionBD();
+            cn.setAutoCommit(false);
             ps = cn.prepareStatement("DELETE FROM ventas WHERE idventas=?");
             ps.setInt(1, Venta.getIdVenta());
             estado =  ps.executeUpdate();
-            cn.close();
+            cn.commit();
             ps.close();
         }catch (SQLException e){
             System.out.println("Ocurrio un error : " + e.getMessage());
+            cn.rollback();
             return  estado;
+        }finally {
+            cn.setAutoCommit(true);
+            cn.close();
         }
         return estado;
     }
