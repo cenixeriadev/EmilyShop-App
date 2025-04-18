@@ -16,7 +16,7 @@ public class Modelo_GestionarVentas {
         this.vista = vista;
     }
 
-    public void ListarTabla(String nombre , String telefono){
+    public void ListarTabla(String nombre , String telefono) {
         try {
 
             StringBuilder query = new StringBuilder("""
@@ -29,7 +29,10 @@ public class Modelo_GestionarVentas {
                         INNER JOIN inventario i ON i.id_inventario = d.id_inventario
                         WHERE 1=1
                    \s""");
-
+            if(nombre.isEmpty() && telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(null ,  "Debe llenar los campos necesarios!");
+                return;
+            }
             if (!nombre.isEmpty()) {
                 query.append(" AND c.nombre_apellido LIKE ?");
             }
